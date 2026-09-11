@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">kisanDost</string>
+    <string name="title_activity_main">kisanDost</string>
+    <string name="package_name">com.kisanDost</string>
+    <string name="custom_url_scheme">com.kisanDost</string>
+</resources>
