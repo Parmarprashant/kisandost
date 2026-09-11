@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
-// import { UserButton, useUser } from "@clerk/nextjs";
 import { useAuth } from "@/components/providers/AuthProvider";
 import Image from "next/image";
 import {
