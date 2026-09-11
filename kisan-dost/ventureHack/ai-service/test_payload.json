@@ -1,0 +1,11 @@
+{
+  "crop": "Wheat",
+  "land_area": 5,
+  "fertilizer_cost": 5000,
+  "pesticide_cost": 2000,
+  "irrigation_cost": 1500,
+  "state": "Rajasthan",
+  "season": "Rabi",
+  "ndvi": 0.75,
+  "soil_moisture": 40.0
+}
