@@ -8,7 +8,7 @@ export async function GET() {
       return NextResponse.json({ user: null }, { status: 401 });
     }
     
-    return NextResponse.json({ user: { id: user._id, username: user.username, name: user.name, mobile: user.mobile, village: user.village, district: user.district, mainCrop: user.mainCrop } }, { status: 200 });
+    return NextResponse.json({ user: { id: user._id, username: user.username, name: user.name, email: user.email, avatar: user.avatar, mobile: user.mobile, village: user.village, district: user.district, mainCrop: user.mainCrop } }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ user: null }, { status: 500 });
   }

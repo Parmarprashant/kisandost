@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
-import { hashPassword, createToken } from '@/lib/auth';
-import { cookies } from 'next/headers';
+import { hashPassword, createToken, setAuthCookie } from '@/lib/auth';
 
 export async function POST(request: Request) {
   try {
@@ -29,15 +28,7 @@ export async function POST(request: Request) {
     });
 
     const token = await createToken({ userId: newUser._id.toString(), username: newUser.username });
-    
-    const cookieStore = await cookies();
-    cookieStore.set('__kisan_auth_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
-    });
+    await setAuthCookie(token);
 
     return NextResponse.json({ message: 'User registered successfully', user: { id: newUser._id, username: newUser.username, name: newUser.name } }, { status: 201 });
   } catch (error: any) {

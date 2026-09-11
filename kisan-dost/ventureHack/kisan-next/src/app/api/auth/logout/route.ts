@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { clearAuthCookie } from '@/lib/auth';
 
 export async function POST() {
-  const cookieStore = await cookies();
-  cookieStore.delete('__kisan_auth_token');
+  await clearAuthCookie();
   
   return NextResponse.json({ message: 'Logged out successfully' }, { status: 200 });
 }
