@@ -1,0 +1,37 @@
+{
+  "name": "KisanDost - Digital Companion for Farmers",
+  "short_name": "KisanDost",
+  "description": "Crop health, fertilizer calculator, and NDVI tracking for farmers in India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2e6b3b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/app/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["agriculture", "productivity"],
+  "screenshots": [
+    {
+      "src": "/app/icon.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ]
+}
