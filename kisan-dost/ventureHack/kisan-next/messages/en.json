@@ -1,0 +1,1241 @@
+{
+  "Index": {
+    "title": "Welcome to KisanDost",
+    "subtitle": "Your digital companion for better farming.",
+    "login": "Login with Google",
+    "getStarted": "Get Started"
+  },
+  "Hero": {
+    "titleLine1": "Every Farmer's",
+    "titleLine2": "Need,",
+    "titleLine3": "Digital Companion!",
+    "subtitle": "Empowering Indian farmers with precision technology, satellite monitoring, and expert crop care.",
+    "downloadNow": "Download Now",
+    "cropHealth": "Crop Health",
+    "cropHealthDesc": "Satellites monitoring your fields 24/7",
+    "indianFarming": "Indian Farmer using digital tools",
+    "kisanFamily": "Indian Farming Landscape"
+  },
+  "Footer": {
+    "description": "Empowering Indian farmers with cutting-edge AI tools, real-time weather insights, and a supportive community for a prosperous future.",
+    "quickLinks": "Quick Links",
+    "farmerTools": "Farmer Tools",
+    "support": "Support",
+    "getInTouch": "Get in Touch",
+    "weatherUpdates": "Weather Updates",
+    "fertilizerCalc": "Fertilizer Calc",
+    "diseaseDetection": "Disease Detection",
+    "helpCenter": "Help Center",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "contactUs": "Contact Us",
+    "workingHours": "Mon-Fri, 9am to 6pm",
+    "online247": "Online 24/7",
+    "krishiBhawan": "Krishi Bhawan",
+    "newDelhi": "New Delhi, India",
+    "verified": "Verified",
+    "supportBadge": "24/7 Support",
+    "operational": "Operational",
+    "allRightsReserved": "All rights reserved. Made with",
+    "forIndianFarmers": "for Indian Farmers."
+  },
+  "FarmingFeature": {
+    "badge": "The Backbone of India",
+    "title1": "Why Farming is",
+    "title2": "Crucial for Our Future",
+    "description": "Agriculture is the heart and soul of India. As the country's biggest economy booster, farming not only sustains over 50% of the nation's workforce but also ensures food security for more than a billion people globally.",
+    "pillarTitle": "Economic Pillar",
+    "pillarDesc": "Fuels national growth and accelerates rural development.",
+    "employmentTitle": "Mass Employment",
+    "employmentDesc": "Provides livelihoods and empowers millions of families.",
+    "quote": "\"When the farmer prospers, the nation thrives. Empowering them with modern technology is not just an option, it's a necessity.\"",
+    "gdp": "of India's GDP"
+  },
+  "Services": {
+    "title": "Our Services",
+    "subtitle": "Empowering traditional knowledge with modern technology",
+    "diseaseDesc": "Identify & cure crop pests instantly",
+    "fertilizerDesc": "Precise NPK dosing for your soil",
+    "weatherDesc": "Accurate local village-level weather",
+    "cropSuggestionTitle": "Crop Suggestion",
+    "cropSuggestionDesc": "Get location-based crop recommendations",
+    "exploreService": "Explore Service"
+  },
+  "HomeCropCare": {
+    "titleLine1": "CROP CARE &",
+    "titleLine2": "DISEASE GUIDE",
+    "description": "Select your crop to get expert medical advice, symptoms, and control measures.",
+    "viewAllCrops": "View All Crops",
+    "careTitleSuffix": "CARE",
+    "bestSeason": "Best Season",
+    "symptoms": "SYMPTOMS",
+    "diseaseFavorable": "FAVORABLE CONDITIONS",
+    "pestControl": "PEST CONTROL",
+    "generalPrecaution": "General Precaution:",
+    "viewStore": "View Store Products",
+    "doctorTitle": "Crop Doctor is Ready",
+    "doctorDesc": "Select any crop on the left to start diagnosis"
+  },
+  "TrustSection": {
+    "districts": "Districts Covered",
+    "safe": "Safe Recommendations",
+    "satellite": "Satellite Monitoring"
+  },
+  "Dashboard": {
+    "greeting": "Namaste {name}! Your farm is {health} today",
+    "chooseCrop": "Choose Your Crop",
+    "calculateFertilizer": "Calculate Fertilizer",
+    "healthStatus": {
+      "healthy": "Healthy",
+      "moderate": "Moderate",
+      "stress": "Stress"
+    },
+    "ndviSubtitle": "Your current overall farm NDVI is {value} ({status}).",
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor",
+    "profitIntelTitle": "AI Profit Intelligence",
+    "profitIntelDesc": "Predict your crop yield and estimate profits based on real-time APMC market prices.",
+    "tryPredictor": "Try Predictor",
+    "viewDetails": "View Details",
+    "seasonLabel": "Season",
+    "waterNeedLabel": "Water Need",
+    "soilTypeLabel": "Soil Type",
+    "commonDiseasesLabel": "Common Diseases",
+    "precautionsLabel": "Precautions & Remedies"
+  },
+  "ProfitPredictor": {
+    "title": "Profit Predictor",
+    "description": "Calculate your expected profit based on farm inputs and market rates.",
+    "predictedProfit": "Predicted Profit",
+    "confidence": "Confidence",
+    "expectedRevenue": "Expected Revenue",
+    "totalCost": "Total Cost",
+    "recommendation": "Recommendation",
+    "readyToPredict": "Ready to predict your profit?",
+    "readyToPredictDesc": "Fill out the form on the left with your land area and input costs to get AI-powered profit insights.",
+    "smartMode": "Smart Mode",
+    "manualMode": "Manual Mode",
+    "selectLocation": "Select your farm location",
+    "locationSelected": "Location selected",
+    "autoFetchTitle": "Auto-fetching data...",
+    "autoFetchDesc": "Retrieving weather and environmental data",
+    "cropType": "Crop Type",
+    "selectCrop": "Select Crop",
+    "landArea": "Land Area",
+    "fertilizerCost": "Fertilizer Cost",
+    "pesticideCost": "Pesticide Cost",
+    "irrigationCost": "Irrigation Cost",
+    "rainfall": "Rainfall",
+    "soilNitrogen": "Soil Nitrogen",
+    "soilPhosphorus": "Soil Phosphorus",
+    "soilPotassium": "Soil Potassium",
+    "predictButton": "Predict Profit",
+    "predicting": "Predicting...",
+    "predictionSuccess": "Profit prediction complete!",
+    "predictionError": "Failed to calculate prediction.",
+    "developerPanel": "Developer Debug Panel",
+    "insights": {
+      "goodProfit": "Your estimated profit is healthy for this crop!",
+      "costWarning": "Your pesticide costs seem higher than regional averages.",
+      "optimize": "Switching to organic fertilizer may reduce input costs."
+    }
+  },
+  "CropSuggestion": {
+    "title": "AI Crop Suggestion",
+    "description": "Select a location on the map of Gujarat to get expert AI recommendations for the best crops to grow in that region.",
+    "loadingMap": "Loading Map...",
+    "selectLocationTitle": "Select Location",
+    "selectLocationDesc": "Click anywhere on the map of Gujarat to see localized AI crop suggestions.",
+    "selectedLocation": "Selected Location",
+    "analyzing": "Analyzing location details & generating AI suggestions...",
+    "awaitingLocation": "Awaiting Location",
+    "awaitingLocationDesc": "Click on the map to select a district and let our AI provide expert crop recommendations.",
+    "aiAdvisory": "AI Advisory for {district}",
+    "geminiInsight": "Gemini Insight",
+    "bestCrops": "Best Crops for this Region",
+    "waterLevel": "Water Level",
+    "season": "Season"
+  },
+  "Navigation": {
+    "home": "Home",
+    "products": "Products",
+    "diseases": "Diseases",
+    "calculator": "Calculator",
+    "weather": "Weather",
+    "communities": "Communities",
+    "ai": "AI Profit",
+    "yieldAi": "Yield AI",
+    "profile": "Profile",
+    "myCrops": "My Crops"
+  },
+  "Navbar": {
+    "detectingLocation": "Detecting location…",
+    "locationBlocked": "Location Blocked",
+    "locationBlockedDesc": "Your browser has blocked location access. To fix:",
+    "locationBlockedStep1": "Click the lock icon in address bar",
+    "locationBlockedStep2": "Set Location to Allow",
+    "locationBlockedStep3": "Then click Retry below",
+    "retryLocation": "Retry Location",
+    "refresh": "Refresh",
+    "updated": "Updated",
+    "fullWeather": "Full weather",
+    "activeFarmer": "Active Farmer",
+    "farmerLogin": "Farmer Login",
+    "selectLanguage": "Select Language:",
+    "home": "Home"
+  },
+  "Fertilizer": {
+    "title": "Fertilizer Calculator",
+    "crop": "Select Crop",
+    "area": "Farm area (acres)",
+    "soilType": "Soil Type",
+    "soilDesc": "Loamy / Sandy / Clay",
+    "calculate": "Calculate",
+    "save": "Save to My Farm",
+    "recommended": "Recommended NPK",
+    "totalBags": "Total Bags Needed",
+    "cost": "Cost Estimate",
+    "profit": "Profit Gain"
+  },
+  "DiseasesPage": {
+    "title": "Crop Disease & Pest Management",
+    "subtitle": "Select up to 8 crops to view common diseases, pests, and preventive measures. Protect your harvest with expert guidance.",
+    "selected": "You've selected {count} out of 8 crops",
+    "filters": {
+      "all": "All Crops",
+      "fruits": "Fruits",
+      "vegetables": "Vegetables",
+      "cereals": "Cereals",
+      "cashCrops": "Cash Crops"
+    },
+    "reset": "Reset Selection",
+    "symptoms": "SYMPTOMS (लक्षण)",
+    "favorableConditions": "FAVORABLE CONDITIONS",
+    "impact": "Impact",
+    "prevention": "Prevention & Control",
+    "pestControl": "PEST CONTROL (इलाज)",
+    "generalPrecaution": "GENERAL PRECAUTION:",
+    "viewStoreProducts": "View Store Products",
+    "care": "{crop} CARE",
+    "bestSeason": "Best Season: Kharif (Monsoon)"
+  },
+  "Crops": {
+    "wheat": {
+      "name": "Wheat",
+      "diseases": {
+        "wheat-rust": {
+          "name": "Wheat Rust",
+          "description": "Fungal disease affecting wheat stems, leaves, and grains.",
+          "symptoms": [
+            "Rust-colored pustules",
+            "Yellowing of leaves",
+            "Stunted growth"
+          ],
+          "favorableConditions": "Warm days and cool nights with dew.",
+          "impact": "Reduces yield by 20-50%.",
+          "prevention": [
+            "Resistant varieties",
+            "Fungicides",
+            "Timely planting"
+          ]
+        }
+      }
+    },
+    "rice": {
+      "name": "Rice",
+      "diseases": {
+        "rice-blast": {
+          "name": "Rice Blast",
+          "description": "Fungal infection affecting above-ground parts.",
+          "symptoms": [
+            "Diamond-shaped spots",
+            "Neck rot"
+          ],
+          "favorableConditions": "High humidity and continuous rain.",
+          "impact": "Severe destruction of the entire crop.",
+          "prevention": [
+            "Resistant varieties",
+            "Balanced nitrogen",
+            "Proper spacing"
+          ]
+        }
+      }
+    },
+    "corn": {
+      "name": "Corn",
+      "diseases": {
+        "corn-smut": {
+          "name": "Common Smut",
+          "description": "Fungal disease causing galls on plants.",
+          "symptoms": [
+            "White/black galls",
+            "Distorted ears"
+          ],
+          "favorableConditions": "Hot, dry weather followed by rain.",
+          "impact": "Reduces yield and grain quality.",
+          "prevention": [
+            "Rotation",
+            "Avoid injury",
+            "Seed treatment"
+          ]
+        }
+      }
+    },
+    "banana": {
+      "name": "Banana",
+      "diseases": {
+        "panama-disease": {
+          "name": "Panama Disease",
+          "description": "Soil-borne fungal disease.",
+          "symptoms": [
+            "Yellow leaf margins",
+            "Wilting",
+            "Split pseudostem"
+          ],
+          "favorableConditions": "Acidic soil and poor drainage.",
+          "impact": "Permanent loss of plantations.",
+          "prevention": [
+            "Clean planting material",
+            "Resistant varieties"
+          ]
+        }
+      }
+    },
+    "grapes": {
+      "name": "Grapes",
+      "diseases": {
+        "downy-mildew-grapes": {
+          "name": "Downy Mildew",
+          "description": "Aggressive fungal disease of vines.",
+          "symptoms": [
+            "Oil spots",
+            "White mold underside"
+          ],
+          "favorableConditions": "Wet weather, moderate temps.",
+          "impact": "Severe defoliation and fruit loss.",
+          "prevention": [
+            "Canopy management",
+            "Copper sprays"
+          ]
+        }
+      }
+    },
+    "pineapple": {
+      "name": "Pineapple",
+      "diseases": {
+        "heart-rot": {
+          "name": "Heart Rot",
+          "description": "Fungal decay of the inner leaves.",
+          "symptoms": [
+            "Yellowing center",
+            "Leaves pull out easily"
+          ],
+          "favorableConditions": "Waterlogged heavy soils.",
+          "impact": "Plant death.",
+          "prevention": [
+            "Drainage",
+            "Fungicide dip"
+          ]
+        }
+      }
+    },
+    "orange": {
+      "name": "Orange",
+      "diseases": {
+        "citrus-canker": {
+          "name": "Citrus Canker",
+          "description": "Bacterial spots on fruit and leaves.",
+          "symptoms": [
+            "Raised brown lesions",
+            "Yellow halos"
+          ],
+          "favorableConditions": "Wind-driven rain.",
+          "impact": "Reduces yield and quality.",
+          "prevention": [
+            "Certification",
+            "Copper sprays"
+          ]
+        }
+      }
+    },
+    "pomegranate": {
+      "name": "Pomegranate",
+      "diseases": {
+        "bacterial-blight-pom": {
+          "name": "Bacterial Blight",
+          "description": "Dark water-soaked lesions.",
+          "symptoms": [
+            "Spots on fruits",
+            "Fruit cracking"
+          ],
+          "favorableConditions": "Rainy weather.",
+          "impact": "Severe market loss.",
+          "prevention": [
+            "Pruning",
+            "Antibiotics"
+          ]
+        }
+      }
+    },
+    "plum": {
+      "name": "Plum",
+      "diseases": {
+        "black-knot": {
+          "name": "Black Knot",
+          "description": "Fungal swellings on branches.",
+          "symptoms": [
+            "Warty black galls",
+            "Dieback"
+          ],
+          "favorableConditions": "Wet springs.",
+          "impact": "Can kill the tree.",
+          "prevention": [
+            "Pruning knots",
+            "Destroy infections"
+          ]
+        }
+      }
+    },
+    "pear": {
+      "name": "Pear",
+      "diseases": {
+        "fire-blight-pear": {
+          "name": "Fire Blight",
+          "description": "Bacterial scorching disease.",
+          "symptoms": [
+            "Blackened twigs",
+            "Oozing cankers"
+          ],
+          "favorableConditions": "Warm, wet blooms.",
+          "impact": "Rapid tree death.",
+          "prevention": [
+            "Sanitary pruning",
+            "Bactericides"
+          ]
+        }
+      }
+    },
+    "peach": {
+      "name": "Peach",
+      "diseases": {
+        "leaf-curl-peach": {
+          "name": "Peach Leaf Curl",
+          "description": "Fungal distortion of leaves.",
+          "symptoms": [
+            "Puckered reddish leaves",
+            "Premature drop"
+          ],
+          "favorableConditions": "Cool, wet spring.",
+          "impact": "Weakens tree vitality.",
+          "prevention": [
+            "Copper sprays in dormancy"
+          ]
+        }
+      }
+    },
+    "strawberry": {
+      "name": "Strawberry",
+      "diseases": {
+        "gray-mold-strawberry": {
+          "name": "Gray Mold",
+          "description": "Common berry fungus.",
+          "symptoms": [
+            "Fuzzy gray mold",
+            "Soft rot"
+          ],
+          "favorableConditions": "High humidity.",
+          "impact": "Post-harvest decay.",
+          "prevention": [
+            "Mulching",
+            "Airflow",
+            "Early picking"
+          ]
+        }
+      }
+    },
+    "papaya": {
+      "name": "Papaya",
+      "diseases": {
+        "ringspot-papaya": {
+          "name": "Papaya Ringspot",
+          "description": "Viral rings on fruit leaves.",
+          "symptoms": [
+            "Rings on fruit",
+            "Reduced leaf size"
+          ],
+          "favorableConditions": "Aphid activity.",
+          "impact": "Stunts plant growth.",
+          "prevention": [
+            "Resistant seeds",
+            "Vector control"
+          ]
+        }
+      }
+    },
+    "watermelon": {
+      "name": "Watermelon",
+      "diseases": {
+        "fusarium-wilt-wm": {
+          "name": "Fusarium Wilt",
+          "description": "Soil-borne pathogen.",
+          "symptoms": [
+            "Wilting vines",
+            "Stem browning"
+          ],
+          "favorableConditions": "Warm soil.",
+          "impact": "Total crop failure.",
+          "prevention": [
+            "Crop rotation",
+            "Grafting"
+          ]
+        }
+      }
+    },
+    "apple": {
+      "name": "Apple",
+      "diseases": {
+        "apple-scab": {
+          "name": "Apple Scab",
+          "description": "Velvety spots on fruit.",
+          "symptoms": [
+            "Scabby fruit lesions",
+            "Leaf drop"
+          ],
+          "favorableConditions": "Rainy spring.",
+          "impact": "Market loss.",
+          "prevention": [
+            "Resistant varieties",
+            "Scheduled sprays"
+          ]
+        }
+      }
+    },
+    "soyabean": {
+      "name": "Soyabean",
+      "diseases": {
+        "soybean-rust": {
+          "name": "Soybean Rust",
+          "description": "Aggressive foliar fungus.",
+          "symptoms": [
+            "Tan leaf spots",
+            "Early defoliation"
+          ],
+          "favorableConditions": "High moisture.",
+          "impact": "Up to 80% loss.",
+          "prevention": [
+            "Early monitoring",
+            "Fungicides"
+          ]
+        }
+      }
+    },
+    "carrot": {
+      "name": "Carrot",
+      "diseases": {
+        "carrot-leaf-blight": {
+          "name": "Alternaria Blight",
+          "description": "Common carrot leaf rot.",
+          "symptoms": [
+            "Dark spots",
+            "Yellow edges"
+          ],
+          "favorableConditions": "Humid heat.",
+          "impact": "Reduces root size.",
+          "prevention": [
+            "Seed treatment",
+            "Rotation"
+          ]
+        }
+      }
+    },
+    "pepper": {
+      "name": "Pepper",
+      "diseases": {
+        "bacterial-spot-pepper": {
+          "name": "Bacterial Spot",
+          "description": "Damaging bacterial infection.",
+          "symptoms": [
+            "Foliar spots",
+            "Fruit cankers"
+          ],
+          "favorableConditions": "Rain and heat.",
+          "impact": "Sunscald and yield drop.",
+          "prevention": [
+            "Pathogen-free seed",
+            "Copper sprays"
+          ]
+        }
+      }
+    },
+    "potato": {
+      "name": "Potato",
+      "diseases": {
+        "late-blight-potato": {
+          "name": "Late Blight",
+          "description": "Destructive fungal rot.",
+          "symptoms": [
+            "Dark leaf lesions",
+            "Tuber rot"
+          ],
+          "favorableConditions": "Moist cool weather.",
+          "impact": "Total plant loss.",
+          "prevention": [
+            "Certified seed",
+            "Protective hilling"
+          ]
+        }
+      }
+    },
+    "broccoli": {
+      "name": "Broccoli",
+      "diseases": {
+        "clubroot-broccoli": {
+          "name": "Clubroot",
+          "description": "Soil-borne root distortion.",
+          "symptoms": [
+            "Swollen roots",
+            "Stunting"
+          ],
+          "favorableConditions": "Acidic soil moisture.",
+          "impact": "Small heads, plant death.",
+          "prevention": [
+            "Soil pH management"
+          ]
+        }
+      }
+    },
+    "cucumber": {
+      "name": "Cucumber",
+      "diseases": {
+        "powdery-mildew-cuc": {
+          "name": "Powdery Mildew",
+          "description": "White leaf powder fungus.",
+          "symptoms": [
+            "White powder",
+            "Leaf drying"
+          ],
+          "favorableConditions": "Humidity.",
+          "impact": "Reduced harvest life.",
+          "prevention": [
+            "Resistant varieties",
+            "Sulfur"
+          ]
+        }
+      }
+    },
+    "lettuce": {
+      "name": "Lettuce",
+      "diseases": {
+        "downy-mildew-lettuce": {
+          "name": "Downy Mildew",
+          "description": "Leaf rot of lettuce.",
+          "symptoms": [
+            "Yellow angular spots",
+            "White mold"
+          ],
+          "favorableConditions": "Cool and wet.",
+          "impact": "Destroys marketable heads.",
+          "prevention": [
+            "Rotation",
+            "Evening dry-out"
+          ]
+        }
+      }
+    },
+    "spinach": {
+      "name": "Spinach",
+      "diseases": {
+        "spinach-downy-mildew": {
+          "name": "Downy Mildew",
+          "description": "Critical spinach rot.",
+          "symptoms": [
+            "Yellow patches",
+            "Moldy underside"
+          ],
+          "favorableConditions": "Damp cold weather.",
+          "impact": "Rapid crop destruction.",
+          "prevention": [
+            "Resistant hybrids",
+            "Spacing"
+          ]
+        }
+      }
+    },
+    "cauliflower": {
+      "name": "Cauliflower",
+      "diseases": {
+        "black-rot-cauli": {
+          "name": "Black Rot",
+          "description": "Crucifer bacterial decay.",
+          "symptoms": [
+            "V-shaped yellow margin",
+            "Black veins"
+          ],
+          "favorableConditions": "Warm Rain.",
+          "impact": "Severe head rot.",
+          "prevention": [
+            "Clean seed",
+            "Rotation"
+          ]
+        }
+      }
+    },
+    "cabbage": {
+      "name": "Cabbage",
+      "diseases": {
+        "alternaria-leaf-spot-cab": {
+          "name": "Alternaria Spot",
+          "description": "Unsightly head fungus.",
+          "symptoms": [
+            "Zonate spots",
+            "Browning"
+          ],
+          "favorableConditions": "Hot and humid.",
+          "impact": "Decreases shelf-life and value.",
+          "prevention": [
+            "Drip irrigation",
+            "Sanitation"
+          ]
+        }
+      }
+    },
+    "onion": {
+      "name": "Onion",
+      "diseases": {
+        "purple-blotch-onion": {
+          "name": "Purple Blotch",
+          "description": "Bulb-stunting fungus.",
+          "symptoms": [
+            "Purple spots",
+            "Leaf dry out"
+          ],
+          "favorableConditions": "Humidity.",
+          "impact": "Affects quality and storage.",
+          "prevention": [
+            "Long rotation",
+            "Drainage"
+          ]
+        }
+      }
+    },
+    "tomato": {
+      "name": "Tomato",
+      "diseases": {
+        "early-blight-tom": {
+          "name": "Early Blight",
+          "description": "Common foliar rot.",
+          "symptoms": [
+            "Concentric leaf circles",
+            "Fruit rot"
+          ],
+          "favorableConditions": "Humid days.",
+          "impact": "Reduces yield by damaging foliage.",
+          "prevention": [
+            "Mulching",
+            "Pruning lower leaves"
+          ]
+        }
+      }
+    },
+    "cotton": {
+      "name": "Cotton",
+      "diseases": {
+        "boll-rot-cotton": {
+          "name": "Boll Rot",
+          "description": "Cotton boll decay.",
+          "symptoms": [
+            "Water-soaked boll spots",
+            "Discoloration"
+          ],
+          "favorableConditions": "Rain and density.",
+          "impact": "Reduces lint yield and quality.",
+          "prevention": [
+            "Drainage",
+            "Insects control"
+          ]
+        }
+      }
+    },
+    "sugarcane": {
+      "name": "Sugarcane",
+      "diseases": {
+        "red-rot-sugarcane": {
+          "name": "Red Rot",
+          "description": "Critical sugar rot.",
+          "symptoms": [
+            "Red stalk interior",
+            "Alcoholic smell"
+          ],
+          "favorableConditions": "Rain and waterlogging.",
+          "impact": "Reduces sugar recovery and weight.",
+          "prevention": [
+            "Clean seed",
+            "Red rot resistance"
+          ]
+        }
+      }
+    }
+  },
+  "WeatherTips": {
+    "storm": "⚡ Storm alert — avoid fieldwork, secure crops & equipment now.",
+    "heavyRainWind": "🌧️ Heavy rain + strong winds — postpone spraying & harvesting.",
+    "rain": "🌧️ Rain today — skip irrigation, ideal to transplant seedlings.",
+    "foggy": "🌫️ Foggy morning — delay pesticide spraying until fog clears.",
+    "extremeHeat": "🔥 Extreme heat — water crops early morning, shade young plants.",
+    "highHeatUV": "☀️ High heat & UV — irrigate at dawn/dusk, protect workers too.",
+    "frost": "❄️ Near-frost — cover sensitive crops overnight to prevent damage.",
+    "strongWind": "💨 Strong winds — avoid spraying, secure mulch & shade nets.",
+    "highHumidity": "💧 High humidity — watch for fungal disease, ensure good airflow.",
+    "sunnyClear": "🌤️ Good sunny day — great for harvesting & drying grains.",
+    "clear": "✅ Clear skies — good conditions for field work & spraying fertilizers.",
+    "moderate": "🌱 Moderate conditions — suitable for routine farm activities today."
+  },
+  "WeatherPage": {
+    "title": "Weather",
+    "subtitle": "Real-time conditions for any location",
+    "searchPlaceholder": "City, region or country…",
+    "searchBtn": "Search",
+    "useMyLocation": "Use My Location",
+    "useMyLocationTitle": "Use my location",
+    "locationDeniedTitle": "Location access denied",
+    "locationDeniedDesc": "Enable location in your browser settings, or search for a city below.",
+    "detectingLocation": "Detecting your location…",
+    "allowLocation": "Allow location access when prompted",
+    "searchManually": "Search manually instead",
+    "fetchingWeather": "Fetching weather…",
+    "gettingConditions": "Getting the latest conditions",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "uvIndex": "UV Index",
+    "uvLow": "Low",
+    "uvModerate": "Moderate",
+    "uvHigh": "High",
+    "uvVeryHigh": "Very High",
+    "gustSpeed": "Gust Speed",
+    "cloudCover": "Cloud Cover",
+    "rain": "Rain",
+    "noLocationTitle": "No location selected",
+    "noLocationDesc": "Click the locate button to use your current location, or search for any city above.",
+    "failedFetch": "Failed to fetch weather"
+  },
+  "YieldPredictor": {
+    "pageTitle": "Kisan AI Auto-Pilot",
+    "pageDescription": "Click any farm location on the map. Our Auto-Pilot will instantly fetch live weather, run satellite parameters, and use TensorFlow.js to predict your harvest yield.",
+    "mapInstruction": "Click on your farm to auto-fetch weather & predict yield",
+    "title": "Yield Predictor",
+    "description": "Enter environmental data to predict expected crop yield.",
+    "ndvi": "NDVI (Vegetation Index)",
+    "ndviLow": "Bare soil",
+    "ndviHigh": "Dense vegetation",
+    "soilMoisture": "Soil Moisture (%)",
+    "dry": "Dry",
+    "wet": "Wet",
+    "rainfall": "Rainfall (mm)",
+    "predicting": "Predicting...",
+    "predictButton": "Predict Yield",
+    "predictionSuccess": "Yield prediction complete!",
+    "predictionError": "Failed to predict. Try again.",
+    "predictedYield": "Predicted Yield",
+    "tonsPerHectare": "tons per hectare",
+    "vsAverage": "vs regional avg",
+    "averageRegional": "Regional Average",
+    "regionBaseline": "Baseline",
+    "comparisonChart": "Yield Comparison",
+    "readyTitle": "Ready to predict yield?",
+    "readyDescription": "Enter your NDVI, soil moisture, and rainfall data to get an AI-powered yield prediction.",
+    "expandMap": "Expand",
+    "stepMap": "Location",
+    "stepEnvironment": "Environment",
+    "stepResults": "Results",
+    "stepGuide1": "Step 1: Set location on map",
+    "stepGuide2": "Step 2: Adjust environmental data",
+    "stepGuide3": "Step 3: Select crop & click Predict",
+    "environmental": "Environmental Data",
+    "satelliteData": "Satellite & Weather Data",
+    "cropTypeRequired": "Crop type is required",
+    "areaRequired": "Valid land area is required",
+    "validationError": "Please fill in all required fields",
+    "predictYield": "Predict Yield",
+    "farmInputs": "Farm-specific inputs",
+    "cropType": "Crop Type",
+    "selectCrop": "Select a crop...",
+    "baseYield": "Base yield",
+    "landArea": "Land Area",
+    "enterArea": "Enter area"
+  },
+  "Products": {
+    "NAA": {
+      "name": "NAA 4.5% SL",
+      "tag": "Plant Growth Regulator",
+      "description": "Prevents flower and fruit drop in a wide range of crops.",
+      "longDescription": "NAA (Naphthalene Acetic Acid) 4.5% SL is a synthetic plant hormone in the auxin family. It is primarily used to prevent the premature shedding of flowers, squares, and bolls, thereby improving fruit set and overall yield. It is effective in crops like cotton, tomatoes, and mangoes.",
+      "features": [
+        "Prevents flower and fruit drop",
+        "Improves fruit set and retention",
+        "Enhances overall crop yield",
+        "Promotes root growth in cuttings",
+        "Suitable for foliar application"
+      ],
+      "usage": {
+        "tomato": "20-40 ml in 1000 L water per ha (at flowering and fruit set)",
+        "cotton": "222-444 ml in 1000 L water per ha (3 sprays from square formation)",
+        "mango": "15 ml formulation per 100 L water (pre-harvest spray)"
+      }
+    },
+    "Abamectin": {
+      "name": "Abamectin 1.9% EC",
+      "tag": "Miticide / Insecticide",
+      "description": "Effective against mites and leaf miners in a variety of crops.",
+      "longDescription": "Abamectin 1.9% EC is a mixture of avermectins, producing toxic effects in insects and mites by stimulating the release of gamma-aminobutyric acid (GABA), an inhibitory neurotransmitter. It provides excellent control of spider mites and leaf miners in crops like roses, grapes, apples, and tomatoes.",
+      "features": [
+        "Effective against red spider mites and leaf miners",
+        "Acts through contact and stomach action",
+        "Recommended for use on roses, grapes, apples, and tomatoes",
+        "Provides long-lasting protection with a short waiting period",
+        "Rapidly degrades on plant surfaces and in soil"
+      ],
+      "usage": {
+        "rose": "0.025-0.05% solution in 5000 L water per ha (3 days waiting period)",
+        "grapes": "0.75 ml/L water in 500-1000 L water per ha (3 days waiting period)",
+        "apple": "0.05% solution, 6-7 L water per tree (7 days waiting period)",
+        "tomato": "450-600 ml in 500 L water per ha (3 days waiting period)"
+      }
+    },
+    "Acephate": {
+      "name": "Acephate 75% SP",
+      "tag": "Systemic Insecticide",
+      "description": "Broad-spectrum systemic insecticide for sucking and chewing pests.",
+      "longDescription": "Acephate 75% SP is a soluble powder that acts as a systemic and contact insecticide. It is absorbed by leaves and roots, providing effective control against a wide range of pests including jassids, bollworms, aphids, and stem borers in crops like cotton, rice, and safflower.",
+      "features": [
+        "Systemic action for long-lasting control",
+        "Effective against both sucking and chewing insects",
+        "Water-soluble for easy application",
+        "Suitable for cotton, paddy, and safflower",
+        "Reduces pest populations quickly"
+      ],
+      "usage": {
+        "cotton_jassids": "292 g a.i./ha (390 g formulation) in 500-1000 L water (15 days waiting)",
+        "cotton_bollworms": "584 g a.i./ha (780 g formulation) in 500-1000 L water (15 days waiting)",
+        "safflower_aphids": "584 g a.i./ha (780 g formulation) in 500-1000 L water (15 days waiting)",
+        "rice_pests": "500-750 g a.i./ha (666-1000 g formulation) in 300-500 L water (15 days waiting)"
+      }
+    },
+    "Acetamiprid": {
+      "name": "Acetamiprid 20% SP",
+      "tag": "Neonicotinoid",
+      "description": "Systemic insecticide for effective control of sap-feeding insects.",
+      "longDescription": "Acetamiprid 20% SP is a systemic, neonicotinoid insecticide that acts on the central nervous system of insects, causing paralysis and death. It is highly effective against aphids, jassids, thrips, and whiteflies in a variety of crops including cotton, cabbage, okra, chilli, and rice.",
+      "features": [
+        "Powerful systemic and translaminar activity",
+        "Controls a broad spectrum of sucking pests",
+        "Quick knockdown effect",
+        "Safe to beneficial insects when used as directed",
+        "Compatible with most IPM programs"
+      ],
+      "usage": {
+        "cotton_aphids_jassids": "10 g a.i./ha (50 g formulation) in 500-600 L water (15 days waiting)",
+        "cotton_whiteflies": "20 g a.i./ha (100 g formulation) in 500-600 L water (15 days waiting)",
+        "cabbage_aphids": "15 g a.i./ha (75 g formulation) in 500-600 L water (7 days waiting)",
+        "okra_aphids": "15 g a.i./ha (75 g formulation) in 500-600 L water (3 days waiting)",
+        "chilli_thrips": "10-20 g a.i./ha (50-100 g formulation) in 500-600 L water (3 days waiting)",
+        "rice_bph": "10-20 g a.i./ha (50-100 g formulation) in 500-600 L water (7 days waiting)"
+      }
+    },
+    "AluminumPhosphide": {
+      "name": "Aluminum Phosphide 56%",
+      "tag": "Fumigant",
+      "description": "A highly effective fumigant for stored grain pest control.",
+      "longDescription": "Aluminum Phosphide 56% is a solid fumigant that reacts with moisture in the air to release phosphine gas. It is used to control a broad spectrum of stored grain pests like weevils, borers, and beetles in cereals, pulses, oilseeds, and spices, as well as for rodent control in burrows.",
+      "features": [
+        "Highly effective against all stages of stored grain pests",
+        "Penetrates deep into grain stacks",
+        "Available in tablet and pouch formulations",
+        "Kills insects without leaving residues on grain",
+        "Also used for rodent burrow fumigation"
+      ],
+      "usage": {
+        "cereals_pulses": "3 tablets (3g) per ton or 150g/100m³, exposure 5-7 days, aeration 48 hrs",
+        "oilseeds_spices": "3 tablets per ton or 225g/100m³, exposure 5 days, aeration 48 hrs",
+        "godowns": "14 tablets/1000m³ or 150g/100m³, exposure 72 hrs, aeration 24 hrs",
+        "rodent_burrows": "1 tablet per burrow"
+      }
+    },
+    "Brodifacoum": {
+      "name": "Brodifacoum 0.005% BB",
+      "tag": "Rodenticide",
+      "description": "A potent, single-feed anticoagulant rodenticide for field and premises.",
+      "longDescription": "Brodifacoum 0.005% BB is a powerful anticoagulant rodenticide. It works by inhibiting the synthesis of Vitamin K, essential for blood clotting, leading to the death of rodents from internal hemorrhaging. It is a single-feed bait, effective against a wide range of rats, bandicoots, and mice in agricultural, commercial, and residential settings.",
+      "features": [
+        "Effective as a single-dose bait",
+        "Controls a wide variety of rodent species",
+        "Ready-to-use block formulation",
+        "Ideal for use in and around buildings and fields",
+        "Palatable bait matrix"
+      ],
+      "usage": {
+        "field_rats": "One bait block (20g) per baiting station as single feed",
+        "residential": "Place in and around premises, cold storage, godowns, warehouses",
+        "burrow_baiting": "Place bait near active burrows"
+      }
+    },
+    "Chlorantraniliprole": {
+      "name": "Chlorantraniliprole 18.5% SC",
+      "tag": "Anthranilic Diamide",
+      "description": "Targets lepidopteran pests by disrupting their muscle contraction.",
+      "longDescription": "Chlorantraniliprole 18.5% SC belongs to the anthranilic diamide class of insecticides. It works by activating the ryanodine receptors in insects, leading to uncontrolled muscle contraction, paralysis, and death. It is highly effective against stem borers, fruit borers, and caterpillars in crops like rice, cotton, and vegetables.",
+      "features": [
+        "Excellent control of lepidopteran pests",
+        "Acts on insect muscle systems, unique mode of action",
+        "Long-lasting residual control",
+        "Safe to mammals and beneficial insects",
+        "Larvicidal and ovicidal properties"
+      ],
+      "usage": {
+        "rice": "30 g a.i./ha (150 ml) in 500 L water (47 days waiting)",
+        "cabbage": "10 g a.i./ha (50 ml) in 500 L water (3 days waiting)",
+        "cotton": "30 g a.i./ha (150 ml) in 500 L water (9 days waiting)",
+        "tomato": "30 g a.i./ha (150 ml) in 500 L water (3 days waiting)",
+        "chilli": "30 g a.i./ha (150 ml) in 500 L water (3 days waiting)",
+        "brinjal": "40 g a.i./ha (200 ml) in 500-750 L water (22 days waiting)"
+      }
+    },
+    "Cypermethrin": {
+      "name": "Cypermethrin 10% EC",
+      "tag": "Pyrethroid",
+      "description": "A fast-acting, broad-spectrum insecticide for diverse crops.",
+      "longDescription": "Cypermethrin 10% EC is a synthetic pyrethroid insecticide that acts on the nervous system of insects, providing quick knockdown and kill. It is effective against a wide range of chewing and sucking pests, including bollworms, diamondback moths, fruit borers, and jassids in crops such as cotton, cabbage, okra, brinjal, and wheat.",
+      "features": [
+        "Rapid knockdown and strong repellent action",
+        "Broad-spectrum activity",
+        "Effective against a wide range of field pests",
+        "Stable in sunlight, providing good residual activity",
+        "Suitable for integration with other pest management practices"
+      ],
+      "usage": {
+        "cotton": "50-70 g a.i./ha (550-760 ml) in 150-1000 L water (7 days waiting)",
+        "cabbage": "60-70 g a.i./ha (650-760 ml) in 100-400 L water (7 days waiting)",
+        "okra": "50-70 g a.i./ha (550-760 ml) in 150-400 L water (3 days waiting)",
+        "brinjal": "50-70 g a.i./ha (550-760 ml) in 150-400 L water (3 days waiting)",
+        "wheat": "50 g a.i./ha (550 ml) in 500-800 L water (14 days waiting)"
+      }
+    },
+    "Deltamethrin": {
+      "name": "Deltamethrin 2.8% EC",
+      "tag": "Pyrethroid",
+      "description": "High-potency insecticide for agriculture and public health.",
+      "longDescription": "Deltamethrin 2.8% EC is a highly potent synthetic pyrethroid insecticide. It disrupts the nervous system of insects, causing immediate paralysis. It is used in agriculture to control bollworms, leaf folders, thrips, and borers, and in public health for mosquito control. Its high activity means lower dosage rates are required.",
+      "features": [
+        "Extremely high insecticidal activity",
+        "Effective at very low doses",
+        "Used for both crop protection and public health",
+        "Provides rapid knockdown and good residual effect",
+        "Effective against a wide range of insect pests"
+      ],
+      "usage": {
+        "cotton": "12.5 g a.i./ha (500 ml) in 400-600 L water",
+        "tea_thrips": "3-4 g a.i./ha (120-150 ml) in 400-600 L water (3 days waiting)",
+        "okra": "10-15 g a.i./ha (400-600 ml) in 400-600 L water (1 day waiting)",
+        "chilli": "10-12.5 g a.i./ha (400-500 ml) in 400-600 L water (5 days waiting)",
+        "groundnut": "12.5 g a.i./ha (500 ml) in 400-600 L water (3 days waiting)",
+        "public_health_mosquito": "Thermal fogging 0.5 g a.i./ha or ULV 0.5 g a.i./ha"
+      }
+    },
+    "Imidacloprid": {
+      "name": "Imidacloprid 70% WG",
+      "tag": "Neonicotinoid",
+      "description": "A systemic insecticide for long-lasting control of sucking pests.",
+      "longDescription": "Imidacloprid 70% WG is a systemic insecticide from the neonicotinoid group. It is absorbed by plants and moves through the vascular system, providing long-lasting protection against sap-feeding insects. It is highly effective against jassids, aphids, thrips, and whiteflies in cotton, rice, vegetables, and other crops.",
+      "features": [
+        "Powerful systemic action",
+        "Provides long-term protection (up to several weeks)",
+        "Highly effective against sucking insects",
+        "Water-dispersible granule for easy mixing",
+        "Reduced risk to the environment compared to broad-spectrum sprays"
+      ],
+      "usage": {
+        "cotton": "21-24.5 g a.i./ha (30-35 g) in 375-500 L water (7 days waiting)",
+        "rice": "21-24.5 g a.i./ha (30-35 g) in 300-375 L water (7 days waiting)",
+        "okra": "21-24.5 g a.i./ha (30-35 g) in 300-375 L water (3 days waiting)",
+        "cucumber": "24.5 g a.i./ha (35 g) in 500 L water (5 days waiting)",
+        "tomato": "35 g a.i./ha (50 g) in 500 L water (5 days waiting)",
+        "potato": "63 g a.i./ha (90 g) in 500 L water (30 days waiting)"
+      }
+    },
+    "Thiamethoxam": {
+      "name": "Thiamethoxam 25% WG",
+      "tag": "Neonicotinoid",
+      "description": "Systemic insecticide with rapid action for comprehensive crop protection.",
+      "longDescription": "Thiamethoxam 25% WG is a second-generation neonicotinoid insecticide with excellent systemic and translaminar activity. It works by interfering with nicotinic acetylcholine receptors in the insect nervous system. It is effective against a broad spectrum of sucking and some chewing pests in rice, cotton, vegetables, and mangoes.",
+      "features": [
+        "Broad-spectrum control of sucking pests",
+        "Excellent systemic and translaminar movement",
+        "Rapid uptake by plants",
+        "Long residual activity",
+        "Can be applied as foliar spray, drench, or seed treatment"
+      ],
+      "usage": {
+        "rice": "25 g a.i./ha (100 g) in 500-750 L water (14 days waiting)",
+        "cotton_jassid": "25 g a.i./ha (100 g) in 500-750 L water (21 days waiting)",
+        "cotton_whitefly": "50 g a.i./ha (200 g) in 500-750 L water (21 days waiting)",
+        "okra": "25 g a.i./ha (100 g) in 500-1000 L water (5 days waiting)",
+        "mango": "25 g a.i./ha (100 g) in 1000 L water (30 days waiting)",
+        "wheat": "12.5 g a.i./ha (50 g) in 500 L water (21 days waiting)"
+      }
+    },
+    "AcephateImida": {
+      "name": "Acephate 50% + Imidacloprid 1.8% SP",
+      "tag": "Combination SP",
+      "description": "A powerful combination for controlling both sucking and borer pests.",
+      "longDescription": "This combination product harnesses the systemic and contact action of Imidacloprid with the broad-spectrum activity of Acephate. It provides a comprehensive solution for complex pest infestations, effectively managing jassids, aphids, thrips, whiteflies, and bollworms in crops like cotton, chilli, and paddy.",
+      "features": [
+        "Dual mode of action for resistance management",
+        "Controls a wide spectrum of sucking pests and bollworms",
+        "Synergistic effect for enhanced pest control",
+        "Ideal for crops with multiple pest complexes",
+        "Water-soluble powder for easy application"
+      ],
+      "usage": {
+        "cotton": "518 g a.i./ha (1000 g) in 500 L water (40 days waiting)",
+        "rice": "518 g a.i./ha (1000 g) in 500 L water",
+        "sugarcane": "1250+45 g a.i./ha (2500 ml) in 500 L water (123 days waiting)",
+        "chilli": "518 g a.i./ha (1000 g) in 500 L water (3 days waiting)"
+      }
+    },
+    "ChlLambda": {
+      "name": "Chlorantraniliprole 9.3% + Lambda-cyhalothrin 4.6% ZC",
+      "tag": "Combination ZC",
+      "description": "A potent mix of diamide and pyrethroid for rapid and residual control.",
+      "longDescription": "This combination formulation contains Chlorantraniliprole (a ryanodine receptor modulator) and Lambda-cyhalothrin (a sodium channel modulator). It provides both quick knockdown and long-lasting residual control of a wide range of pests including fruit borers, bollworms, leaf folders, jassids, and beetles in crops like pigeon pea, cotton, brinjal, and maize.",
+      "features": [
+        "Two powerful modes of action",
+        "Provides rapid knockdown (Lambda-cyhalothrin) and long residual (Chlorantraniliprole)",
+        "Broad-spectrum control of lepidopteran and sucking pests",
+        "Effective resistance management tool",
+        "Protects yield and quality"
+      ],
+      "usage": {
+        "pigeon_pea": "30 g a.i./ha (200 ml) in 500 L water (18 days waiting)",
+        "cotton": "37.5 g a.i./ha (250 ml) in 500 L water (20 days waiting)",
+        "brinjal": "28 g a.i./ha (200 ml) in 500 L water (5 days waiting)",
+        "okra": "28 g a.i./ha (200 ml) in 500 L water (3 days waiting)",
+        "rice": "28-35 g a.i./ha (200-250 ml) in 500 L water (53 days waiting)",
+        "soybean": "28 g a.i./ha (200 ml) in 500 L water (41 days waiting)",
+        "maize": "35 g a.i./ha (250 ml) in 500 L water (36 days waiting)"
+      }
+    },
+    "LambdaCS": {
+      "name": "Lambda-cyhalothrin 9.7% CS",
+      "tag": "Public Health Insecticide",
+      "description": "A microencapsulated formulation for effective mosquito control.",
+      "longDescription": "Lambda-cyhalothrin 9.7% CS is a public health insecticide formulated for indoor residual spraying (IRS). Its microencapsulation technology provides a safer and longer-lasting residual effect on various wall surfaces. It is specifically recommended for controlling mosquitoes that transmit malaria, dengue, and other vector-borne diseases.",
+      "features": [
+        "Microencapsulated for enhanced safety and residual life",
+        "Used for Indoor Residual Spraying (IRS)",
+        "Effective against Anopheles, Aedes, and Culex mosquitoes",
+        "Long-lasting efficacy on porous and non-porous surfaces",
+        "Approved for public health programs"
+      ],
+      "usage": {
+        "malaria_control": "25 mg a.i./sq.m (12.5 ml/500 sq.m) in 10 L water",
+        "moderate_infestation": "20 mg a.i./sq.m (4 ml/L water) spray solution 50 ml/sq.m",
+        "high_infestation": "25 mg a.i./sq.m (5 ml/L water) spray solution 50 ml/sq.m"
+      }
+    },
+    "Temephos": {
+      "name": "Temephos 1% GR",
+      "tag": "Larvicide",
+      "description": "A larvicide for controlling mosquito breeding in water bodies.",
+      "longDescription": "Temephos 1% GR is an organophosphate larvicide used in public health programs to control mosquito larvae. It is applied to breeding habitats such as stagnant water, ponds, drains, and containers to prevent the emergence of adult mosquitoes. It is highly effective against Aedes, Anopheles, and Culex species.",
+      "features": [
+        "Specifically targets mosquito larvae",
+        "Prevents adult mosquito emergence",
+        "Ideal for use in drinking water storage containers (at recommended doses)",
+        "Available in easy-to-apply granule form",
+        "An essential tool in Integrated Vector Management (IVM)"
+      ],
+      "usage": {
+        "highly_polluted": "200-500 g a.i./ha (20-50 kg/ha) for drains, cesspits",
+        "moderately_polluted": "100-200 g a.i./ha (10-20 kg/ha) for marshes, swamps",
+        "clean_water": "50-100 g a.i./ha (5-10 kg/ha) for ponds, lakes",
+        "cyclops_control": "0.5-1.0 g a.i. (5-10 g) for ponds, step wells"
+      }
+    },
+    "TransfluthrinLV": {
+      "name": "Transfluthrin 0.88% Liquid Vaporizer",
+      "tag": "Household Insecticide",
+      "description": "A ready-to-use liquid vaporizer for mosquito-free homes.",
+      "longDescription": "This is a ready-to-use household insecticide in a liquid vaporizer format. It contains Transfluthrin, a fast-acting pyrethroid that effectively repels and kills mosquitoes (Aedes, Anopheles, Culex) and houseflies. It provides a convenient and continuous protection system for indoor use.",
+      "features": [
+        "Ready-to-use liquid vaporizer",
+        "Provides continuous protection for up to 30-60 nights",
+        "Effectively controls and repels mosquitoes",
+        "Odorless and non-staining",
+        "Ideal for bedrooms and living areas"
+      ],
+      "usage": {
+        "indoor": "Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection",
+        "area": "Effective for rooms up to 300-400 sq.ft"
+      }
+    },
+    "PrallethrinLV": {
+      "name": "Prallethrin 0.65% Liquid Vaporizer",
+      "tag": "Household Insecticide",
+      "description": "A fast-acting liquid vaporizer for immediate mosquito protection.",
+      "longDescription": "This liquid vaporizer contains Prallethrin, a synthetic pyrethroid known for its rapid knockdown effect against mosquitoes. It is highly effective in eliminating mosquitoes quickly and providing a comfortable environment. It is safe for use in homes when used as directed.",
+      "features": [
+        "Fast-acting formula for quick knockdown",
+        "Effective against mosquitoes and other flying insects",
+        "Provides continuous protection",
+        "Easy to use with standard liquid vaporizer devices",
+        "Pleasant fragrance for a comfortable atmosphere"
+      ],
+      "usage": {
+        "indoor": "Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection",
+        "area": "Effective for rooms up to 300-400 sq.ft"
+      }
+    },
+    "RupiyaKuber": {
+      "name": "Rupiya Kuber",
+      "tag": "Liquid Manure Supplement",
+      "description": "A natural liquid manure supplement providing balanced potassium, carbon, and magnesium to the crop.",
+      "longDescription": "It's a natural liquid manure supplement which provides balanced amounts of potassium, carbon and magnesium to the crop. Increases productivity and quality of crops by enhancing the process of photosynthesis and pollen germination.",
+      "features": [
+        "Increases productivity and quality of crops",
+        "Enhances photosynthesis and pollen germination",
+        "Provides natural micronutrition to the crop",
+        "Helps in fruit and flower development"
+      ],
+      "usage": {
+        "foliar_spray": "5-10 ml per liter of water",
+        "drip_irrigation": "10-15 liters per acre"
+      }
+    }
+  },
+  "ProductsPage": {
+    "heroTag": "🌾 Agricultural Solutions",
+    "heroTitle": "KisanDost Products",
+    "heroSubtitle": "Science-backed crop nutrition and soil enhancement products for modern farming.",
+    "allProducts": "← All Products",
+    "priceLabel": "Price:",
+    "priceOnRequest": "Price on request",
+    "viewProduct": "View Product →",
+    "buyOnWhatsApp": "Buy on WhatsApp",
+    "tabs": {
+      "overview": "Overview",
+      "features": "Features",
+      "usage": "Usage"
+    },
+    "noFeatures": "No features listed for this product.",
+    "noUsage": "Usage information not available. Please contact us for dosage details.",
+    "loading": "Loading product...",
+    "productNotFound": "Product Not Found",
+    "notFoundDesc": "The product you are looking for does not exist.",
+    "footer": "© 2026 KisanDost · Empowering Indian Farmers",
+    "solvesLabel": "Solves"
+  }
+}
