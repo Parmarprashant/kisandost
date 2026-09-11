@@ -1,0 +1,11 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  base = "kisan-dost/ventureHack/kisan-next"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "true"
+  NODE_VERSION = "20"
