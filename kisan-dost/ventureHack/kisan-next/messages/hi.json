@@ -1353,7 +1353,24 @@
       "v6": "2 महीने पहले",
       "v7": "2 महीने पहले",
       "v8": "3 महीने पहले"
-    }
+    },
+    "govSchemesTitle": "किसानों के लिए सरकारी योजनाएँ",
+    "govSchemesIntro": "आय सहायता, फसल बीमा, ऋण, सिंचाई, मशीनरी और संबद्ध गतिविधियों से जुड़ी केंद्र सरकार की योजनाएँ। लाभ और पात्रता देखने के लिए योजना पर टैप करें, या आवेदन हेतु आधिकारिक पोर्टल खोलें।",
+    "govSchemesSearch": "नाम, मंत्रालय या कीवर्ड से योजना खोजें…",
+    "govSchemesAll": "सभी योजनाएँ",
+    "govSchemesLoading": "योजनाएँ लोड हो रही हैं…",
+    "govSchemesError": "योजनाएँ लोड नहीं हो सकीं। कृपया पुनः प्रयास करें।",
+    "govSchemesEmpty": "आपकी खोज से कोई योजना मेल नहीं खाती।",
+    "govSchemesBenefits": "मुख्य लाभ",
+    "govSchemesEligibility": "कौन आवेदन कर सकता है",
+    "govSchemesDetails": "विवरण देखें",
+    "govSchemesLess": "कम दिखाएँ",
+    "govSchemesApply": "आधिकारिक पोर्टल",
+    "govSchemesCentral": "केंद्रीय योजना",
+    "govSchemesLaunched": "शुरुआत",
+    "govSchemesShowAll": "सभी योजनाएँ दिखाएँ",
+    "networkTab": "किसान नेटवर्क",
+    "resourcesTab": "किसान संसाधन"
   },
   "ChatWidget": {
     "headerTitle": "KisanDost AI सहायक",

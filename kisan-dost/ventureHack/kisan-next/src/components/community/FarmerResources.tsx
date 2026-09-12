@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import GovernmentSchemes from "@/components/community/GovernmentSchemes";
 
 const VIDEOS = [
   { id: "fuE750JhA2U", titleKey: "v1", dateKey: "v1" },
@@ -328,6 +329,9 @@ export default function FarmerResources() {
           </div>
         </div>
       </section>
+
+      {/* Government Schemes Directory */}
+      <GovernmentSchemes />
 
       {/* Farmer Welfare Services Grid */}
       <section className="space-y-8 pt-4">

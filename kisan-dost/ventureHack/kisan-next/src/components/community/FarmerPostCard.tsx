@@ -61,6 +61,16 @@ export default function FarmerPostCard({ post, onPostUpdated }: FarmerPostCardPr
   const [showComments, setShowComments] = useState(false);
   const [commentCount, setCommentCount] = useState(post.commentCount || 0);
   const [isReporting, setIsReporting] = useState(false);
+  // Images that 404'd at runtime (e.g. uploads lost on an ephemeral filesystem)
+  // so their tiles can be dropped instead of leaving empty grey boxes.
+  const [brokenImages, setBrokenImages] = useState<string[]>([]);
+
+  // A post may carry blank or null entries from older records; treat those as
+  // "no image" rather than rendering an empty tile.
+  const validImages = (post.images ?? []).filter(
+    (img): img is string =>
+      typeof img === "string" && img.trim() !== "" && !brokenImages.includes(img)
+  );
 
   const postId = post.id || post._id || "";
 
@@ -212,10 +222,10 @@ export default function FarmerPostCard({ post, onPostUpdated }: FarmerPostCardPr
         {post.title}
       </h3>
 
-      {/* Images Gallery */}
-      {post.images && post.images.length > 0 && (
+      {/* Images Gallery - omitted entirely when the post has no usable image */}
+      {validImages.length > 0 && (
         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
-          {post.images.map((img, idx) => (
+          {validImages.map((img, idx) => (
             <div
               key={idx}
               className="relative w-48 h-32 md:w-64 md:h-40 rounded-2xl overflow-hidden border border-slate-200 shrink-0 bg-slate-100 shadow-sm"
@@ -226,6 +236,7 @@ export default function FarmerPostCard({ post, onPostUpdated }: FarmerPostCardPr
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
                 unoptimized
+                onError={() => setBrokenImages((prev) => [...prev, img])}
               />
             </div>
           ))}
