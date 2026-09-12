@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 // import { useUser, useClerk } from "@clerk/nextjs";
 import { useAuth } from "@/components/providers/AuthProvider";
@@ -16,6 +17,7 @@ export default function AuthPage() {
   const t = useTranslations("Index");
   const { user, login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
@@ -30,7 +32,16 @@ export default function AuthPage() {
     if (user) {
       setShowLanguageSelect(true);
     }
-  }, [user]);
+    
+    const urlError = searchParams.get('error');
+    if (urlError) {
+      if (urlError === 'google_auth_failed') setError('Google authentication failed. Please try again.');
+      else if (urlError === 'token_exchange_failed') setError('Server configuration error: Token exchange failed. Ensure Google Client ID/Secret are set.');
+      else if (urlError === 'profile_fetch_failed') setError('Failed to fetch your Google profile.');
+      else if (urlError === 'server_error') setError('An internal server error occurred during authentication.');
+      else setError('An unknown authentication error occurred.');
+    }
+  }, [user, searchParams]);
 
   const handleLanguageSelect = (locale: string) => {
     router.replace("/", { locale });
