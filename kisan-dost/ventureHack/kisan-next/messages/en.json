@@ -1353,7 +1353,24 @@
       "v6": "2 months ago",
       "v7": "2 months ago",
       "v8": "3 months ago"
-    }
+    },
+    "govSchemesTitle": "Government Schemes for Farmers",
+    "govSchemesIntro": "Central government schemes covering income support, crop insurance, credit, irrigation, machinery and allied activities. Tap a scheme for benefits and eligibility, or open the official portal to apply.",
+    "govSchemesSearch": "Search schemes by name, ministry or keyword…",
+    "govSchemesAll": "All Schemes",
+    "govSchemesLoading": "Loading schemes…",
+    "govSchemesError": "Could not load schemes. Please try again.",
+    "govSchemesEmpty": "No schemes match your search.",
+    "govSchemesBenefits": "Key Benefits",
+    "govSchemesEligibility": "Who Can Apply",
+    "govSchemesDetails": "View Details",
+    "govSchemesLess": "Show Less",
+    "govSchemesApply": "Official Portal",
+    "govSchemesCentral": "Central Scheme",
+    "govSchemesLaunched": "Launched",
+    "govSchemesShowAll": "Show All Schemes",
+    "networkTab": "Farmer Network",
+    "resourcesTab": "Farmer Resources"
   },
   "ChatWidget": {
     "headerTitle": "KisanDost AI Assistant",
