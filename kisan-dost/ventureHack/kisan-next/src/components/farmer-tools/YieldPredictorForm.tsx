@@ -44,13 +44,13 @@ import {
 } from "recharts";
 
 // Crop-specific base yield data (tons per acre)
-const CROP_BASE_YIELDS: Record<string, number> = {
-  wheat: 3.0,
-  rice: 2.5,
-  corn: 4.0,
-  cotton: 1.8,
-  soybean: 2.5,
-  sugarcane: 35, // Measured in different units
+export const CROP_BASE_YIELDS: Record<string, number> = {
+  rice: 2.10,
+  wheat: 1.85,
+  corn: 2.35,
+  cotton: 0.95,
+  soybean: 1.15,
+  sugarcane: 34.0,
 };
 
 const CROPS = [
@@ -148,12 +148,11 @@ export function YieldPredictorForm({ onPredict }: YieldPredictorFormProps) {
       }
       simulatedNdvi = Math.round(simulatedNdvi * 100) / 100;
 
-      setFormData((prev) => ({
-        ...prev,
+      updateFormData({
+        ndvi: simulatedNdvi,
         soil_moisture: mappedMoisture,
         rainfall: mappedRainfall,
-        ndvi: simulatedNdvi,
-      }));
+      });
       setSyncedWeather(true);
       toast.info(
         `Auto-filled satellite & weather data for ${weatherData.location.name}`
@@ -708,16 +707,37 @@ export function YieldPredictorForm({ onPredict }: YieldPredictorFormProps) {
 }
 
 // FIXED: Export EnvironmentalPanel subcomponent for 3-column layout (left panel)
-export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 'onPredict'>) {
+export interface EnvironmentalData {
+  ndvi: number;
+  soil_moisture: number;
+  rainfall: number;
+}
+
+export interface EnvironmentalPanelProps {
+  onPredict?: (data: any) => void;
+  envData?: EnvironmentalData;
+  onEnvChange?: (data: EnvironmentalData) => void;
+}
+
+export function EnvironmentalPanel({ onPredict, envData, onEnvChange }: EnvironmentalPanelProps) {
   const t = useTranslations("YieldPredictor");
   const { weatherData, lastUpdated } = useWeather();
   const [syncedWeather, setSyncedWeather] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const [localFormData, setLocalFormData] = useState<EnvironmentalData>({
     ndvi: 0.65,
     soil_moisture: 30,
     rainfall: 150,
   });
+
+  const formData = envData || localFormData;
+  const updateFormData = (newData: EnvironmentalData) => {
+    if (onEnvChange) {
+      onEnvChange(newData);
+    } else {
+      setLocalFormData(newData);
+    }
+  };
 
   // Auto-fill from weather data
   useEffect(() => {
@@ -740,12 +760,11 @@ export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 
       }
       simulatedNdvi = Math.round(simulatedNdvi * 100) / 100;
 
-      setFormData((prev) => ({
-        ...prev,
+      updateFormData({
+        ndvi: simulatedNdvi,
         soil_moisture: mappedMoisture,
         rainfall: mappedRainfall,
-        ndvi: simulatedNdvi,
-      }));
+      });
       setSyncedWeather(true);
       toast.info(`Auto-filled satellite & weather data for ${weatherData.location.name}`);
     }
@@ -791,7 +810,7 @@ export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 
               max="0.95"
               step="0.01"
               value={formData.ndvi}
-              onChange={(e) => setFormData({ ...formData, ndvi: Number(e.target.value) })}
+              onChange={(e) => updateFormData({ ...formData, ndvi: Number(e.target.value) })}
               className="w-full h-2 bg-emerald-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
             />
             <div className="flex justify-between text-[10px] text-muted-foreground font-medium">
@@ -819,7 +838,7 @@ export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 
               max="60"
               step="1"
               value={formData.soil_moisture}
-              onChange={(e) => setFormData({ ...formData, soil_moisture: Number(e.target.value) })}
+              onChange={(e) => updateFormData({ ...formData, soil_moisture: Number(e.target.value) })}
               className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
             />
             <div className="flex justify-between text-[10px] text-muted-foreground font-medium">
@@ -846,7 +865,7 @@ export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 
               min="0"
               max="500"
               value={formData.rainfall}
-              onChange={(e) => setFormData({ ...formData, rainfall: Number(e.target.value) })}
+              onChange={(e) => updateFormData({ ...formData, rainfall: Number(e.target.value) })}
               className="text-center text-lg font-semibold"
             />
           </div>
@@ -857,7 +876,12 @@ export function EnvironmentalPanel({ onPredict }: Pick<YieldPredictorFormProps, 
 }
 
 // FIXED: Export FormPanel subcomponent for 3-column layout (middle panel)
-export function FormPanel({ onPredict }: Pick<YieldPredictorFormProps, 'onPredict'>) {
+export interface FormPanelProps {
+  onPredict: (data: any) => void;
+  envData?: EnvironmentalData;
+}
+
+export function FormPanel({ onPredict, envData }: FormPanelProps) {
   const t = useTranslations("YieldPredictor");
   const [loading, setLoading] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
@@ -888,9 +912,10 @@ export function FormPanel({ onPredict }: Pick<YieldPredictorFormProps, 'onPredic
         body: JSON.stringify({
           crop_type: cropType,
           area_acres: areaInAcres,
-          ndvi: 0.65, // Default - should come from context/props in real usage
-          soil_moisture: 30,
-          rainfall: 150,
+          area_unit: areaUnit,
+          ndvi: envData?.ndvi ?? 0.65,
+          soil_moisture: envData?.soil_moisture ?? 30,
+          rainfall: envData?.rainfall ?? 150,
         }),
       });
 
@@ -902,9 +927,15 @@ export function FormPanel({ onPredict }: Pick<YieldPredictorFormProps, 'onPredic
         onPredict({
           predicted_yield: data.predicted_yield,
           yield_per_acre: data.yield_per_acre,
+          total_yield: data.total_yield,
           average_regional_yield: data.average_regional_yield,
+          average_regional_per_acre: data.average_regional_per_acre,
+          percent_difference: data.percent_difference,
+          is_above_average: data.is_above_average,
+          insights: data.insights,
           crop: cropType,
           area_acres: areaInAcres,
+          area_unit: areaUnit,
         });
         toast.success(t("predictionSuccess"));
       }

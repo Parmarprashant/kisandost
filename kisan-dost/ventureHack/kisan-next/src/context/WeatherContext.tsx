@@ -267,9 +267,15 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
   /** Fallback: fetch weather by IP when GPS is unavailable */
   const fetchByIp = useCallback(async () => {
     try {
-      await fetchWeather("auto:ip", false);
+      const res = await fetchWeather("auto:ip", false);
+      if (!res) {
+        await fetchWeather("Ahmedabad", false);
+      }
     } catch (err) {
-      console.error("[Weather API] IP-based fetch failed:", err);
+      console.warn("[Weather API] IP-based fetch failed, using fallback location:", err);
+      try {
+        await fetchWeather("Ahmedabad", false);
+      } catch {}
     } finally {
       setLoading(false);
     }
