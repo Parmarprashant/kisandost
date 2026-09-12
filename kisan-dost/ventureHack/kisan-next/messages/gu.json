@@ -1299,7 +1299,24 @@
       "v6": "2 મહિના પહેલા",
       "v7": "2 મહિના પહેલા",
       "v8": "3 મહિના પહેલા"
-    }
+    },
+    "govSchemesTitle": "ખેડૂતો માટે સરકારી યોજનાઓ",
+    "govSchemesIntro": "આવક સહાય, પાક વીમો, ધિરાણ, સિંચાઈ, મશીનરી અને સંલગ્ન પ્રવૃત્તિઓને આવરી લેતી કેન્દ્ર સરકારની યોજનાઓ. લાભ અને પાત્રતા જોવા યોજના પર ટૅપ કરો, અથવા અરજી માટે સત્તાવાર પોર્ટલ ખોલો.",
+    "govSchemesSearch": "નામ, મંત્રાલય કે કીવર્ડથી યોજના શોધો…",
+    "govSchemesAll": "બધી યોજનાઓ",
+    "govSchemesLoading": "યોજનાઓ લોડ થઈ રહી છે…",
+    "govSchemesError": "યોજનાઓ લોડ થઈ શકી નથી. કૃપા કરી ફરી પ્રયાસ કરો.",
+    "govSchemesEmpty": "તમારી શોધ સાથે કોઈ યોજના મેળ ખાતી નથી.",
+    "govSchemesBenefits": "મુખ્ય લાભ",
+    "govSchemesEligibility": "કોણ અરજી કરી શકે",
+    "govSchemesDetails": "વિગતો જુઓ",
+    "govSchemesLess": "ઓછું બતાવો",
+    "govSchemesApply": "સત્તાવાર પોર્ટલ",
+    "govSchemesCentral": "કેન્દ્રીય યોજના",
+    "govSchemesLaunched": "શરૂઆત",
+    "govSchemesShowAll": "બધી યોજનાઓ બતાવો",
+    "networkTab": "ખેડૂત નેટવર્ક",
+    "resourcesTab": "ખેડૂત સંસાધનો"
   },
   "ChatWidget": {
     "headerTitle": "KisanDost AI સહાયક",

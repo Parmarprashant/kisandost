@@ -6,6 +6,17 @@ import { SEED_POSTS } from '../seed/route';
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * Keep only usable image URLs. Older records and partial uploads can leave
+ * blank or null entries behind, which would otherwise render as empty tiles.
+ */
+function sanitizeImages(images: unknown): string[] {
+  if (!Array.isArray(images)) return [];
+  return images.filter(
+    (img): img is string => typeof img === 'string' && img.trim() !== ''
+  );
+}
+
 export async function GET(req: Request) {
   try {
     await dbConnect();
@@ -82,6 +93,7 @@ export async function GET(req: Request) {
     const formattedPosts = posts.map((post: any) => ({
       ...post,
       id: post._id.toString(),
+      images: sanitizeImages(post.images),
       isHelpfulByMe: userId ? (post.helpfulUsers || []).includes(userId) : false,
       isSavedByMe: userId ? (post.savedByUsers || []).includes(userId) : false,
     }));
@@ -147,7 +159,7 @@ export async function POST(req: Request) {
       whatIDid: whatIDid || '',
       result: result || '',
       precautions: precautions || '',
-      images: Array.isArray(images) ? images : [],
+      images: sanitizeImages(images),
       helpfulCount: 0,
       helpfulUsers: [],
       savedByUsers: [],
