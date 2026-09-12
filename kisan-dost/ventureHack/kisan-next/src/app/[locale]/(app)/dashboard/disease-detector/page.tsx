@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import SimilarExperiences from "@/components/community/SimilarExperiences";
 
 export default function DiseaseDetectorPage() {
   const router = useRouter();
@@ -292,6 +293,12 @@ export default function DiseaseDetectorPage() {
                   </div>
                 </div>
               )}
+
+              {/* Similar Farmer Experiences Integration */}
+              <SimilarExperiences 
+                cropName={result.cropName} 
+                diseaseName={result.diseaseName} 
+              />
             </div>
           )}
 
