@@ -2,13 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Users, Landmark, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import FarmerResources from "@/components/community/FarmerResources";
 import FarmerNetwork from "@/components/community/FarmerNetwork";
 
 export default function CommunitiesPage() {
-  const t = useTranslations("Navigation");
+  const tNav = useTranslations("Navigation");
+  const tComm = useTranslations("Communities");
   const [activeTab, setActiveTab] = useState<"network" | "resources">("network");
 
   return (
@@ -20,10 +21,10 @@ export default function CommunitiesPage() {
           🌾 KisanDost Community
         </div>
         <h1 className="text-4xl md:text-5xl font-black text-[#2e6b3b] tracking-tighter uppercase">
-          Connect. Learn. Share. Grow.
+          {tComm("title")}
         </h1>
         <p className="text-base md:text-lg text-muted-foreground font-medium max-w-2xl mx-auto">
-          Empowering farmers through peer-to-peer field experience sharing and official government welfare resources.
+          {tComm("subtitle")}
         </p>
       </div>
 
@@ -40,7 +41,7 @@ export default function CommunitiesPage() {
             )}
           >
             <span className="text-lg">👨‍🌾</span>
-            <span>Farmer Network</span>
+            <span>{tComm("networkTab") || "Farmer Network"}</span>
           </button>
 
           <button
@@ -53,7 +54,7 @@ export default function CommunitiesPage() {
             )}
           >
             <span className="text-lg">🏛️</span>
-            <span>Farmer Resources</span>
+            <span>{tComm("resourcesTab") || "Farmer Resources"}</span>
           </button>
         </div>
       </div>

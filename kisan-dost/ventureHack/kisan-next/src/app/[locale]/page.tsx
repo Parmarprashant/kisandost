@@ -84,7 +84,7 @@ export default function Home() {
           <div className="space-y-10 animate-in slide-in-from-left duration-1000">
           
             
-            <h1 className="text-6xl md:text-8xl font-black text-[#2e6b3b] tracking-tighter leading-[0.85]">
+            <h1 className="text-5xl md:text-7xl font-black text-[#2e6b3b] tracking-tight leading-normal md:leading-tight">
               {tHero("titleLine1")} <br />
               {tHero("titleLine2")} <br />
               <span className="text-[#8bc34a]">{tHero("titleLine3")}</span>

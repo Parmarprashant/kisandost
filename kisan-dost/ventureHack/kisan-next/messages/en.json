@@ -1214,6 +1214,32 @@
         "foliar_spray": "5-10 ml per liter of water",
         "drip_irrigation": "10-15 liters per acre"
       }
+    },
+    "MiticideViricideCombo": {
+      "name": "Miticide + Lysorus Viricide Combo",
+      "tag": "Crop Protection Combo",
+      "description": "A powerful combination of miticide and viricide to protect crops from mites and viral diseases.",
+      "longDescription": "Miticide + Lysorus Viricide Combo provides dual protection against harmful mites and viral infections in crops.",
+      "features": [
+        "Effective control of mites and viral diseases",
+        "Improves overall plant health"
+      ],
+      "usage": {
+        "foliar_spray": "2-3 ml per liter of water"
+      }
+    },
+    "TapasSiliconAdjuvant": {
+      "name": "Tapas Silicon Adjuvant",
+      "tag": "Silicon-Based Adjuvant",
+      "description": "A silicon-based adjuvant that enhances pesticide efficiency and strengthens plant defense.",
+      "longDescription": "Tapas Silicon Adjuvant improves the effectiveness of pesticides and foliar sprays.",
+      "features": [
+        "Enhances effectiveness of pesticides and fertilizers",
+        "Improves spray coverage and absorption"
+      ],
+      "usage": {
+        "foliar_spray": "0.5-1 ml per liter of water"
+      }
     }
   },
   "ProductsPage": {
@@ -1237,5 +1263,111 @@
     "notFoundDesc": "The product you are looking for does not exist.",
     "footer": "© 2026 KisanDost · Empowering Indian Farmers",
     "solvesLabel": "Solves"
+  },
+  "Communities": {
+    "title": "Communities & Schemes",
+    "subtitle": "Connecting farmers with government initiatives and peer knowledge.",
+    "pmKisanTitle": "PM Kisan Samman Nidhi Scheme",
+    "officialInitiative": "Official Government Initiative",
+    "officialChannel": "Official YouTube Channel",
+    "quote": "\"Launched by Hon'ble PM Shri Narendra Modi on 24th February 2019. Operational since 1st December 2018. Provides income support to eligible farmer families.\"",
+    "operationalDate": "Operational: 01 December 2018",
+    "launchDate": "Launched: 24 February 2019",
+    "beneficiaries": "Beneficiaries: Crores of Farmers",
+    "latestVideos": "Latest Videos",
+    "visitChannel": "Visit Channel",
+    "loadMore": "Load More Videos",
+    "visitYoutube": "Visit YouTube Channel",
+    "watchMore": "Watch More on YouTube",
+    "welfareSchemes": "Farmer Welfare Schemes",
+    "fullyOnline": "Fully Online",
+    "partiallyOnline": "Partially Online",
+    "shareThis": "Share This",
+    "pmKisanDesc": "PM-KISAN is a government scheme that provides financial assistance to small and marginal farmers across India. Under this initiative, eligible farmers receive ₹6,000 annually, transferred directly into their bank accounts in three equal installments.",
+    "rateThis": "Rate This:",
+    "like": "Like",
+    "dislike": "Dislike",
+    "peopleHelpful": "people found this helpful",
+    "visitPortal": "Visit Official Portal",
+    "eServices": "Farmer e-Services",
+    "more": "Learn More",
+    "annualSupport": "₹6,000 Annual Support",
+    "installments": "3 Installments",
+    "directTransfer": "Direct Bank Transfer",
+    "forFarmers": "For Farmers",
+    "footerNote": "* Information based on official PM Kisan YouTube channel and government sources.",
+    "eServiceCards": {
+      "ekyc": {
+        "title": "Complete e-KYC for PM-Kisan",
+        "description": "The e-KYC service is essential for verifying the identity of beneficiaries under the PM-Kisan scheme. Farmers can complete their KYC process online, ensuring they meet eligibility criteria and receive timely disbursements."
+      },
+      "landRecords": {
+        "title": "Check Land Records in Gujarat Online",
+        "description": "Get the Record of Rights (RoR) online for various villages of Gujarat. Provided by the Department of Revenue, Gujarat. Users can get RoR details by selecting district, taluka, village, and survey number."
+      },
+      "appStatus": {
+        "title": "Check PM-Kisan Application Status",
+        "description": "This service enables farmers to check the status of their PM-Kisan applications. By entering registration details, applicants can track submissions and verify if they have been approved to receive financial benefits."
+      },
+      "pmayDashboard": {
+        "title": "PM Awaas Yojana-Gramin Dashboard",
+        "description": "This digital dashboard enables officials from states and banks to track the performance of PMAY-Gramin. It provides real-time data and performance metrics to monitor implementation of affordable rural housing."
+      },
+      "foodSecurity": {
+        "title": "National Food Security Portal",
+        "description": "Ensures all people at all times have access to basic food for an active and healthy life. Characterized by availability, access, utilization and stability of food across the country."
+      },
+      "registerFarmer": {
+        "title": "Register as New Farmer for PM-Kisan",
+        "description": "Farmers may register for the PM-Kisan Samman Nidhi scheme. By providing necessary details, farmers can apply to receive financial support from the government to ensure economic stability and agricultural productivity."
+      },
+      "ems": {
+        "title": "Extension Reforms Monitoring System (EMS)",
+        "description": "The EMS is a web-enabled online monitoring system for Monthly Progress Reports (MPR) under the ATMA Programme. It monitors the physical and financial progress of all scheme components."
+      },
+      "kkms": {
+        "title": "Kisaan Knowledge Management System",
+        "description": "The Kisaan Knowledge Management System is an initiative by the Ministry of Agriculture to assist farmers by providing services such as toll-free numbers, online forums, and useful farming-specific information."
+      },
+      "pmKisanScheme": {
+        "title": "Pradhan Mantri Kisan Samman Nidhi (PM-Kisan)",
+        "description": "The PM-KISAN scheme aims to supplement the financial needs of Small and Marginal Farmers (SMFs) by providing direct income support of Rs. 6000 per year, transferred in three equal installments."
+      }
+    },
+    "videoTitles": {
+      "v1": "PM Kisan Scheme - Farmer Benefits",
+      "v2": "How to Check PM Kisan Status Online",
+      "v3": "PM Kisan 12th Installment Release",
+      "v4": "PM Kisan Scheme - Complete Guide",
+      "v5": "Farmers Welfare Schemes 2024",
+      "v6": "Direct Benefit Transfer (DBT) Explained",
+      "v7": "E-KYC Registration Tutorial",
+      "v8": "PMAY and PM Kisan Synergy"
+    },
+    "videoDates": {
+      "v1": "2 days ago",
+      "v2": "1 week ago",
+      "v3": "2 weeks ago",
+      "v4": "3 weeks ago",
+      "v5": "1 month ago",
+      "v6": "2 months ago",
+      "v7": "2 months ago",
+      "v8": "3 months ago"
+    }
+  },
+  "ChatWidget": {
+    "headerTitle": "KisanDost AI Assistant",
+    "headerSub": "Hindi • English • Gujarati • Marathi",
+    "greeting": "🙏 Namaste! I am your KisanDost AI Assistant.\n\nI can help you with crop diseases, fertilizer, weather, profit prediction, government schemes, and more — in Hindi, English, Gujarati, or Marathi!\n\nSimply ask your question below 👇",
+    "placeholder": "Type your question...",
+    "callExpert": "Call Expert",
+    "quickReplies": {
+      "disease": "🌾 Crop Disease",
+      "fertilizer": "🧪 Fertilizer",
+      "weather": "☁️ Weather Tips",
+      "profit": "📈 Profit Predict",
+      "schemes": "🏛️ Govt Schemes",
+      "contact": "📞 Contact Expert"
+    }
   }
 }

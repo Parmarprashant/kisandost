@@ -34,34 +34,44 @@ export function LanguageSwitcher() {
         <Languages className="w-4 h-4 opacity-70" />
         <SelectValue placeholder="Language" />
       </SelectTrigger>
-      <SelectContent className="rounded-2xl border-border/50 shadow-2xl p-2 min-w-[160px] bg-white/95 backdrop-blur-md">
+      <SelectContent 
+        alignItemWithTrigger={false}
+        align="end"
+        className="rounded-2xl border-border/50 shadow-2xl p-2 min-w-[160px] bg-white/95 backdrop-blur-md"
+      >
         <SelectItem 
           value="en" 
           className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors"
         >
-          <div className="flex items-center gap-3 w-full">
-            <span className="text-xl leading-none shadow-sm rounded-sm">🇺🇸</span> 
+          <div className="flex items-center gap-2">
             <span className="font-bold text-sm">English</span>
           </div>
         </SelectItem>
         <SelectItem 
           value="hi" 
-          className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors"
+          className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors pr-8"
         >
-          <div className="flex items-center gap-3 w-full">
-            <span className="text-xl leading-none shadow-sm rounded-sm">🇮🇳</span> 
-            <span className="font-bold text-sm">हिंदी </span>
-            <span className="text-xs text-muted-foreground ml-auto font-medium">(Hindi)</span>
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-sm">हिंदी</span>
+            <span className="text-xs text-muted-foreground font-medium">(Hindi)</span>
           </div>
         </SelectItem>
         <SelectItem 
           value="gu" 
-          className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors"
+          className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors pr-8"
         >
-          <div className="flex items-center gap-3 w-full">
-            <span className="text-xl leading-none shadow-sm rounded-sm">🇮🇳</span> 
+          <div className="flex items-center gap-2">
             <span className="font-bold text-sm">ગુજરાતી</span>
-            <span className="text-xs text-muted-foreground ml-auto font-medium">(Gujarati)</span>
+            <span className="text-xs text-muted-foreground font-medium">(Gujarati)</span>
+          </div>
+        </SelectItem>
+        <SelectItem 
+          value="mr" 
+          className="rounded-xl flex items-center gap-3 py-3 px-3 focus:bg-[#2e6b3b]/10 focus:text-[#2e6b3b] cursor-pointer transition-colors pr-8"
+        >
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-sm">मराठी</span>
+            <span className="text-xs text-muted-foreground font-medium">(Marathi)</span>
           </div>
         </SelectItem>
       </SelectContent>

@@ -264,9 +264,10 @@ export default function AuthPage() {
                   exit={{ opacity: 0, x: 20 }}
                   className="space-y-4"
                 >
-                  <Button onClick={() => handleLanguageSelect("en")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4"><span className="text-2xl">🇺🇸</span> English</span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                  <Button onClick={() => handleLanguageSelect("hi")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4"><span className="text-2xl">🇮🇳</span> हिंदी <span className="text-sm text-muted-foreground font-medium ml-2">(Hindi)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                  <Button onClick={() => handleLanguageSelect("gu")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4"><span className="text-2xl">🇮🇳</span> ગુજરાતી <span className="text-sm text-muted-foreground font-medium ml-2">(Gujarati)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
+                  <Button onClick={() => handleLanguageSelect("en")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">English</span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
+                  <Button onClick={() => handleLanguageSelect("hi")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">हिंदी <span className="text-sm text-muted-foreground font-medium ml-2">(Hindi)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
+                  <Button onClick={() => handleLanguageSelect("gu")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">ગુજરાતી <span className="text-sm text-muted-foreground font-medium ml-2">(Gujarati)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
+                  <Button onClick={() => handleLanguageSelect("mr")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">मराठी <span className="text-sm text-muted-foreground font-medium ml-2">(Marathi)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
                 </motion.div>
               )}
             </AnimatePresence>
