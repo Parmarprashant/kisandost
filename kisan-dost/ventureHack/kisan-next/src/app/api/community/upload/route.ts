@@ -21,16 +21,22 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Save to public/uploads/community
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'community');
-    await fs.mkdir(uploadsDir, { recursive: true });
+    // Save to public/uploads/community (or fallback to Base64 on Vercel read-only filesystem)
+    let publicUrl = '';
+    try {
+      const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'community');
+      await fs.mkdir(uploadsDir, { recursive: true });
 
-    const safeFilename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-    const filePath = path.join(uploadsDir, safeFilename);
+      const safeFilename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+      const filePath = path.join(uploadsDir, safeFilename);
 
-    await fs.writeFile(filePath, buffer);
-
-    const publicUrl = `/uploads/community/${safeFilename}`;
+      await fs.writeFile(filePath, buffer);
+      publicUrl = `/uploads/community/${safeFilename}`;
+    } catch (fsError) {
+      // On Vercel serverless read-only filesystem, fallback to Base64 Data URL
+      const mimeType = file.type || 'image/jpeg';
+      publicUrl = `data:${mimeType};base64,${buffer.toString('base64')}`;
+    }
 
     return NextResponse.json({
       success: true,
