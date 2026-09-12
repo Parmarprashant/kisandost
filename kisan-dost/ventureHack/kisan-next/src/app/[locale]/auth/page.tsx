@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,7 +31,7 @@ import {
   Check
 } from "lucide-react";
 
-export default function AuthPage() {
+function AuthContent() {
   const t = useTranslations("Index");
   const { user, login, checkSession } = useAuth();
   const router = useRouter();
@@ -694,5 +694,17 @@ export default function AuthPage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F7FDF9] flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-[#2e6b3b] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <AuthContent />
+    </Suspense>
   );
 }
