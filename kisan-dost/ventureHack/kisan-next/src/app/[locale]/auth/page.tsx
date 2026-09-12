@@ -347,36 +347,6 @@ export default function AuthPage() {
                           </p>
                         </div>
 
-<<<<<<< HEAD
-                  <div className="flex items-center justify-center gap-6 pt-2">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full border border-border/50">
-                      <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-                      Secure Login
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full border border-border/50">
-                      <Globe className="w-3.5 h-3.5 text-primary" />
-                      Free Access
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="language-content"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="space-y-4"
-                >
-                  <Button onClick={() => handleLanguageSelect("en")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">English</span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                  <Button onClick={() => handleLanguageSelect("hi")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">हिंदी <span className="text-sm text-muted-foreground font-medium ml-2">(Hindi)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                  <Button onClick={() => handleLanguageSelect("gu")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">ગુજરાતી <span className="text-sm text-muted-foreground font-medium ml-2">(Gujarati)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                  <Button onClick={() => handleLanguageSelect("mr")} variant="outline" className="w-full h-16 justify-between px-6 font-bold text-lg"><span className="flex items-center gap-4">मराठी <span className="text-sm text-muted-foreground font-medium ml-2">(Marathi)</span></span><ArrowRight className="text-slate-400 w-5 h-5"/></Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </CardContent>
-        </Card>
-=======
                         {/* Animated Mode Switcher (Sign In vs Register) */}
                         <div className="grid grid-cols-2 p-1.5 bg-slate-100 rounded-2xl relative border border-slate-200/60">
                           <button
@@ -412,7 +382,6 @@ export default function AuthPage() {
                             )}
                           </button>
                         </div>
->>>>>>> b5d91ad (feat(auth): redesign auth portal with rich agricultural hero showcase, one-click demo login, password toggle, crop selector, and multi-language cards)
 
                         {/* Quick One-Click Demo Farmer Login */}
                         <button
