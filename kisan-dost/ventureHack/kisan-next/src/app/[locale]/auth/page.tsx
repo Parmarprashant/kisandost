@@ -15,7 +15,7 @@ import { ShieldCheck, Globe, Sprout, ArrowRight } from "lucide-react";
 
 export default function AuthPage() {
   const t = useTranslations("Index");
-  const { user, login } = useAuth();
+  const { user, login, checkSession } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -33,6 +33,11 @@ export default function AuthPage() {
       setShowLanguageSelect(true);
     }
     
+    const urlSuccess = searchParams.get('success');
+    if (urlSuccess === 'google_login') {
+      checkSession();
+    }
+
     const urlError = searchParams.get('error');
     if (urlError) {
       if (urlError === 'google_auth_failed') setError('Google authentication failed. Please try again.');
@@ -41,7 +46,19 @@ export default function AuthPage() {
       else if (urlError === 'server_error') setError('An internal server error occurred during authentication.');
       else setError('An unknown authentication error occurred.');
     }
-  }, [user, searchParams]);
+  }, [user, searchParams, checkSession]);
+
+  const clearUrlParams = () => {
+    if (typeof window !== 'undefined' && window.location.search) {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  };
+
+  const handleToggleMode = () => {
+    setIsLogin((prev) => !prev);
+    setError("");
+    clearUrlParams();
+  };
 
   const handleLanguageSelect = (locale: string) => {
     router.replace("/", { locale });
@@ -51,6 +68,7 @@ export default function AuthPage() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    clearUrlParams();
 
     try {
       const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
@@ -130,7 +148,10 @@ export default function AuthPage() {
                           type="text" 
                           placeholder="Your Name" 
                           value={name} 
-                          onChange={(e) => setName(e.target.value)} 
+                          onChange={(e) => {
+                            setName(e.target.value);
+                            if (error) setError("");
+                          }} 
                           required={!isLogin} 
                         />
                       </div>
@@ -142,7 +163,10 @@ export default function AuthPage() {
                         type="text" 
                         placeholder="Enter username" 
                         value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
+                        onChange={(e) => {
+                          setUsername(e.target.value);
+                          if (error) setError("");
+                        }} 
                         required 
                       />
                     </div>
@@ -153,7 +177,10 @@ export default function AuthPage() {
                         type="password" 
                         placeholder="••••••••" 
                         value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          if (error) setError("");
+                        }} 
                         required 
                       />
                     </div>
@@ -210,7 +237,7 @@ export default function AuthPage() {
                       {isLogin ? "Don't have an account? " : "Already have an account? "}
                       <button 
                         type="button" 
-                        onClick={() => setIsLogin(!isLogin)} 
+                        onClick={handleToggleMode} 
                         className="text-[#2e6b3b] font-bold underline"
                       >
                         {isLogin ? "Register here" : "Sign in"}
