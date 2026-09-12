@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
-import { YieldPredictorForm, EnvironmentalPanel, FormPanel } from "@/components/farmer-tools/YieldPredictorForm";
+import { YieldPredictorForm, EnvironmentalPanel, FormPanel, EnvironmentalData } from "@/components/farmer-tools/YieldPredictorForm";
 import { YieldComparisonChart } from "@/components/farmer-tools/YieldComparisonChart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,14 +27,28 @@ const FarmMap = dynamic(
 );
 
 interface PredictionResult {
-  predicted_yield: number;
-  average_regional_yield: number;
+  predicted_yield: number;            // Rate in tons/hectare
+  yield_per_acre?: number;            // Rate in tons/acre
+  total_yield?: number;               // Total farm production across whole land area
+  average_regional_yield: number;     // Regional baseline in tons/hectare
+  average_regional_per_acre?: number; // Regional baseline in tons/acre
+  area_acres?: number;
+  area_unit?: string;
+  percent_difference?: number;
+  is_above_average?: boolean;
+  insights?: string;
+  crop?: string;
 }
 
 export default function YieldPredictorPage() {
   const t = useTranslations("YieldPredictor");
   const { fetchByQuery } = useWeather();
   const [result, setResult] = useState<PredictionResult | null>(null);
+  const [envData, setEnvData] = useState<EnvironmentalData>({
+    ndvi: 0.65,
+    soil_moisture: 30,
+    rainfall: 150,
+  });
   // FIXED: Add modal state for expanded map view
   const [expandedMapOpen, setExpandedMapOpen] = useState(false);
 
@@ -111,10 +125,10 @@ export default function YieldPredictorPage() {
       {/* FIXED: 3-column equal layout (environmental | form | results) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Column 1: Environmental Inputs (from YieldPredictorForm left panel) */}
-        <EnvironmentalPanel onPredict={setResult} />
+        <EnvironmentalPanel envData={envData} onEnvChange={setEnvData} onPredict={setResult} />
 
         {/* Column 2: Prediction Form (from YieldPredictorForm right panel) */}
-        <FormPanel onPredict={setResult} />
+        <FormPanel envData={envData} onPredict={setResult} />
 
         {/* Column 3: Results Panel */}
         <div>
@@ -122,65 +136,97 @@ export default function YieldPredictorPage() {
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-4">
               {/* Result Cards */}
               <div className="space-y-3">
-                {/* Predicted Yield */}
+                {/* Predicted Yield Rate */}
                 <Card className="bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 shadow-lg rounded-lg">
-                  <CardHeader className="pb-3 pt-4 px-5">
+                  <CardHeader className="pb-2 pt-4 px-5">
                     <CardTitle className="text-sm font-medium text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
                       <Sprout className="w-4 h-4" />
-                      {t("predictedYield")}
+                      {t("predictedYield") || "Predicted Yield Rate"}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="px-5 pb-4">
                     <div className="text-3xl font-black text-emerald-700 dark:text-emerald-300">
-                      {result.predicted_yield.toFixed(2)}
+                      {result.yield_per_acre ? result.yield_per_acre.toFixed(2) : (result.predicted_yield / 2.471).toFixed(2)}
+                      <span className="text-sm font-semibold text-emerald-600/70 ml-1.5">tons / acre</span>
                     </div>
-                    <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80 font-medium mt-1">
-                      {t("tonsPerHectare")}
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      ({result.predicted_yield.toFixed(2)} tons / hectare)
                     </p>
                     <Badge
                       variant="secondary"
-                      className={`mt-2 text-xs ${
-                        isAboveAverage
-                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
-                          : "bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300"
+                      className={`mt-2.5 text-xs font-semibold ${
+                        (result.is_above_average ?? isAboveAverage)
+                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300"
+                          : "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300"
                       }`}
                     >
                       <TrendingUp className="w-3 h-3 mr-1" />
-                      {isAboveAverage ? "+" : ""}
-                      {yieldDiff}% {t("vsAverage")}
+                      {(result.is_above_average ?? isAboveAverage) ? "+" : ""}
+                      {result.percent_difference !== undefined ? result.percent_difference : yieldDiff}% {t("vsAverage") || "vs regional baseline"}
                     </Badge>
                   </CardContent>
                 </Card>
 
-                {/* Regional Average */}
+                {/* Total Farm Production */}
+                <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 shadow-lg rounded-lg">
+                  <CardHeader className="pb-2 pt-4 px-5">
+                    <CardTitle className="text-sm font-medium text-amber-800 dark:text-amber-300 flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      Total Farm Harvest
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="px-5 pb-4">
+                    <div className="text-3xl font-black text-amber-800 dark:text-amber-300">
+                      {result.total_yield ? result.total_yield.toFixed(2) : (result.predicted_yield * (result.area_acres || 1)).toFixed(2)}
+                      <span className="text-sm font-semibold text-amber-700/70 ml-1.5">tons total</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      Estimated harvest across {result.area_acres || 1} {result.area_unit || "acres"}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Regional Baseline */}
                 <Card className="bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 border-indigo-200 dark:border-indigo-800 shadow-lg rounded-lg">
-                  <CardHeader className="pb-3 pt-4 px-5">
+                  <CardHeader className="pb-2 pt-4 px-5">
                     <CardTitle className="text-sm font-medium text-indigo-700 dark:text-indigo-300 flex items-center gap-2">
                       <BarChart3 className="w-4 h-4" />
-                      {t("averageRegional")}
+                      {t("averageRegional") || "Regional Baseline Rate"}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="px-5 pb-4">
                     <div className="text-3xl font-black text-indigo-700 dark:text-indigo-300">
-                      {result.average_regional_yield.toFixed(2)}
+                      {result.average_regional_per_acre ? result.average_regional_per_acre.toFixed(2) : (result.average_regional_yield / 2.471).toFixed(2)}
+                      <span className="text-sm font-semibold text-indigo-600/70 ml-1.5">tons / acre</span>
                     </div>
-                    <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 font-medium mt-1">
-                      {t("tonsPerHectare")}
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      ({result.average_regional_yield.toFixed(2)} tons / hectare standard)
                     </p>
-                    <Badge
-                      variant="secondary"
-                      className="mt-2 text-xs bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300"
-                    >
-                      {t("regionBaseline")}
-                    </Badge>
                   </CardContent>
                 </Card>
+
+                {/* Agronomic Insight */}
+                {result.insights && (
+                  <div className="p-3.5 bg-slate-50 dark:bg-slate-900/40 rounded-lg border border-slate-200 dark:border-slate-800 text-xs leading-relaxed text-slate-700 dark:text-slate-300">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400 mr-1.5">AI Advisory:</span>
+                    {result.insights}
+                  </div>
+                )}
               </div>
 
               {/* Comparison Chart */}
               <YieldComparisonChart
-                predictedYield={result.predicted_yield}
-                averageRegionalYield={result.average_regional_yield}
+                predictedYield={
+                  result.area_unit === "hectares"
+                    ? result.predicted_yield
+                    : (result.yield_per_acre ?? (result.predicted_yield / 2.471))
+                }
+                averageRegionalYield={
+                  result.area_unit === "hectares"
+                    ? result.average_regional_yield
+                    : (result.average_regional_per_acre ?? (result.average_regional_yield / 2.471))
+                }
+                unitLabel={result.area_unit === "hectares" ? "tons / hectare" : "tons / acre"}
               />
             </div>
           ) : (
