@@ -259,35 +259,43 @@ export default function DiseaseDetectorPage() {
                   </h3>
                   
                   <div className="grid gap-3">
-                    {result.recommendedPesticides?.map((p: any) => (
-                      <Card key={p.productId} className="flex justify-between items-center p-3 hover:border-emerald-300 transition-colors">
+                    {result.recommendedPesticides?.map((p: any, idx: number) => (
+                      <Card key={p.productId || `${p.name}-${idx}`} className="flex justify-between items-center p-3 hover:border-emerald-300 transition-colors">
                         <div>
                           <p className="font-semibold">{p.name}</p>
                           <Badge variant="outline" className="text-xs text-red-600 border-red-200 bg-red-50 mt-1">Pesticide</Badge>
                         </div>
-                        <Button 
-                          size="sm" 
-                          onClick={() => router.push(`/marketplace/product/${p.productId}`)}
-                          className="bg-emerald-600 hover:bg-emerald-700"
-                        >
-                          View Details
-                        </Button>
+                        {p.productId ? (
+                          <Button 
+                            size="sm" 
+                            onClick={() => router.push(`/marketplace/product/${p.productId}`)}
+                            className="bg-emerald-600 hover:bg-emerald-700"
+                          >
+                            View Details
+                          </Button>
+                        ) : (
+                          <Badge variant="secondary" className="text-xs text-slate-500">Recommended</Badge>
+                        )}
                       </Card>
                     ))}
                     
-                    {result.recommendedFertilizers?.map((f: any) => (
-                      <Card key={f.productId} className="flex justify-between items-center p-3 hover:border-emerald-300 transition-colors">
+                    {result.recommendedFertilizers?.map((f: any, idx: number) => (
+                      <Card key={f.productId || `${f.name}-${idx}`} className="flex justify-between items-center p-3 hover:border-emerald-300 transition-colors">
                         <div>
                           <p className="font-semibold">{f.name}</p>
                           <Badge variant="outline" className="text-xs text-emerald-600 border-emerald-200 bg-emerald-50 mt-1">Fertilizer</Badge>
                         </div>
-                        <Button 
-                          size="sm" 
-                          onClick={() => router.push(`/marketplace/product/${f.productId}`)}
-                          className="bg-emerald-600 hover:bg-emerald-700"
-                        >
-                          View Details
-                        </Button>
+                        {f.productId ? (
+                          <Button 
+                            size="sm" 
+                            onClick={() => router.push(`/marketplace/product/${f.productId}`)}
+                            className="bg-emerald-600 hover:bg-emerald-700"
+                          >
+                            View Details
+                          </Button>
+                        ) : (
+                          <Badge variant="secondary" className="text-xs text-slate-500">Recommended</Badge>
+                        )}
                       </Card>
                     ))}
                   </div>
