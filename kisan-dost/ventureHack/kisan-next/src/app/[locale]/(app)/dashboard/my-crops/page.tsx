@@ -2,426 +2,1487 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tractor, Sprout, AlertCircle, Calendar, Lock, Crown, ShieldCheck, MessageSquare, QrCode, RefreshCw, Trash2, BellRing, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { requestNotificationPermission, getFCMToken, saveFCMTokenToBackend, setupForegroundMessageListener } from "@/lib/fcm";
+import {
+  Sprout,
+  Plus,
+  MapPin,
+  Compass,
+  Droplets,
+  Calendar,
+  Layers,
+  Edit2,
+  Trash2,
+  CheckCircle2,
+  Info,
+  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+  FlaskConical,
+  RotateCcw,
+  Eye,
+  AlertTriangle,
+  MessageSquare
+} from "lucide-react";
 
 type Crop = {
   _id: string;
-  cropType: string;
-  plantationDate: string;
-  landArea: number;
-  location: string;
-  phoneNumber: string;
-  lastAdvisorySent?: string;
+  fieldId: string;
+  cropName: string;
+  cropMasterId?: string;
+  variety?: string;
+  sowingDate: string;
+  cultivatedArea: number;
+  cultivatedAreaUnit: "Acre" | "Hectare";
+  cultivationMethod?: string;
+  status: "Active" | "Harvested" | "Removed";
+  notes?: string;
+  createdAt: string;
 };
 
-type StageData = {
-  daysAfterSowing: number;
-  currentStage: string;
-  currentAdvisory: any | null;
-  nextAdvisory: any | null;
+type Field = {
+  _id: string;
+  name: string;
+  area: number;
+  areaUnit: "Acre" | "Hectare";
+  location: {
+    village?: string;
+    taluka?: string;
+    district?: string;
+    state?: string;
+    latitude?: number;
+    longitude?: number;
+  };
+  soil: {
+    type?: string;
+    soilTestAvailable?: boolean;
+    pH?: number;
+    nitrogen?: number;
+    phosphorus?: number;
+    potassium?: number;
+    organicCarbon?: number;
+  };
+  irrigation: {
+    method?: string;
+    waterSource?: string;
+    frequency?: string;
+  };
+  previousCrop?: string;
+  crops?: Crop[];
+  createdAt: string;
+};
+
+type CropMasterItem = {
+  cropName: string;
+  varieties: string[];
 };
 
 export default function MyCropsPage() {
-  const t = useTranslations("Dashboard");
-  const [crops, setCrops] = useState<Crop[]>([]);
-  const [stages, setStages] = useState<Record<string, StageData>>({});
-  const [loading, setLoading] = useState(true);
-  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const t = useTranslations("myCrop");
   
-  // FCM UI State
-  const [fcmEnabled, setFcmEnabled] = useState(false);
-  const [isFcmLoading, setIsFcmLoading] = useState(false);
-  const [fcmStatusUI, setFcmStatusUI] = useState("");
+  const [fields, setFields] = useState<Field[]>([]);
+  const [cropMaster, setCropMaster] = useState<CropMasterItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isSeeding, setIsSeeding] = useState(false);
+
+  // Modal Controls
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
+  const [wizardStep, setWizardStep] = useState(1); // 1: Field, 2: Soil & Irrigation, 3: Crop, 4: Review
+
+  const [isAddCropModalOpen, setIsAddCropModalOpen] = useState(false);
+  const [selectedFieldForCrop, setSelectedFieldForCrop] = useState<Field | null>(null);
+
+  const [viewFieldModal, setViewFieldModal] = useState<Field | null>(null);
+  const [viewCropModal, setViewCropModal] = useState<Crop | null>(null);
+  const [editFieldModal, setEditFieldModal] = useState<Field | null>(null);
+  const [editCropModal, setEditCropModal] = useState<Crop | null>(null);
+
+  // Form States for Wizard (Field + Initial Crop)
+  const [fieldName, setFieldName] = useState("");
+  const [fieldArea, setFieldArea] = useState("");
+  const [fieldAreaUnit, setFieldAreaUnit] = useState<"Acre" | "Hectare">("Acre");
+  const [village, setVillage] = useState("");
+  const [taluka, setTaluka] = useState("");
+  const [district, setDistrict] = useState("");
+  const [stateName, setStateName] = useState("");
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
+
+  // Soil Info
+  const [soilType, setSoilType] = useState("Black Soil");
+  const [hasSoilTest, setHasSoilTest] = useState(false);
+  const [pH, setPh] = useState("");
+  const [nitrogen, setNitrogen] = useState("");
+  const [phosphorus, setPhosphorus] = useState("");
+  const [potassium, setPotassium] = useState("");
+  const [organicCarbon, setOrganicCarbon] = useState("");
+
+  // Irrigation & Previous Crop
+  const [irrigationMethod, setIrrigationMethod] = useState("Drip");
+  const [waterSource, setWaterSource] = useState("Borewell");
+  const [irrigationFrequency, setIrrigationFrequency] = useState("Every 2–3 days");
+  const [previousCrop, setPreviousCrop] = useState("Wheat");
+
+  // Crop Info
+  const [cropName, setCropName] = useState("Cotton");
+  const [variety, setVariety] = useState("Bt Cotton");
+  const [customVariety, setCustomVariety] = useState("");
+  const [sowingDate, setSowingDate] = useState(new Date().toISOString().split("T")[0]);
+  const [cultivatedArea, setCultivatedArea] = useState("");
+  const [cultivatedAreaUnit, setCultivatedAreaUnit] = useState<"Acre" | "Hectare">("Acre");
+  const [cultivationMethod, setCultivationMethod] = useState("Direct Sowing");
+  const [cropNotes, setCropNotes] = useState("");
+
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
-    // First, check membership access
-    const checkAccess = async () => {
-      try {
-        const res = await fetch("/api/membership");
-        const data = await res.json();
-        setHasAccess(data.hasActiveMembership);
-      } catch {
-        setHasAccess(false);
-      }
-    };
-
-    const checkFCMStatus = async () => {
-      try {
-        const res = await fetch("/api/notifications/status");
-        if (res.ok) {
-          const data = await res.json();
-          setFcmEnabled(data.enabled);
-        }
-      } catch (err) {
-        console.error("Failed to check FCM status", err);
-      }
-    };
-
-    checkAccess();
-    checkFCMStatus();
-
-    // Setup foreground listening
-    const unsubscribe = setupForegroundMessageListener((payload) => {
-      // Optional: also show an in-app toast
-      toast.success(payload.notification?.title || "New notification received!");
-    });
-    
-    return () => unsubscribe();
+    fetchFields();
+    fetchCropMaster();
   }, []);
 
-  const handleRefreshAdvisories = async () => {
-    setIsRefreshing(true);
+  const fetchFields = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("/api/cron/process-advisories");
-      const data = await res.json();
+      const res = await fetch("/api/fields");
       if (res.ok) {
-        toast.success(`Successfully processed advisories. ${data.smsSent} messages sent (simulated).`);
-        // Force refresh crop data to show new "Last Notified" badges
-        window.location.reload(); 
-      } else {
-        toast.error("Failed to process advisories.");
+        const data = await res.json();
+        setFields(data);
       }
-    } catch (error) {
-      console.error("Manual refresh failed", error);
-      toast.error("Internal error occurred during refresh.");
-    } finally {
-      setIsRefreshing(false);
-    }
-  };
-
-  const handleEnableNotifications = async () => {
-    setIsFcmLoading(true);
-    setFcmStatusUI("Requesting permission...");
-    try {
-      const permRes = await requestNotificationPermission();
-      if (!permRes.success) {
-        toast.error("Notice: Permission denied. Please enable notifications in your browser settings.");
-        setFcmStatusUI("");
-        setIsFcmLoading(false);
-        return;
-      }
-      
-      setFcmStatusUI("Generating token...");
-      const tokenRes = await getFCMToken();
-      if (!tokenRes.token) {
-        toast.error("Failed to fetch notification token. Make sure you aren't blocking web workers.");
-        setFcmStatusUI("");
-        setIsFcmLoading(false);
-        return;
-      }
-
-      setFcmStatusUI("Saving...");
-      const saveRes = await saveFCMTokenToBackend(tokenRes.token);
-      if (saveRes.success) {
-        setFcmEnabled(true);
-        toast.success("Advisory notifications successfully enabled!");
-      } else {
-        toast.error(saveRes.error || "Server error. Could not link notifications.");
-      }
-      setFcmStatusUI("");
     } catch (err) {
-      console.error(err);
-      toast.error("Error enabling notifications.");
-      setFcmStatusUI("");
+      console.error("Failed to fetch fields", err);
+      toast.error("Failed to load fields.");
+    } finally {
+      setLoading(false);
     }
-    setIsFcmLoading(false);
   };
 
-  const handleDelete = async (id: string, name: string) => {
-    if (!window.confirm(`Are you sure you want to remove ${name}? This action cannot be undone.`)) {
+  const fetchCropMaster = async () => {
+    try {
+      const res = await fetch("/api/crop-master");
+      if (res.ok) {
+        const data = await res.json();
+        setCropMaster(data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch crop master", err);
+    }
+  };
+
+  const resetForm = () => {
+    setWizardStep(1);
+    setFieldName("");
+    setFieldArea("");
+    setFieldAreaUnit("Acre");
+    setVillage("");
+    setTaluka("");
+    setDistrict("");
+    setStateName("");
+    setLatitude(null);
+    setLongitude(null);
+    setSoilType("Black Soil");
+    setHasSoilTest(false);
+    setPh("");
+    setNitrogen("");
+    setPhosphorus("");
+    setPotassium("");
+    setOrganicCarbon("");
+    setIrrigationMethod("Drip");
+    setWaterSource("Borewell");
+    setIrrigationFrequency("Every 2–3 days");
+    setPreviousCrop("Wheat");
+    setCropName("Cotton");
+    setVariety("Bt Cotton");
+    setCustomVariety("");
+    setSowingDate(new Date().toISOString().split("T")[0]);
+    setCultivatedArea("");
+    setCultivatedAreaUnit("Acre");
+    setCultivationMethod("Direct Sowing");
+    setCropNotes("");
+    setFormError("");
+  };
+
+  // Geolocation Handler
+  const handleDetectLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error("Geolocation is not supported by your browser.");
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setLatitude(lat);
+        setLongitude(lng);
+
+        // Attempt reverse geocoding fallback
+        try {
+          const res = await fetch(`/api/location/reverse?lat=${lat}&lon=${lng}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.district) setDistrict(data.district);
+            if (data.state) setStateName(data.state);
+            if (data.village) setVillage(data.village);
+          }
+        } catch {}
+
+        setIsLocating(false);
+        toast.success(t("locationDetected") || "Location detected!");
+      },
+      (err) => {
+        setIsLocating(false);
+        toast.error("Could not detect location. Please enter manually.");
+      },
+      { timeout: 10000 }
+    );
+  };
+
+  // Step Nav Validation
+  const handleNextStep = () => {
+    setFormError("");
+    if (wizardStep === 1) {
+      if (!fieldName.trim()) {
+        setFormError("Please enter a field name.");
+        return;
+      }
+      if (!fieldArea || Number(fieldArea) <= 0) {
+        setFormError("Please enter a valid field area greater than 0.");
+        return;
+      }
+      setWizardStep(2);
+    } else if (wizardStep === 2) {
+      setWizardStep(3);
+    } else if (wizardStep === 3) {
+      if (!cropName.trim()) {
+        setFormError("Please select a crop.");
+        return;
+      }
+      if (!sowingDate) {
+        setFormError("Please select a valid sowing date.");
+        return;
+      }
+      const cArea = Number(cultivatedArea || fieldArea);
+      const fArea = Number(fieldArea);
+      if (cArea <= 0) {
+        setFormError("Crop area must be greater than 0.");
+        return;
+      }
+      if (cArea > fArea) {
+        setFormError(`Crop area (${cArea}) cannot exceed total field area (${fArea}).`);
+        return;
+      }
+      setWizardStep(4);
+    }
+  };
+
+  // Save Field + Crop
+  const handleSaveFieldAndCrop = async () => {
+    setFormError("");
+    try {
+      // 1. Create Field
+      const fieldPayload = {
+        name: fieldName,
+        area: Number(fieldArea),
+        areaUnit: fieldAreaUnit,
+        location: {
+          village,
+          taluka,
+          district,
+          state: stateName,
+          latitude,
+          longitude,
+        },
+        soil: {
+          type: soilType,
+          soilTestAvailable: hasSoilTest,
+          pH: pH ? Number(pH) : null,
+          nitrogen: nitrogen ? Number(nitrogen) : null,
+          phosphorus: phosphorus ? Number(phosphorus) : null,
+          potassium: potassium ? Number(potassium) : null,
+          organicCarbon: organicCarbon ? Number(organicCarbon) : null,
+        },
+        irrigation: {
+          method: irrigationMethod,
+          waterSource,
+          frequency: irrigationFrequency,
+        },
+        previousCrop,
+      };
+
+      const fieldRes = await fetch("/api/fields", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fieldPayload),
+      });
+
+      if (!fieldRes.ok) {
+        const errData = await fieldRes.json();
+        throw new Error(errData.error || "Failed to create field");
+      }
+
+      const createdField = await fieldRes.json();
+
+      // 2. Create Crop inside field
+      const selectedVar = variety === "Other" ? customVariety : variety;
+      const cropPayload = {
+        cropName,
+        variety: selectedVar,
+        sowingDate,
+        cultivatedArea: Number(cultivatedArea || fieldArea),
+        cultivatedAreaUnit,
+        cultivationMethod,
+        notes: cropNotes,
+      };
+
+      const cropRes = await fetch(`/api/fields/${createdField._id}/crops`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cropPayload),
+      });
+
+      if (!cropRes.ok) {
+        const errData = await cropRes.json();
+        throw new Error(errData.error || "Failed to register crop");
+      }
+
+      toast.success("Field and crop registered successfully!");
+      setIsWizardOpen(false);
+      resetForm();
+      fetchFields();
+    } catch (err: any) {
+      setFormError(err.message);
+      toast.error(err.message);
+    }
+  };
+
+  // Add Crop to Existing Field Handler
+  const handleAddCropToField = async () => {
+    if (!selectedFieldForCrop) return;
+    setFormError("");
+
+    if (!cropName.trim()) {
+      setFormError("Please select a crop name.");
+      return;
+    }
+    const cArea = Number(cultivatedArea);
+    if (!cArea || cArea <= 0) {
+      setFormError("Cultivated area must be greater than 0.");
+      return;
+    }
+    if (cArea > selectedFieldForCrop.area) {
+      setFormError(`Crop area (${cArea}) cannot exceed field area (${selectedFieldForCrop.area}).`);
       return;
     }
 
     try {
-      const res = await fetch(`/api/farmer-crops/${id}`, { method: "DELETE" });
+      const selectedVar = variety === "Other" ? customVariety : variety;
+      const payload = {
+        cropName,
+        variety: selectedVar,
+        sowingDate,
+        cultivatedArea: cArea,
+        cultivatedAreaUnit,
+        cultivationMethod,
+        notes: cropNotes,
+      };
+
+      const res = await fetch(`/api/fields/${selectedFieldForCrop._id}/crops`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Failed to add crop");
+      }
+
+      toast.success(`Crop added to ${selectedFieldForCrop.name}!`);
+      setIsAddCropModalOpen(false);
+      setSelectedFieldForCrop(null);
+      resetForm();
+      fetchFields();
+    } catch (err: any) {
+      setFormError(err.message);
+    }
+  };
+
+  // Delete Field Handler
+  const handleDeleteField = async (fieldId: string) => {
+    if (!confirm("Are you sure you want to delete this field and all its registered crops?")) return;
+    try {
+      const res = await fetch(`/api/fields/${fieldId}`, { method: "DELETE" });
       if (res.ok) {
-        toast.success(`${name} removed successfully.`);
-        setCrops(prev => prev.filter(c => c._id !== id));
+        toast.success("Field deleted successfully.");
+        fetchFields();
+      } else {
+        toast.error("Failed to delete field.");
+      }
+    } catch {
+      toast.error("Error deleting field.");
+    }
+  };
+
+  // Delete Crop Handler
+  const handleDeleteCrop = async (cropId: string) => {
+    if (!confirm("Are you sure you want to delete this crop entry?")) return;
+    try {
+      const res = await fetch(`/api/crops/${cropId}`, { method: "DELETE" });
+      if (res.ok) {
+        toast.success("Crop deleted.");
+        fetchFields();
       } else {
         toast.error("Failed to delete crop.");
       }
-    } catch (error) {
-      console.error("Delete failed", error);
+    } catch {
       toast.error("Error deleting crop.");
     }
   };
 
-  useEffect(() => {
-    if (hasAccess !== true) { setLoading(false); return; }
-    const fetchCrops = async () => {
-      try {
-        const res = await fetch("/api/farmer-crops");
-        const data = await res.json();
-        setCrops(data);
-
-        // Fetch stage data for each crop
-        const stageMap: Record<string, StageData> = {};
-        for (const crop of data) {
-          const stageRes = await fetch(`/api/crop-stage?cropType=${crop.cropType}&plantationDate=${crop.plantationDate}`);
-          if (stageRes.ok) {
-            stageMap[crop._id] = await stageRes.json();
-          }
-        }
-        setStages(stageMap);
-      } catch (error) {
-        console.error("Failed to fetch crops", error);
-      } finally {
-        setLoading(false);
+  // Seed Demo Data Handler
+  const handleSeedDemoData = async () => {
+    setIsSeeding(true);
+    try {
+      const res = await fetch("/api/seed-demo", { method: "POST" });
+      if (res.ok) {
+        toast.success("Demo fields and crops loaded!");
+        fetchFields();
+      } else {
+        toast.error("Failed to seed demo data.");
       }
-    };
+    } catch {
+      toast.error("Error seeding demo data.");
+    } finally {
+      setIsSeeding(false);
+    }
+  };
 
-    fetchCrops();
-  }, [hasAccess]);
+  // 2Factor SMS Integration Test Handler
+  const [isSendingSms, setIsSendingSms] = useState(false);
+  const handleSendTestSMS = async () => {
+    if (isSendingSms) return;
+    setIsSendingSms(true);
+    try {
+      const res = await fetch("/api/sms/test", { method: "POST" });
+      const data = await res.json();
 
-  // Non-member detailed feature section
-  if (hasAccess === false) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-emerald-950/20 dark:to-background py-16 px-4 mt-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        <div className="container max-w-4xl mx-auto space-y-16">
+      if (res.ok && data.success) {
+        toast.success(data.message || "Test SMS sent successfully.");
+      } else {
+        toast.error(data.error || "SMS sending failed. Check the server logs.");
+      }
+    } catch (err: any) {
+      console.error("2Factor SMS test exception:", err);
+      toast.error(err.message || "SMS sending failed. Check the server logs.");
+    } finally {
+      setIsSendingSms(false);
+    }
+  };
 
-          {/* Hero */}
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-700 font-semibold text-sm">
-              <Crown className="w-4 h-4" /> KisanDost Premium
-            </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-              Your Complete <span className="text-emerald-600">Crop Assistant</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              My Crops is a powerful premium tool designed to help Indian farmers track their fields, receive expert pesticide guidance automatically, and verify product authenticity — all in one place.
-            </p>
-          </div>
-
-          {/* Feature Details */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: <Sprout className="w-6 h-6 text-emerald-600" />,
-                title: "Crop Lifecycle Tracking",
-                bg: "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-200",
-                description: "Register your crops with planting date and land area. The system automatically calculates which growth stage your crop is in today — from seedling to harvest — so you always know what phase your field is in.",
-              },
-              {
-                icon: <MessageSquare className="w-6 h-6 text-blue-600" />,
-                title: "Daily SMS Advisory Alerts",
-                bg: "bg-blue-50 dark:bg-blue-900/10 border-blue-200",
-                description: "Every morning at 6 AM, our system checks the current crop stage and sends you a tailored SMS with the exact pesticide name, dosage calculation for your land size, and the purpose of the spray. No more guessing.",
-              },
-              {
-                icon: <QrCode className="w-6 h-6 text-indigo-600" />,
-                title: "Pesticide QR Code Scanner",
-                bg: "bg-indigo-50 dark:bg-indigo-900/10 border-indigo-200",
-                description: "Counterfeit pesticides are a major problem in rural India. Scan the QR code on any pesticide bottle to instantly verify if it is from a certified manufacturer. Fake products are flagged with a red warning.",
-              },
-              {
-                icon: <ShieldCheck className="w-6 h-6 text-amber-600" />,
-                title: "Protected AI Tools Access",
-                bg: "bg-amber-50 dark:bg-amber-900/10 border-amber-200",
-                description: "Premium members also get full priority access to the AI Profit Predictor and Yield Forecast systems, with higher usage limits and real-time market price suggestions for harvesting at the right time.",
-              },
-            ].map((f) => (
-              <Card key={f.title} className={`border ${f.bg} hover:shadow-md transition-shadow`}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-white dark:bg-background border">{f.icon}</div>
-                    <CardTitle className="text-base">{f.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* How It Works */}
-          <div className="bg-white dark:bg-muted/10 rounded-3xl border border-border p-8">
-            <h2 className="text-2xl font-bold text-center mb-8">How It Works</h2>
-            <div className="grid md:grid-cols-4 gap-6 text-center">
-              {[
-                { step: "1", label: "Subscribe", desc: "Choose a plan and pay securely. Access is activated instantly." },
-                { step: "2", label: "Register Crop", desc: "Enter your crop type, plantation date, and farm size." },
-                { step: "3", label: "Get Alerts", desc: "Receive automatic SMS advisories every morning." },
-                { step: "4", label: "Scan & Verify", desc: "Use the QR scanner to confirm pesticide authenticity." },
-              ].map((s) => (
-                <div key={s.step} className="space-y-2">
-                  <div className="w-10 h-10 rounded-full bg-emerald-600 text-white font-black text-lg flex items-center justify-center mx-auto">
-                    {s.step}
-                  </div>
-                  <p className="font-semibold">{s.label}</p>
-                  <p className="text-xs text-muted-foreground">{s.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center space-y-4">
-            <p className="font-semibold text-lg">Ready to protect and grow your farm?</p>
-            <Link href="/pricing">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 gap-2 px-10 text-base py-6 rounded-2xl shadow-lg shadow-emerald-200">
-                <Crown className="w-5 h-5" /> View Plans & Subscribe
-              </Button>
-            </Link>
-            <p className="text-xs text-muted-foreground">Choose monthly or long-term plans on the pricing page. Access starts immediately after payment.</p>
-          </div>
-
-        </div>
-      </div>
-    );
-  }
-
-
-  if (loading) {
-    return (
-      <div className="container mx-auto py-12 px-4 space-y-6">
-        <h1 className="text-3xl font-extrabold flex items-center mb-8"><Tractor className="w-8 h-8 mr-2 text-primary" /> My Crops</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map(i => (
-            <Card key={i} className="animate-pulse">
-              <CardHeader><Skeleton className="h-6 w-32" /></CardHeader>
-              <CardContent><Skeleton className="h-24 w-full" /></CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // Selected Varieties for Crop Master Dropdown
+  const activeVarieties = cropMaster.find((c) => c.cropName === cropName)?.varieties || [
+    "Standard",
+    "Hybrid",
+    "Local",
+    "Other",
+  ];
 
   return (
-    <div className="container mx-auto py-12 px-4 space-y-8 animate-in mt-20 fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-primary flex items-center">
-            <Tractor className="w-8 h-8 text-emerald-600 mr-2" />
-            My Crops
-          </h1>
-          <p className="text-muted-foreground mt-1">Track growth stages and manage pesticide advisories.</p>
+    <div className="space-y-8 pb-16">
+      {/* Header Banner */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-[#1B4332] via-[#2E6B3B] to-[#4CAF50] p-6 sm:p-8 rounded-3xl text-white shadow-xl">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-[#FFCA28] font-bold text-sm tracking-wide uppercase">
+            <Sprout className="w-5 h-5" />
+            Field & Crop Data Collection
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black">{t("title")}</h1>
+          <p className="text-emerald-100 max-w-xl text-sm sm:text-base">
+            {t("subtitle")}
+          </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Button 
-            variant="outline" 
-            onClick={fcmEnabled ? undefined : handleEnableNotifications}
-            disabled={isFcmLoading || fcmEnabled}
-            className={
-              fcmEnabled 
-                ? "bg-emerald-50/80 text-emerald-700 border-emerald-100 cursor-default hover:bg-emerald-50/80 opacity-100 shadow-sm" 
-                : "border-sky-200 text-sky-700 hover:bg-sky-50 bg-white"
-            }
+
+        <div className="flex flex-wrap items-center gap-3">
+          <Button
+            onClick={() => {
+              resetForm();
+              setIsWizardOpen(true);
+            }}
+            className="bg-[#FFCA28] hover:bg-[#ffb800] text-[#1B4332] font-bold h-12 px-6 rounded-2xl shadow-lg transition-transform active:scale-95"
           >
-            {isFcmLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin text-sky-600" /> : <BellRing className={`w-4 h-4 mr-2 ${fcmEnabled ? "text-emerald-500" : "text-sky-600"}`} />}
-            {fcmEnabled ? "Alerts Enabled" : (fcmStatusUI || "Enable Free Alerts")}
+            <Plus className="w-5 h-5 mr-1.5" />
+            {t("addField")}
           </Button>
 
-          <Button 
-            variant="outline" 
-            onClick={handleRefreshAdvisories} 
-            disabled={isRefreshing}
-            className="border-emerald-200 hover:bg-emerald-50 shadow-sm"
+          <Button
+            onClick={handleSeedDemoData}
+            disabled={isSeeding}
+            variant="outline"
+            className="border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold h-12 px-5 rounded-2xl backdrop-blur-md"
           >
-            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
-            {isRefreshing ? "Processing SMS..." : "Refresh Advisories"}
+            <Sparkles className="w-4 h-4 mr-2 text-[#FFCA28]" />
+            {isSeeding ? "Seeding..." : t("seedDemo")}
           </Button>
-          <Link href="/dashboard/add-crop">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
-              <Sprout className="w-4 h-4 mr-2" /> Add New Crop
-            </Button>
-          </Link>
+
+          <Button
+            onClick={handleSendTestSMS}
+            disabled={isSendingSms}
+            variant="outline"
+            className="border-amber-300/40 bg-amber-500/20 hover:bg-amber-500/30 text-white font-bold h-12 px-5 rounded-2xl backdrop-blur-md"
+          >
+            <MessageSquare className="w-4 h-4 mr-2 text-[#FFCA28]" />
+            {isSendingSms ? "Sending SMS..." : "Send Test SMS"}
+          </Button>
         </div>
       </div>
 
-      {crops.length === 0 ? (
-        <div className="text-center py-20 bg-muted/30 border-2 border-dashed rounded-3xl mx-auto max-w-lg">
-          <Tractor className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold mb-2">No crops registered yet</h3>
-          <p className="text-muted-foreground mb-6">Register a crop to receive automated SMS advisories.</p>
-          <Link href="/dashboard/add-crop">
-            <Button variant="outline"><Sprout className="w-4 h-4 mr-2" /> Start Tracking</Button>
-          </Link>
+      {/* Main Content Area */}
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Skeleton className="h-64 rounded-3xl" />
+          <Skeleton className="h-64 rounded-3xl" />
         </div>
+      ) : fields.length === 0 ? (
+        /* Empty State */
+        <Card className="border-2 border-dashed border-emerald-200 bg-white/80 backdrop-blur-md rounded-3xl text-center p-8 sm:p-12 shadow-sm">
+          <CardContent className="space-y-6 flex flex-col items-center">
+            <div className="w-20 h-20 bg-emerald-100 rounded-3xl flex items-center justify-center text-primary shadow-inner">
+              <Layers className="w-10 h-10 text-[#2E6B3B]" />
+            </div>
+            <div className="space-y-2 max-w-md">
+              <h3 className="text-2xl font-bold text-[#1B4332]">{t("noFieldsYet")}</h3>
+              <p className="text-muted-foreground text-sm">{t("noFieldsDesc")}</p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+              <Button
+                onClick={() => {
+                  resetForm();
+                  setIsWizardOpen(true);
+                }}
+                className="bg-[#2E6B3B] hover:bg-[#1B4332] text-white font-bold h-12 px-6 rounded-xl"
+              >
+                <Plus className="w-5 h-5 mr-2" />
+                {t("addField")}
+              </Button>
+              <Button
+                onClick={handleSeedDemoData}
+                variant="outline"
+                className="border-emerald-300 text-emerald-800 font-bold h-12 px-5 rounded-xl"
+              >
+                <Sparkles className="w-4 h-4 mr-2 text-[#2E6B3B]" />
+                {t("seedDemo")}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {crops.map((crop) => {
-            const stageInfo = stages[crop._id];
-            return (
-              <Card key={crop._id} className="overflow-hidden hover:shadow-lg transition-shadow border-emerald-100">
-                <div className="h-2 w-full bg-emerald-500" />
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-xl capitalize">{crop.cropType}</CardTitle>
-                    <div className="flex items-center gap-2">
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="h-8 w-8 text-muted-foreground hover:text-destructive transition-colors"
-                        onClick={() => handleDelete(crop._id, crop.cropType)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                      <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
-                        {crop.landArea} Acres
+        /* Fields List */
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-black text-[#1B4332] flex items-center gap-2">
+              <Layers className="w-6 h-6 text-primary" />
+              {t("myFields")} ({fields.length})
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {fields.map((field) => (
+              <Card
+                key={field._id}
+                className="border-none shadow-[0_10px_30px_rgba(0,0,0,0.05)] bg-white/90 backdrop-blur-xl rounded-3xl overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <CardHeader className="bg-emerald-50/50 pb-4 border-b border-emerald-100/60">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle className="text-xl font-bold text-[#1B4332] flex items-center gap-2">
+                          {field.name}
+                        </CardTitle>
+                        <CardDescription className="text-sm font-semibold text-emerald-700 mt-1 flex items-center gap-1.5">
+                          <MapPin className="w-4 h-4 text-primary" />
+                          {[
+                            field.location.village,
+                            field.location.taluka,
+                            field.location.district,
+                            field.location.state,
+                          ]
+                            .filter(Boolean)
+                            .join(", ") || "Location not set"}
+                        </CardDescription>
+                      </div>
+                      <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs px-3 py-1 font-bold rounded-full">
+                        {field.area} {field.areaUnit || "Acres"}
                       </Badge>
                     </div>
-                  </div>
-                  <div className="flex items-center text-sm text-muted-foreground mt-1">
-                    <Calendar className="w-4 h-4 mr-1" /> Planted {format(new Date(crop.plantationDate), "MMM d, yyyy")}
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {stageInfo ? (
-                    <div className="bg-secondary/40 rounded-xl p-4 space-y-3">
-                      <div className="flex justify-between items-center border-b border-border pb-2">
-                        <span className="text-sm font-medium text-muted-foreground">Current Stage</span>
-                        <span className="font-semibold text-primary">{stageInfo.currentStage}</span>
+                  </CardHeader>
+
+                  <CardContent className="pt-4 space-y-4">
+                    {/* Metadata Pill Tags */}
+                    <div className="flex flex-wrap gap-2 text-xs font-semibold">
+                      <span className="bg-emerald-50 text-emerald-900 px-3 py-1 rounded-full border border-emerald-100 flex items-center gap-1">
+                        <FlaskConical className="w-3.5 h-3.5 text-emerald-600" />
+                        Soil: {field.soil.type || "Loamy"}
+                      </span>
+                      <span className="bg-blue-50 text-blue-900 px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1">
+                        <Droplets className="w-3.5 h-3.5 text-blue-600" />
+                        Irrigation: {field.irrigation.method || "Drip"}
+                      </span>
+                      {field.previousCrop && field.previousCrop !== "None" && (
+                        <span className="bg-amber-50 text-amber-900 px-3 py-1 rounded-full border border-amber-100 flex items-center gap-1">
+                          <RotateCcw className="w-3.5 h-3.5 text-amber-600" />
+                          Prev: {field.previousCrop}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Nested Crops Section */}
+                    <div className="space-y-3 pt-2">
+                      <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                        <span>Registered Crops ({field.crops?.length || 0})</span>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-muted-foreground">Age</span>
-                        <span className="font-semibold">{stageInfo.daysAfterSowing} Days</span>
-                      </div>
-                      
-                      {stageInfo.nextAdvisory && (
-                        <div className="mt-4 pt-3 border-t border-border/50">
-                          <h4 className="text-xs uppercase tracking-wider text-muted-foreground mb-2 flex items-center">
-                            <AlertCircle className="w-3 h-3 mr-1 text-orange-500" />
-                            Next Advisory Target
-                          </h4>
-                          <p className="text-sm font-medium">{stageInfo.nextAdvisory.purpose}</p>
-                          <p className="text-xs text-muted-foreground mt-1">Expected at {stageInfo.nextAdvisory.daysAfterSowingStart} days</p>
+
+                      {!field.crops || field.crops.length === 0 ? (
+                        <div className="bg-slate-50 p-4 rounded-2xl text-center text-xs text-muted-foreground border border-slate-100">
+                          {t("noCropsInField")}
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          {field.crops.map((crop) => (
+                            <div
+                              key={crop._id}
+                              className="bg-emerald-50/30 p-3.5 rounded-2xl border border-emerald-100/70 flex items-center justify-between hover:bg-emerald-50/80 transition-colors"
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-lg">
+                                  🌱
+                                </div>
+                                <div>
+                                  <div className="font-bold text-[#1B4332] text-sm flex items-center gap-2">
+                                    {crop.cropName}
+                                    {crop.variety && (
+                                      <span className="text-xs font-medium text-muted-foreground bg-white px-2 py-0.5 rounded-md border border-gray-200">
+                                        {crop.variety}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
+                                    <span className="flex items-center gap-1">
+                                      <Calendar className="w-3 h-3 text-emerald-600" />
+                                      Sown: {format(new Date(crop.sowingDate), "dd MMM yyyy")}
+                                    </span>
+                                    <span>•</span>
+                                    <span>
+                                      {crop.cultivatedArea} {crop.cultivatedAreaUnit}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center gap-1">
+                                <Button
+                                  size="icon"
+                                  variant="ghost"
+                                  onClick={() => setViewCropModal(crop)}
+                                  className="h-8 w-8 text-slate-500 hover:text-primary hover:bg-white"
+                                >
+                                  <Eye className="w-4 h-4" />
+                                </Button>
+                                <Button
+                                  size="icon"
+                                  variant="ghost"
+                                  onClick={() => handleDeleteCrop(crop._id)}
+                                  className="h-8 w-8 text-slate-400 hover:text-red-600 hover:bg-white"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       )}
                     </div>
-                  ) : (
-                    <div className="p-4 bg-muted/50 rounded-xl flex items-center justify-center">
-                      <Skeleton className="h-6 w-32" />
-                    </div>
-                  )}
-                </CardContent>
-                <CardFooter className="bg-muted/10 border-t px-6 py-4 flex flex-col items-center gap-2">
-                  <p className="text-xs text-muted-foreground">Location: {crop.location}</p>
-                  {crop.lastAdvisorySent ? (
-                    <Badge variant="secondary" className="text-[10px] font-normal py-0">
-                      Last Notified: {crop.lastAdvisorySent}
-                    </Badge>
-                  ) : (
-                    <Badge variant="outline" className="text-[10px] font-normal py-0 opacity-50">
-                      No advisory sent yet
-                    </Badge>
-                  )}
+                  </CardContent>
+                </div>
+
+                <CardFooter className="bg-slate-50/80 border-t border-slate-100 p-4 flex items-center justify-between gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setSelectedFieldForCrop(field);
+                      setCultivatedArea(field.area.toString());
+                      setCultivatedAreaUnit(field.areaUnit);
+                      setIsAddCropModalOpen(true);
+                    }}
+                    className="border-emerald-300 hover:bg-emerald-100 text-emerald-900 font-bold text-xs rounded-xl"
+                  >
+                    <Plus className="w-3.5 h-3.5 mr-1" />
+                    {t("addCrop")}
+                  </Button>
+
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setViewFieldModal(field)}
+                      className="text-xs font-bold text-slate-600 hover:text-slate-900"
+                    >
+                      {t("viewField")}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDeleteField(field._id)}
+                      className="h-8 w-8 text-slate-400 hover:text-red-600"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </CardFooter>
               </Card>
-            );
-          })}
+            ))}
+          </div>
         </div>
       )}
+
+      {/* MULTI-STEP WIZARD MODAL FOR ADDING FIELD + CROP */}
+      <Dialog open={isWizardOpen} onOpenChange={setIsWizardOpen}>
+        <DialogContent className="max-w-2xl bg-white rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+              <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                <Sprout className="w-4 h-4 text-primary" />
+                Step {wizardStep} of 4
+              </div>
+              <span className="text-xs font-semibold text-muted-foreground">
+                {wizardStep === 1
+                  ? t("step1")
+                  : wizardStep === 2
+                  ? t("step2")
+                  : wizardStep === 3
+                  ? t("step3")
+                  : t("step4")}
+              </span>
+            </div>
+            <DialogTitle className="text-2xl font-black text-[#1B4332] pt-3">
+              {wizardStep === 1
+                ? "Register Field Information"
+                : wizardStep === 2
+                ? "Soil & Irrigation Information"
+                : wizardStep === 3
+                ? "Add Crop Information"
+                : t("reviewTitle")}
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* Form Content Steps */}
+          <div className="space-y-6 py-4">
+            {formError && (
+              <div className="p-3 bg-red-50 text-red-600 text-sm font-medium rounded-xl border border-red-200 flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 shrink-0" />
+                {formError}
+              </div>
+            )}
+
+            {/* STEP 1: FIELD INFO */}
+            {wizardStep === 1 && (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fieldName" className="font-bold text-[#1B4332]">
+                    Field Name <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="fieldName"
+                    placeholder="e.g. North Field / Village Field"
+                    value={fieldName}
+                    onChange={(e) => setFieldName(e.target.value)}
+                    className="h-12 rounded-xl"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="fieldArea" className="font-bold text-[#1B4332]">
+                      Field Area <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="fieldArea"
+                      type="number"
+                      step="0.1"
+                      placeholder="e.g. 2.5"
+                      value={fieldArea}
+                      onChange={(e) => setFieldArea(e.target.value)}
+                      className="h-12 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="fieldAreaUnit" className="font-bold text-[#1B4332]">
+                      Area Unit
+                    </Label>
+                    <select
+                      id="fieldAreaUnit"
+                      value={fieldAreaUnit}
+                      onChange={(e) => setFieldAreaUnit(e.target.value as any)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Acre">Acre</option>
+                      <option value="Hectare">Hectare</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="font-bold text-[#1B4332]">Location Details</Label>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleDetectLocation}
+                      disabled={isLocating}
+                      className="text-xs border-emerald-300 text-emerald-800 hover:bg-emerald-50 rounded-xl"
+                    >
+                      <Compass className="w-3.5 h-3.5 mr-1 text-primary" />
+                      {isLocating ? "Detecting..." : t("detectLocation")}
+                    </Button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
+                      placeholder="Village"
+                      value={village}
+                      onChange={(e) => setVillage(e.target.value)}
+                      className="h-10 rounded-xl text-sm"
+                    />
+                    <Input
+                      placeholder="Taluka"
+                      value={taluka}
+                      onChange={(e) => setTaluka(e.target.value)}
+                      className="h-10 rounded-xl text-sm"
+                    />
+                    <Input
+                      placeholder="District"
+                      value={district}
+                      onChange={(e) => setDistrict(e.target.value)}
+                      className="h-10 rounded-xl text-sm"
+                    />
+                    <Input
+                      placeholder="State"
+                      value={stateName}
+                      onChange={(e) => setStateName(e.target.value)}
+                      className="h-10 rounded-xl text-sm"
+                    />
+                  </div>
+
+                  {latitude && longitude && (
+                    <p className="text-xs text-emerald-700 font-semibold flex items-center gap-1 pt-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Coordinates Captured: {latitude.toFixed(4)}, {longitude.toFixed(4)}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 2: SOIL & IRRIGATION */}
+            {wizardStep === 2 && (
+              <div className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Soil Type</Label>
+                    <select
+                      value={soilType}
+                      onChange={(e) => setSoilType(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Black Soil">Black Soil</option>
+                      <option value="Loamy Soil">Loamy Soil</option>
+                      <option value="Sandy Soil">Sandy Soil</option>
+                      <option value="Clay Soil">Clay Soil</option>
+                      <option value="Alluvial Soil">Alluvial Soil</option>
+                      <option value="Other">Other</option>
+                      <option value="Don't Know">Don't Know</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Irrigation Method</Label>
+                    <select
+                      value={irrigationMethod}
+                      onChange={(e) => setIrrigationMethod(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Drip">Drip Irrigation</option>
+                      <option value="Sprinkler">Sprinkler Irrigation</option>
+                      <option value="Flood">Flood Irrigation</option>
+                      <option value="Rainfed">Rainfed</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Water Source</Label>
+                    <select
+                      value={waterSource}
+                      onChange={(e) => setWaterSource(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Borewell">Borewell</option>
+                      <option value="Canal">Canal</option>
+                      <option value="River">River</option>
+                      <option value="Farm Pond">Farm Pond</option>
+                      <option value="Rainwater">Rainwater</option>
+                      <option value="Other">Other</option>
+                      <option value="Don't Know">Don't Know</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Irrigation Frequency</Label>
+                    <select
+                      value={irrigationFrequency}
+                      onChange={(e) => setIrrigationFrequency(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Daily">Daily</option>
+                      <option value="Every 2–3 days">Every 2–3 days</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="As required">As required</option>
+                      <option value="Rain-dependent">Rain-dependent</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="font-bold text-[#1B4332]">Previous Crop Grown</Label>
+                  <Input
+                    placeholder="e.g. Wheat / Mustard / None"
+                    value={previousCrop}
+                    onChange={(e) => setPreviousCrop(e.target.value)}
+                    className="h-12 rounded-xl"
+                  />
+                </div>
+
+                {/* Optional Soil Test Section */}
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-sm text-[#1B4332]">
+                      Do you have a Soil Test Report?
+                    </span>
+                    <Button
+                      type="button"
+                      variant={hasSoilTest ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setHasSoilTest(!hasSoilTest)}
+                      className="rounded-xl text-xs font-bold"
+                    >
+                      {hasSoilTest ? "Yes (Report Available)" : "No (Skip)"}
+                    </Button>
+                  </div>
+
+                  {hasSoilTest && (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                      <div>
+                        <Label className="text-xs font-bold text-muted-foreground">pH Level</Label>
+                        <Input
+                          placeholder="e.g. 7.2"
+                          value={pH}
+                          onChange={(e) => setPh(e.target.value)}
+                          className="h-10 text-sm rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs font-bold text-muted-foreground">Nitrogen (N)</Label>
+                        <Input
+                          placeholder="kg/ha"
+                          value={nitrogen}
+                          onChange={(e) => setNitrogen(e.target.value)}
+                          className="h-10 text-sm rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs font-bold text-muted-foreground">Phosphorus (P)</Label>
+                        <Input
+                          placeholder="kg/ha"
+                          value={phosphorus}
+                          onChange={(e) => setPhosphorus(e.target.value)}
+                          className="h-10 text-sm rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs font-bold text-muted-foreground">Potassium (K)</Label>
+                        <Input
+                          placeholder="kg/ha"
+                          value={potassium}
+                          onChange={(e) => setPotassium(e.target.value)}
+                          className="h-10 text-sm rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs font-bold text-muted-foreground">Organic Carbon (%)</Label>
+                        <Input
+                          placeholder="e.g. 0.65"
+                          value={organicCarbon}
+                          onChange={(e) => setOrganicCarbon(e.target.value)}
+                          className="h-10 text-sm rounded-xl"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3: CROP INFO */}
+            {wizardStep === 3 && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">
+                      Crop Name <span className="text-red-500">*</span>
+                    </Label>
+                    <select
+                      value={cropName}
+                      onChange={(e) => {
+                        setCropName(e.target.value);
+                        setVariety(
+                          cropMaster.find((c) => c.cropName === e.target.value)?.varieties[0] ||
+                            "Standard"
+                        );
+                      }}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      {cropMaster.map((c) => (
+                        <option key={c.cropName} value={c.cropName}>
+                          {c.cropName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Variety</Label>
+                    <select
+                      value={variety}
+                      onChange={(e) => setVariety(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      {activeVarieties.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+
+                    {variety === "Other" && (
+                      <Input
+                        placeholder="Enter variety name"
+                        value={customVariety}
+                        onChange={(e) => setCustomVariety(e.target.value)}
+                        className="h-10 mt-2 rounded-xl"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">
+                      Sowing / Planting Date <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      type="date"
+                      value={sowingDate}
+                      onChange={(e) => setSowingDate(e.target.value)}
+                      className="h-12 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Cultivation Method</Label>
+                    <select
+                      value={cultivationMethod}
+                      onChange={(e) => setCultivationMethod(e.target.value)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Direct Sowing">Direct Sowing</option>
+                      <option value="Transplanting">Transplanting</option>
+                      <option value="Nursery → Transplanting">Nursery → Transplanting</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">
+                      Cultivated Area <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      type="number"
+                      step="0.1"
+                      placeholder={`Max ${fieldArea || 0}`}
+                      value={cultivatedArea}
+                      onChange={(e) => setCultivatedArea(e.target.value)}
+                      className="h-12 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-bold text-[#1B4332]">Area Unit</Label>
+                    <select
+                      value={cultivatedAreaUnit}
+                      onChange={(e) => setCultivatedAreaUnit(e.target.value as any)}
+                      className="w-full h-12 px-3 rounded-xl border border-input bg-background font-medium"
+                    >
+                      <option value="Acre">Acre</option>
+                      <option value="Hectare">Hectare</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="font-bold text-[#1B4332]">Additional Notes (Optional)</Label>
+                  <Input
+                    placeholder="e.g. Planted after first monsoon rain."
+                    value={cropNotes}
+                    onChange={(e) => setCropNotes(e.target.value)}
+                    className="h-12 rounded-xl"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* STEP 4: REVIEW & SAVE */}
+            {wizardStep === 4 && (
+              <div className="space-y-4">
+                <div className="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-200 space-y-4">
+                  <div className="flex items-center justify-between border-b border-emerald-200/60 pb-3">
+                    <div>
+                      <h4 className="font-bold text-lg text-[#1B4332]">{fieldName}</h4>
+                      <p className="text-xs text-emerald-800 font-semibold">
+                        {[village, taluka, district, stateName].filter(Boolean).join(", ") ||
+                          "Location details set"}
+                      </p>
+                    </div>
+                    <Badge className="bg-emerald-200 text-emerald-900 font-bold px-3 py-1">
+                      {fieldArea} {fieldAreaUnit}
+                    </Badge>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-emerald-950">
+                    <div>
+                      <span className="text-muted-foreground block">Soil Type</span>
+                      <span>{soilType}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block">Irrigation</span>
+                      <span>
+                        {irrigationMethod} ({waterSource})
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block">Crop Name</span>
+                      <span className="text-sm font-bold text-[#1B4332]">{cropName}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block">Variety</span>
+                      <span>{variety === "Other" ? customVariety : variety}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block">Sowing Date</span>
+                      <span>{sowingDate}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block">Cultivated Area</span>
+                      <span>
+                        {cultivatedArea || fieldArea} {cultivatedAreaUnit}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 p-3.5 rounded-xl border border-amber-200 text-xs text-amber-800 flex items-start gap-2">
+                  <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <span>
+                    {t("advisoryNotice")} (Data collection phase active).
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <DialogFooter className="flex items-center justify-between pt-4 border-t border-gray-100 gap-3">
+            {wizardStep > 1 ? (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setWizardStep(wizardStep - 1)}
+                className="h-11 rounded-xl px-5 font-bold"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1" />
+                {t("back")}
+              </Button>
+            ) : (
+              <div />
+            )}
+
+            {wizardStep < 4 ? (
+              <Button
+                type="button"
+                onClick={handleNextStep}
+                className="h-11 rounded-xl px-6 bg-[#2E6B3B] hover:bg-[#1B4332] text-white font-bold"
+              >
+                {t("next")}
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                onClick={handleSaveFieldAndCrop}
+                className="h-11 rounded-xl px-8 bg-[#2E6B3B] hover:bg-[#1B4332] text-white font-bold shadow-lg"
+              >
+                <CheckCircle2 className="w-4 h-4 mr-1.5" />
+                {t("saveCrop")}
+              </Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* MODAL: ADD CROP TO EXISTING FIELD */}
+      <Dialog open={isAddCropModalOpen} onOpenChange={setIsAddCropModalOpen}>
+        <DialogContent className="max-w-md bg-white rounded-3xl p-6">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-[#1B4332]">
+              Add Crop to {selectedFieldForCrop?.name}
+            </DialogTitle>
+            <DialogDescription className="text-xs">
+              Field Area: {selectedFieldForCrop?.area} {selectedFieldForCrop?.areaUnit}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4 py-3">
+            {formError && (
+              <div className="p-3 bg-red-50 text-red-600 text-xs font-semibold rounded-xl">
+                {formError}
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label className="font-bold text-xs">Crop Name *</Label>
+              <select
+                value={cropName}
+                onChange={(e) => setCropName(e.target.value)}
+                className="w-full h-11 px-3 rounded-xl border bg-background text-sm font-medium"
+              >
+                {cropMaster.map((c) => (
+                  <option key={c.cropName} value={c.cropName}>
+                    {c.cropName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="font-bold text-xs">Variety</Label>
+              <select
+                value={variety}
+                onChange={(e) => setVariety(e.target.value)}
+                className="w-full h-11 px-3 rounded-xl border bg-background text-sm font-medium"
+              >
+                {activeVarieties.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="font-bold text-xs">Sowing Date *</Label>
+              <Input
+                type="date"
+                value={sowingDate}
+                onChange={(e) => setSowingDate(e.target.value)}
+                className="h-11 rounded-xl text-sm"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <Label className="font-bold text-xs">Cultivated Area *</Label>
+                <Input
+                  type="number"
+                  step="0.1"
+                  value={cultivatedArea}
+                  onChange={(e) => setCultivatedArea(e.target.value)}
+                  className="h-11 rounded-xl text-sm"
+                />
+              </div>
+              <div>
+                <Label className="font-bold text-xs">Unit</Label>
+                <select
+                  value={cultivatedAreaUnit}
+                  onChange={(e) => setCultivatedAreaUnit(e.target.value as any)}
+                  className="w-full h-11 px-3 rounded-xl border bg-background text-sm font-medium"
+                >
+                  <option value="Acre">Acre</option>
+                  <option value="Hectare">Hectare</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              onClick={handleAddCropToField}
+              className="w-full h-11 bg-[#2E6B3B] hover:bg-[#1B4332] text-white font-bold rounded-xl"
+            >
+              {t("saveCrop")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* VIEW FIELD DETAIL MODAL */}
+      <Dialog open={!!viewFieldModal} onOpenChange={() => setViewFieldModal(null)}>
+        {viewFieldModal && (
+          <DialogContent className="max-w-lg bg-white rounded-3xl p-6">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-[#1B4332]">
+                {viewFieldModal.name}
+              </DialogTitle>
+              <DialogDescription className="text-xs font-semibold text-emerald-800">
+                {[
+                  viewFieldModal.location.village,
+                  viewFieldModal.location.taluka,
+                  viewFieldModal.location.district,
+                  viewFieldModal.location.state,
+                ]
+                  .filter(Boolean)
+                  .join(", ") || "Location"}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-4 text-xs font-medium py-2">
+              <div className="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl">
+                <div>
+                  <span className="text-muted-foreground block">Total Area</span>
+                  <span className="text-sm font-bold">
+                    {viewFieldModal.area} {viewFieldModal.areaUnit}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Soil Type</span>
+                  <span className="text-sm font-bold">{viewFieldModal.soil.type}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Irrigation Method</span>
+                  <span className="text-sm font-bold">{viewFieldModal.irrigation.method}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Water Source</span>
+                  <span className="text-sm font-bold">{viewFieldModal.irrigation.waterSource}</span>
+                </div>
+              </div>
+
+              {viewFieldModal.soil.soilTestAvailable && (
+                <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span className="font-bold text-emerald-900 block mb-1">
+                    Soil Test Data Available
+                  </span>
+                  <div className="grid grid-cols-3 gap-2 text-emerald-950">
+                    <span>pH: {viewFieldModal.soil.pH || "N/A"}</span>
+                    <span>N: {viewFieldModal.soil.nitrogen || "N/A"}</span>
+                    <span>P: {viewFieldModal.soil.phosphorus || "N/A"}</span>
+                    <span>K: {viewFieldModal.soil.potassium || "N/A"}</span>
+                    <span>OC: {viewFieldModal.soil.organicCarbon || "N/A"}%</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
+                <Info className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>{t("advisoryNotice")}</span>
+              </div>
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
+
+      {/* VIEW CROP DETAIL MODAL */}
+      <Dialog open={!!viewCropModal} onOpenChange={() => setViewCropModal(null)}>
+        {viewCropModal && (
+          <DialogContent className="max-w-md bg-white rounded-3xl p-6">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-black text-[#1B4332] flex items-center gap-2">
+                🌱 {viewCropModal.cropName}
+              </DialogTitle>
+              <DialogDescription className="text-xs">
+                Registered on {format(new Date(viewCropModal.createdAt), "dd MMM yyyy")}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-4 py-2 text-xs font-semibold">
+              <div className="grid grid-cols-2 gap-3 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
+                <div>
+                  <span className="text-muted-foreground block">Variety</span>
+                  <span className="text-sm font-bold text-emerald-900">
+                    {viewCropModal.variety || "Standard"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Cultivated Area</span>
+                  <span className="text-sm font-bold text-emerald-900">
+                    {viewCropModal.cultivatedArea} {viewCropModal.cultivatedAreaUnit}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Sowing Date</span>
+                  <span className="text-sm font-bold text-emerald-900">
+                    {format(new Date(viewCropModal.sowingDate), "dd MMM yyyy")}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block">Cultivation Method</span>
+                  <span className="text-sm font-bold text-emerald-900">
+                    {viewCropModal.cultivationMethod || "Direct Sowing"}
+                  </span>
+                </div>
+              </div>
+
+              {viewCropModal.notes && (
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-muted-foreground block text-xs">Notes:</span>
+                  <span className="text-slate-800">{viewCropModal.notes}</span>
+                </div>
+              )}
+
+              <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200 text-amber-900 space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-sm">
+                  <Sparkles className="w-4 h-4 text-amber-600" />
+                  Upcoming Advisory Engine
+                </div>
+                <p className="text-xs font-normal">
+                  {t("advisoryNotice")}
+                </p>
+              </div>
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </div>
   );
 }
