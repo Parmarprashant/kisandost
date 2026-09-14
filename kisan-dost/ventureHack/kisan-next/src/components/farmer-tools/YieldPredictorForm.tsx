@@ -148,11 +148,12 @@ export function YieldPredictorForm({ onPredict }: YieldPredictorFormProps) {
       }
       simulatedNdvi = Math.round(simulatedNdvi * 100) / 100;
 
-      updateFormData({
+      setFormData((prev) => ({
+        ...prev,
         ndvi: simulatedNdvi,
         soil_moisture: mappedMoisture,
         rainfall: mappedRainfall,
-      });
+      }));
       setSyncedWeather(true);
       toast.info(
         `Auto-filled satellite & weather data for ${weatherData.location.name}`

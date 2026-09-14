@@ -31,15 +31,15 @@ export default function ProfitPredictorPage() {
         <div className="xl:col-span-7 space-y-6">
           {predictionData ? (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <Card className="bg-emerald-50 border-emerald-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <Card className="bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-emerald-700">
+                    <CardTitle className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
                       Predicted Profit
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-emerald-700 flex items-center">
+                    <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300 flex items-center">
                       <IndianRupee className="w-5 h-5 mr-1" />
                       {predictionData.predictedProfit.toLocaleString()}
                     </div>
@@ -49,31 +49,58 @@ export default function ProfitPredictorPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-blue-50 border-blue-200">
+                <Card className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-blue-700">
+                    <CardTitle className="text-sm font-medium text-blue-700 dark:text-blue-300">
                       Expected Revenue
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-blue-700 flex items-center">
+                    <div className="text-2xl font-bold text-blue-700 dark:text-blue-300 flex items-center">
                       <IndianRupee className="w-5 h-5 mr-1" />
                       {predictionData.expectedRevenue.toLocaleString()}
                     </div>
+                    <p className="text-[11px] text-muted-foreground mt-1">
+                      {predictionData.predictedYield ? `${predictionData.predictedYield.toFixed(1)} quintals` : "Total Production"}
+                    </p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-orange-50 border-orange-200">
+                <Card className="bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-800">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-orange-700">
+                    <CardTitle className="text-sm font-medium text-orange-700 dark:text-orange-300">
                       Total Cost
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-orange-700 flex items-center">
+                    <div className="text-2xl font-bold text-orange-700 dark:text-orange-300 flex items-center">
                       <IndianRupee className="w-5 h-5 mr-1" />
                       {predictionData.totalCost.toLocaleString()}
                     </div>
+                    <p className="text-[11px] text-muted-foreground mt-1">
+                      Inputs & Operations
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-teal-50 dark:bg-teal-950/30 border-teal-200 dark:border-teal-800">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-teal-700 dark:text-teal-300 flex items-center justify-between">
+                      <span>Live Mandi Rate</span>
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+                      </span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-teal-700 dark:text-teal-300 flex items-center">
+                      <IndianRupee className="w-5 h-5 mr-1" />
+                      {predictionData.pricePerQuintal.toLocaleString()}
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-1 truncate" title={predictionData.mandiDetails?.market || "APMC Market"}>
+                      📍 {predictionData.mandiDetails?.market || "APMC"} ({predictionData.mandiDetails?.state || "Govt Mandi"})
+                    </p>
                   </CardContent>
                 </Card>
               </div>
