@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -34,6 +34,12 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
   const [isFetchingLocationData, setIsFetchingLocationData] = useState(false);
   const [showDevPanel, setShowDevPanel] = useState(false);
 
+  // Live Mandi State from data.gov.in
+  const [selectedState, setSelectedState] = useState<string>("Rajasthan");
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("");
+  const [liveMandiData, setLiveMandiData] = useState<any>(null);
+  const [fetchingMandi, setFetchingMandi] = useState(false);
+
   const [formData, setFormData] = useState({
     cropType: "Wheat",
     landArea: 1,
@@ -47,6 +53,37 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
     latitude: 0,
     longitude: 0,
   });
+
+  // Query verified live Mandi APMC rates whenever crop or state changes
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchMandiPrice() {
+      setFetchingMandi(true);
+      try {
+        const queryParams = new URLSearchParams({
+          crop: formData.cropType,
+          ...(selectedState ? { state: selectedState } : {}),
+          ...(selectedDistrict ? { district: selectedDistrict } : {}),
+        });
+        const res = await fetch(`/api/mandi-prices?${queryParams.toString()}`);
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && isMounted) {
+            setLiveMandiData(json.data);
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch live mandi price:", err);
+      } finally {
+        if (isMounted) setFetchingMandi(false);
+      }
+    }
+
+    fetchMandiPrice();
+    return () => {
+      isMounted = false;
+    };
+  }, [formData.cropType, selectedState, selectedDistrict]);
 
   const [devData, setDevData] = useState({
     sourceRainfall: "Manual entry",
@@ -140,6 +177,12 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
       const simulatedP = Math.max(15, Math.min(45, Math.round(20 + (lonHash % 20))));
       const simulatedK = Math.max(10, Math.min(35, Math.round(15 + ((latHash + lonHash) % 15))));
 
+      // Extract detected state and district for APMC Mandi lookup
+      const detectedState = data.location?.region || "";
+      const detectedDistrict = data.location?.name || "";
+      if (detectedState) setSelectedState(detectedState);
+      if (detectedDistrict) setSelectedDistrict(detectedDistrict);
+
       setFormData(prev => ({
         ...prev,
         rainfall: estimatedSeasonalRainfall,
@@ -149,13 +192,13 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
       }));
 
       setDevData({
-        sourceRainfall: `Auto-fetched from ${data.location?.name || "Location"} (Estimated Seasonal)`,
+        sourceRainfall: `Auto-fetched from ${data.location?.name || "Location"} (${detectedState})`,
         sourceSoil: "Auto-filled based on location coordinates",
         pipelineUsed: "npk-enhanced-model",
       });
 
       toast.success(t("autoFetchTitle") || "Auto-fetching data...", {
-        description: t("autoFetchDesc") || "Retrieving weather and environmental data",
+        description: `Synced weather & detected ${detectedDistrict ? `${detectedDistrict}, ` : ""}${detectedState}`,
       });
       
     } catch (error) {
@@ -174,7 +217,12 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
     e.preventDefault();
     setLoading(true);
     try {
-      const payload = { ...formData };
+      const payload: any = { 
+        ...formData,
+        state: selectedState,
+        district: selectedDistrict,
+        mandi: liveMandiData?.mandi || undefined,
+      };
       if (mode === "manual") {
         payload.latitude = 0;
         payload.longitude = 0;
@@ -291,16 +339,100 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
                     <SelectValue placeholder={t("selectCrop")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Wheat">Wheat</SelectItem>
-                    <SelectItem value="Rice">Rice</SelectItem>
-                    <SelectItem value="Maize">Maize</SelectItem>
-                    <SelectItem value="Cotton">Cotton</SelectItem>
-                    <SelectItem value="Sugarcane">Sugarcane</SelectItem>
+                    <SelectItem value="Wheat">Wheat (गेहूँ)</SelectItem>
+                    <SelectItem value="Rice">Rice / Paddy (धान)</SelectItem>
+                    <SelectItem value="Cotton">Cotton (कपास)</SelectItem>
+                    <SelectItem value="Maize">Maize (मक्का)</SelectItem>
+                    <SelectItem value="Soyabean">Soyabean (सोयाबीन)</SelectItem>
+                    <SelectItem value="Mustard">Mustard (सरसों)</SelectItem>
+                    <SelectItem value="Gram">Gram / Chana (चना)</SelectItem>
+                    <SelectItem value="Bajra">Bajra (बाजरा)</SelectItem>
+                    <SelectItem value="Sugarcane">Sugarcane (गन्ना)</SelectItem>
+                    <SelectItem value="Potato">Potato (आलू)</SelectItem>
+                    <SelectItem value="Tomato">Tomato (टमाटर)</SelectItem>
+                    <SelectItem value="Onion">Onion (प्याज)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="stateSelect" className="font-semibold">Mandi State / Region</Label>
+                <Select
+                  value={selectedState}
+                  onValueChange={(val: string | null) => {
+                    if (val) setSelectedState(val);
+                  }}
+                >
+                  <SelectTrigger id="stateSelect" className="h-11">
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Rajasthan">Rajasthan (राजस्थान)</SelectItem>
+                    <SelectItem value="Gujarat">Gujarat (गुजरात)</SelectItem>
+                    <SelectItem value="Madhya Pradesh">Madhya Pradesh (मध्य प्रदेश)</SelectItem>
+                    <SelectItem value="Uttar Pradesh">Uttar Pradesh (उत्तर प्रदेश)</SelectItem>
+                    <SelectItem value="Punjab">Punjab (पंजाब)</SelectItem>
+                    <SelectItem value="Haryana">Haryana (हरियाणा)</SelectItem>
+                    <SelectItem value="Maharashtra">Maharashtra (महाराष्ट्र)</SelectItem>
+                    <SelectItem value="Karnataka">Karnataka (कर्नाटक)</SelectItem>
+                    <SelectItem value="Telangana">Telangana (तेलंगाना)</SelectItem>
+                    <SelectItem value="Andhra Pradesh">Andhra Pradesh (आंध्र प्रदेश)</SelectItem>
+                    <SelectItem value="Bihar">Bihar (बिहार)</SelectItem>
+                    <SelectItem value="West Bengal">West Bengal (पश्चिम बंगाल)</SelectItem>
+                    <SelectItem value="Tamil Nadu">Tamil Nadu (तमिलनाडु)</SelectItem>
+                    <SelectItem value="Odisha">Odisha (ओडिशा)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Real-Time Live APMC Mandi Price Card */}
+              <div className="md:col-span-2 rounded-xl border border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-teal-500/10 dark:from-emerald-950/30 dark:to-teal-950/20 p-4 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+                      <IndianRupee className="w-3.5 h-3.5" /> Real-Time Mandi (APMC) Rate
+                    </span>
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300">
+                    data.gov.in verified
+                  </Badge>
+                </div>
+
+                <div className="mt-2.5 flex items-baseline justify-between flex-wrap gap-2">
+                  <div>
+                    <span className="text-2xl font-black text-emerald-900 dark:text-emerald-100">
+                      {fetchingMandi ? (
+                        <span className="text-base text-muted-foreground animate-pulse">Syncing live APMC price...</span>
+                      ) : (
+                        `₹${(liveMandiData?.pricePerQuintal || 2425).toLocaleString()}`
+                      )}
+                    </span>
+                    <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 ml-1.5">
+                      / quintal (100 kg)
+                    </span>
+                  </div>
+                  {liveMandiData?.minPrice && liveMandiData?.maxPrice && (
+                    <span className="text-xs font-medium text-muted-foreground bg-background/60 px-2.5 py-1 rounded-md border">
+                      Day Range: ₹{liveMandiData.minPrice.toLocaleString()} – ₹{liveMandiData.maxPrice.toLocaleString()}
+                    </span>
+                  )}
+                </div>
+
+                <div className="mt-2 pt-2 border-t border-emerald-500/15 text-[11px] text-muted-foreground flex items-center justify-between flex-wrap gap-1">
+                  <span>
+                    📍 Market: <strong className="text-foreground">{liveMandiData?.mandi || "Regional APMC"}</strong> ({liveMandiData?.state || selectedState})
+                  </span>
+                  <span>
+                    📅 Trade Date: <strong className="text-foreground">{liveMandiData?.arrivalDate || "Today"}</strong>
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="landArea" className="font-semibold">{t("landArea")} (Acres)</Label>
                 <div className="relative">
                   <Input

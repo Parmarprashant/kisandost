@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -34,7 +34,11 @@ function LocationMarker({ onLocationSelect }: FarmMapProps) {
   // Initialize marker to weather location if available
   useEffect(() => {
     if (weatherData?.location && !position) {
-      setPosition([weatherData.location.lat, weatherData.location.lon]);
+      const lat = Number(weatherData.location.lat);
+      const lon = Number(weatherData.location.lon);
+      if (!isNaN(lat) && !isNaN(lon) && (lat !== 0 || lon !== 0)) {
+        setPosition([lat, lon]);
+      }
     }
   }, [weatherData, position]);
 
@@ -50,11 +54,62 @@ function LocationMarker({ onLocationSelect }: FarmMapProps) {
 }
 
 // Sub-component to handle centering WITHOUT re-mounting the entire map
-function RecenterMap({ center, zoom }: { center: [number, number], zoom: number }) {
+function RecenterMap({ center, zoom }: { center: [number, number]; zoom: number }) {
   const map = useMap();
+  const prevCenterRef = useRef<[number, number] | null>(null);
+
   useEffect(() => {
-    map.setView(center, zoom);
-  }, [center, zoom, map]);
+    if (!map) return;
+
+    const [lat, lon] = center;
+    if (typeof lat !== "number" || typeof lon !== "number" || isNaN(lat) || isNaN(lon)) {
+      return;
+    }
+
+    // Skip on first mount because MapContainer already set the initial view
+    if (!prevCenterRef.current) {
+      prevCenterRef.current = [lat, lon];
+      return;
+    }
+
+    // If coordinates haven't changed, skip
+    if (prevCenterRef.current[0] === lat && prevCenterRef.current[1] === lon) {
+      return;
+    }
+
+    prevCenterRef.current = [lat, lon];
+
+    let isMounted = true;
+
+    map.whenReady(() => {
+      if (!isMounted) return;
+      try {
+        const container = map.getContainer?.();
+        const mapPane = map.getPane?.("mapPane");
+        if (!container || !mapPane || !(map as any)._loaded) {
+          return;
+        }
+
+        const currentCenter = map.getCenter?.();
+        if (currentCenter) {
+          const dist = map.distance([currentCenter.lat, currentCenter.lng], [lat, lon]);
+          const currentZoom = map.getZoom?.();
+          if (dist < 10 && currentZoom === zoom) {
+            return;
+          }
+        }
+
+        map.setView([lat, lon], zoom, { animate: true });
+      } catch (err) {
+        console.warn("[FarmMap] Safe catch recentering map:", err);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [center[0], center[1], zoom, map]);
+
   return null;
 }
 
@@ -69,12 +124,17 @@ export function FarmMap({ onLocationSelect }: FarmMapProps) {
     L.Marker.prototype.options.icon = createDefaultIcon();
   }, []);
 
-  // Default coordinates
-  const center: [number, number] = weatherData?.location
-    ? [weatherData.location.lat, weatherData.location.lon]
-    : [20.5937, 78.9629];
+  // Stable memoized default coordinates
+  const center: [number, number] = useMemo(() => {
+    const lat = Number(weatherData?.location?.lat);
+    const lon = Number(weatherData?.location?.lon);
+    if (!isNaN(lat) && !isNaN(lon) && (lat !== 0 || lon !== 0)) {
+      return [lat, lon];
+    }
+    return [20.5937, 78.9629];
+  }, [weatherData?.location?.lat, weatherData?.location?.lon]);
 
-  const zoom = weatherData ? 12 : 5;
+  const zoom = weatherData?.location ? 12 : 5;
 
   if (!isClient) {
     return (
@@ -96,7 +156,6 @@ export function FarmMap({ onLocationSelect }: FarmMapProps) {
         zoom={zoom}
         scrollWheelZoom={true}
         className="w-full h-[350px]"
-        id="farm-map-container"
       >
         <RecenterMap center={center} zoom={zoom} />
         <TileLayer
