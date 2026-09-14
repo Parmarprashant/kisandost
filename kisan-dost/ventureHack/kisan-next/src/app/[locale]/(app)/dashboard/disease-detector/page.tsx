@@ -127,7 +127,22 @@ export default function DiseaseDetectorPage() {
               {previewUrl ? (
                 <div className="relative w-full aspect-square max-h-64 rounded-xl overflow-hidden shadow-md">
                   <Image src={previewUrl} alt="Leaf preview" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  {result?.focusRegion?.isFocused && (
+                    <div
+                      className="absolute border-2 border-dashed border-emerald-400 bg-emerald-500/15 pointer-events-none rounded transition-all duration-500 z-10 animate-in fade-in"
+                      style={{
+                        top: `${result.focusRegion.boxNormalized[0] * 100}%`,
+                        left: `${result.focusRegion.boxNormalized[1] * 100}%`,
+                        height: `${(result.focusRegion.boxNormalized[2] - result.focusRegion.boxNormalized[0]) * 100}%`,
+                        width: `${(result.focusRegion.boxNormalized[3] - result.focusRegion.boxNormalized[1]) * 100}%`,
+                      }}
+                    >
+                      <span className="absolute -top-6 left-0 bg-emerald-700 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow whitespace-nowrap flex items-center gap-1">
+                        🎯 Analyzed Leaf
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
                     <p className="text-white font-medium flex items-center gap-2"><UploadCloud className="w-5 h-5"/> Change Image</p>
                   </div>
                 </div>
@@ -220,6 +235,12 @@ export default function DiseaseDetectorPage() {
                       {result.diseaseName}
                     </p>
                     <p className="text-sm mt-2 text-muted-foreground leading-relaxed">{result.description}</p>
+                    {result.focusRegion?.isFocused && (
+                      <div className="mt-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg p-2.5 flex items-center gap-2 text-xs text-emerald-900 dark:text-emerald-200 animate-in fade-in">
+                        <span className="text-base">🎯</span>
+                        <span><strong>Auto-Leaf Focus:</strong> {result.focusRegion.message || "AI automatically focused on the primary diseased foliage cluster for foliar-scale neural diagnosis."}</span>
+                      </div>
+                    )}
                   </div>
                 </CardHeader>
                 

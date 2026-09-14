@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import dbConnect from "@/lib/mongodb";
 import PredictionHistory from "@/models/PredictionHistory";
 
-import { getMarketPrice } from "@/lib/apmc/marketData";
+import { getDetailedMarketPrice } from "@/lib/apmc/marketData";
 
 export async function POST(req: Request) {
   try {
@@ -33,9 +33,8 @@ export async function POST(req: Request) {
     try {
       body = await req.json();
       console.log("Body parsed successfully");
-    } catch (parseErr) {
-      const err = parseErr as Error;
-      console.error("JSON Parse Error:", err);
+    } catch (err: any) {
+      console.error("JSON parse error:", err);
       return NextResponse.json({ 
         error: "Invalid JSON input", 
         details: err.message 
@@ -52,7 +51,9 @@ export async function POST(req: Request) {
       fertilizerCost,
       pesticideCost,
       irrigationCost = 0,
-      mandi = "Chittorgarh",
+      mandi,
+      state = "Rajasthan",
+      district,
       latitude,
       longitude
     } = body;
@@ -151,25 +152,27 @@ export async function POST(req: Request) {
       console.log(`Continuous Fallback Yield Estimated: ${predictedYield.toFixed(2)} quintals (Area: ${landArea} acres, Conf: ${confidenceScore.toFixed(3)})`);
     }
 
-    // 2. Get Market Price
-    console.log("Connecting to DB...");
+    // 2. Get Real-Time APMC Market Price from data.gov.in
+    console.log("Fetching real-time APMC Mandi price from data.gov.in...");
     await dbConnect();
-    const pricePerQuintal = await getMarketPrice(cropType, mandi);
-    console.log(`Market Price for ${cropType} in ${mandi}: ₹${pricePerQuintal}/quintal`);
+    const mandiLocationQuery = state || mandi || "India";
+    const mandiDetails = await getDetailedMarketPrice(cropType, mandiLocationQuery);
+    const pricePerQuintal = mandiDetails.pricePerQuintal;
+    console.log(`Live APMC Mandi Price for ${cropType} (${mandiDetails.mandi}, ${mandiDetails.state}): ₹${pricePerQuintal}/quintal [Source: ${mandiDetails.source}]`);
 
-    // 3. Calculate Profit Estimation
+    // 3. Calculate Profit Estimation with Real-Time Mandi Prices
     const expectedRevenue = predictedYield * pricePerQuintal;
     const totalCost = Number(fertilizerCost) + Number(pesticideCost) + Number(irrigationCost);
     const predictedProfit = expectedRevenue - totalCost;
 
     const recommendation = predictedProfit > 0 
-      ? `Based on current market trends and your input data, you are likely to make a profit of ₹${Math.round(predictedProfit).toLocaleString()}. We recommend proceeding with the current soil management plan.`
-      : `Warning: Projected costs exceed expected revenue. Consider optimizing fertilizer usage or switching to a more cost-effective crop for this season.`;
+      ? `Based on verified APMC Mandi rates (${mandiDetails.mandi} - ₹${pricePerQuintal.toLocaleString()}/quintal on ${mandiDetails.arrivalDate}) and your farm inputs, you are projected to make a net profit of ₹${Math.round(predictedProfit).toLocaleString()}. Market trend is favorable for ${cropType}.`
+      : `Warning: Projected input costs (₹${totalCost.toLocaleString()}) exceed expected revenue (₹${Math.round(expectedRevenue).toLocaleString()}) at current APMC rate of ₹${pricePerQuintal.toLocaleString()}/quintal (${mandiDetails.mandi}). Consider optimizing fertilizer/irrigation or exploring alternative high-value crops for this season.`;
 
     // 4. Store in DB
     console.log("Creating DB record...");
     const predictionRecord = await PredictionHistory.create({
-      userId,
+      userId: userId || "guest_farmer",
       cropType,
       landArea: Number(landArea),
       soilNitrogen: Number(soilNitrogen),
@@ -199,6 +202,16 @@ export async function POST(req: Request) {
       recommendation,
       predictedYield,
       pricePerQuintal,
+      mandiDetails: {
+        market: mandiDetails.mandi,
+        district: mandiDetails.district,
+        state: mandiDetails.state,
+        arrivalDate: mandiDetails.arrivalDate,
+        minPrice: mandiDetails.minPrice,
+        maxPrice: mandiDetails.maxPrice,
+        source: mandiDetails.source,
+        variety: mandiDetails.variety,
+      },
       historyId: predictionRecord._id,
     });
   } catch (error) {

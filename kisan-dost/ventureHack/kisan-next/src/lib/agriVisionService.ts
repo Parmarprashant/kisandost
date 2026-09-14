@@ -1,4 +1,4 @@
-﻿/**
+/**
  * AgriVision AI Service
  *
  * Replaces the previous Gemini Vision integration.
@@ -37,6 +37,12 @@ export interface AgriVisionRawResponse {
   segmentation?: {
     infected_area_pct?: number;
   };
+  focus_region?: {
+    is_focused: boolean;
+    box_normalized: [number, number, number, number];
+    box_pixels: [number, number, number, number];
+    message: string;
+  };
 }
 
 /** Shape expected by the existing Kisan Dost frontend */
@@ -51,6 +57,12 @@ export interface AgriVisionDiseaseResult {
   recommendedPesticides: string[];
   recommendedFertilizers: string[];
   requiresExpertVerification: boolean;
+  focusRegion?: {
+    isFocused: boolean;
+    boxNormalized: [number, number, number, number]; // [ymin, xmin, ymax, xmax]
+    boxPixels: [number, number, number, number];
+    message: string;
+  };
 }
 
 /**
@@ -212,9 +224,17 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
 
     // Capitalize crop name
     const rawCrop = raw.crop?.name || "Crop";
-    const cropName = rawCrop.charAt(0).toUpperCase() + rawCrop.slice(1);
+    const isUnknownCrop = !rawCrop || rawCrop.toLowerCase() === "unknown";
+    const cropName = isUnknownCrop
+      ? "Unknown Crop"
+      : rawCrop.charAt(0).toUpperCase() + rawCrop.slice(1);
 
-    const confidence = confidenceToNumber(raw.diagnosis.confidence);
+    const isUndetermined =
+      cleanDiseaseName.toLowerCase().includes("unable to determine") ||
+      raw.diagnosis.status === "INSUFFICIENT_EVIDENCE" ||
+      raw.diagnosis.type === "unknown";
+
+    const confidence = isUndetermined ? 0 : confidenceToNumber(raw.diagnosis.confidence);
 
     // --- Build Clean Agronomic Symptoms ---
     const diseaseLower = cleanDiseaseName.toLowerCase();
@@ -235,7 +255,13 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       .map(sanitizeText)
       .filter((s) => s.length > 5);
 
-    const symptoms = matchedSymptoms.length > 0
+    const symptoms = isUndetermined
+      ? [
+          "Wide-angle or distant plant photograph detected.",
+          "Individual leaf lesion patterns cannot be resolved with diagnostic certainty.",
+          "Please upload a clear close-up photograph of an individual affected leaf."
+        ]
+      : matchedSymptoms.length > 0
       ? matchedSymptoms
       : cleanRawEvidence.length > 0
       ? cleanRawEvidence
@@ -247,7 +273,12 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
 
     // --- Build Clean Agronomic Causes ---
     let causes: string[] = [];
-    if (matchedCauses.length > 0) {
+    if (isUndetermined) {
+      causes = [
+        "Camera distance or wide field framing obscures leaf vein details and micro-lesion margins.",
+        "Accurate AI diagnosis requires high-resolution macro imagery of single leaves."
+      ];
+    } else if (matchedCauses.length > 0) {
       causes = matchedCauses;
     } else if (raw.advisory.disease_description) {
       const sanitizedDesc = sanitizeText(raw.advisory.disease_description);
@@ -270,7 +301,14 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       .map(sanitizeText)
       .filter((p) => p.length > 10 && !/(score|entropy|rejected|status)/i.test(p));
 
-    if (precautions.length === 0) {
+    if (isUndetermined) {
+      precautions.length = 0;
+      precautions.push(
+        "Take a close-up photo focusing on a single diseased leaf in good daylight.",
+        "Ensure the camera is in sharp focus on the leaf spots or lesions.",
+        "Avoid applying chemical sprays until diagnosis is verified."
+      );
+    } else if (precautions.length === 0) {
       precautions.push(
         "Inspect leaves early in the morning for dew-related fungal spread.",
         "Ensure balanced fertilization and avoid excess nitrogen.",
@@ -278,15 +316,26 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       );
     }
 
-    const recommendedPesticides = extractPesticideNames(raw.advisory.chemical_control || []);
-    const recommendedFertilizers = extractFertilizerNames(raw.advisory.cultural_practices || []);
+    const recommendedPesticides = isUndetermined ? [] : extractPesticideNames(raw.advisory.chemical_control || []);
+    const recommendedFertilizers = isUndetermined ? [] : extractFertilizerNames(raw.advisory.cultural_practices || []);
 
-    const description = sanitizeText(
-      raw.advisory.disease_description ||
-      raw.recommendation ||
-      raw.diagnosis.farmer_subheading ||
-      `${cleanDiseaseName} diagnosed on ${cropName}. Follow recommended field management.`
-    );
+    const description = isUndetermined
+      ? (raw.diagnosis.farmer_subheading || "Wide-angle or ambiguous photo detected. Please upload a clear close-up photograph of an individual affected leaf.")
+      : sanitizeText(
+          raw.advisory.disease_description ||
+          raw.recommendation ||
+          raw.diagnosis.farmer_subheading ||
+          `${cleanDiseaseName} diagnosed on ${cropName}. Follow recommended field management.`
+        );
+
+    const focusRegion = raw.focus_region
+      ? {
+          isFocused: raw.focus_region.is_focused ?? false,
+          boxNormalized: raw.focus_region.box_normalized || [0, 0, 1, 1],
+          boxPixels: raw.focus_region.box_pixels || [0, 0, 0, 0],
+          message: raw.focus_region.message || "",
+        }
+      : undefined;
 
     return {
       cropName,
@@ -299,6 +348,7 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       recommendedPesticides,
       recommendedFertilizers,
       requiresExpertVerification: raw.requires_expert_verification ?? false,
+      focusRegion,
     };
   } finally {
     clearTimeout(timeoutId);
