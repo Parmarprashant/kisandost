@@ -1,0 +1,2343 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Hindi (`hi`).
+class L10nHi extends L10n {
+  L10nHi([String locale = 'hi']) : super(locale);
+
+  @override
+  String get appError => 'कुछ गड़बड़ हो गई।';
+
+  @override
+  String get appLanguage => 'भाषा';
+
+  @override
+  String appLastUpdated(String time) {
+    return '$time को अपडेट किया गया';
+  }
+
+  @override
+  String get appOffline => 'आप ऑफ़लाइन हैं। सहेजी गई जानकारी दिखा रहे हैं।';
+
+  @override
+  String get appRetry => 'फिर कोशिश करें';
+
+  @override
+  String get appSlow =>
+      'इसमें सामान्य से अधिक समय लग रहा है। कृपया प्रतीक्षा करें।';
+
+  @override
+  String get chatWidget_callExpert => 'विशेषज्ञ को कॉल करें';
+
+  @override
+  String get chatWidget_greeting =>
+      '🙏 नमस्ते! मैं आपका KisanDost AI सहायक हूँ।\n\nमैं फसल रोग, उर्वरक, मौसम, लाभ अनुमान और सरकारी योजनाओं में आपकी मदद कर सकता हूँ!\n\nबस अपना सवाल नीचे पूछें 👇';
+
+  @override
+  String get chatWidget_headerSub => 'हिंदी • अंग्रेजी • गुजराती • मराठी';
+
+  @override
+  String get chatWidget_headerTitle => 'KisanDost AI सहायक';
+
+  @override
+  String get chatWidget_placeholder => 'अपना सवाल लिखें...';
+
+  @override
+  String get chatWidget_quickReplies_contact => '📞 संपर्क सहायता';
+
+  @override
+  String get chatWidget_quickReplies_disease => '🌾 फसल रोग';
+
+  @override
+  String get chatWidget_quickReplies_fertilizer => '🧪 उर्वरक मात्रा';
+
+  @override
+  String get chatWidget_quickReplies_profit => '📈 लाभ अनुमान';
+
+  @override
+  String get chatWidget_quickReplies_schemes => '🏛️ सरकारी योजनाएं';
+
+  @override
+  String get chatWidget_quickReplies_weather => '☁️ मौसम टिप्स';
+
+  @override
+  String get comingSoon => 'जल्द आ रहा है';
+
+  @override
+  String get communities_annualSupport => '₹6,000 वार्षिक सहायता';
+
+  @override
+  String get communities_beneficiaries => 'लाभार्थी: करोड़ों किसान';
+
+  @override
+  String get communities_directTransfer => 'सीधा बैंक ट्रांसफर';
+
+  @override
+  String get communities_dislike => 'नापसंद';
+
+  @override
+  String get communities_eServiceCards_appStatus_description =>
+      'यह सेवा किसानों को उनके पीएम-किसान आवेदनों की स्थिति जांचने में सक्षम बनाती है। पंजीकरण विवरण दर्ज करके, आवेदक अपनी सबमिशन की ट्रैकिंग कर सकते हैं।';
+
+  @override
+  String get communities_eServiceCards_appStatus_title =>
+      'पीएम-किसान आवेदन स्थिति जांचें';
+
+  @override
+  String get communities_eServiceCards_ekyc_description =>
+      'ई-केवाईसी सेवा पीएम-किसान योजना के लाभार्थियों की पहचान सत्यापित करने के लिए आवश्यक है। किसान अपनी केवाईसी प्रक्रिया ऑनलाइन पूरी कर सकते हैं।';
+
+  @override
+  String get communities_eServiceCards_ekyc_title =>
+      'पीएम-किसान के लिए ई-केवाईसी पूरा करें';
+
+  @override
+  String get communities_eServiceCards_ems_description =>
+      'EMS, ATMA कार्यक्रम के तहत मासिक प्रगति रिपोर्ट (MPR) के लिए एक वेब-सक्षम ऑनलाइन निगरानी प्रणाली है। यह सभी योजना घटकों की भौतिक और वित्तीय प्रगति की निगरानी करता है।';
+
+  @override
+  String get communities_eServiceCards_ems_title =>
+      'विस्तार सुधार निगरानी प्रणाली (EMS)';
+
+  @override
+  String get communities_eServiceCards_foodSecurity_description =>
+      'सुनिश्चित करता है कि सभी लोगों को हर समय सक्रिय और स्वस्थ जीवन के लिए बुनियादी भोजन उपलब्ध हो। पूरे देश में खाद्य की उपलब्धता, पहुंच और स्थिरता।';
+
+  @override
+  String get communities_eServiceCards_foodSecurity_title =>
+      'राष्ट्रीय खाद्य सुरक्षा पोर्टल';
+
+  @override
+  String get communities_eServiceCards_kkms_description =>
+      'किसान ज्ञान प्रबंधन प्रणाली कृषि मंत्रालय की एक पहल है जो किसानों को टोल-फ्री नंबर, ऑनलाइन फोरम और उपयोगी कृषि-विशिष्ट जानकारी जैसी सेवाएं प्रदान करती है।';
+
+  @override
+  String get communities_eServiceCards_kkms_title =>
+      'किसान ज्ञान प्रबंधन प्रणाली';
+
+  @override
+  String get communities_eServiceCards_landRecords_description =>
+      'गुजरात के विभिन्न गांवों के लिए ऑनलाइन अधिकार अभिलेख (RoR) प्राप्त करें। गुजरात राजस्व विभाग द्वारा प्रदान किया गया।';
+
+  @override
+  String get communities_eServiceCards_landRecords_title =>
+      'गुजरात में ऑनलाइन भूमि रिकॉर्ड जांचें';
+
+  @override
+  String get communities_eServiceCards_pmKisanScheme_description =>
+      'पीएम-किसान योजना छोटे और सीमांत किसानों (SMFs) की वित्तीय जरूरतों को पूरा करने के उद्देश्य से प्रति वर्ष ₹6000 की प्रत्यक्ष आय सहायता प्रदान करती है, जो तीन समान किस्तों में हस्तांतरित की जाती है।';
+
+  @override
+  String get communities_eServiceCards_pmKisanScheme_title =>
+      'प्रधानमंत्री किसान सम्मान निधि (पीएम-किसान)';
+
+  @override
+  String get communities_eServiceCards_pmayDashboard_description =>
+      'यह डिजिटल डैशबोर्ड राज्यों और बैंकों के अधिकारियों को PMAY-ग्रामीण के प्रदर्शन को ट्रैक करने में सक्षम बनाता है। यह वास्तविक समय डेटा और प्रदर्शन मैट्रिक्स प्रदान करता है।';
+
+  @override
+  String get communities_eServiceCards_pmayDashboard_title =>
+      'पीएम आवास योजना-ग्रामीण डैशबोर्ड';
+
+  @override
+  String get communities_eServiceCards_registerFarmer_description =>
+      'किसान पीएम-किसान सम्मान निधि योजना के लिए पंजीकरण कर सकते हैं। आवश्यक विवरण प्रदान करके, किसान सरकार से वित्तीय सहायता प्राप्त करने के लिए आवेदन कर सकते हैं।';
+
+  @override
+  String get communities_eServiceCards_registerFarmer_title =>
+      'पीएम-किसान के लिए नए किसान के रूप में पंजीकरण करें';
+
+  @override
+  String get communities_eServices => 'किसान ई-सेवाएं';
+
+  @override
+  String get communities_footerNote =>
+      '* जानकारी आधिकारिक पीएम किसान यूट्यूब चैनल और सरकारी स्रोतों पर आधारित है।';
+
+  @override
+  String get communities_forFarmers => 'किसानों के लिए';
+
+  @override
+  String get communities_fullyOnline => 'पूर्ण ऑनलाइन';
+
+  @override
+  String get communities_govSchemesAll => 'सभी योजनाएँ';
+
+  @override
+  String get communities_govSchemesApply => 'आधिकारिक पोर्टल';
+
+  @override
+  String get communities_govSchemesBenefits => 'मुख्य लाभ';
+
+  @override
+  String get communities_govSchemesCentral => 'केंद्रीय योजना';
+
+  @override
+  String get communities_govSchemesDetails => 'विवरण देखें';
+
+  @override
+  String get communities_govSchemesEligibility => 'कौन आवेदन कर सकता है';
+
+  @override
+  String get communities_govSchemesEmpty =>
+      'आपकी खोज से कोई योजना मेल नहीं खाती।';
+
+  @override
+  String get communities_govSchemesError =>
+      'योजनाएँ लोड नहीं हो सकीं। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get communities_govSchemesIntro =>
+      'आय सहायता, फसल बीमा, ऋण, सिंचाई, मशीनरी और संबद्ध गतिविधियों से जुड़ी केंद्र सरकार की योजनाएँ। लाभ और पात्रता देखने के लिए योजना पर टैप करें, या आवेदन हेतु आधिकारिक पोर्टल खोलें।';
+
+  @override
+  String get communities_govSchemesLaunched => 'शुरुआत';
+
+  @override
+  String get communities_govSchemesLess => 'कम दिखाएँ';
+
+  @override
+  String get communities_govSchemesLoading => 'योजनाएँ लोड हो रही हैं…';
+
+  @override
+  String get communities_govSchemesSearch =>
+      'नाम, मंत्रालय या कीवर्ड से योजना खोजें…';
+
+  @override
+  String get communities_govSchemesShowAll => 'सभी योजनाएँ दिखाएँ';
+
+  @override
+  String get communities_govSchemesTitle => 'किसानों के लिए सरकारी योजनाएँ';
+
+  @override
+  String get communities_installments => '3 किस्तें';
+
+  @override
+  String get communities_latestVideos => 'नवीनतम वीडियो';
+
+  @override
+  String get communities_launchDate => 'शुभारंभ: 24 फरवरी 2019';
+
+  @override
+  String get communities_like => 'पसंद';
+
+  @override
+  String get communities_loadMore => 'और वीडियो लोड करें';
+
+  @override
+  String get communities_more => 'और जानें';
+
+  @override
+  String get communities_networkTab => 'किसान नेटवर्क';
+
+  @override
+  String get communities_officialChannel => 'आधिकारिक यूट्यूब चैनल';
+
+  @override
+  String get communities_officialInitiative => 'आधिकारिक सरकारी पहल';
+
+  @override
+  String get communities_operationalDate => 'कार्यरत: 01 दिसंबर 2018';
+
+  @override
+  String get communities_partiallyOnline => 'आंशिक ऑनलाइन';
+
+  @override
+  String get communities_peopleHelpful => 'लोगों को यह उपयोगी लगा';
+
+  @override
+  String get communities_pmKisanDesc =>
+      'पीएम-किसान एक सरकारी योजना है जो भारत भर के छोटे और सीमांत किसानों को वित्तीय सहायता प्रदान करती है। इस पहल के तहत, पात्र किसानों को उनके बैंक खातों में सीधे तीन समान किस्तों में वार्षिक ₹6,000 मिलते हैं।';
+
+  @override
+  String get communities_pmKisanTitle => 'पीएम किसान सम्मान निधि योजना';
+
+  @override
+  String get communities_quote =>
+      '\"माननीय प्रधानमंत्री श्री नरेंद्र मोदी द्वारा 24 फरवरी 2019 को शुभारंभ। 1 दिसंबर 2018 से कार्यरत। पात्र किसान परिवारों को आय सहायता प्रदान करता है।\"';
+
+  @override
+  String get communities_rateThis => 'रेटिंग दें:';
+
+  @override
+  String get communities_resourcesTab => 'किसान संसाधन';
+
+  @override
+  String get communities_shareThis => 'शेयर करें';
+
+  @override
+  String get communities_subtitle =>
+      'किसानों को सरकारी पहल और समकक्ष ज्ञान से जोड़ना।';
+
+  @override
+  String get communities_title => 'समुदाय और योजनाएं';
+
+  @override
+  String get communities_videoDates_v1 => '2 दिन पहले';
+
+  @override
+  String get communities_videoDates_v2 => '1 सप्ताह पहले';
+
+  @override
+  String get communities_videoDates_v3 => '2 सप्ताह पहले';
+
+  @override
+  String get communities_videoDates_v4 => '3 सप्ताह पहले';
+
+  @override
+  String get communities_videoDates_v5 => '1 महीना पहले';
+
+  @override
+  String get communities_videoDates_v6 => '2 महीने पहले';
+
+  @override
+  String get communities_videoDates_v7 => '2 महीने पहले';
+
+  @override
+  String get communities_videoDates_v8 => '3 महीने पहले';
+
+  @override
+  String get communities_videoTitles_v1 => 'पीएम किसान योजना - किसान लाभ';
+
+  @override
+  String get communities_videoTitles_v2 =>
+      'पीएम किसान स्थिति ऑनलाइन कैसे जांचें';
+
+  @override
+  String get communities_videoTitles_v3 => 'पीएम किसान 12वीं किस्त जारी';
+
+  @override
+  String get communities_videoTitles_v4 => 'पीएम किसान योजना - पूर्ण गाइड';
+
+  @override
+  String get communities_videoTitles_v5 => 'किसान कल्याण योजनाएं 2024';
+
+  @override
+  String get communities_videoTitles_v6 =>
+      'प्रत्यक्ष लाभ हस्तांतरण (DBT) समझाया';
+
+  @override
+  String get communities_videoTitles_v7 => 'ई-केवाईसी पंजीकरण ट्यूटोरियल';
+
+  @override
+  String get communities_videoTitles_v8 => 'PMAY और पीएम किसान तालमेल';
+
+  @override
+  String get communities_visitChannel => 'चैनल पर जाएं';
+
+  @override
+  String get communities_visitPortal => 'आधिकारिक पोर्टल पर जाएं';
+
+  @override
+  String get communities_visitYoutube => 'यूट्यूब चैनल पर जाएं';
+
+  @override
+  String get communities_watchMore => 'यूट्यूब पर और देखें';
+
+  @override
+  String get communities_welfareSchemes => 'किसान कल्याण योजनाएं';
+
+  @override
+  String cropSuggestion_aiAdvisory(String district) {
+    return '$district के लिए AI सलाह';
+  }
+
+  @override
+  String get cropSuggestion_analyzing =>
+      'स्थान विवरण का विश्लेषण और AI सुझाव उत्पन्न कर रहे हैं...';
+
+  @override
+  String get cropSuggestion_awaitingLocation => 'स्थान की प्रतीक्षा में';
+
+  @override
+  String get cropSuggestion_awaitingLocationDesc =>
+      'जिले का चयन करने के लिए मानचित्र पर क्लिक करें और हमारे AI को विशेषज्ञ फसल सिफारिशें प्रदान करने दें।';
+
+  @override
+  String get cropSuggestion_bestCrops => 'इस क्षेत्र के लिए सर्वोत्तम फसलें';
+
+  @override
+  String get cropSuggestion_description =>
+      'उस क्षेत्र में उगाने के लिए सर्वोत्तम फसलों के लिए विशेषज्ञ AI सिफारिशें प्राप्त करने के लिए गुजरात के मानचित्र पर एक स्थान का चयन करें।';
+
+  @override
+  String get cropSuggestion_geminiInsight => 'Gemini अंतर्दृष्टि';
+
+  @override
+  String get cropSuggestion_loadingMap => 'मानचित्र लोड हो रहा है...';
+
+  @override
+  String get cropSuggestion_season => 'मौसम';
+
+  @override
+  String get cropSuggestion_selectLocationDesc =>
+      'स्थानिक AI फसल सुझाव देखने के लिए गुजरात के मानचित्र पर कहीं भी क्लिक करें।';
+
+  @override
+  String get cropSuggestion_selectLocationTitle => 'स्थान चुनें';
+
+  @override
+  String get cropSuggestion_selectedLocation => 'चयनित स्थान';
+
+  @override
+  String get cropSuggestion_title => 'AI फसल सुझाव';
+
+  @override
+  String get cropSuggestion_waterLevel => 'जल स्तर';
+
+  @override
+  String get crops_apple_diseases_appleScab_description =>
+      'फलों पर मखमली धब्बे।';
+
+  @override
+  String get crops_apple_diseases_appleScab_favorableConditions =>
+      'बरसात का वसंत।';
+
+  @override
+  String get crops_apple_diseases_appleScab_impact => 'बाजार का नुकसान।';
+
+  @override
+  String get crops_apple_diseases_appleScab_name => 'ऐप्पल स्कैब';
+
+  @override
+  String get crops_apple_name => 'सेब';
+
+  @override
+  String get crops_banana_diseases_panamaDisease_description =>
+      'मिट्टी से पैदा होने वाला फफूंद रोग।';
+
+  @override
+  String get crops_banana_diseases_panamaDisease_favorableConditions =>
+      'अम्लीय मिट्टी और खराब जल निकासी।';
+
+  @override
+  String get crops_banana_diseases_panamaDisease_impact =>
+      'बागानों का स्थायी नुकसान।';
+
+  @override
+  String get crops_banana_diseases_panamaDisease_name => 'पनामा विल्ट';
+
+  @override
+  String get crops_banana_name => 'केला';
+
+  @override
+  String get crops_broccoli_diseases_clubrootBroccoli_description =>
+      'मिट्टी से पैदा होने वाली जड़ विकृति।';
+
+  @override
+  String get crops_broccoli_diseases_clubrootBroccoli_favorableConditions =>
+      'अम्लीय मिट्टी की नमी।';
+
+  @override
+  String get crops_broccoli_diseases_clubrootBroccoli_impact =>
+      'छोटे सिर, पौधे की मृत्यु।';
+
+  @override
+  String get crops_broccoli_diseases_clubrootBroccoli_name => 'क्लबरोट';
+
+  @override
+  String get crops_broccoli_name => 'ब्रोकोली';
+
+  @override
+  String get crops_cabbage_diseases_alternariaLeafSpotCab_description =>
+      'અણગમતી માથાની ફૂગ।';
+
+  @override
+  String get crops_cabbage_diseases_alternariaLeafSpotCab_favorableConditions =>
+      'ગરમ અને ભેજવાળી।';
+
+  @override
+  String get crops_cabbage_diseases_alternariaLeafSpotCab_impact =>
+      'શેલ્ફ-લાઇફ અને મૂલ્ય ઘટાડે છે।';
+
+  @override
+  String get crops_cabbage_diseases_alternariaLeafSpotCab_name =>
+      'અલ્ટરનેરિયા સ્પોટ';
+
+  @override
+  String get crops_cabbage_name => 'કોબીજ';
+
+  @override
+  String get crops_carrot_diseases_carrotLeafBlight_description =>
+      'आम गाजर पत्ती की सड़न।';
+
+  @override
+  String get crops_carrot_diseases_carrotLeafBlight_favorableConditions =>
+      'नम गर्मी।';
+
+  @override
+  String get crops_carrot_diseases_carrotLeafBlight_impact =>
+      'जड़ का आकार कम करता है।';
+
+  @override
+  String get crops_carrot_diseases_carrotLeafBlight_name =>
+      'अल्टरनेरिया ब्लाइट';
+
+  @override
+  String get crops_carrot_name => 'गाजर';
+
+  @override
+  String get crops_cauliflower_diseases_blackRotCauli_description =>
+      'ક્રુસિફર બેક્ટેરિયલ સડો।';
+
+  @override
+  String get crops_cauliflower_diseases_blackRotCauli_favorableConditions =>
+      'ગરમ વરસાદ।';
+
+  @override
+  String get crops_cauliflower_diseases_blackRotCauli_impact =>
+      'ગંભીર માથાનો સડો।';
+
+  @override
+  String get crops_cauliflower_diseases_blackRotCauli_name => 'બ્લેક રોટ';
+
+  @override
+  String get crops_cauliflower_name => 'ફૂલકોબી';
+
+  @override
+  String get crops_corn_diseases_cornSmut_description =>
+      'पौधों पर गांठे बनाने वाला फफूंद रोग।';
+
+  @override
+  String get crops_corn_diseases_cornSmut_favorableConditions =>
+      'गर्म, शुष्क मौसम के बाद बारिश।';
+
+  @override
+  String get crops_corn_diseases_cornSmut_impact =>
+      'उपज और दाने की गुणवत्ता कम करता है।';
+
+  @override
+  String get crops_corn_diseases_cornSmut_name => 'कांगियारी (Smut)';
+
+  @override
+  String get crops_corn_name => 'मक्का';
+
+  @override
+  String get crops_cotton_diseases_bollRotCotton_description =>
+      'કપાસના બોલનો સડો।';
+
+  @override
+  String get crops_cotton_diseases_bollRotCotton_favorableConditions =>
+      'વરસાદ અને ઘનતા।';
+
+  @override
+  String get crops_cotton_diseases_bollRotCotton_impact =>
+      'લિન્ટની ઉપજ અને ગુણવત્તા ઘટાડે છે।';
+
+  @override
+  String get crops_cotton_diseases_bollRotCotton_name => 'બોલ સડો';
+
+  @override
+  String get crops_cotton_name => 'કપાસ';
+
+  @override
+  String get crops_cucumber_diseases_powderyMildewCuc_description =>
+      'सफेद पत्ती पाउडर फफूंद।';
+
+  @override
+  String get crops_cucumber_diseases_powderyMildewCuc_favorableConditions =>
+      'आर्द्रता।';
+
+  @override
+  String get crops_cucumber_diseases_powderyMildewCuc_impact =>
+      'फसल का जीवन कम।';
+
+  @override
+  String get crops_cucumber_diseases_powderyMildewCuc_name => 'पाउडरी मिल्ड्यू';
+
+  @override
+  String get crops_cucumber_name => 'खीरा';
+
+  @override
+  String get crops_grapes_diseases_downyMildewGrapes_description =>
+      'बेलों का आक्रामक फफूंद रोग।';
+
+  @override
+  String get crops_grapes_diseases_downyMildewGrapes_favorableConditions =>
+      'गीला मौसम, मध्यम तापमान।';
+
+  @override
+  String get crops_grapes_diseases_downyMildewGrapes_impact =>
+      'गंभीर पत्ती और फल झड़ना।';
+
+  @override
+  String get crops_grapes_diseases_downyMildewGrapes_name => 'डाउनी मिल्ड्यू';
+
+  @override
+  String get crops_grapes_name => 'अंगूर';
+
+  @override
+  String get crops_lettuce_diseases_downyMildewLettuce_description =>
+      'લેટીસના પાનનો સડો।';
+
+  @override
+  String get crops_lettuce_diseases_downyMildewLettuce_favorableConditions =>
+      'ઠંડી અને ભીની।';
+
+  @override
+  String get crops_lettuce_diseases_downyMildewLettuce_impact =>
+      'માર્કેટેબલ માથાનો નાશ કરે છે।';
+
+  @override
+  String get crops_lettuce_diseases_downyMildewLettuce_name =>
+      'ડાઉની માઇલ્ડ્યુ';
+
+  @override
+  String get crops_lettuce_name => 'लेट्यूस';
+
+  @override
+  String get crops_onion_diseases_purpleBlotchOnion_description =>
+      'બલ્બ-સ્ટંટિંગ ફૂગ।';
+
+  @override
+  String get crops_onion_diseases_purpleBlotchOnion_favorableConditions =>
+      'ભેજ।';
+
+  @override
+  String get crops_onion_diseases_purpleBlotchOnion_impact =>
+      'ગુણવત્તા અને સંગ્રહને અસર કરે છે।';
+
+  @override
+  String get crops_onion_diseases_purpleBlotchOnion_name => 'પર્પલ બ્લોચ';
+
+  @override
+  String get crops_onion_name => 'ડુંગળી';
+
+  @override
+  String get crops_orange_diseases_citrusCanker_description =>
+      'फलों और पत्तियों पर जीवाणु धब्बे।';
+
+  @override
+  String get crops_orange_diseases_citrusCanker_favorableConditions =>
+      'हवा से चलने वाली बारिश।';
+
+  @override
+  String get crops_orange_diseases_citrusCanker_impact =>
+      'उपज और गुणवत्ता कम करता है।';
+
+  @override
+  String get crops_orange_diseases_citrusCanker_name => 'सिट्रस कैंकर';
+
+  @override
+  String get crops_orange_name => 'संतरा';
+
+  @override
+  String get crops_papaya_diseases_ringspotPapaya_description =>
+      'फलों की पत्तियों पर वायरल छल्ले।';
+
+  @override
+  String get crops_papaya_diseases_ringspotPapaya_favorableConditions =>
+      'माहू की गतिविधि।';
+
+  @override
+  String get crops_papaya_diseases_ringspotPapaya_impact =>
+      'पौधों की वृद्धि रोकता है।';
+
+  @override
+  String get crops_papaya_diseases_ringspotPapaya_name => 'रिंगस्पॉट';
+
+  @override
+  String get crops_papaya_name => 'पपीता';
+
+  @override
+  String get crops_peach_diseases_leafCurlPeach_description =>
+      'पत्तियों का फफूंद से विकृत होना।';
+
+  @override
+  String get crops_peach_diseases_leafCurlPeach_favorableConditions =>
+      'ठंडा, गीला वसंत।';
+
+  @override
+  String get crops_peach_diseases_leafCurlPeach_impact =>
+      'पेड़ की जीवन शक्ति कमजोर करता है।';
+
+  @override
+  String get crops_peach_diseases_leafCurlPeach_name => 'पत्ती मुड़ना';
+
+  @override
+  String get crops_peach_name => 'आड़ू';
+
+  @override
+  String get crops_pear_diseases_fireBlightPear_description =>
+      'जीवाणु झुलसा रोग।';
+
+  @override
+  String get crops_pear_diseases_fireBlightPear_favorableConditions =>
+      'गर्म, गीला फूल।';
+
+  @override
+  String get crops_pear_diseases_fireBlightPear_impact =>
+      'पेड़ की तेजी से मौत।';
+
+  @override
+  String get crops_pear_diseases_fireBlightPear_name => 'फायर ब्लाइट';
+
+  @override
+  String get crops_pear_name => 'नाशपाती';
+
+  @override
+  String get crops_pepper_diseases_bacterialSpotPepper_description =>
+      'नुकसानदायक जीवाणु संक्रमण।';
+
+  @override
+  String get crops_pepper_diseases_bacterialSpotPepper_favorableConditions =>
+      'बारिश और गर्मी।';
+
+  @override
+  String get crops_pepper_diseases_bacterialSpotPepper_impact =>
+      'सनस्कैल्ड और उपज में गिरावट।';
+
+  @override
+  String get crops_pepper_diseases_bacterialSpotPepper_name =>
+      'बैक्टीरियल स्पॉट';
+
+  @override
+  String get crops_pepper_name => 'मिर्च';
+
+  @override
+  String get crops_pineapple_diseases_heartRot_description =>
+      'भीतरी पत्तियों का फफूंद से सड़ना।';
+
+  @override
+  String get crops_pineapple_diseases_heartRot_favorableConditions =>
+      'जलभराव वाली भारी मिट्टी।';
+
+  @override
+  String get crops_pineapple_diseases_heartRot_impact => 'पौधे की मृत्यु।';
+
+  @override
+  String get crops_pineapple_diseases_heartRot_name => 'हार्ट रॉट';
+
+  @override
+  String get crops_pineapple_name => 'अनानास';
+
+  @override
+  String get crops_plum_diseases_blackKnot_description =>
+      'शाखाओं पर फफूंद की सूजन।';
+
+  @override
+  String get crops_plum_diseases_blackKnot_favorableConditions =>
+      'गीले वसंत ऋतु।';
+
+  @override
+  String get crops_plum_diseases_blackKnot_impact => 'पेड़ को मार सकता है।';
+
+  @override
+  String get crops_plum_diseases_blackKnot_name => 'ब्लैक नॉट';
+
+  @override
+  String get crops_plum_name => 'बेर';
+
+  @override
+  String get crops_pomegranate_diseases_bacterialBlightPom_description =>
+      'गहरे पानी से लथपथ घाव।';
+
+  @override
+  String
+  get crops_pomegranate_diseases_bacterialBlightPom_favorableConditions =>
+      'बरसात का मौसम।';
+
+  @override
+  String get crops_pomegranate_diseases_bacterialBlightPom_impact =>
+      'बाजार का भारी नुकसान।';
+
+  @override
+  String get crops_pomegranate_diseases_bacterialBlightPom_name =>
+      'बैक्टीरियल ब्लाइट';
+
+  @override
+  String get crops_pomegranate_name => 'अनार';
+
+  @override
+  String get crops_potato_diseases_lateBlightPotato_description =>
+      'विनाशकारी फफूंद सड़न।';
+
+  @override
+  String get crops_potato_diseases_lateBlightPotato_favorableConditions =>
+      'नम ठंडा मौसम।';
+
+  @override
+  String get crops_potato_diseases_lateBlightPotato_impact =>
+      'पौधे का पूर्ण नुकसान।';
+
+  @override
+  String get crops_potato_diseases_lateBlightPotato_name => 'झुलसा रोग';
+
+  @override
+  String get crops_potato_name => 'आलू';
+
+  @override
+  String get crops_rice_diseases_riceBlast_description =>
+      'धान के ऊपरी हिस्सों को प्रभावित करने वाला फफूंद संक्रमण।';
+
+  @override
+  String get crops_rice_diseases_riceBlast_favorableConditions =>
+      'उच्च आर्द्रता और लगातार बारिश।';
+
+  @override
+  String get crops_rice_diseases_riceBlast_impact =>
+      'पूरी फसल नष्ट हो सकती है।';
+
+  @override
+  String get crops_rice_diseases_riceBlast_name => 'झोंका रोग (Blast)';
+
+  @override
+  String get crops_rice_name => 'धान (चावल)';
+
+  @override
+  String get crops_soyabean_diseases_soybeanRust_description =>
+      'आक्रामक पत्ती फफूंद।';
+
+  @override
+  String get crops_soyabean_diseases_soybeanRust_favorableConditions =>
+      'उच्च नमी।';
+
+  @override
+  String get crops_soyabean_diseases_soybeanRust_impact => '80% तक का नुकसान।';
+
+  @override
+  String get crops_soyabean_diseases_soybeanRust_name => 'सोयाबीन रस्ट';
+
+  @override
+  String get crops_soyabean_name => 'सोयाबीन';
+
+  @override
+  String get crops_spinach_diseases_spinachDownyMildew_description =>
+      'નિર્ણાયક પાલક સડો।';
+
+  @override
+  String get crops_spinach_diseases_spinachDownyMildew_favorableConditions =>
+      'ભીનું ઠંડુ હવામાન।';
+
+  @override
+  String get crops_spinach_diseases_spinachDownyMildew_impact =>
+      'ઝડપી પાક વિનાશ।';
+
+  @override
+  String get crops_spinach_diseases_spinachDownyMildew_name =>
+      'ડાઉની માઇલ્ડ્યુ';
+
+  @override
+  String get crops_spinach_name => 'પાલક';
+
+  @override
+  String get crops_strawberry_diseases_grayMoldStrawberry_description =>
+      'आम बेरी फफूंद।';
+
+  @override
+  String get crops_strawberry_diseases_grayMoldStrawberry_favorableConditions =>
+      'उच्च आर्द्रता।';
+
+  @override
+  String get crops_strawberry_diseases_grayMoldStrawberry_impact =>
+      'कटाई के बाद सड़न।';
+
+  @override
+  String get crops_strawberry_diseases_grayMoldStrawberry_name => 'ग्रे मोल्ड';
+
+  @override
+  String get crops_strawberry_name => 'स्ट्रॉबेरी';
+
+  @override
+  String get crops_sugarcane_diseases_redRotSugarcane_description =>
+      'નિર્ણાયક શેરડી રોગ।';
+
+  @override
+  String get crops_sugarcane_diseases_redRotSugarcane_favorableConditions =>
+      'વરસાદ અને જળ ભરાવ।';
+
+  @override
+  String get crops_sugarcane_diseases_redRotSugarcane_impact =>
+      'ખાંડની પુનઃપ્રાપ્તિ અને વજન ઘટાડે છે।';
+
+  @override
+  String get crops_sugarcane_diseases_redRotSugarcane_name => 'રેડ રોટ';
+
+  @override
+  String get crops_sugarcane_name => 'શેરડી';
+
+  @override
+  String get crops_tomato_diseases_earlyBlightTom_description =>
+      'સામાન્ય પર્ણ સડો।';
+
+  @override
+  String get crops_tomato_diseases_earlyBlightTom_favorableConditions =>
+      'ભેજવાળા દિવસો।';
+
+  @override
+  String get crops_tomato_diseases_earlyBlightTom_impact =>
+      'પર્ણને નુકસાન પહોંચાડીને ઉપજ ઘટાડે છે।';
+
+  @override
+  String get crops_tomato_diseases_earlyBlightTom_name => 'અર્લી બ્લાઇટ (રોગ)';
+
+  @override
+  String get crops_tomato_name => 'ટામેટા';
+
+  @override
+  String get crops_watermelon_diseases_fusariumWiltWm_description =>
+      'मिट्टी से होने वाला रोगजनक।';
+
+  @override
+  String get crops_watermelon_diseases_fusariumWiltWm_favorableConditions =>
+      'गर्म मिट्टी।';
+
+  @override
+  String get crops_watermelon_diseases_fusariumWiltWm_impact =>
+      'पूरी फसल खराब।';
+
+  @override
+  String get crops_watermelon_diseases_fusariumWiltWm_name =>
+      'फ्यूजेरियम विल्ट';
+
+  @override
+  String get crops_watermelon_name => 'तरबूज';
+
+  @override
+  String get crops_wheat_diseases_wheatRust_description =>
+      'तने, पत्तियों और दानों को प्रभावित करने वाला फफूंद रोग।';
+
+  @override
+  String get crops_wheat_diseases_wheatRust_favorableConditions =>
+      'गर्म दिन और ठंडी रातें ओस के साथ।';
+
+  @override
+  String get crops_wheat_diseases_wheatRust_impact =>
+      'पैदावार में 20-50% तक की कमी।';
+
+  @override
+  String get crops_wheat_diseases_wheatRust_name => 'गेरूई (Rust)';
+
+  @override
+  String get crops_wheat_name => 'गेहूँ';
+
+  @override
+  String get dashboard_calculateFertilizer => 'उर्वरक की गणना करें';
+
+  @override
+  String get dashboard_chooseCrop => 'अपनी फसल चुनें';
+
+  @override
+  String get dashboard_commonDiseasesLabel => 'सामान्य रोग';
+
+  @override
+  String get dashboard_excellent => 'उत्कृष्ट';
+
+  @override
+  String get dashboard_fair => 'निष्पक्ष';
+
+  @override
+  String get dashboard_good => 'अच्छा';
+
+  @override
+  String dashboard_greeting(String health, String name) {
+    return 'नमस्ते $name! आपका खेत आज $health है';
+  }
+
+  @override
+  String get dashboard_healthStatus_healthy => 'स्वस्थ';
+
+  @override
+  String get dashboard_healthStatus_moderate => 'मध्यम';
+
+  @override
+  String get dashboard_healthStatus_stress => 'तनाव';
+
+  @override
+  String dashboard_ndviSubtitle(String status, String value) {
+    return 'आपका वर्तमान समग्र खेत NDVI $value ($status) है।';
+  }
+
+  @override
+  String get dashboard_poor => 'खराब';
+
+  @override
+  String get dashboard_precautionsLabel => 'सावधानियां एवं उपचार';
+
+  @override
+  String get dashboard_profitIntelDesc =>
+      'अपनी फसल की उपज की भविष्यवाणी करें और रीयल-टाइम APMC बाजार मूल्यों के आधार पर लाभ का अनुमान लगाएं।';
+
+  @override
+  String get dashboard_profitIntelTitle => 'AI लाभ इंटेलिजेंस';
+
+  @override
+  String get dashboard_seasonLabel => 'मौसम';
+
+  @override
+  String get dashboard_soilTypeLabel => 'मिट्टी के प्रकार';
+
+  @override
+  String get dashboard_tryPredictor => 'सुझाव आज़माएँ';
+
+  @override
+  String get dashboard_viewDetails => 'विवरण देखें';
+
+  @override
+  String get dashboard_waterNeedLabel => 'पानी की जरूरत';
+
+  @override
+  String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
+
+  @override
+  String diseasesPage_care(String crop) {
+    return '$crop CARE';
+  }
+
+  @override
+  String get diseasesPage_favorableConditions => 'FAVORABLE CONDITIONS';
+
+  @override
+  String get diseasesPage_filters_all => 'सभी फसलें';
+
+  @override
+  String get diseasesPage_filters_cashCrops => 'नकदी फसलें';
+
+  @override
+  String get diseasesPage_filters_cereals => 'अनाज';
+
+  @override
+  String get diseasesPage_filters_fruits => 'फल';
+
+  @override
+  String get diseasesPage_filters_vegetables => 'सब्जियां';
+
+  @override
+  String get diseasesPage_generalPrecaution => 'GENERAL PRECAUTION:';
+
+  @override
+  String get diseasesPage_impact => 'प्रभाव';
+
+  @override
+  String get diseasesPage_pestControl => 'PEST CONTROL (इलाज)';
+
+  @override
+  String get diseasesPage_prevention => 'रोकथाम और नियंत्रण';
+
+  @override
+  String get diseasesPage_reset => 'चयन रीसेट करें';
+
+  @override
+  String diseasesPage_selected(String count) {
+    return 'आपने 8 में से $count फसलें चुनी हैं';
+  }
+
+  @override
+  String get diseasesPage_subtitle =>
+      '8 फसलों तक का चयन करके आम बीमारियों, कीटों और निवारक उपायों को देखें। विशेषज्ञ मार्गदर्शन के साथ अपनी फसल को सुरक्षित रखें।';
+
+  @override
+  String get diseasesPage_symptoms => 'SYMPTOMS (लक्षण)';
+
+  @override
+  String get diseasesPage_title => 'फसल रोग एवं कीट प्रबंधन';
+
+  @override
+  String get diseasesPage_viewStoreProducts => 'View Store Products';
+
+  @override
+  String get fertilizer_area => 'खेत का क्षेत्र (एकड़)';
+
+  @override
+  String get fertilizer_calculate => 'गणना करें';
+
+  @override
+  String get fertilizer_cost => 'अनुमानित लागत';
+
+  @override
+  String get fertilizer_crop => 'फसल चुनें';
+
+  @override
+  String get fertilizer_profit => 'अपेक्षित लाभ';
+
+  @override
+  String get fertilizer_recommended => 'अनुशंसित NPK';
+
+  @override
+  String get fertilizer_save => 'मेरे खेत में सहेजें';
+
+  @override
+  String get fertilizer_soilDesc => 'दोमट / बालू / चिकनी';
+
+  @override
+  String get fertilizer_soilType => 'मिट्टी के प्रकार';
+
+  @override
+  String get fertilizer_title => 'उर्वरक कैलकुलेटर';
+
+  @override
+  String get fertilizer_totalBags => 'कुल बोरी चाहिए';
+
+  @override
+  String get myCrop_acres => 'एकड़';
+
+  @override
+  String get myCrop_addCrop => '+ फसल जोड़ें';
+
+  @override
+  String get myCrop_addField => '+ खेत जोड़ें';
+
+  @override
+  String get myCrop_advisoryNotice =>
+      'फसल निगरानी और एआई सलाह जल्द ही उपलब्ध होगी।';
+
+  @override
+  String get myCrop_area => 'खेत का क्षेत्रफल';
+
+  @override
+  String get myCrop_areaUnit => 'क्षेत्रफल इकाई';
+
+  @override
+  String get myCrop_back => 'पीछे';
+
+  @override
+  String get myCrop_cropName => 'फसल का नाम';
+
+  @override
+  String get myCrop_cultivatedArea => 'खेती का क्षेत्रफल';
+
+  @override
+  String get myCrop_cultivationMethod => 'खेती की विधि';
+
+  @override
+  String get myCrop_deleteCrop => 'फसल हटाएं';
+
+  @override
+  String get myCrop_deleteField => 'खेत हटाएं';
+
+  @override
+  String get myCrop_detectLocation => 'खेत का स्थान खोजें (GPS)';
+
+  @override
+  String get myCrop_editCrop => 'फसल संपादित करें';
+
+  @override
+  String get myCrop_editField => 'खेत संपादित करें';
+
+  @override
+  String get myCrop_fieldName => 'खेत का नाम';
+
+  @override
+  String get myCrop_hectares => 'हेक्टेयर';
+
+  @override
+  String get myCrop_irrigationFrequency => 'सिंचाई की आवृत्ति';
+
+  @override
+  String get myCrop_irrigationMethod => 'सिंचाई की विधि';
+
+  @override
+  String get myCrop_location => 'स्थान';
+
+  @override
+  String get myCrop_locationDetected => 'स्थान सफलतापूर्वक पहचाना गया!';
+
+  @override
+  String get myCrop_myFields => 'मेरे खेत';
+
+  @override
+  String get myCrop_next => 'अगला कदम';
+
+  @override
+  String get myCrop_noCropsInField => 'इस खेत के लिए कोई फसल पंजीकृत नहीं है।';
+
+  @override
+  String get myCrop_noFieldsDesc =>
+      'अपनी फसलों और मिट्टी के विवरण को ट्रैक करने के लिए अपना पहला खेत जोड़ें।';
+
+  @override
+  String get myCrop_noFieldsYet => 'अभी कोई खेत पंजीकृत नहीं है';
+
+  @override
+  String get myCrop_notes => 'अतिरिक्त टिप्पणी';
+
+  @override
+  String get myCrop_previousCrop => 'पिछली फसल';
+
+  @override
+  String get myCrop_reviewTitle => 'खेत और फसल डेटा की समीक्षा करें';
+
+  @override
+  String get myCrop_saveCrop => 'फसल सहेजें';
+
+  @override
+  String get myCrop_saveField => 'खेत सहेजें';
+
+  @override
+  String get myCrop_seedDemo => '🌱 नमूना खेत जोड़ें';
+
+  @override
+  String get myCrop_soilTestReport =>
+      'क्या आपके पास मिट्टी परीक्षण रिपोर्ट है?';
+
+  @override
+  String get myCrop_soilType => 'मिट्टी का प्रकार';
+
+  @override
+  String get myCrop_sowingDate => 'बुआई / रोपाई की तिथि';
+
+  @override
+  String get myCrop_status => 'फसल की स्थिति';
+
+  @override
+  String get myCrop_step1 => '1. खेत की जानकारी';
+
+  @override
+  String get myCrop_step2 => '2. मिट्टी और सिंचाई';
+
+  @override
+  String get myCrop_step3 => '3. फसल पंजीकरण';
+
+  @override
+  String get myCrop_step4 => '4. समीक्षा और सहेजें';
+
+  @override
+  String get myCrop_subtitle =>
+      'अपने खेत और फसलों का डेटा पंजीकृत और प्रबंधित करें।';
+
+  @override
+  String get myCrop_title => 'मेरे खेत और फसलें';
+
+  @override
+  String get myCrop_variety => 'किस्म (वैरायटी)';
+
+  @override
+  String get myCrop_viewField => 'खेत का विवरण देखें';
+
+  @override
+  String get myCrop_waterSource => 'पानी का स्रोत';
+
+  @override
+  String get navDiagnose => 'जाँच';
+
+  @override
+  String get navFarm => 'मेरा खेत';
+
+  @override
+  String get navInsights => 'जानकारी';
+
+  @override
+  String get navMore => 'और';
+
+  @override
+  String get navbar_activeFarmer => 'सक्रिय किसान';
+
+  @override
+  String get navbar_detectingLocation => 'स्थान का पता लगाया जा रहा है...';
+
+  @override
+  String get navbar_farmerLogin => 'किसान लॉगिन';
+
+  @override
+  String get navbar_fullWeather => 'पूरा मौसम';
+
+  @override
+  String get navbar_home => 'होम';
+
+  @override
+  String get navbar_locationBlocked => 'स्थान अवरुद्ध';
+
+  @override
+  String get navbar_locationBlockedDesc =>
+      'आपके ब्राउज़र ने स्थान पहुँच को अवरुद्ध कर दिया है। ठीक करने के लिए:';
+
+  @override
+  String get navbar_locationBlockedStep1 =>
+      'एड्रेस बार में लॉक आइकन पर क्लिक करें';
+
+  @override
+  String get navbar_locationBlockedStep2 =>
+      'स्थान को \'अनुमति दें\' पर सेट करें';
+
+  @override
+  String get navbar_locationBlockedStep3 =>
+      'फिर नीचे \'पुनः प्रयास करें\' पर क्लिक करें';
+
+  @override
+  String get navbar_refresh => 'ताज़ा करें';
+
+  @override
+  String get navbar_retryLocation => 'पुनः प्रयास करें';
+
+  @override
+  String get navbar_selectLanguage => 'भाषा चुनें:';
+
+  @override
+  String get navbar_updated => 'अपडेट किया गया';
+
+  @override
+  String get navigation_ai => 'AI लाभ';
+
+  @override
+  String get navigation_calculator => 'कैलकुलेटर';
+
+  @override
+  String get navigation_communities => 'समुदाय';
+
+  @override
+  String get navigation_diseases => 'बीमारियाँ';
+
+  @override
+  String get navigation_home => 'होम';
+
+  @override
+  String get navigation_myCrops => 'मेरी फ़सलें';
+
+  @override
+  String get navigation_products => 'उत्पाद';
+
+  @override
+  String get navigation_profile => 'प्रोफ़ाइल';
+
+  @override
+  String get navigation_weather => 'मौसम';
+
+  @override
+  String get navigation_yieldAi => 'उपज AI';
+
+  @override
+  String get productsPage_allProducts => '← सभी उत्पाद';
+
+  @override
+  String get productsPage_buyOnWhatsApp => 'WhatsApp पर खरीदें';
+
+  @override
+  String get productsPage_footer =>
+      '© 2026 KisanDost · भारतीय किसानों का सशक्तिकरण';
+
+  @override
+  String get productsPage_heroSubtitle =>
+      'आधुनिक खेती के लिए विज्ञान-आधारित फसल पोषण और मिट्टी संवर्धन उत्पाद।';
+
+  @override
+  String get productsPage_heroTag => '🌾 कृषि समाधान';
+
+  @override
+  String get productsPage_heroTitle => 'KisanDost उत्पाद';
+
+  @override
+  String get productsPage_loading => 'उत्पाद लोड हो रहा है...';
+
+  @override
+  String get productsPage_noFeatures =>
+      'इस उत्पाद के लिए कोई विशेषताएं सूचीबद्ध नहीं हैं।';
+
+  @override
+  String get productsPage_noUsage =>
+      'उपयोग की जानकारी उपलब्ध नहीं है। कृपया खुराक विवरण के लिए हमसे संपर्क करें।';
+
+  @override
+  String get productsPage_notFoundDesc =>
+      'आप जिस उत्पाद की तलाश कर रहे हैं वह मौजूद नहीं है.';
+
+  @override
+  String get productsPage_priceLabel => 'कीमत:';
+
+  @override
+  String get productsPage_priceOnRequest => 'अनुरोध पर कीमत';
+
+  @override
+  String get productsPage_productNotFound => 'उत्पाद नहीं मिला';
+
+  @override
+  String get productsPage_solvesLabel => 'समाधान';
+
+  @override
+  String get productsPage_tabs_features => 'विशेषताएं';
+
+  @override
+  String get productsPage_tabs_overview => 'अवलोकन';
+
+  @override
+  String get productsPage_tabs_usage => 'उपयोग';
+
+  @override
+  String get productsPage_viewProduct => 'उत्पाद देखें →';
+
+  @override
+  String get products_Abamectin_description =>
+      'विभिन्न फसलों में घुन और लीफ माइनर्स के खिलाफ प्रभावी।';
+
+  @override
+  String get products_Abamectin_longDescription =>
+      'Abamectin 1.9% EC एवरमेक्टिन का मिश्रण है, जो कीटों और घुन के तंत्रिका तंत्र पर प्रभाव डालता है। यह गुलाब, अंगूर, सेब और टमाटर जैसी फसलों में मकड़ी के घुन और लीफ माइनर्स का बेहतरीन नियंत्रण प्रदान करता है।';
+
+  @override
+  String get products_Abamectin_name => 'एबामेक्टिन 1.9% EC';
+
+  @override
+  String get products_Abamectin_tag => 'घुन नाशक / कीटनाशक';
+
+  @override
+  String get products_Abamectin_usage_apple =>
+      '0.05% घोल, 6-7 लीटर पानी प्रति पेड़ (7 दिन की प्रतीक्षा अवधि)';
+
+  @override
+  String get products_Abamectin_usage_grapes =>
+      '0.75 मिली/लीटर पानी 500-1000 लीटर पानी प्रति हेक्टेयर (3 दिन की प्रतीक्षा अवधि)';
+
+  @override
+  String get products_Abamectin_usage_rose =>
+      '0.025-0.05% घोल 5000 लीटर पानी में प्रति हेक्टेयर (3 दिन की प्रतीक्षा अवधि)';
+
+  @override
+  String get products_Abamectin_usage_tomato =>
+      '450-600 मिलीलीटर 500 लीटर पानी में प्रति हेक्टेयर (3 दिन की प्रतीक्षा अवधि)';
+
+  @override
+  String get products_AcephateImida_description =>
+      'चूसने और छेदक कीटों दोनों को नियंत्रित करने के लिए एक शक्तिशाली मिश्रण।';
+
+  @override
+  String get products_AcephateImida_longDescription =>
+      'यह उत्पाद इमिडाक्लोप्रिड की सर्वांगी कार्रवाई को एसिफेट की व्यापक स्पेक्ट्रम गतिविधि के साथ जोड़ता है। यह जटिल कीट संक्रमणों के लिए एक व्यापक समाधान प्रदान करता है, विशेष रूप से कपास, मिर्च और धान में।';
+
+  @override
+  String get products_AcephateImida_name =>
+      'एसिफेट 50% + इमिडाक्लोप्रिड 1.8% SP';
+
+  @override
+  String get products_AcephateImida_tag => 'संयोजन एसपी';
+
+  @override
+  String get products_AcephateImida_usage_chilli =>
+      '518 ग्राम ए.आई./हेक्टेयर (1000 ग्राम) 500 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_AcephateImida_usage_cotton =>
+      '518 ग्राम ए.आई./हेक्टेयर (1000 ग्राम) 500 लीटर पानी में (40 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_AcephateImida_usage_rice =>
+      '518 ग्राम ए.आई./हेक्टेयर (1000 ग्राम) 500 लीटर पानी में';
+
+  @override
+  String get products_AcephateImida_usage_sugarcane =>
+      '1250+45 ग्राम ए.आई./हेक्टेयर (2500 मिलीलीटर) 500 लीटर पानी में (123 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acephate_description =>
+      'चूसने और चबाने वाले कीटों के लिए व्यापक स्पेक्ट्रम कीटनाशक।';
+
+  @override
+  String get products_Acephate_longDescription =>
+      'Acephate 75% SP एक घुलनशील पाउडर है जो सर्वांगी (Systemic) और संपर्क कीटनाशक के रूप में कार्य करता है। यह पत्तियों और जड़ों द्वारा अवशोषित कर लिया जाता है, जिससे कपास, चावल और कुसुम जैसी फसलों में जैसिड्स, बोलवॉर्म, एफिड्स और तना छेदक कीटों का प्रभावी नियंत्रण मिलता है।';
+
+  @override
+  String get products_Acephate_name => 'एसिफेट 75% SP';
+
+  @override
+  String get products_Acephate_tag => 'सर्वांगी कीटनाशक';
+
+  @override
+  String get products_Acephate_usage_cottonBollworms =>
+      '584 ग्राम ए.आई./हेक्टेयर (780 ग्राम फॉर्मूलेशन) 500-1000 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acephate_usage_cottonJassids =>
+      '292 ग्राम ए.आई./हेक्टेयर (390 ग्राम फॉर्मूलेशन) 500-1000 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acephate_usage_ricePests =>
+      '500-750 ग्राम ए.आई./हेक्टेयर (666-1000 ग्राम फॉर्मूलेशन) 300-500 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acephate_usage_safflowerAphids =>
+      '584 ग्राम ए.आई./हेक्टेयर (780 ग्राम फॉर्मूलेशन) 500-1000 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_description =>
+      'रस चूसने वाले कीटों के प्रभावी नियंत्रण के लिए सर्वांगी कीटनाशक।';
+
+  @override
+  String get products_Acetamiprid_longDescription =>
+      'Acetamiprid 20% SP एक सर्वांगी कीटनाशक है जो कीटों के केंद्रीय तंत्रिका तंत्र पर कार्य करता है, जिससे उन्हें लकवा मार जाता है। यह कपास, गोभी, भिंडी, मिर्च और चावल सहित विभिन्न फसलों में एफिड्स, जैसिड्स, थ्रिप्स और सफेद मक्खियों के खिलाफ अत्यधिक प्रभावी है।';
+
+  @override
+  String get products_Acetamiprid_name => 'एसिटामिप्रिड 20% SP';
+
+  @override
+  String get products_Acetamiprid_tag => 'नियोनिकोटीनोइड';
+
+  @override
+  String get products_Acetamiprid_usage_cabbageAphids =>
+      '15 ग्राम ए.आई./हेक्टेयर (75 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_usage_chilliThrips =>
+      '10-20 ग्राम ए.आई./हेक्टेयर (50-100 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_usage_cottonAphidsJassids =>
+      '10 ग्राम ए.आई./हेक्टेयर (50 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_usage_cottonWhiteflies =>
+      '20 ग्राम ए.आई./हेक्टेयर (100 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (15 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_usage_okraAphids =>
+      '15 ग्राम ए.आई./हेक्टेयर (75 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Acetamiprid_usage_riceBph =>
+      '10-20 ग्राम ए.आई./हेक्टेयर (50-100 ग्राम फॉर्मूलेशन) 500-600 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_AluminumPhosphide_description =>
+      'भंडारित अनाज कीट नियंत्रण के लिए एक अत्यधिक प्रभावी धूमन।';
+
+  @override
+  String get products_AluminumPhosphide_longDescription =>
+      'Aluminum Phosphide 56% एक ठोस धूमन है जो हवा में नमी के साथ प्रतिक्रिया करके फॉस्फीन गैस छोड़ता है। इसका उपयोग अनाज, दालों, तिलहन और मसालों में कीटों के नियंत्रण के साथ-साथ बिलों में कृंतक नियंत्रण के लिए किया जाता है।';
+
+  @override
+  String get products_AluminumPhosphide_name => 'एल्युमिनियम फॉस्फाइड 56%';
+
+  @override
+  String get products_AluminumPhosphide_tag => 'धूमन (फ्यूमिगेंट)';
+
+  @override
+  String get products_AluminumPhosphide_usage_cerealsPulses =>
+      '3 टैबलेट (3 ग्राम) प्रति टन या 150 ग्राम/100 घन मीटर, 5-7 दिन का संपर्क, 48 घंटे वातन';
+
+  @override
+  String get products_AluminumPhosphide_usage_godowns =>
+      '14 टैबलेट/1000 घन मीटर या 150 ग्राम/100 घन मीटर, 72 घंटे का संपर्क, 24 घंटे वातन';
+
+  @override
+  String get products_AluminumPhosphide_usage_oilseedsSpices =>
+      '3 टैबलेट प्रति टन या 225 ग्राम/100 घन मीटर, 5 दिन का संपर्क, 48 घंटे वातन';
+
+  @override
+  String get products_AluminumPhosphide_usage_rodentBurrows =>
+      '1 टैबलेट प्रति बिल';
+
+  @override
+  String get products_Brodifacoum_description =>
+      'खेतों और परिसरों के लिए एक शक्तिशाली, एकल-खुराक कृंतकनाशक।';
+
+  @override
+  String get products_Brodifacoum_longDescription =>
+      'Brodifacoum 0.005% BB एक शक्तिशाली थक्का-रोधी कृंतकनाशक (Rodenticide) है। यह विटामिन K के संश्लेषण को रोककर काम करता है, जिससे कृंतकों की आंतरिक रक्तस्राव से मृत्यु हो जाती है। यह चूहे, बैंडिकूट और मूषक के खिलाफ प्रभावी है।';
+
+  @override
+  String get products_Brodifacoum_name => 'ब्रोडीफैकॉम 0.005% BB';
+
+  @override
+  String get products_Brodifacoum_tag => 'कृंतकनाशक';
+
+  @override
+  String get products_Brodifacoum_usage_burrowBaiting =>
+      'सक्रिय बिलों के पास चारा रखें';
+
+  @override
+  String get products_Brodifacoum_usage_fieldRats =>
+      'एक चारा ब्लॉक (20 ग्राम) प्रति बेटिंग स्टेशन एकल फीड के रूप में';
+
+  @override
+  String get products_Brodifacoum_usage_residential =>
+      'परिसरों, कोल्ड स्टोरेज, गोदामों के आसपास रखें';
+
+  @override
+  String get products_ChlLambda_description =>
+      'त्वरित और अवशिष्ट नियंत्रण के लिए डायमाइड और पाइरेथ्रॉइड का मिश्रण।';
+
+  @override
+  String get products_ChlLambda_longDescription =>
+      'इस संयोजन में क्लोरेंट्रानिलिप्रोल और लैम्डा-साइहलोथ्रिन शामिल हैं। यह फल छेदक, बोलवॉर्म और जैसिड्स जैसे कीटों का त्वरित नॉकडाउन और लंबे समय तक नियंत्रण प्रदान करता है।';
+
+  @override
+  String get products_ChlLambda_name =>
+      'क्लोरेंट्रानिलिप्रोल 9.3% + लैम्डा-साइहलोथ्रिन 4.6% ZC';
+
+  @override
+  String get products_ChlLambda_tag => 'संयोजन जेडसी';
+
+  @override
+  String get products_ChlLambda_usage_brinjal =>
+      '28 ग्राम ए.आई./हेक्टेयर (200 मिलीलीटर) 500 लीटर पानी में (5 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_cotton =>
+      '37.5 ग्राम ए.आई./हेक्टेयर (250 मिलीलीटर) 500 लीटर पानी में (20 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_maize =>
+      '35 ग्राम ए.आई./हेक्टेयर (250 मिलीलीटर) 500 लीटर पानी में (36 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_okra =>
+      '28 ग्राम ए.आई./हेक्टेयर (200 मिलीलीटर) 500 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_pigeonPea =>
+      '30 ग्राम ए.आई./हेक्टेयर (200 मिलीलीटर) 500 लीटर पानी में (18 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_rice =>
+      '28-35 ग्राम ए.आई./हेक्टेयर (200-250 मिलीलीटर) 500 लीटर पानी में (53 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_ChlLambda_usage_soybean =>
+      '28 ग्राम ए.आई./हेक्टेयर (200 मिलीलीटर) 500 लीटर पानी में (41 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_description =>
+      'कीटों के पेशी संकुचन को बाधित करके लेपिडोप्टेरन कीटों को लक्षित करता है।';
+
+  @override
+  String get products_Chlorantraniliprole_longDescription =>
+      'Chlorantraniliprole 18.5% SC एंथ्रानिलिक डायमाइड श्रेणी का कीटनाशक है। यह कीटों में राइनोडाइन रिसेप्टर्स को सक्रिय करके काम करता है, जिससे अनियंत्रित पेशी संकुचन और मृत्यु हो जाती है। यह चावल, कपास और सब्जियों में तना छेदक और फल छेदक कीटों के खिलाफ प्रभावी है।';
+
+  @override
+  String get products_Chlorantraniliprole_name =>
+      'क्लोरेंट्रानिलिप्रोल 18.5% SC';
+
+  @override
+  String get products_Chlorantraniliprole_tag => 'एंथ्रानिलिक डायमाइड';
+
+  @override
+  String get products_Chlorantraniliprole_usage_brinjal =>
+      '40 ग्राम ए.आई./हेक्टेयर (200 मिलीलीटर) 500-750 लीटर पानी में (22 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_usage_cabbage =>
+      '10 ग्राम ए.आई./हेक्टेयर (50 मिलीलीटर) 500 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_usage_chilli =>
+      '30 ग्राम ए.आई./हेक्टेयर (150 मिलीलीटर) 500 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_usage_cotton =>
+      '30 ग्राम ए.आई./हेक्टेयर (150 मिलीलीटर) 500 लीटर पानी में (9 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_usage_rice =>
+      '30 ग्राम ए.आई./हेक्टेयर (150 मिलीलीटर) 500 लीटर पानी में (47 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Chlorantraniliprole_usage_tomato =>
+      '30 ग्राम ए.आई./हेक्टेयर (150 मिलीलीटर) 500 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Cypermethrin_description =>
+      'विविध फसलों के लिए एक तेजी से काम करने वाला कीटनाशक।';
+
+  @override
+  String get products_Cypermethrin_longDescription =>
+      'Cypermethrin 10% EC एक सिंथेटिक पाइरेथ्रॉइड कीटनाशक है जो कीटों के तंत्रिका तंत्र पर कार्य करता है। यह चबाने और चूसने वाले कीटों जैसे बोलवॉर्म, फल छेदक और जैसिड्स के खिलाफ प्रभावी है। यह कपास, गोभी, भिंडी और गेहूं जैसी फसलों में उपयोगी है।';
+
+  @override
+  String get products_Cypermethrin_name => 'साइपरमेथ्रिन 10% EC';
+
+  @override
+  String get products_Cypermethrin_tag => 'पाइरेथ्रॉइड';
+
+  @override
+  String get products_Cypermethrin_usage_brinjal =>
+      '50-70 ग्राम ए.आई./हेक्टेयर (550-760 मिलीलीटर) 150-400 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Cypermethrin_usage_cabbage =>
+      '60-70 ग्राम ए.आई./हेक्टेयर (650-760 मिलीलीटर) 100-400 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Cypermethrin_usage_cotton =>
+      '50-70 ग्राम ए.आई./हेक्टेयर (550-760 मिलीलीटर) 150-1000 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Cypermethrin_usage_okra =>
+      '50-70 ग्राम ए.आई./हेक्टेयर (550-760 मिलीलीटर) 150-400 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Cypermethrin_usage_wheat =>
+      '50 ग्राम ए.आई./हेक्टेयर (550 मिलीलीटर) 500-800 लीटर पानी में (14 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Deltamethrin_description =>
+      'कृषि और सार्वजनिक स्वास्थ्य के लिए उच्च तीव्रता वाला कीटनाशक।';
+
+  @override
+  String get products_Deltamethrin_longDescription =>
+      'Deltamethrin 2.8% EC एक अत्यंत शक्तिशाली कीटनाशक है। यह कीटों के तंत्रिका तंत्र को बाधित करता है, जिससे तत्काल लकवा मार जाता है। इसका उपयोग कृषि में बोलवॉर्म, थ्रिप्स और सार्वजनिक स्वास्थ्य में मच्छरों के नियंत्रण के लिए किया जाता है।';
+
+  @override
+  String get products_Deltamethrin_name => 'डेल्टामेथ्रिन 2.8% EC';
+
+  @override
+  String get products_Deltamethrin_tag => 'पाइरेथ्रॉइड';
+
+  @override
+  String get products_Deltamethrin_usage_chilli =>
+      '10-12.5 ग्राम ए.आई./हेक्टेयर (400-500 मिलीलीटर) 400-600 लीटर पानी में (5 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Deltamethrin_usage_cotton =>
+      '12.5 ग्राम ए.आई./हेक्टेयर (500 मिलीलीटर) 400-600 लीटर पानी में';
+
+  @override
+  String get products_Deltamethrin_usage_groundnut =>
+      '12.5 ग्राम ए.आई./हेक्टेयर (500 मिलीलीटर) 400-600 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Deltamethrin_usage_okra =>
+      '10-15 ग्राम ए.आई./हेक्टेयर (400-600 मिलीलीटर) 400-600 लीटर पानी में (1 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Deltamethrin_usage_publicHealthMosquito =>
+      'थर्मल फॉगिंग 0.5 ग्राम ए.आई./हेक्टेयर या ULV 0.5 ग्राम ए.आई./हेक्टेयर';
+
+  @override
+  String get products_Deltamethrin_usage_teaThrips =>
+      '3-4 ग्राम ए.आई./हेक्टेयर (120-150 मिलीलीटर) 400-600 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_description =>
+      'चूसने वाले कीटों के स्थायी नियंत्रण के लिए सर्वांगी कीटनाशक।';
+
+  @override
+  String get products_Imidacloprid_longDescription =>
+      'Imidacloprid 70% WG नियोनिकोटीनोइड समूह का कीटनाशक है। यह पौधों द्वारा अवशोषित किया जाता है और लंबे समय तक सुरक्षा प्रदान करता है। यह कपास, चावल, सब्जियों में जैसिड्स, एफिड्स, थ्रिप्स और सफेद मक्खियों के खिलाफ अत्यधिक प्रभावी है।';
+
+  @override
+  String get products_Imidacloprid_name => 'इमिडाक्लोप्रिड 70% WG';
+
+  @override
+  String get products_Imidacloprid_tag => 'नियोनिकोटीनोइड';
+
+  @override
+  String get products_Imidacloprid_usage_cotton =>
+      '21-24.5 ग्राम ए.आई./हेक्टेयर (30-35 ग्राम) 375-500 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_usage_cucumber =>
+      '24.5 ग्राम ए.आई./हेक्टेयर (35 ग्राम) 500 लीटर पानी में (5 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_usage_okra =>
+      '21-24.5 ग्राम ए.आई./हेक्टेयर (30-35 ग्राम) 300-375 लीटर पानी में (3 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_usage_potato =>
+      '63 ग्राम ए.आई./हेक्टेयर (90 ग्राम) 500 लीटर पानी में (30 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_usage_rice =>
+      '21-24.5 ग्राम ए.आई./हेक्टेयर (30-35 ग्राम) 300-375 लीटर पानी में (7 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Imidacloprid_usage_tomato =>
+      '35 ग्राम ए.आई./हेक्टेयर (50 ग्राम) 500 लीटर पानी में (5 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_LambdaCS_description =>
+      'मच्छर नियंत्रण के लिए एक माइक्रोएन्कैप्सुलेटेड फॉर्मूलेशन।';
+
+  @override
+  String get products_LambdaCS_longDescription =>
+      'Lambda-cyhalothrin 9.7% CS सार्वजनिक स्वास्थ्य के लिए विकसित किया गया कीटनाशक है। इसकी माइक्रोएन्कैप्सुलेशन तकनीक विभिन्न सतहों पर लंबे समय तक चलने वाला अवशिष्ट प्रभाव प्रदान करती है।';
+
+  @override
+  String get products_LambdaCS_name => 'लैम्डा-साइहलोथ्रिन 9.7% CS';
+
+  @override
+  String get products_LambdaCS_tag => 'सार्वजनिक स्वास्थ्य कीटनाशक';
+
+  @override
+  String get products_LambdaCS_usage_highInfestation =>
+      '25 मिलीग्राम ए.आई./वर्ग मीटर (5 मिलीलीटर/लीटर पानी) स्प्रे घोल 50 मिलीलीटर/वर्ग मीटर';
+
+  @override
+  String get products_LambdaCS_usage_malariaControl =>
+      '25 मिलीग्राम ए.आई./वर्ग मीटर (12.5 मिलीलीटर/500 वर्ग मीटर) 10 लीटर पानी में';
+
+  @override
+  String get products_LambdaCS_usage_moderateInfestation =>
+      '20 मिलीग्राम ए.आई./वर्ग मीटर (4 मिलीलीटर/लीटर पानी) स्प्रे घोल 50 मिलीलीटर/वर्ग मीटर';
+
+  @override
+  String get products_MiticideViricideCombo_description =>
+      'फसलों को मकड़ी और विषाणु रोगों से बचाने के लिए माइटिसाइड और विरिसाइड का शक्तिशाली संयोजन।';
+
+  @override
+  String get products_MiticideViricideCombo_longDescription =>
+      'यह कॉम्बो फसलों में हानिकारक मकड़ियों और वायरल संक्रमणों के खिलाफ दोहरा सुरक्षा प्रदान करता है।';
+
+  @override
+  String get products_MiticideViricideCombo_name =>
+      'माइटिसाइड + लाइसोरस विरिसाइड कॉम्बो';
+
+  @override
+  String get products_MiticideViricideCombo_tag => 'फसल सुरक्षा कॉम्बो';
+
+  @override
+  String get products_MiticideViricideCombo_usage_foliarSpray =>
+      '2-3 मिलीलीटर प्रति लीटर पानी';
+
+  @override
+  String get products_NAA_description =>
+      'विभिन्न प्रकार की फसलों में फूलों और फलों को झड़ने से रोकता है।';
+
+  @override
+  String get products_NAA_longDescription =>
+      'NAA (नेफ़थलीन एसिटिक एसिड) 4.5% SL ऑक्सिन परिवार का एक सिंथेटिक पादप हार्मोन है। इसका मुख्य उपयोग फूलों और फलों के समय से पहले झड़ने को रोकने के लिए किया जाता है, जिससे फलों के उत्पादन और समग्र उपज में सुधार होता है। यह कपास, टमाटर और आम जैसी फसलों में प्रभावी है।';
+
+  @override
+  String get products_NAA_name => 'NAA 4.5% SL';
+
+  @override
+  String get products_NAA_tag => 'पादप विकास नियामक';
+
+  @override
+  String get products_NAA_usage_cotton =>
+      '222-444 मिलीलीटर 1000 लीटर पानी में प्रति हेक्टेयर (स्क्वायर फॉर्मेशन से 3 छिड़काव)';
+
+  @override
+  String get products_NAA_usage_mango =>
+      '15 मिलीलीटर फॉर्मूलेशन प्रति 100 लीटर पानी (कटाई से पहले छिड़काव)';
+
+  @override
+  String get products_NAA_usage_tomato =>
+      '20-40 मिलीलीटर 1000 लीटर पानी में प्रति हेक्टेयर (फूल आने और फल लगने के समय)';
+
+  @override
+  String get products_PrallethrinLV_description =>
+      'तत्काल मच्छर सुरक्षा के लिए तेजी से काम करने वाला लिक्विड वेपोराइजर।';
+
+  @override
+  String get products_PrallethrinLV_longDescription =>
+      'इस लिक्विवड वेपोराइजर में प्रालिथ्रिन होता है, जो मच्छरों के खिलाफ अपने त्वरित नॉकडाउन प्रभाव के लिए जाना जाता है। यह मच्छरों को जल्दी खत्म करने और आरामदायक माहौल प्रदान करने में प्रभावी है।';
+
+  @override
+  String get products_PrallethrinLV_name =>
+      'प्रालिथ्रिन 0.65% लिक्विड वेपोराइजर';
+
+  @override
+  String get products_PrallethrinLV_tag => 'घरेलू कीटनाशक';
+
+  @override
+  String get products_PrallethrinLV_usage_area =>
+      '300-400 वर्ग फुट तक के कमरों के लिए प्रभावी';
+
+  @override
+  String get products_PrallethrinLV_usage_indoor =>
+      'मानक लिक्विड वेपोराइजर मशीन के साथ प्रयोग करें, एक रिफिल 30-45 रातों की सुरक्षा प्रदान करता है';
+
+  @override
+  String get products_RupiyaKuber_description =>
+      'फसल को संतुलित पोटेशियम, कार्बन और मैग्नीशियम प्रदान करने वाला एक प्राकृतिक तरल खाद पूरक।';
+
+  @override
+  String get products_RupiyaKuber_longDescription =>
+      'यह एक प्राकृतिक तरल खाद पूरक है जो फसल को संतुलित मात्रा में पोटेशियम, कार्बन और मैग्नीशियम प्रदान करता है। यह प्रकाश संश्लेषण और पराग अंकुरण की प्रक्रिया को बढ़ाकर फसल की उत्पादकता और गुणवत्ता बढ़ाता है।';
+
+  @override
+  String get products_RupiyaKuber_name => 'रुपया कुबेर';
+
+  @override
+  String get products_RupiyaKuber_tag => 'तरल खाद पूरक';
+
+  @override
+  String get products_RupiyaKuber_usage_dripIrrigation =>
+      '10-15 लीटर प्रति एकड़';
+
+  @override
+  String get products_RupiyaKuber_usage_foliarSpray =>
+      '5-10 मिलीलीटर प्रति लीटर पानी';
+
+  @override
+  String get products_TapasSiliconAdjuvant_description =>
+      'कीटनाशक की प्रभावशीलता को बढ़ाने वाला और पौधों की सुरक्षा को मजबूत करने वाला सिलिकॉन-आधारित सहायक।';
+
+  @override
+  String get products_TapasSiliconAdjuvant_longDescription =>
+      'तपस सिलिकॉन सहायक कीटनाशकों और उर्वरकों के अवशोषण और प्रभावशीलता में सुधार करता है।';
+
+  @override
+  String get products_TapasSiliconAdjuvant_name =>
+      'तपस सिलिकॉन सहायक (Adjuvant)';
+
+  @override
+  String get products_TapasSiliconAdjuvant_tag => 'सिलिकॉन-आधारित सहायक';
+
+  @override
+  String get products_TapasSiliconAdjuvant_usage_foliarSpray =>
+      '0.5-1 मिलीलीटर प्रति लीटर पानी';
+
+  @override
+  String get products_Temephos_description =>
+      'जलाशयों में मच्छरों के प्रजनन को नियंत्रित करने के लिए लार्वानाशक।';
+
+  @override
+  String get products_Temephos_longDescription =>
+      'Temephos 1% GR एक ऑर्गेनोफॉस्फेट लार्वानाशक है जिसका उपयोग मच्छरों के लार्वा को नियंत्रित करने के लिए किया जाता है। इसे स्थिर पानी, तालाबों और नालियों में मच्छरों को पनपने से रोकने के लिए लगाया जाता है।';
+
+  @override
+  String get products_Temephos_name => 'टेमेफॉस 1% GR';
+
+  @override
+  String get products_Temephos_tag => 'लार्वानाशक';
+
+  @override
+  String get products_Temephos_usage_cleanWater =>
+      '50-100 ग्राम ए.आई./हेक्टेयर (5-10 किग्रा/हेक्टेयर) तालाबों, झीलों के लिए';
+
+  @override
+  String get products_Temephos_usage_cyclopsControl =>
+      '0.5-1.0 ग्राम ए.आई. (5-10 ग्राम) तालाबों, कुओं के लिए';
+
+  @override
+  String get products_Temephos_usage_highlyPolluted =>
+      '200-500 ग्राम ए.आई./हेक्टेयर (20-50 किग्रा/हेक्टेयर) नालियों, सेसपिट्स के लिए';
+
+  @override
+  String get products_Temephos_usage_moderatelyPolluted =>
+      '100-200 ग्राम ए.आई./हेक्टेयर (10-20 किग्रा/हेक्टेयर) दलदल, दलदली भूमि के लिए';
+
+  @override
+  String get products_Thiamethoxam_description =>
+      'व्यापक फसल सुरक्षा के लिए त्वरित कार्रवाई वाला कीटनाशक।';
+
+  @override
+  String get products_Thiamethoxam_longDescription =>
+      'Thiamethoxam 25% WG दूसरी पीढ़ी का नियोनिकोटीनोइड कीटनाशक है। यह कीटों के तंत्रिका तंत्र में रिसेप्टर्स के साथ हस्तक्षेप करके काम करता है। यह चावल, कपास, सब्जियों और आम में चूसने वाले कीटों के खिलाफ प्रभावी है।';
+
+  @override
+  String get products_Thiamethoxam_name => 'थियामेथोक्सम 25% WG';
+
+  @override
+  String get products_Thiamethoxam_tag => 'नियोनिकोटीनोइड';
+
+  @override
+  String get products_Thiamethoxam_usage_cottonJassid =>
+      '25 ग्राम ए.आई./हेक्टेयर (100 ग्राम) 500-750 लीटर पानी में (21 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Thiamethoxam_usage_cottonWhitefly =>
+      '50 ग्राम ए.आई./हेक्टेयर (200 ग्राम) 500-750 लीटर पानी में (21 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Thiamethoxam_usage_mango =>
+      '25 ग्राम ए.आई./हेक्टेयर (100 ग्राम) 1000 लीटर पानी में (30 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Thiamethoxam_usage_okra =>
+      '25 ग्राम ए.आई./हेक्टेयर (100 ग्राम) 500-1000 लीटर पानी में (5 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Thiamethoxam_usage_rice =>
+      '25 ग्राम ए.आई./हेक्टेयर (100 ग्राम) 500-750 लीटर पानी में (14 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_Thiamethoxam_usage_wheat =>
+      '12.5 ग्राम ए.आई./हेक्टेयर (50 ग्राम) 500 लीटर पानी में (21 दिन की प्रतीक्षा)';
+
+  @override
+  String get products_TransfluthrinLV_description =>
+      'मच्छर मुक्त घरों के लिए उपयोग में आसान लिक्विड वेपोराइजर।';
+
+  @override
+  String get products_TransfluthrinLV_longDescription =>
+      'यह एक घरेलू कीटनाशक है जो मच्छरों को भगाने और मारने के लिए ट्रांसफ्लुथ्रिन का उपयोग करता है। यह इनडोर उपयोग के लिए एक सुविधाजनक और निरंतर सुरक्षा प्रणाली प्रदान करता है।';
+
+  @override
+  String get products_TransfluthrinLV_name =>
+      'ट्रांसफ्लुथ्रिन 0.88% लिक्विड वेपोराइजर';
+
+  @override
+  String get products_TransfluthrinLV_tag => 'घरेलू कीटनाशक';
+
+  @override
+  String get products_TransfluthrinLV_usage_area =>
+      '300-400 वर्ग फुट तक के कमरों के लिए प्रभावी';
+
+  @override
+  String get products_TransfluthrinLV_usage_indoor =>
+      'मानक लिक्विड वेपोराइजर मशीन के साथ प्रयोग करें, एक रिफिल 30-45 रातों की सुरक्षा प्रदान करता है';
+
+  @override
+  String get profitPredictor_autoFetchDesc =>
+      'मौसम और पर्यावरण डेटा प्राप्त कर रहे हैं';
+
+  @override
+  String get profitPredictor_autoFetchTitle => 'डेटा ला रहा है...';
+
+  @override
+  String get profitPredictor_confidence => 'आत्मविश्वास';
+
+  @override
+  String get profitPredictor_cropType => 'फसल का प्रकार';
+
+  @override
+  String get profitPredictor_description =>
+      'AI-आधारित लाभ भविष्यवाणी और बाजार लागत विश्लेषण।';
+
+  @override
+  String get profitPredictor_developerPanel => 'Developer Debug Panel';
+
+  @override
+  String get profitPredictor_expectedRevenue => 'अपेक्षित राजस्व';
+
+  @override
+  String get profitPredictor_fertilizerCost => 'उर्वरक लागत (₹)';
+
+  @override
+  String get profitPredictor_insights_costWarning =>
+      'आपकी कीटनाशक लागत क्षेत्रीय औसत से अधिक लग रही है।';
+
+  @override
+  String get profitPredictor_insights_goodProfit =>
+      'इस फसल के लिए आपका अनुमानित लाभ स्वस्थ है!';
+
+  @override
+  String get profitPredictor_insights_optimize =>
+      'जैविक उर्वरक पर स्विच करने से इनपुट लागत कम हो सकती है।';
+
+  @override
+  String get profitPredictor_irrigationCost => 'सिंचाई लागत (₹)';
+
+  @override
+  String get profitPredictor_landArea => 'खेत का क्षेत्रफल (एकड़)';
+
+  @override
+  String get profitPredictor_locationSelected => 'स्थान चुना गया';
+
+  @override
+  String get profitPredictor_manualMode => 'मैन्युअल मोड';
+
+  @override
+  String get profitPredictor_pesticideCost => 'कीटनाशक लागत (₹)';
+
+  @override
+  String get profitPredictor_predictButton => 'लाभ का अनुमान लगाएं';
+
+  @override
+  String get profitPredictor_predictedProfit => 'अनुमानित लाभ';
+
+  @override
+  String get profitPredictor_predicting => 'अनुमान लगा रहे हैं...';
+
+  @override
+  String get profitPredictor_predictionError =>
+      'भविष्यवाणी की गणना करने में विफल।';
+
+  @override
+  String get profitPredictor_predictionSuccess => 'लाभ की भविष्यवाणी पूरी हुई!';
+
+  @override
+  String get profitPredictor_rainfall => 'वर्षा (मिमी)';
+
+  @override
+  String get profitPredictor_readyToPredict =>
+      'क्या आप अपने लाभ की भविष्यवाणी करने के लिए तैयार हैं?';
+
+  @override
+  String get profitPredictor_readyToPredictDesc =>
+      'AI-संचालित लाभ अंतर्दृष्टि प्राप्त करने के लिए अपनी भूमि का क्षेत्रफल और लागत के साथ बाईं ओर का फॉर्म भरें।';
+
+  @override
+  String get profitPredictor_recommendation => 'अनुशंसा';
+
+  @override
+  String get profitPredictor_selectCrop => 'फसल चुनें';
+
+  @override
+  String get profitPredictor_selectLocation => 'अपने खेत का स्थान चुनें';
+
+  @override
+  String get profitPredictor_smartMode => 'स्मार्ट मोड';
+
+  @override
+  String get profitPredictor_soilNitrogen => 'मिट्टी नाइट्रोजन';
+
+  @override
+  String get profitPredictor_soilPhosphorus => 'मिट्टी फास्फोरस';
+
+  @override
+  String get profitPredictor_soilPotassium => 'मिट्टी पोटैशियम';
+
+  @override
+  String get profitPredictor_title => 'लाभ इंटेलिजेंस';
+
+  @override
+  String get profitPredictor_totalCost => 'कुल लागत';
+
+  @override
+  String get weatherPage_allowLocation => 'लोकेशन अनुमति दें जब पूछा जाए';
+
+  @override
+  String get weatherPage_cloudCover => 'बादल आवरण';
+
+  @override
+  String get weatherPage_detectingLocation => 'आपकी लोकेशन ढूंढ रहे हैं…';
+
+  @override
+  String get weatherPage_failedFetch => 'मौसम जानकारी लाने में विफल';
+
+  @override
+  String get weatherPage_feelsLike => 'एहसास होता है';
+
+  @override
+  String get weatherPage_fetchingWeather => 'मौसम जानकारी ला रहे हैं…';
+
+  @override
+  String get weatherPage_gettingConditions => 'नवीनतम मौसम स्थिति मिल रही है';
+
+  @override
+  String get weatherPage_gustSpeed => 'झोंके की गति';
+
+  @override
+  String get weatherPage_humidity => 'आर्द्रता';
+
+  @override
+  String get weatherPage_locationDeniedDesc =>
+      'ब्राउज़र सेटिंग में लोकेशन चालू करें, या नीचे शहर खोजें।';
+
+  @override
+  String get weatherPage_locationDeniedTitle => 'लोकेशन एक्सेस श्रेणी नहीं';
+
+  @override
+  String get weatherPage_noLocationDesc =>
+      'अपनी वर्तमान लोकेशन के लिए लोकेट बटन दबाएं, या ऊपर कोई भी शहर खोजें।';
+
+  @override
+  String get weatherPage_noLocationTitle => 'कोई स्थान चयनित नहीं';
+
+  @override
+  String get weatherPage_pressure => 'दबाव';
+
+  @override
+  String get weatherPage_rain => 'बारिश';
+
+  @override
+  String get weatherPage_searchBtn => 'खोजें';
+
+  @override
+  String get weatherPage_searchManually => 'मैनुअल खोजें';
+
+  @override
+  String get weatherPage_searchPlaceholder => 'शहर, क्षेत्र या देश…';
+
+  @override
+  String get weatherPage_subtitle => 'किसी भी स्थान की वास्तविक मौसम जानकारी';
+
+  @override
+  String get weatherPage_title => 'मौसम';
+
+  @override
+  String get weatherPage_useMyLocation => 'मेरी लोकेशन उपयोग करें';
+
+  @override
+  String get weatherPage_useMyLocationTitle => 'मेरी लोकेशन उपयोग करें';
+
+  @override
+  String get weatherPage_uvHigh => 'अधिक';
+
+  @override
+  String get weatherPage_uvIndex => 'UV सूचकांक';
+
+  @override
+  String get weatherPage_uvLow => 'कम';
+
+  @override
+  String get weatherPage_uvModerate => 'मध्यम';
+
+  @override
+  String get weatherPage_uvVeryHigh => 'बहुत अधिक';
+
+  @override
+  String get weatherPage_visibility => 'दिखावट';
+
+  @override
+  String get weatherPage_wind => 'हवा';
+
+  @override
+  String get weatherTips_clear =>
+      '✅ साफ आकाश — खेत का काम और उर्वरक छिड़काव के लिए अच्छा समय।';
+
+  @override
+  String get weatherTips_extremeHeat =>
+      '🔥 अत्यधिक गर्मी — सुबह जल्दी सिंचाई करें, छोटे पौधों को छाया दें।';
+
+  @override
+  String get weatherTips_foggy =>
+      '🌫️ कोहरे की सुबह — कोहरा छंटने तक कीटनाशक छिड़काव न करें।';
+
+  @override
+  String get weatherTips_frost =>
+      '❄️ पाले की आशंका — रात को संवेदनशील फसलें ढकें।';
+
+  @override
+  String get weatherTips_heavyRainWind =>
+      '🌧️ तेज बारिश + तेज हवा — छिड़काव और कटाई टालें।';
+
+  @override
+  String get weatherTips_highHeatUV =>
+      '☀️ तेज गर्मी और UV — सुबह-शाम सिंचाई करें, मजदूरों का ध्यान रखें।';
+
+  @override
+  String get weatherTips_highHumidity =>
+      '💧 अधिक नमी — फंगल रोग पर नजर रखें, हवादार रखें।';
+
+  @override
+  String get weatherTips_moderate =>
+      '🌱 सामान्य मौसम — आज सामान्य खेती के काम करें।';
+
+  @override
+  String get weatherTips_rain =>
+      '🌧️ आज बारिश — सिंचाई न करें, पौधे लगाने के लिए अच्छा समय।';
+
+  @override
+  String get weatherTips_storm =>
+      '⚡ आंधी की चेतावनी — खेत में काम बंद करें, फसल व उपकरण सुरक्षित करें।';
+
+  @override
+  String get weatherTips_strongWind =>
+      '💨 तेज हवा — छिड़काव न करें, मल्च और शेड नेट ठीक करें।';
+
+  @override
+  String get weatherTips_sunnyClear =>
+      '🌤️ अच्छी धूप — कटाई और अनाज सुखाने के लिए बढ़िया दिन।';
+
+  @override
+  String get yieldPredictor_areaRequired => 'मान्य भूमि क्षेत्र आवश्यक है';
+
+  @override
+  String get yieldPredictor_averageRegional => 'क्षेत्रीय औसत';
+
+  @override
+  String get yieldPredictor_baseYield => 'आधार उपज';
+
+  @override
+  String get yieldPredictor_comparisonChart => 'उपज तुलना';
+
+  @override
+  String get yieldPredictor_cropType => 'फसल का प्रकार';
+
+  @override
+  String get yieldPredictor_cropTypeRequired => 'फसल का प्रकार आवश्यक है';
+
+  @override
+  String get yieldPredictor_description =>
+      'अपेक्षित फसल उपज की भविष्यवाणी के लिए पर्यावरण डेटा दर्ज करें।';
+
+  @override
+  String get yieldPredictor_dry => 'सूखा';
+
+  @override
+  String get yieldPredictor_enterArea => 'क्षेत्र दर्ज करें';
+
+  @override
+  String get yieldPredictor_environmental => 'पर्यावरणीय डेटा';
+
+  @override
+  String get yieldPredictor_expandMap => 'विस्तारित करें';
+
+  @override
+  String get yieldPredictor_farmInputs => 'खेत-विशिष्ट इनपुट';
+
+  @override
+  String get yieldPredictor_landArea => 'भूमि क्षेत्र';
+
+  @override
+  String get yieldPredictor_mapInstruction =>
+      'स्वचालित मौसम प्राप्त करने और उपज की भविष्यवाणी करने के लिए अपने खेत पर क्लिक करें';
+
+  @override
+  String get yieldPredictor_ndvi => 'NDVI (वनस्पति सूचकांक)';
+
+  @override
+  String get yieldPredictor_ndviHigh => 'घनी वनस्पति';
+
+  @override
+  String get yieldPredictor_ndviLow => 'नंगी मिट्टी';
+
+  @override
+  String get yieldPredictor_pageDescription =>
+      'TensorFlow.js AI द्वारा NDVI, मिट्टी की नमी और वर्षा डेटा का उपयोग करके प्रति हेक्टेयर फसल उपज की भविष्यवाणी करें।';
+
+  @override
+  String get yieldPredictor_pageTitle => 'फसल उपज भविष्यवाणी';
+
+  @override
+  String get yieldPredictor_predictButton => 'उपज का अनुमान लगाएं';
+
+  @override
+  String get yieldPredictor_predictYield => 'उपज भविष्यवाणी';
+
+  @override
+  String get yieldPredictor_predictedYield => 'अनुमानित उपज';
+
+  @override
+  String get yieldPredictor_predicting => 'भविष्यवाणी जारी...';
+
+  @override
+  String get yieldPredictor_predictionError =>
+      'भविष्यवाणी करने में विफल। फिर से प्रयास करें।';
+
+  @override
+  String get yieldPredictor_predictionSuccess => 'उपज की भविष्यवाणी पूरी हुई!';
+
+  @override
+  String get yieldPredictor_rainfall => 'वर्षा (मिमी)';
+
+  @override
+  String get yieldPredictor_readyDescription =>
+      'AI-संचालित उपज भविष्यवाणी प्राप्त करने के लिए NDVI, मिट्टी की नमी और वर्षा डेटा दर्ज करें।';
+
+  @override
+  String get yieldPredictor_readyTitle => 'उपज की भविष्यवाणी के लिए तैयार?';
+
+  @override
+  String get yieldPredictor_regionBaseline => 'बेसलाइन';
+
+  @override
+  String get yieldPredictor_satelliteData => 'उपग्रह & मौसम डेटा';
+
+  @override
+  String get yieldPredictor_selectCrop => 'फसल चुनें...';
+
+  @override
+  String get yieldPredictor_soilMoisture => 'मिट्टी की नमी (%)';
+
+  @override
+  String get yieldPredictor_stepEnvironment => 'पर्यावरण';
+
+  @override
+  String get yieldPredictor_stepGuide1 => 'चरण 1: मानचित्र पर स्थान सेट करें';
+
+  @override
+  String get yieldPredictor_stepGuide2 =>
+      'चरण 2: पर्यावरणीय डेटा को समायोजित करें';
+
+  @override
+  String get yieldPredictor_stepGuide3 =>
+      'चरण 3: फसल चुनें और भविष्यवाणी करें पर क्लिक करें';
+
+  @override
+  String get yieldPredictor_stepMap => 'स्थान';
+
+  @override
+  String get yieldPredictor_stepResults => 'परिणाम';
+
+  @override
+  String get yieldPredictor_title => 'उपज भविष्यवक्ता';
+
+  @override
+  String get yieldPredictor_tonsPerHectare => 'टन प्रति हेक्टेयर';
+
+  @override
+  String get yieldPredictor_validationError => 'कृपया सभी आवश्यक फ़ील्ड भरें';
+
+  @override
+  String get yieldPredictor_vsAverage => 'क्षेत्रीय औसत बनाम';
+
+  @override
+  String get yieldPredictor_wet => 'गीला';
+}
