@@ -7,6 +7,9 @@ import '../../app/locale_controller.dart';
 import '../../app/theme/app_colors.dart';
 import '../../core/network/api_exception.dart';
 import '../../l10n/app_localizations.dart';
+import '../auth/data/auth_controller.dart';
+import '../farm/data/farm_models.dart';
+import '../farm/data/farm_repository.dart';
 import '../weather/data/weather_models.dart';
 import '../weather/data/weather_repository.dart';
 
@@ -19,11 +22,23 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
-    final weather = ref.watch(weatherProvider(_defaultLocation));
+    final user = ref.watch(currentUserProvider);
+    final crops = ref.watch(activeCropsProvider);
+
+    // Weather for the farmer's own field when one is on record; the default
+    // only covers a brand-new account with nothing entered yet.
+    final location = crops.isNotEmpty
+        ? (crops.first.field.location.weatherQuery ?? _defaultLocation)
+        : _defaultLocation;
+    final weather = ref.watch(weatherProvider(location));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.navigation_home),
+        title: Text(
+          user == null
+              ? l10n.navigation_home
+              : l10n.homeGreeting(user.name.split(' ').first),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.language),
@@ -33,13 +48,41 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () async =>
-            ref.refresh(weatherProvider(_defaultLocation).future),
+        onRefresh: () async {
+          // Invalidate first, then await the refetch, so the spinner stays
+          // up until the new data is actually in hand.
+          ref.invalidate(fieldsProvider);
+          ref.invalidate(weatherProvider(location));
+          await ref.read(weatherProvider(location).future);
+        },
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
           children: [
-            _WeatherCard(state: weather, location: _defaultLocation),
+            InkWell(
+              onTap: () => context.go('/weather'),
+              borderRadius: BorderRadius.circular(16),
+              child: _WeatherCard(state: weather, location: location),
+            ),
             const SizedBox(height: 24),
+
+            if (crops.isNotEmpty) ...[
+              Text(
+                l10n.homeMyCrops,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 116,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: crops.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: 12),
+                  itemBuilder: (context, i) => _CropChip(entry: crops[i]),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+
             Text(
               l10n.dashboard_chooseCrop,
               style: Theme.of(context).textTheme.titleMedium,
@@ -261,6 +304,56 @@ class _WeatherError extends ConsumerWidget {
             label: Text(l10n.appRetry),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// One active crop, with its days-after-sowing — the number the advisory
+/// engine keys off and the one a farmer counts in.
+class _CropChip extends StatelessWidget {
+  const _CropChip({required this.entry});
+
+  final ({Field field, Crop crop}) entry;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final text = Theme.of(context).textTheme;
+
+    return InkWell(
+      onTap: () => context.go('/farm'),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: 160,
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Theme.of(context).colorScheme.outline),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Icon(Icons.eco, color: AppColors.primary),
+            Text(
+              entry.crop.cropName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: text.bodyLarge,
+            ),
+            Text(
+              '${entry.field.name} · ${entry.crop.areaLabel}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: text.labelSmall,
+            ),
+            Text(
+              l10n.farmDayCount('${entry.crop.daysAfterSowing}'),
+              style: text.labelMedium?.copyWith(color: AppColors.primary),
+            ),
+          ],
+        ),
       ),
     );
   }

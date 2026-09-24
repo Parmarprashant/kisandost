@@ -17,5 +17,34 @@ export async function GET(req: NextRequest) {
   googleAuthUrl.searchParams.set('access_type', 'offline');
   googleAuthUrl.searchParams.set('prompt', 'select_account');
 
-  return NextResponse.redirect(googleAuthUrl.toString());
+  // The mobile app opens this same flow in a system browser. Google still
+  // redirects back to this server's registered callback — so no extra OAuth
+  // client and no new redirect URI need registering — and the callback then
+  // hands the token to the app through its custom scheme.
+  //
+  // `state` is the only field that survives the round trip to Google, and it
+  // doubles as the CSRF token the web flow was missing.
+  const state = buildState(req.nextUrl.searchParams.get('client') === 'mobile');
+  googleAuthUrl.searchParams.set('state', state);
+
+  const response = NextResponse.redirect(googleAuthUrl.toString());
+
+  // Remember the state so the callback can reject a response it did not start.
+  response.cookies.set(OAUTH_STATE_COOKIE, state, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 600,
+  });
+
+  return response;
+}
+
+export const OAUTH_STATE_COOKIE = '__kisan_oauth_state';
+
+/** `<random>:<web|mobile>` — random half defeats CSRF, suffix picks the reply. */
+function buildState(isMobile: boolean): string {
+  const random = crypto.randomUUID().replace(/-/g, '');
+  return `${random}:${isMobile ? 'mobile' : 'web'}`;
 }

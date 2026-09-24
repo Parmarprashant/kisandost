@@ -61,13 +61,43 @@ void main() {
 
     test('placeholder strings keep their arguments', () async {
       final english = await _load(const Locale('en'));
-      final greeting = english.dashboard_greeting('Ramesh', 'healthy');
+      // NOTE the argument order: gen_l10n sorts placeholder parameters
+      // ALPHABETICALLY, so "Namaste {name}! Your farm is {health}" generates
+      // `dashboard_greeting(String health, String name)`.
+      final greeting = english.dashboard_greeting('healthy', 'Ramesh');
 
       expect(greeting, contains('Ramesh'));
       expect(greeting, contains('healthy'));
       // A literal `{name}` here would mean the ARB placeholder metadata was
       // dropped during import.
       expect(greeting, isNot(contains('{')));
+    });
+
+    test('placeholders land in the right slots, not merely present', () async {
+      // Regression. gen_l10n orders parameters alphabetically rather than in
+      // the order they appear in the string, so "Range {min} – {max}" has the
+      // signature `(max, min)`. Calling it in reading order rendered the
+      // range backwards on screen — "₹2,600 – ₹2,400" — and a `contains`
+      // assertion happily passed because both numbers were there.
+      final english = await _load(const Locale('en'));
+      final range = english.mandiRange('MAXVAL', 'MINVAL');
+
+      expect(
+        range.indexOf('MINVAL'),
+        lessThan(range.indexOf('MAXVAL')),
+        reason: 'the low value must be rendered before the high value',
+      );
+    });
+
+    test('the greeting puts the name where a name belongs', () async {
+      final english = await _load(const Locale('en'));
+      final greeting = english.dashboard_greeting('HEALTHVAL', 'NAMEVAL');
+
+      expect(
+        greeting.indexOf('NAMEVAL'),
+        lessThan(greeting.indexOf('HEALTHVAL')),
+        reason: 'Namaste {name} ... is {health}',
+      );
     });
   });
 

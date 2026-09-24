@@ -137,6 +137,72 @@ abstract class L10n {
   /// **'This is taking longer than usual. Please wait.'**
   String get appSlow;
 
+  /// No description provided for @authCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in was cancelled.'**
+  String get authCancelled;
+
+  /// No description provided for @authGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get authGoogle;
+
+  /// No description provided for @authOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline. Connect and try again.'**
+  String get authOffline;
+
+  /// No description provided for @authProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get authProfile;
+
+  /// No description provided for @authRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Google could not sign you in. Please try again.'**
+  String get authRejected;
+
+  /// No description provided for @authServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not sign you in right now.'**
+  String get authServerError;
+
+  /// No description provided for @authSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get authSignOut;
+
+  /// No description provided for @authSigningIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in'**
+  String get authSigningIn;
+
+  /// No description provided for @authStateMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'That sign-in link did not match. Please start again.'**
+  String get authStateMismatch;
+
+  /// No description provided for @authTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Your farming companion'**
+  String get authTagline;
+
+  /// No description provided for @authWhyGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'We use your Google account so you never have to remember a password.'**
+  String get authWhyGoogle;
+
   /// No description provided for @chatWidget_callExpert.
   ///
   /// In en, this message translates to:
@@ -700,6 +766,90 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Farmer Welfare Schemes'**
   String get communities_welfareSchemes;
+
+  /// No description provided for @communityAddComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a reply'**
+  String get communityAddComment;
+
+  /// No description provided for @communityAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask farmers'**
+  String get communityAsk;
+
+  /// No description provided for @communityComments.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} comments'**
+  String communityComments(String count);
+
+  /// No description provided for @communityCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get communityCrop;
+
+  /// No description provided for @communityDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe it'**
+  String get communityDetails;
+
+  /// No description provided for @communityEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet'**
+  String get communityEmpty;
+
+  /// No description provided for @communityHelpful.
+  ///
+  /// In en, this message translates to:
+  /// **'Helpful'**
+  String get communityHelpful;
+
+  /// No description provided for @communityNoComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No replies yet. Be the first.'**
+  String get communityNoComments;
+
+  /// No description provided for @communityPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Post'**
+  String get communityPost;
+
+  /// No description provided for @communityPostTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What is the problem?'**
+  String get communityPostTitle;
+
+  /// No description provided for @communityPosting.
+  ///
+  /// In en, this message translates to:
+  /// **'Posting'**
+  String get communityPosting;
+
+  /// No description provided for @communitySend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get communitySend;
+
+  /// No description provided for @communitySignInNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to reply or mark posts helpful.'**
+  String get communitySignInNote;
+
+  /// No description provided for @communityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Farmer community'**
+  String get communityTitle;
 
   /// No description provided for @cropSuggestion_aiAdvisory.
   ///
@@ -1775,6 +1925,150 @@ abstract class L10n {
   /// **'Water Need'**
   String get dashboard_waterNeedLabel;
 
+  /// No description provided for @diagnoseAnalysing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysing leaf'**
+  String get diagnoseAnalysing;
+
+  /// No description provided for @diagnoseBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Products to use'**
+  String get diagnoseBuy;
+
+  /// No description provided for @diagnoseCauses.
+  ///
+  /// In en, this message translates to:
+  /// **'Why it happened'**
+  String get diagnoseCauses;
+
+  /// No description provided for @diagnoseCompressing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing photo'**
+  String get diagnoseCompressing;
+
+  /// No description provided for @diagnoseConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% sure'**
+  String diagnoseConfidence(String value);
+
+  /// No description provided for @diagnoseExpertNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm with an expert before you spray.'**
+  String get diagnoseExpertNote;
+
+  /// No description provided for @diagnoseFarmingSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Farming steps'**
+  String get diagnoseFarmingSteps;
+
+  /// No description provided for @diagnoseGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get diagnoseGallery;
+
+  /// No description provided for @diagnoseGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the frame with one affected leaf'**
+  String get diagnoseGuide;
+
+  /// No description provided for @diagnoseHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get diagnoseHealthy;
+
+  /// No description provided for @diagnoseHowToFix.
+  ///
+  /// In en, this message translates to:
+  /// **'How to get a good photo'**
+  String get diagnoseHowToFix;
+
+  /// No description provided for @diagnoseInfected.
+  ///
+  /// In en, this message translates to:
+  /// **'Disease found'**
+  String get diagnoseInfected;
+
+  /// No description provided for @diagnoseKeepPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Your photo is saved. You can try again.'**
+  String get diagnoseKeepPhoto;
+
+  /// No description provided for @diagnoseMatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding treatments'**
+  String get diagnoseMatching;
+
+  /// No description provided for @diagnoseNoCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera is not available on this device.'**
+  String get diagnoseNoCamera;
+
+  /// No description provided for @diagnosePermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow camera access to check your crop.'**
+  String get diagnosePermission;
+
+  /// No description provided for @diagnoseRetake.
+  ///
+  /// In en, this message translates to:
+  /// **'Check another leaf'**
+  String get diagnoseRetake;
+
+  /// No description provided for @diagnoseSlowNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The first check of the day can take up to a minute.'**
+  String get diagnoseSlowNote;
+
+  /// No description provided for @diagnoseSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'What to look for'**
+  String get diagnoseSymptoms;
+
+  /// No description provided for @diagnoseTakePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo'**
+  String get diagnoseTakePhoto;
+
+  /// No description provided for @diagnoseTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'That photo is too large. Please take a new one.'**
+  String get diagnoseTooLarge;
+
+  /// No description provided for @diagnoseUnclear.
+  ///
+  /// In en, this message translates to:
+  /// **'The photo was not clear enough'**
+  String get diagnoseUnclear;
+
+  /// No description provided for @diagnoseUploading.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading'**
+  String get diagnoseUploading;
+
+  /// No description provided for @diagnoseWhatToDo.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do now'**
+  String get diagnoseWhatToDo;
+
   /// No description provided for @diseasesPage_bestSeason.
   ///
   /// In en, this message translates to:
@@ -1883,6 +2177,234 @@ abstract class L10n {
   /// **'View Store Products'**
   String get diseasesPage_viewStoreProducts;
 
+  /// No description provided for @farmAddCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Add crop'**
+  String get farmAddCrop;
+
+  /// No description provided for @farmAddField.
+  ///
+  /// In en, this message translates to:
+  /// **'Add field'**
+  String get farmAddField;
+
+  /// No description provided for @farmArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get farmArea;
+
+  /// No description provided for @farmBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get farmBack;
+
+  /// No description provided for @farmBadNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number'**
+  String get farmBadNumber;
+
+  /// No description provided for @farmCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get farmCancel;
+
+  /// No description provided for @farmCropName.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get farmCropName;
+
+  /// No description provided for @farmCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'Crops'**
+  String get farmCrops;
+
+  /// No description provided for @farmCultivationMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'How was it sown'**
+  String get farmCultivationMethod;
+
+  /// No description provided for @farmDayCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {days}'**
+  String farmDayCount(String days);
+
+  /// No description provided for @farmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get farmDelete;
+
+  /// No description provided for @farmDeleteField.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this field?'**
+  String get farmDeleteField;
+
+  /// No description provided for @farmDeleteFieldNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The crops in it will be removed too.'**
+  String get farmDeleteFieldNote;
+
+  /// No description provided for @farmDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get farmDistrict;
+
+  /// No description provided for @farmFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Field name'**
+  String get farmFieldName;
+
+  /// No description provided for @farmFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Fields'**
+  String get farmFields;
+
+  /// No description provided for @farmFrequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Watering'**
+  String get farmFrequency;
+
+  /// No description provided for @farmIrrigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation'**
+  String get farmIrrigation;
+
+  /// No description provided for @farmNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get farmNext;
+
+  /// No description provided for @farmNoCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'No crops in this field yet'**
+  String get farmNoCrops;
+
+  /// No description provided for @farmNoFields.
+  ///
+  /// In en, this message translates to:
+  /// **'No fields yet'**
+  String get farmNoFields;
+
+  /// No description provided for @farmNoFieldsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first field to get advice for your crops.'**
+  String get farmNoFieldsHint;
+
+  /// No description provided for @farmNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get farmNotes;
+
+  /// No description provided for @farmPreviousCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Last crop'**
+  String get farmPreviousCrop;
+
+  /// No description provided for @farmRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill this in'**
+  String get farmRequired;
+
+  /// No description provided for @farmReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your answers'**
+  String get farmReview;
+
+  /// No description provided for @farmSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get farmSave;
+
+  /// No description provided for @farmSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get farmSaved;
+
+  /// No description provided for @farmSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving'**
+  String get farmSaving;
+
+  /// No description provided for @farmSoilType.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil type'**
+  String get farmSoilType;
+
+  /// No description provided for @farmSowingDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Sowing date'**
+  String get farmSowingDate;
+
+  /// No description provided for @farmState.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get farmState;
+
+  /// No description provided for @farmStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String farmStep(String current, String total);
+
+  /// No description provided for @farmTaluka.
+  ///
+  /// In en, this message translates to:
+  /// **'Taluka'**
+  String get farmTaluka;
+
+  /// No description provided for @farmUseLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my location'**
+  String get farmUseLocation;
+
+  /// No description provided for @farmVariety.
+  ///
+  /// In en, this message translates to:
+  /// **'Variety'**
+  String get farmVariety;
+
+  /// No description provided for @farmVillage.
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get farmVillage;
+
+  /// No description provided for @farmWaterSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Water source'**
+  String get farmWaterSource;
+
   /// No description provided for @fertilizer_area.
   ///
   /// In en, this message translates to:
@@ -1948,6 +2470,90 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Total Bags Needed'**
   String get fertilizer_totalBags;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Namaste, {name}'**
+  String homeGreeting(String name);
+
+  /// No description provided for @homeMyCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'My crops'**
+  String get homeMyCrops;
+
+  /// No description provided for @mandiArrival.
+  ///
+  /// In en, this message translates to:
+  /// **'Market date {date}'**
+  String mandiArrival(String date);
+
+  /// No description provided for @mandiCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get mandiCrop;
+
+  /// No description provided for @mandiEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated rate'**
+  String get mandiEstimate;
+
+  /// No description provided for @mandiEstimateNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No live market data for this crop here. This is a government baseline, not a traded price.'**
+  String get mandiEstimateNote;
+
+  /// No description provided for @mandiIndicative.
+  ///
+  /// In en, this message translates to:
+  /// **'Indicative rate'**
+  String get mandiIndicative;
+
+  /// No description provided for @mandiIndicativeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Real government data, but not a fresh reading from your local market today.'**
+  String get mandiIndicativeNote;
+
+  /// No description provided for @mandiLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Live government rate'**
+  String get mandiLive;
+
+  /// No description provided for @mandiNotYourDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearest reporting market'**
+  String get mandiNotYourDistrict;
+
+  /// No description provided for @mandiPerQuintal.
+  ///
+  /// In en, this message translates to:
+  /// **'per quintal'**
+  String get mandiPerQuintal;
+
+  /// No description provided for @mandiRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Range {min} – {max}'**
+  String mandiRange(String max, String min);
+
+  /// No description provided for @mandiState.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get mandiState;
+
+  /// No description provided for @mandiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mandi prices'**
+  String get mandiTitle;
 
   /// No description provided for @myCrop_acres.
   ///
@@ -2386,6 +2992,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Yield AI'**
   String get navigation_yieldAi;
+
+  /// No description provided for @onboardDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get onboardDistrict;
+
+  /// No description provided for @onboardFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get onboardFinish;
+
+  /// No description provided for @onboardMainCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Main crop'**
+  String get onboardMainCrop;
+
+  /// No description provided for @onboardMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get onboardMobile;
+
+  /// No description provided for @onboardName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get onboardName;
+
+  /// No description provided for @onboardSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip for now'**
+  String get onboardSkip;
+
+  /// No description provided for @onboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about your farm'**
+  String get onboardTitle;
+
+  /// No description provided for @onboardVillage.
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get onboardVillage;
+
+  /// No description provided for @onboardWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'This lets us give advice for your area and your crops.'**
+  String get onboardWhy;
 
   /// No description provided for @productsPage_allProducts.
   ///
@@ -3647,6 +4307,42 @@ abstract class L10n {
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
 
+  /// No description provided for @weatherFeels.
+  ///
+  /// In en, this message translates to:
+  /// **'Feels like {value}°'**
+  String weatherFeels(String value);
+
+  /// No description provided for @weatherForecast.
+  ///
+  /// In en, this message translates to:
+  /// **'Next days'**
+  String get weatherForecast;
+
+  /// No description provided for @weatherHeatWarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Very hot. Irrigate early morning or evening.'**
+  String get weatherHeatWarn;
+
+  /// No description provided for @weatherHumidity.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity'**
+  String get weatherHumidity;
+
+  /// No description provided for @weatherLocating.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding your location'**
+  String get weatherLocating;
+
+  /// No description provided for @weatherLocationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is off. Search for your village instead.'**
+  String get weatherLocationDenied;
+
   /// No description provided for @weatherPage_allowLocation.
   ///
   /// In en, this message translates to:
@@ -3821,6 +4517,24 @@ abstract class L10n {
   /// **'Wind'**
   String get weatherPage_wind;
 
+  /// No description provided for @weatherRain.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% chance of rain'**
+  String weatherRain(String value);
+
+  /// No description provided for @weatherSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Village, town or district'**
+  String get weatherSearchHint;
+
+  /// No description provided for @weatherSprayWarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain expected — do not spray today.'**
+  String get weatherSprayWarn;
+
   /// No description provided for @weatherTips_clear.
   ///
   /// In en, this message translates to:
@@ -3892,6 +4606,24 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'🌤️ Good sunny day — great for harvesting & drying grains.'**
   String get weatherTips_sunnyClear;
+
+  /// No description provided for @weatherUseLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my location'**
+  String get weatherUseLocation;
+
+  /// No description provided for @weatherWind.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind'**
+  String get weatherWind;
+
+  /// No description provided for @weatherWindWarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong wind — spray will drift. Wait for calmer air.'**
+  String get weatherWindWarn;
 
   /// No description provided for @yieldPredictor_areaRequired.
   ///

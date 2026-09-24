@@ -30,6 +30,41 @@ class L10nEn extends L10n {
   String get appSlow => 'This is taking longer than usual. Please wait.';
 
   @override
+  String get authCancelled => 'Sign-in was cancelled.';
+
+  @override
+  String get authGoogle => 'Continue with Google';
+
+  @override
+  String get authOffline => 'You are offline. Connect and try again.';
+
+  @override
+  String get authProfile => 'Profile';
+
+  @override
+  String get authRejected => 'Google could not sign you in. Please try again.';
+
+  @override
+  String get authServerError => 'We could not sign you in right now.';
+
+  @override
+  String get authSignOut => 'Sign out';
+
+  @override
+  String get authSigningIn => 'Signing in';
+
+  @override
+  String get authStateMismatch =>
+      'That sign-in link did not match. Please start again.';
+
+  @override
+  String get authTagline => 'Your farming companion';
+
+  @override
+  String get authWhyGoogle =>
+      'We use your Google account so you never have to remember a password.';
+
+  @override
   String get chatWidget_callExpert => 'Call Expert';
 
   @override
@@ -338,6 +373,50 @@ class L10nEn extends L10n {
 
   @override
   String get communities_welfareSchemes => 'Farmer Welfare Schemes';
+
+  @override
+  String get communityAddComment => 'Write a reply';
+
+  @override
+  String get communityAsk => 'Ask farmers';
+
+  @override
+  String communityComments(String count) {
+    return '$count comments';
+  }
+
+  @override
+  String get communityCrop => 'Crop';
+
+  @override
+  String get communityDetails => 'Describe it';
+
+  @override
+  String get communityEmpty => 'No posts yet';
+
+  @override
+  String get communityHelpful => 'Helpful';
+
+  @override
+  String get communityNoComments => 'No replies yet. Be the first.';
+
+  @override
+  String get communityPost => 'Post';
+
+  @override
+  String get communityPostTitle => 'What is the problem?';
+
+  @override
+  String get communityPosting => 'Posting';
+
+  @override
+  String get communitySend => 'Send';
+
+  @override
+  String get communitySignInNote => 'Sign in to reply or mark posts helpful.';
+
+  @override
+  String get communityTitle => 'Farmer community';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {
@@ -973,6 +1052,83 @@ class L10nEn extends L10n {
   String get dashboard_waterNeedLabel => 'Water Need';
 
   @override
+  String get diagnoseAnalysing => 'Analysing leaf';
+
+  @override
+  String get diagnoseBuy => 'Products to use';
+
+  @override
+  String get diagnoseCauses => 'Why it happened';
+
+  @override
+  String get diagnoseCompressing => 'Preparing photo';
+
+  @override
+  String diagnoseConfidence(String value) {
+    return '$value% sure';
+  }
+
+  @override
+  String get diagnoseExpertNote =>
+      'Please confirm with an expert before you spray.';
+
+  @override
+  String get diagnoseFarmingSteps => 'Farming steps';
+
+  @override
+  String get diagnoseGallery => 'Choose from gallery';
+
+  @override
+  String get diagnoseGuide => 'Fill the frame with one affected leaf';
+
+  @override
+  String get diagnoseHealthy => 'Healthy';
+
+  @override
+  String get diagnoseHowToFix => 'How to get a good photo';
+
+  @override
+  String get diagnoseInfected => 'Disease found';
+
+  @override
+  String get diagnoseKeepPhoto => 'Your photo is saved. You can try again.';
+
+  @override
+  String get diagnoseMatching => 'Finding treatments';
+
+  @override
+  String get diagnoseNoCamera => 'Camera is not available on this device.';
+
+  @override
+  String get diagnosePermission => 'Allow camera access to check your crop.';
+
+  @override
+  String get diagnoseRetake => 'Check another leaf';
+
+  @override
+  String get diagnoseSlowNote =>
+      'The first check of the day can take up to a minute.';
+
+  @override
+  String get diagnoseSymptoms => 'What to look for';
+
+  @override
+  String get diagnoseTakePhoto => 'Take photo';
+
+  @override
+  String get diagnoseTooLarge =>
+      'That photo is too large. Please take a new one.';
+
+  @override
+  String get diagnoseUnclear => 'The photo was not clear enough';
+
+  @override
+  String get diagnoseUploading => 'Uploading';
+
+  @override
+  String get diagnoseWhatToDo => 'What to do now';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override
@@ -1032,6 +1188,125 @@ class L10nEn extends L10n {
   String get diseasesPage_viewStoreProducts => 'View Store Products';
 
   @override
+  String get farmAddCrop => 'Add crop';
+
+  @override
+  String get farmAddField => 'Add field';
+
+  @override
+  String get farmArea => 'Area';
+
+  @override
+  String get farmBack => 'Back';
+
+  @override
+  String get farmBadNumber => 'Enter a number';
+
+  @override
+  String get farmCancel => 'Cancel';
+
+  @override
+  String get farmCropName => 'Crop';
+
+  @override
+  String get farmCrops => 'Crops';
+
+  @override
+  String get farmCultivationMethod => 'How was it sown';
+
+  @override
+  String farmDayCount(String days) {
+    return 'Day $days';
+  }
+
+  @override
+  String get farmDelete => 'Delete';
+
+  @override
+  String get farmDeleteField => 'Delete this field?';
+
+  @override
+  String get farmDeleteFieldNote => 'The crops in it will be removed too.';
+
+  @override
+  String get farmDistrict => 'District';
+
+  @override
+  String get farmFieldName => 'Field name';
+
+  @override
+  String get farmFields => 'Fields';
+
+  @override
+  String get farmFrequency => 'Watering';
+
+  @override
+  String get farmIrrigation => 'Irrigation';
+
+  @override
+  String get farmNext => 'Next';
+
+  @override
+  String get farmNoCrops => 'No crops in this field yet';
+
+  @override
+  String get farmNoFields => 'No fields yet';
+
+  @override
+  String get farmNoFieldsHint =>
+      'Add your first field to get advice for your crops.';
+
+  @override
+  String get farmNotes => 'Notes';
+
+  @override
+  String get farmPreviousCrop => 'Last crop';
+
+  @override
+  String get farmRequired => 'Please fill this in';
+
+  @override
+  String get farmReview => 'Check your answers';
+
+  @override
+  String get farmSave => 'Save';
+
+  @override
+  String get farmSaved => 'Saved';
+
+  @override
+  String get farmSaving => 'Saving';
+
+  @override
+  String get farmSoilType => 'Soil type';
+
+  @override
+  String get farmSowingDate => 'Sowing date';
+
+  @override
+  String get farmState => 'State';
+
+  @override
+  String farmStep(String current, String total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get farmTaluka => 'Taluka';
+
+  @override
+  String get farmUseLocation => 'Use my location';
+
+  @override
+  String get farmVariety => 'Variety';
+
+  @override
+  String get farmVillage => 'Village';
+
+  @override
+  String get farmWaterSource => 'Water source';
+
+  @override
   String get fertilizer_area => 'Farm area (acres)';
 
   @override
@@ -1063,6 +1338,56 @@ class L10nEn extends L10n {
 
   @override
   String get fertilizer_totalBags => 'Total Bags Needed';
+
+  @override
+  String homeGreeting(String name) {
+    return 'Namaste, $name';
+  }
+
+  @override
+  String get homeMyCrops => 'My crops';
+
+  @override
+  String mandiArrival(String date) {
+    return 'Market date $date';
+  }
+
+  @override
+  String get mandiCrop => 'Crop';
+
+  @override
+  String get mandiEstimate => 'Estimated rate';
+
+  @override
+  String get mandiEstimateNote =>
+      'No live market data for this crop here. This is a government baseline, not a traded price.';
+
+  @override
+  String get mandiIndicative => 'Indicative rate';
+
+  @override
+  String get mandiIndicativeNote =>
+      'Real government data, but not a fresh reading from your local market today.';
+
+  @override
+  String get mandiLive => 'Live government rate';
+
+  @override
+  String get mandiNotYourDistrict => 'Nearest reporting market';
+
+  @override
+  String get mandiPerQuintal => 'per quintal';
+
+  @override
+  String mandiRange(String max, String min) {
+    return 'Range $min – $max';
+  }
+
+  @override
+  String get mandiState => 'State';
+
+  @override
+  String get mandiTitle => 'Mandi prices';
 
   @override
   String get myCrop_acres => 'Acres';
@@ -1287,6 +1612,34 @@ class L10nEn extends L10n {
 
   @override
   String get navigation_yieldAi => 'Yield AI';
+
+  @override
+  String get onboardDistrict => 'District';
+
+  @override
+  String get onboardFinish => 'Continue';
+
+  @override
+  String get onboardMainCrop => 'Main crop';
+
+  @override
+  String get onboardMobile => 'Mobile number';
+
+  @override
+  String get onboardName => 'Your name';
+
+  @override
+  String get onboardSkip => 'Skip for now';
+
+  @override
+  String get onboardTitle => 'Tell us about your farm';
+
+  @override
+  String get onboardVillage => 'Village';
+
+  @override
+  String get onboardWhy =>
+      'This lets us give advice for your area and your crops.';
 
   @override
   String get productsPage_allProducts => '← All Products';
@@ -2055,6 +2408,27 @@ class L10nEn extends L10n {
   String get profitPredictor_totalCost => 'Total Cost';
 
   @override
+  String weatherFeels(String value) {
+    return 'Feels like $value°';
+  }
+
+  @override
+  String get weatherForecast => 'Next days';
+
+  @override
+  String get weatherHeatWarn => 'Very hot. Irrigate early morning or evening.';
+
+  @override
+  String get weatherHumidity => 'Humidity';
+
+  @override
+  String get weatherLocating => 'Finding your location';
+
+  @override
+  String get weatherLocationDenied =>
+      'Location is off. Search for your village instead.';
+
+  @override
   String get weatherPage_allowLocation => 'Allow location access when prompted';
 
   @override
@@ -2144,6 +2518,17 @@ class L10nEn extends L10n {
   String get weatherPage_wind => 'Wind';
 
   @override
+  String weatherRain(String value) {
+    return '$value% chance of rain';
+  }
+
+  @override
+  String get weatherSearchHint => 'Village, town or district';
+
+  @override
+  String get weatherSprayWarn => 'Rain expected — do not spray today.';
+
+  @override
   String get weatherTips_clear =>
       '✅ Clear skies — good conditions for field work & spraying fertilizers.';
 
@@ -2190,6 +2575,16 @@ class L10nEn extends L10n {
   @override
   String get weatherTips_sunnyClear =>
       '🌤️ Good sunny day — great for harvesting & drying grains.';
+
+  @override
+  String get weatherUseLocation => 'Use my location';
+
+  @override
+  String get weatherWind => 'Wind';
+
+  @override
+  String get weatherWindWarn =>
+      'Strong wind — spray will drift. Wait for calmer air.';
 
   @override
   String get yieldPredictor_areaRequired => 'Valid land area is required';

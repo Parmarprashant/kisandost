@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/auth/data/auth_controller.dart';
+import '../features/auth/presentation/login_screen.dart';
+import '../features/auth/presentation/onboarding_screen.dart';
+import '../features/auth/presentation/profile_screen.dart';
+import '../features/community/presentation/community_screen.dart';
+import '../features/diagnosis/presentation/diagnose_screen.dart';
+import '../features/farm/presentation/farm_screen.dart';
 import '../features/home/home_screen.dart';
-import '../features/shared/placeholder_screen.dart';
+import '../features/mandi/presentation/mandi_screen.dart';
+import '../features/more/more_screen.dart';
+import '../features/weather/presentation/weather_screen.dart';
 import '../l10n/app_localizations.dart';
 
 /// Five tabs, as laid out in `docs/mobile/DESIGN.md` §3.
@@ -36,50 +46,91 @@ class _TabSpec {
   final String Function(L10n) label;
 }
 
-final router = GoRouter(
-  initialLocation: '/home',
-  routes: [
-    ShellRoute(
-      builder: (context, state, child) =>
-          _AppShell(location: state.uri.path, child: child),
-      routes: [
-        GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
-        GoRoute(
-          path: '/farm',
-          builder: (context, _) => PlaceholderScreen(
-            title: L10n.of(context).navFarm,
-            icon: Icons.grass_outlined,
-            note: 'P0-7 — fields, crops, add-field wizard',
+/// Reachable without a session. Everything else redirects to the login screen.
+const _publicPaths = {'/login', '/splash'};
+
+/// Signed in, but the profile is not usable yet.
+const _onboardingPath = '/onboarding';
+
+final routerProvider = Provider<GoRouter>((ref) {
+  return GoRouter(
+    initialLocation: '/home',
+
+    // Re-runs the redirect whenever auth state changes, so signing out drops
+    // the user to the login screen without any screen having to navigate.
+    refreshListenable: _AuthListenable(ref),
+
+    redirect: (context, state) {
+      final auth = ref.read(authControllerProvider);
+      final path = state.uri.path;
+
+      // Still looking for a stored session: hold on the splash rather than
+      // flashing the login screen at someone who is already signed in.
+      if (auth is AuthChecking) {
+        return path == '/splash' ? null : '/splash';
+      }
+
+      if (auth is! SignedIn) {
+        return path == '/login' ? null : '/login';
+      }
+
+      // A fresh Google sign-up has a name and an email but nothing about the
+      // farm, so it is asked once before entering the shell.
+      if (auth.user.needsOnboarding) {
+        return path == _onboardingPath ? null : _onboardingPath;
+      }
+
+      // Signed in, profile complete, but sitting on a public or setup screen.
+      if (_publicPaths.contains(path) || path == _onboardingPath) {
+        return '/home';
+      }
+
+      return null;
+    },
+
+    routes: [
+      GoRoute(path: '/splash', builder: (_, _) => const _SplashScreen()),
+      GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
+      GoRoute(
+        path: _onboardingPath,
+        builder: (_, _) => const OnboardingScreen(),
+      ),
+      ShellRoute(
+        builder: (context, state, child) =>
+            _AppShell(location: state.uri.path, child: child),
+        routes: [
+          GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
+          GoRoute(path: '/farm', builder: (_, _) => const FarmScreen()),
+          GoRoute(path: '/diagnose', builder: (_, _) => const DiagnoseScreen()),
+          GoRoute(path: '/insights', builder: (_, _) => const MandiScreen()),
+          GoRoute(path: '/more', builder: (_, _) => const MoreScreen()),
+          GoRoute(
+            path: '/community',
+            builder: (_, _) => const CommunityScreen(),
           ),
-        ),
-        GoRoute(
-          path: '/diagnose',
-          builder: (context, _) => PlaceholderScreen(
-            title: L10n.of(context).navDiagnose,
-            icon: Icons.camera_alt_outlined,
-            note: 'P0-4 — camera → AgriVision → diagnosis',
-          ),
-        ),
-        GoRoute(
-          path: '/insights',
-          builder: (context, _) => PlaceholderScreen(
-            title: L10n.of(context).navInsights,
-            icon: Icons.insights_outlined,
-            note: 'P0-6 mandi prices · P1-1/P1-2 predictors',
-          ),
-        ),
-        GoRoute(
-          path: '/more',
-          builder: (context, _) => PlaceholderScreen(
-            title: L10n.of(context).navMore,
-            icon: Icons.apps_outlined,
-            note: 'P0-9 community · P1-4 schemes · P1-5 products',
-          ),
-        ),
-      ],
-    ),
-  ],
-);
+          GoRoute(path: '/weather', builder: (_, _) => const WeatherScreen()),
+          GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
+        ],
+      ),
+    ],
+  );
+});
+
+/// Bridges Riverpod's auth state to go_router's [Listenable] refresh hook.
+class _AuthListenable extends ChangeNotifier {
+  _AuthListenable(Ref ref) {
+    ref.listen(authControllerProvider, (_, _) => notifyListeners());
+  }
+}
+
+class _SplashScreen extends StatelessWidget {
+  const _SplashScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+  }
+}
 
 class _AppShell extends StatelessWidget {
   const _AppShell({required this.location, required this.child});
