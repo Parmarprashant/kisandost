@@ -13,6 +13,7 @@ import '../features/farm/presentation/farm_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/more/more_screen.dart';
 import '../features/predictions/presentation/insights_screen.dart';
+import '../features/products/presentation/products_screen.dart';
 import '../features/schemes/presentation/schemes_screen.dart';
 import '../features/weather/presentation/weather_screen.dart';
 import '../l10n/app_localizations.dart';
@@ -116,6 +117,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (_, _) => const FertilizerScreen(),
           ),
           GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
+          GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),
           GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
         ],
       ),

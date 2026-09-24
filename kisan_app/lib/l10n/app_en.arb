@@ -719,6 +719,8 @@
     }
   },
   "predYieldResult": "Expected harvest",
+  "productsFeatures": "Why it helps",
+  "productsNone": "No products match that search",
   "productsPage_allProducts": "← All Products",
   "productsPage_buyOnWhatsApp": "Buy on WhatsApp",
   "productsPage_footer": "© 2026 KisanDost · Empowering Indian Farmers",
@@ -737,6 +739,18 @@
   "productsPage_tabs_overview": "Overview",
   "productsPage_tabs_usage": "Usage",
   "productsPage_viewProduct": "View Product →",
+  "productsPrice": "₹{amount}",
+  "@productsPrice": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "productsSearch": "Search products",
+  "productsStaticNote": "A reference list of common agri-inputs. Prices are indicative — check with your dealer.",
+  "productsTitle": "Products",
+  "productsUsage": "How to use",
   "products_Abamectin_description": "Effective against mites and leaf miners in a variety of crops.",
   "products_Abamectin_longDescription": "Abamectin 1.9% EC is a mixture of avermectins, producing toxic effects in insects and mites by stimulating the release of gamma-aminobutyric acid (GABA), an inhibitory neurotransmitter. It provides excellent control of spider mites and leaf miners in crops like roses, grapes, apples, and tomatoes.",
   "products_Abamectin_name": "Abamectin 1.9% EC",
@@ -896,6 +910,8 @@
   "products_TransfluthrinLV_tag": "Household Insecticide",
   "products_TransfluthrinLV_usage_area": "Effective for rooms up to 300-400 sq.ft",
   "products_TransfluthrinLV_usage_indoor": "Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection",
+  "profileEdit": "Edit profile",
+  "profileSaved": "Saved",
   "profitPredictor_autoFetchDesc": "Retrieving weather and environmental data",
   "profitPredictor_autoFetchTitle": "Auto-fetching data...",
   "profitPredictor_confidence": "Confidence",

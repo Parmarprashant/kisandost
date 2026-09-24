@@ -1814,6 +1814,12 @@ class L10nEn extends L10n {
   String get predYieldResult => 'Expected harvest';
 
   @override
+  String get productsFeatures => 'Why it helps';
+
+  @override
+  String get productsNone => 'No products match that search';
+
+  @override
   String get productsPage_allProducts => '← All Products';
 
   @override
@@ -1870,6 +1876,24 @@ class L10nEn extends L10n {
 
   @override
   String get productsPage_viewProduct => 'View Product →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'Search products';
+
+  @override
+  String get productsStaticNote =>
+      'A reference list of common agri-inputs. Prices are indicative — check with your dealer.';
+
+  @override
+  String get productsTitle => 'Products';
+
+  @override
+  String get productsUsage => 'How to use';
 
   @override
   String get products_Abamectin_description =>
@@ -2472,6 +2496,12 @@ class L10nEn extends L10n {
   @override
   String get products_TransfluthrinLV_usage_indoor =>
       'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection';
+
+  @override
+  String get profileEdit => 'Edit profile';
+
+  @override
+  String get profileSaved => 'Saved';
 
   @override
   String get profitPredictor_autoFetchDesc =>

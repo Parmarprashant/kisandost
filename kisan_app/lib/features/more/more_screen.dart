@@ -24,6 +24,7 @@ class MoreScreen extends ConsumerWidget {
       _Entry(Icons.cloud_outlined, l10n.navigation_weather, '/weather'),
       _Entry(Icons.science_outlined, l10n.fertTitle, '/fertilizer'),
       _Entry(Icons.account_balance_outlined, l10n.schemesTitle, '/schemes'),
+      _Entry(Icons.shopping_bag_outlined, l10n.productsTitle, '/products'),
       _Entry(Icons.person_outline, l10n.authProfile, '/profile'),
     ];
 
@@ -62,7 +63,7 @@ class MoreScreen extends ConsumerWidget {
             enabled: false,
             leading: const Icon(Icons.more_horiz),
             title: Text(l10n.comingSoon),
-            subtitle: const Text('Products · QR scanner · Predictors'),
+            subtitle: const Text('QR scanner · Advisory timeline'),
           ),
         ],
       ),

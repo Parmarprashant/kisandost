@@ -1816,6 +1816,12 @@ class L10nMr extends L10n {
   String get predYieldResult => 'अपेक्षित उत्पादन';
 
   @override
+  String get productsFeatures => 'का उपयुक्त आहे';
+
+  @override
+  String get productsNone => 'या शोधाशी जुळणारे उत्पादन नाही';
+
+  @override
   String get productsPage_allProducts => '← सर्व उत्पादने';
 
   @override
@@ -1873,6 +1879,24 @@ class L10nMr extends L10n {
 
   @override
   String get productsPage_viewProduct => 'उत्पादन पहा →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'उत्पादन शोधा';
+
+  @override
+  String get productsStaticNote =>
+      'सामान्य शेती साहित्याची संदर्भ यादी. दर अंदाजित आहेत — तुमच्या विक्रेत्याकडे तपासा.';
+
+  @override
+  String get productsTitle => 'उत्पादने';
+
+  @override
+  String get productsUsage => 'कसे वापरावे';
 
   @override
   String get products_Abamectin_description =>
@@ -2475,6 +2499,12 @@ class L10nMr extends L10n {
   @override
   String get products_TransfluthrinLV_usage_indoor =>
       'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection';
+
+  @override
+  String get profileEdit => 'प्रोफाइल बदला';
+
+  @override
+  String get profileSaved => 'जतन केले';
 
   @override
   String get profitPredictor_autoFetchDesc =>

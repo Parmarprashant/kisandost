@@ -3335,6 +3335,18 @@ abstract class L10n {
   /// **'Expected harvest'**
   String get predYieldResult;
 
+  /// No description provided for @productsFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Why it helps'**
+  String get productsFeatures;
+
+  /// No description provided for @productsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No products match that search'**
+  String get productsNone;
+
   /// No description provided for @productsPage_allProducts.
   ///
   /// In en, this message translates to:
@@ -3442,6 +3454,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'View Product →'**
   String get productsPage_viewProduct;
+
+  /// No description provided for @productsPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'₹{amount}'**
+  String productsPrice(String amount);
+
+  /// No description provided for @productsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products'**
+  String get productsSearch;
+
+  /// No description provided for @productsStaticNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A reference list of common agri-inputs. Prices are indicative — check with your dealer.'**
+  String get productsStaticNote;
+
+  /// No description provided for @productsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get productsTitle;
+
+  /// No description provided for @productsUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use'**
+  String get productsUsage;
 
   /// No description provided for @products_Abamectin_description.
   ///
@@ -4396,6 +4438,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection'**
   String get products_TransfluthrinLV_usage_indoor;
+
+  /// No description provided for @profileEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEdit;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get profileSaved;
 
   /// No description provided for @profitPredictor_autoFetchDesc.
   ///

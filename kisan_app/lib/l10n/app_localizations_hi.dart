@@ -1823,6 +1823,12 @@ class L10nHi extends L10n {
   String get predYieldResult => 'अनुमानित पैदावार';
 
   @override
+  String get productsFeatures => 'क्यों फ़ायदेमंद है';
+
+  @override
+  String get productsNone => 'इस खोज से कोई उत्पाद नहीं मिला';
+
+  @override
   String get productsPage_allProducts => '← सभी उत्पाद';
 
   @override
@@ -1880,6 +1886,24 @@ class L10nHi extends L10n {
 
   @override
   String get productsPage_viewProduct => 'उत्पाद देखें →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'उत्पाद खोजें';
+
+  @override
+  String get productsStaticNote =>
+      'आम कृषि सामग्री की संदर्भ सूची। भाव अनुमानित हैं — अपने डीलर से पुष्टि करें।';
+
+  @override
+  String get productsTitle => 'उत्पाद';
+
+  @override
+  String get productsUsage => 'कैसे इस्तेमाल करें';
 
   @override
   String get products_Abamectin_description =>
@@ -2483,6 +2507,12 @@ class L10nHi extends L10n {
   @override
   String get products_TransfluthrinLV_usage_indoor =>
       'मानक लिक्विड वेपोराइजर मशीन के साथ प्रयोग करें, एक रिफिल 30-45 रातों की सुरक्षा प्रदान करता है';
+
+  @override
+  String get profileEdit => 'प्रोफ़ाइल बदलें';
+
+  @override
+  String get profileSaved => 'सहेजा गया';
 
   @override
   String get profitPredictor_autoFetchDesc =>
