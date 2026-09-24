@@ -1708,6 +1708,112 @@ class L10nEn extends L10n {
       'This lets us give advice for your area and your crops.';
 
   @override
+  String predAbove(String value) {
+    return '$value% above your region';
+  }
+
+  @override
+  String get predArea => 'Area (acres)';
+
+  @override
+  String predBelow(String value) {
+    return '$value% below your region';
+  }
+
+  @override
+  String predConfidence(String value) {
+    return '$value% confident';
+  }
+
+  @override
+  String get predCosts => 'Your input costs';
+
+  @override
+  String get predCrop => 'Crop';
+
+  @override
+  String get predEstimatedPrice =>
+      'This estimate uses a baseline price, not a live market rate.';
+
+  @override
+  String get predFertCost => 'Fertilizer cost (₹)';
+
+  @override
+  String get predIrrigCost => 'Irrigation cost (₹)';
+
+  @override
+  String get predLoss => 'You may not cover your input costs.';
+
+  @override
+  String get predMargin => 'Left after input costs';
+
+  @override
+  String get predMarginNote =>
+      'This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.';
+
+  @override
+  String get predNdvi => 'Crop greenness (NDVI)';
+
+  @override
+  String get predNdviHelp =>
+      'How green and healthy the crop looks from above. Leave as-is if unsure.';
+
+  @override
+  String predPerAcre(String value) {
+    return '$value t per acre';
+  }
+
+  @override
+  String get predPestCost => 'Pesticide cost (₹)';
+
+  @override
+  String predPrice(String value) {
+    return '₹$value per quintal';
+  }
+
+  @override
+  String predQuintals(String value) {
+    return '$value quintals';
+  }
+
+  @override
+  String get predRainfall => 'Season rainfall (mm)';
+
+  @override
+  String get predRevenue => 'Expected revenue';
+
+  @override
+  String get predRun => 'Estimate';
+
+  @override
+  String get predRunning => 'Working';
+
+  @override
+  String get predSoilMoisture => 'Soil moisture (%)';
+
+  @override
+  String get predTabMandi => 'Mandi';
+
+  @override
+  String get predTabProfit => 'Profit';
+
+  @override
+  String get predTabYield => 'Yield';
+
+  @override
+  String predTonnes(String value) {
+    return '$value tonnes';
+  }
+
+  @override
+  String predVsRegion(String value) {
+    return 'Regional average $value t per acre';
+  }
+
+  @override
+  String get predYieldResult => 'Expected harvest';
+
+  @override
   String get productsPage_allProducts => '← All Products';
 
   @override

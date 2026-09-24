@@ -1717,6 +1717,112 @@ class L10nHi extends L10n {
       'इससे हम आपके इलाक़े और फ़सल के हिसाब से सलाह दे पाएँगे।';
 
   @override
+  String predAbove(String value) {
+    return 'आपके क्षेत्र से $value% ज़्यादा';
+  }
+
+  @override
+  String get predArea => 'क्षेत्रफल (एकड़)';
+
+  @override
+  String predBelow(String value) {
+    return 'आपके क्षेत्र से $value% कम';
+  }
+
+  @override
+  String predConfidence(String value) {
+    return '$value% निश्चित';
+  }
+
+  @override
+  String get predCosts => 'आपका लागत खर्च';
+
+  @override
+  String get predCrop => 'फ़सल';
+
+  @override
+  String get predEstimatedPrice =>
+      'यह अनुमान आधार भाव पर है, लाइव मंडी भाव पर नहीं।';
+
+  @override
+  String get predFertCost => 'खाद का खर्च (₹)';
+
+  @override
+  String get predIrrigCost => 'सिंचाई का खर्च (₹)';
+
+  @override
+  String get predLoss => 'हो सकता है लागत भी न निकले।';
+
+  @override
+  String get predMargin => 'लागत के बाद बचत';
+
+  @override
+  String get predMarginNote =>
+      'इसमें सिर्फ़ आपकी डाली हुई खाद, दवा और सिंचाई गिनी है। बीज, मज़दूरी, ज़मीन और भाड़ा शामिल नहीं, इसलिए असली मुनाफ़ा कम होगा।';
+
+  @override
+  String get predNdvi => 'फ़सल की हरियाली (NDVI)';
+
+  @override
+  String get predNdviHelp =>
+      'ऊपर से फ़सल कितनी हरी और स्वस्थ दिखती है। पता न हो तो वैसे ही रहने दें।';
+
+  @override
+  String predPerAcre(String value) {
+    return '$value टन प्रति एकड़';
+  }
+
+  @override
+  String get predPestCost => 'दवा का खर्च (₹)';
+
+  @override
+  String predPrice(String value) {
+    return '₹$value प्रति क्विंटल';
+  }
+
+  @override
+  String predQuintals(String value) {
+    return '$value क्विंटल';
+  }
+
+  @override
+  String get predRainfall => 'मौसम की बारिश (मि.मी.)';
+
+  @override
+  String get predRevenue => 'अनुमानित आमदनी';
+
+  @override
+  String get predRun => 'अनुमान लगाएँ';
+
+  @override
+  String get predRunning => 'गणना हो रही है';
+
+  @override
+  String get predSoilMoisture => 'मिट्टी की नमी (%)';
+
+  @override
+  String get predTabMandi => 'मंडी';
+
+  @override
+  String get predTabProfit => 'मुनाफ़ा';
+
+  @override
+  String get predTabYield => 'उपज';
+
+  @override
+  String predTonnes(String value) {
+    return '$value टन';
+  }
+
+  @override
+  String predVsRegion(String value) {
+    return 'क्षेत्रीय औसत $value टन प्रति एकड़';
+  }
+
+  @override
+  String get predYieldResult => 'अनुमानित पैदावार';
+
+  @override
   String get productsPage_allProducts => '← सभी उत्पाद';
 
   @override

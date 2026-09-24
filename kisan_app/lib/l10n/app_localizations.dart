@@ -3161,6 +3161,180 @@ abstract class L10n {
   /// **'This lets us give advice for your area and your crops.'**
   String get onboardWhy;
 
+  /// No description provided for @predAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% above your region'**
+  String predAbove(String value);
+
+  /// No description provided for @predArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (acres)'**
+  String get predArea;
+
+  /// No description provided for @predBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% below your region'**
+  String predBelow(String value);
+
+  /// No description provided for @predConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% confident'**
+  String predConfidence(String value);
+
+  /// No description provided for @predCosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Your input costs'**
+  String get predCosts;
+
+  /// No description provided for @predCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get predCrop;
+
+  /// No description provided for @predEstimatedPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'This estimate uses a baseline price, not a live market rate.'**
+  String get predEstimatedPrice;
+
+  /// No description provided for @predFertCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer cost (₹)'**
+  String get predFertCost;
+
+  /// No description provided for @predIrrigCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation cost (₹)'**
+  String get predIrrigCost;
+
+  /// No description provided for @predLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'You may not cover your input costs.'**
+  String get predLoss;
+
+  /// No description provided for @predMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Left after input costs'**
+  String get predMargin;
+
+  /// No description provided for @predMarginNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.'**
+  String get predMarginNote;
+
+  /// No description provided for @predNdvi.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop greenness (NDVI)'**
+  String get predNdvi;
+
+  /// No description provided for @predNdviHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'How green and healthy the crop looks from above. Leave as-is if unsure.'**
+  String get predNdviHelp;
+
+  /// No description provided for @predPerAcre.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} t per acre'**
+  String predPerAcre(String value);
+
+  /// No description provided for @predPestCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide cost (₹)'**
+  String get predPestCost;
+
+  /// No description provided for @predPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'₹{value} per quintal'**
+  String predPrice(String value);
+
+  /// No description provided for @predQuintals.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} quintals'**
+  String predQuintals(String value);
+
+  /// No description provided for @predRainfall.
+  ///
+  /// In en, this message translates to:
+  /// **'Season rainfall (mm)'**
+  String get predRainfall;
+
+  /// No description provided for @predRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected revenue'**
+  String get predRevenue;
+
+  /// No description provided for @predRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate'**
+  String get predRun;
+
+  /// No description provided for @predRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Working'**
+  String get predRunning;
+
+  /// No description provided for @predSoilMoisture.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil moisture (%)'**
+  String get predSoilMoisture;
+
+  /// No description provided for @predTabMandi.
+  ///
+  /// In en, this message translates to:
+  /// **'Mandi'**
+  String get predTabMandi;
+
+  /// No description provided for @predTabProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit'**
+  String get predTabProfit;
+
+  /// No description provided for @predTabYield.
+  ///
+  /// In en, this message translates to:
+  /// **'Yield'**
+  String get predTabYield;
+
+  /// No description provided for @predTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} tonnes'**
+  String predTonnes(String value);
+
+  /// No description provided for @predVsRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'Regional average {value} t per acre'**
+  String predVsRegion(String value);
+
+  /// No description provided for @predYieldResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected harvest'**
+  String get predYieldResult;
+
   /// No description provided for @productsPage_allProducts.
   ///
   /// In en, this message translates to:

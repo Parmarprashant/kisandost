@@ -634,6 +634,91 @@
   "onboardTitle": "Tell us about your farm",
   "onboardVillage": "Village",
   "onboardWhy": "This lets us give advice for your area and your crops.",
+  "predAbove": "{value}% above your region",
+  "@predAbove": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predArea": "Area (acres)",
+  "predBelow": "{value}% below your region",
+  "@predBelow": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predConfidence": "{value}% confident",
+  "@predConfidence": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predCosts": "Your input costs",
+  "predCrop": "Crop",
+  "predEstimatedPrice": "This estimate uses a baseline price, not a live market rate.",
+  "predFertCost": "Fertilizer cost (₹)",
+  "predIrrigCost": "Irrigation cost (₹)",
+  "predLoss": "You may not cover your input costs.",
+  "predMargin": "Left after input costs",
+  "predMarginNote": "This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.",
+  "predNdvi": "Crop greenness (NDVI)",
+  "predNdviHelp": "How green and healthy the crop looks from above. Leave as-is if unsure.",
+  "predPerAcre": "{value} t per acre",
+  "@predPerAcre": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predPestCost": "Pesticide cost (₹)",
+  "predPrice": "₹{value} per quintal",
+  "@predPrice": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predQuintals": "{value} quintals",
+  "@predQuintals": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predRainfall": "Season rainfall (mm)",
+  "predRevenue": "Expected revenue",
+  "predRun": "Estimate",
+  "predRunning": "Working",
+  "predSoilMoisture": "Soil moisture (%)",
+  "predTabMandi": "Mandi",
+  "predTabProfit": "Profit",
+  "predTabYield": "Yield",
+  "predTonnes": "{value} tonnes",
+  "@predTonnes": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predVsRegion": "Regional average {value} t per acre",
+  "@predVsRegion": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predYieldResult": "Expected harvest",
   "productsPage_allProducts": "← All Products",
   "productsPage_buyOnWhatsApp": "Buy on WhatsApp",
   "productsPage_footer": "© 2026 KisanDost · Empowering Indian Farmers",
