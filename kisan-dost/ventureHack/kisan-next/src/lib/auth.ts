@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify } from 'jose';
 import bcrypt from 'bcryptjs';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import dbConnect from './mongodb';
 import User from '../models/User';
 
@@ -56,9 +56,31 @@ export async function clearAuthCookie() {
   });
 }
 
-export async function getSession() {
+/**
+ * Reads the session token.
+ *
+ * The browser sends it as an httpOnly cookie. A mobile client cannot use
+ * cookies, so an `Authorization: Bearer <jwt>` header is accepted as a
+ * fallback. The cookie is checked first, so nothing about the web app's
+ * behaviour changes.
+ */
+async function readToken(): Promise<string | null> {
   const cookieStore = await cookies();
-  const token = cookieStore.get(AUTH_COOKIE_NAME)?.value;
+  const fromCookie = cookieStore.get(AUTH_COOKIE_NAME)?.value;
+  if (fromCookie) return fromCookie;
+
+  const headerStore = await headers();
+  const authorization = headerStore.get('authorization');
+  if (!authorization) return null;
+
+  const [scheme, value] = authorization.split(' ');
+  if (scheme?.toLowerCase() !== 'bearer' || !value) return null;
+
+  return value.trim() || null;
+}
+
+export async function getSession() {
+  const token = await readToken();
   if (!token) return null;
   return await verifyToken(token);
 }

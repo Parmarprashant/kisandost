@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/api_exception.dart';
+import '../../../core/network/cache_policy.dart';
 import '../../../core/network/dio_client.dart';
 import 'weather_models.dart';
 
@@ -44,6 +45,8 @@ class WeatherRepository {
 final weatherProvider = FutureProvider.family<WeatherSnapshot, String>((
   ref,
   query,
-) {
-  return ref.read(weatherRepositoryProvider).fetch(query);
+) async {
+  final snapshot = await ref.read(weatherRepositoryProvider).fetch(query);
+  cacheFor(ref, weatherCacheWindow);
+  return snapshot;
 });

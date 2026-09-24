@@ -13,6 +13,17 @@
   "appOffline": "You are offline. Showing saved information.",
   "appRetry": "Try again",
   "appSlow": "This is taking longer than usual. Please wait.",
+  "authCancelled": "Sign-in was cancelled.",
+  "authGoogle": "Continue with Google",
+  "authOffline": "You are offline. Connect and try again.",
+  "authProfile": "Profile",
+  "authRejected": "Google could not sign you in. Please try again.",
+  "authServerError": "We could not sign you in right now.",
+  "authSignOut": "Sign out",
+  "authSigningIn": "Signing in",
+  "authStateMismatch": "That sign-in link did not match. Please start again.",
+  "authTagline": "Your farming companion",
+  "authWhyGoogle": "We use your Google account so you never have to remember a password.",
   "chatWidget_callExpert": "Call Expert",
   "chatWidget_greeting": "🙏 Namaste! I am your KisanDost AI Assistant.\n\nI can help you with crop diseases, fertilizer, weather, profit prediction, government schemes, and more — in Hindi, English, Gujarati, or Marathi!\n\nSimply ask your question below 👇",
   "chatWidget_headerSub": "Hindi • English • Gujarati • Marathi",
@@ -107,6 +118,27 @@
   "communities_visitYoutube": "Visit YouTube Channel",
   "communities_watchMore": "Watch More on YouTube",
   "communities_welfareSchemes": "Farmer Welfare Schemes",
+  "communityAddComment": "Write a reply",
+  "communityAsk": "Ask farmers",
+  "communityComments": "{count} comments",
+  "@communityComments": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "communityCrop": "Crop",
+  "communityDetails": "Describe it",
+  "communityEmpty": "No posts yet",
+  "communityHelpful": "Helpful",
+  "communityNoComments": "No replies yet. Be the first.",
+  "communityPost": "Post",
+  "communityPostTitle": "What is the problem?",
+  "communityPosting": "Posting",
+  "communitySend": "Send",
+  "communitySignInNote": "Sign in to reply or mark posts helpful.",
+  "communityTitle": "Farmer community",
   "cropSuggestion_aiAdvisory": "AI Advisory for {district}",
   "@cropSuggestion_aiAdvisory": {
     "placeholders": {
@@ -313,6 +345,37 @@
   "dashboard_tryPredictor": "Try Predictor",
   "dashboard_viewDetails": "View Details",
   "dashboard_waterNeedLabel": "Water Need",
+  "diagnoseAnalysing": "Analysing leaf",
+  "diagnoseBuy": "Products to use",
+  "diagnoseCauses": "Why it happened",
+  "diagnoseCompressing": "Preparing photo",
+  "diagnoseConfidence": "{value}% sure",
+  "@diagnoseConfidence": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "diagnoseExpertNote": "Please confirm with an expert before you spray.",
+  "diagnoseFarmingSteps": "Farming steps",
+  "diagnoseGallery": "Choose from gallery",
+  "diagnoseGuide": "Fill the frame with one affected leaf",
+  "diagnoseHealthy": "Healthy",
+  "diagnoseHowToFix": "How to get a good photo",
+  "diagnoseInfected": "Disease found",
+  "diagnoseKeepPhoto": "Your photo is saved. You can try again.",
+  "diagnoseMatching": "Finding treatments",
+  "diagnoseNoCamera": "Camera is not available on this device.",
+  "diagnosePermission": "Allow camera access to check your crop.",
+  "diagnoseRetake": "Check another leaf",
+  "diagnoseSlowNote": "The first check of the day can take up to a minute.",
+  "diagnoseSymptoms": "What to look for",
+  "diagnoseTakePhoto": "Take photo",
+  "diagnoseTooLarge": "That photo is too large. Please take a new one.",
+  "diagnoseUnclear": "The photo was not clear enough",
+  "diagnoseUploading": "Uploading",
+  "diagnoseWhatToDo": "What to do now",
   "diseasesPage_bestSeason": "Best Season: Kharif (Monsoon)",
   "diseasesPage_care": "{crop} CARE",
   "@diseasesPage_care": {
@@ -345,6 +408,61 @@
   "diseasesPage_symptoms": "SYMPTOMS (लक्षण)",
   "diseasesPage_title": "Crop Disease & Pest Management",
   "diseasesPage_viewStoreProducts": "View Store Products",
+  "farmAddCrop": "Add crop",
+  "farmAddField": "Add field",
+  "farmArea": "Area",
+  "farmBack": "Back",
+  "farmBadNumber": "Enter a number",
+  "farmCancel": "Cancel",
+  "farmCropName": "Crop",
+  "farmCrops": "Crops",
+  "farmCultivationMethod": "How was it sown",
+  "farmDayCount": "Day {days}",
+  "@farmDayCount": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "farmDelete": "Delete",
+  "farmDeleteField": "Delete this field?",
+  "farmDeleteFieldNote": "The crops in it will be removed too.",
+  "farmDistrict": "District",
+  "farmFieldName": "Field name",
+  "farmFields": "Fields",
+  "farmFrequency": "Watering",
+  "farmIrrigation": "Irrigation",
+  "farmNext": "Next",
+  "farmNoCrops": "No crops in this field yet",
+  "farmNoFields": "No fields yet",
+  "farmNoFieldsHint": "Add your first field to get advice for your crops.",
+  "farmNotes": "Notes",
+  "farmPreviousCrop": "Last crop",
+  "farmRequired": "Please fill this in",
+  "farmReview": "Check your answers",
+  "farmSave": "Save",
+  "farmSaved": "Saved",
+  "farmSaving": "Saving",
+  "farmSoilType": "Soil type",
+  "farmSowingDate": "Sowing date",
+  "farmState": "State",
+  "farmStep": "Step {current} of {total}",
+  "@farmStep": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "farmTaluka": "Taluka",
+  "farmUseLocation": "Use my location",
+  "farmVariety": "Variety",
+  "farmVillage": "Village",
+  "farmWaterSource": "Water source",
   "fertilizer_area": "Farm area (acres)",
   "fertilizer_calculate": "Calculate",
   "fertilizer_cost": "Cost Estimate",
@@ -356,6 +474,44 @@
   "fertilizer_soilType": "Soil Type",
   "fertilizer_title": "Fertilizer Calculator",
   "fertilizer_totalBags": "Total Bags Needed",
+  "homeGreeting": "Namaste, {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeMyCrops": "My crops",
+  "mandiArrival": "Market date {date}",
+  "@mandiArrival": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "mandiCrop": "Crop",
+  "mandiEstimate": "Estimated rate",
+  "mandiEstimateNote": "No live market data for this crop here. This is a government baseline, not a traded price.",
+  "mandiIndicative": "Indicative rate",
+  "mandiIndicativeNote": "Real government data, but not a fresh reading from your local market today.",
+  "mandiLive": "Live government rate",
+  "mandiNotYourDistrict": "Nearest reporting market",
+  "mandiPerQuintal": "per quintal",
+  "mandiRange": "Range {min} – {max}",
+  "@mandiRange": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      },
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "mandiState": "State",
+  "mandiTitle": "Mandi prices",
   "myCrop_acres": "Acres",
   "myCrop_addCrop": "+ Add Crop",
   "myCrop_addField": "+ Add Field",
@@ -429,6 +585,15 @@
   "navigation_profile": "Profile",
   "navigation_weather": "Weather",
   "navigation_yieldAi": "Yield AI",
+  "onboardDistrict": "District",
+  "onboardFinish": "Continue",
+  "onboardMainCrop": "Main crop",
+  "onboardMobile": "Mobile number",
+  "onboardName": "Your name",
+  "onboardSkip": "Skip for now",
+  "onboardTitle": "Tell us about your farm",
+  "onboardVillage": "Village",
+  "onboardWhy": "This lets us give advice for your area and your crops.",
   "productsPage_allProducts": "← All Products",
   "productsPage_buyOnWhatsApp": "Buy on WhatsApp",
   "productsPage_footer": "© 2026 KisanDost · Empowering Indian Farmers",
@@ -639,6 +804,19 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "weatherFeels": "Feels like {value}°",
+  "@weatherFeels": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "weatherForecast": "Next days",
+  "weatherHeatWarn": "Very hot. Irrigate early morning or evening.",
+  "weatherHumidity": "Humidity",
+  "weatherLocating": "Finding your location",
+  "weatherLocationDenied": "Location is off. Search for your village instead.",
   "weatherPage_allowLocation": "Allow location access when prompted",
   "weatherPage_cloudCover": "Cloud Cover",
   "weatherPage_detectingLocation": "Detecting your location…",
@@ -668,6 +846,16 @@
   "weatherPage_uvVeryHigh": "Very High",
   "weatherPage_visibility": "Visibility",
   "weatherPage_wind": "Wind",
+  "weatherRain": "{value}% chance of rain",
+  "@weatherRain": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "weatherSearchHint": "Village, town or district",
+  "weatherSprayWarn": "Rain expected — do not spray today.",
   "weatherTips_clear": "✅ Clear skies — good conditions for field work & spraying fertilizers.",
   "weatherTips_extremeHeat": "🔥 Extreme heat — water crops early morning, shade young plants.",
   "weatherTips_foggy": "🌫️ Foggy morning — delay pesticide spraying until fog clears.",
@@ -680,6 +868,9 @@
   "weatherTips_storm": "⚡ Storm alert — avoid fieldwork, secure crops & equipment now.",
   "weatherTips_strongWind": "💨 Strong winds — avoid spraying, secure mulch & shade nets.",
   "weatherTips_sunnyClear": "🌤️ Good sunny day — great for harvesting & drying grains.",
+  "weatherUseLocation": "Use my location",
+  "weatherWind": "Wind",
+  "weatherWindWarn": "Strong wind — spray will drift. Wait for calmer air.",
   "yieldPredictor_areaRequired": "Valid land area is required",
   "yieldPredictor_averageRegional": "Regional Average",
   "yieldPredictor_baseYield": "Base yield",

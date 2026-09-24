@@ -13,6 +13,7 @@ class KisanApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
+    final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
       title: 'KisanDost',

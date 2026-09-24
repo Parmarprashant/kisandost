@@ -30,7 +30,8 @@ export async function POST(request: Request) {
     const token = await createToken({ userId: newUser._id.toString(), username: newUser.username });
     await setAuthCookie(token);
 
-    return NextResponse.json({ message: 'User registered successfully', user: { id: newUser._id, username: newUser.username, name: newUser.name } }, { status: 201 });
+    // See the note in /auth/login — native clients need the token in the body.
+    return NextResponse.json({ message: 'User registered successfully', token, user: { id: newUser._id, username: newUser.username, name: newUser.name } }, { status: 201 });
   } catch (error: any) {
     console.error('Registration error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

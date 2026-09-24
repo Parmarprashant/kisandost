@@ -30,7 +30,10 @@ export async function POST(request: Request) {
     const token = await createToken({ userId: user._id.toString(), username: user.username });
     await setAuthCookie(token);
 
-    return NextResponse.json({ message: 'Logged in successfully', user: { id: user._id, username: user.username, name: user.name } }, { status: 200 });
+    // The token is returned in the body as well as set as a cookie: a native
+    // client cannot read an httpOnly cookie and sends it as a bearer header
+    // instead. The cookie keeps the web app working exactly as before.
+    return NextResponse.json({ message: 'Logged in successfully', token, user: { id: user._id, username: user.username, name: user.name } }, { status: 200 });
   } catch (error: any) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

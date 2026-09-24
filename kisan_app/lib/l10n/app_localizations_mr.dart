@@ -31,6 +31,42 @@ class L10nMr extends L10n {
       'यास नेहमीपेक्षा जास्त वेळ लागत आहे. कृपया प्रतीक्षा करा.';
 
   @override
+  String get authCancelled => 'साइन इन रद्द झाले.';
+
+  @override
+  String get authGoogle => 'Google ने पुढे जा';
+
+  @override
+  String get authOffline => 'तुम्ही ऑफलाइन आहात. जोडून पुन्हा प्रयत्न करा.';
+
+  @override
+  String get authProfile => 'प्रोफाइल';
+
+  @override
+  String get authRejected =>
+      'Google साइन इन करू शकले नाही. पुन्हा प्रयत्न करा.';
+
+  @override
+  String get authServerError => 'आत्ता साइन इन होऊ शकले नाही.';
+
+  @override
+  String get authSignOut => 'साइन आउट';
+
+  @override
+  String get authSigningIn => 'साइन इन होत आहे';
+
+  @override
+  String get authStateMismatch =>
+      'ही साइन इन लिंक जुळली नाही. कृपया पुन्हा सुरू करा.';
+
+  @override
+  String get authTagline => 'तुमचा शेती सोबती';
+
+  @override
+  String get authWhyGoogle =>
+      'आम्ही तुमचे Google खाते वापरतो जेणेकरून पासवर्ड लक्षात ठेवावा लागणार नाही.';
+
+  @override
   String get chatWidget_callExpert => 'तज्ञांना कॉल करा';
 
   @override
@@ -341,6 +377,51 @@ class L10nMr extends L10n {
 
   @override
   String get communities_welfareSchemes => 'शेतकरी कल्याणकारी योजना';
+
+  @override
+  String get communityAddComment => 'उत्तर लिहा';
+
+  @override
+  String get communityAsk => 'शेतकऱ्यांना विचारा';
+
+  @override
+  String communityComments(String count) {
+    return '$count उत्तरे';
+  }
+
+  @override
+  String get communityCrop => 'पीक';
+
+  @override
+  String get communityDetails => 'सविस्तर सांगा';
+
+  @override
+  String get communityEmpty => 'अजून पोस्ट नाही';
+
+  @override
+  String get communityHelpful => 'उपयुक्त';
+
+  @override
+  String get communityNoComments => 'अजून उत्तर नाही. पहिले तुम्ही लिहा.';
+
+  @override
+  String get communityPost => 'पोस्ट करा';
+
+  @override
+  String get communityPostTitle => 'समस्या काय आहे?';
+
+  @override
+  String get communityPosting => 'पोस्ट होत आहे';
+
+  @override
+  String get communitySend => 'पाठवा';
+
+  @override
+  String get communitySignInNote =>
+      'उत्तर देण्यासाठी किंवा उपयुक्त म्हणण्यासाठी साइन इन करा.';
+
+  @override
+  String get communityTitle => 'शेतकरी समुदाय';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {
@@ -976,6 +1057,81 @@ class L10nMr extends L10n {
   String get dashboard_waterNeedLabel => 'पाण्याची गरज';
 
   @override
+  String get diagnoseAnalysing => 'पानाची तपासणी होत आहे';
+
+  @override
+  String get diagnoseBuy => 'वापरायची उत्पादने';
+
+  @override
+  String get diagnoseCauses => 'असे का झाले';
+
+  @override
+  String get diagnoseCompressing => 'फोटो तयार होत आहे';
+
+  @override
+  String diagnoseConfidence(String value) {
+    return '$value% खात्री';
+  }
+
+  @override
+  String get diagnoseExpertNote => 'फवारणीपूर्वी तज्ञांची खात्री करून घ्या.';
+
+  @override
+  String get diagnoseFarmingSteps => 'शेतीचे उपाय';
+
+  @override
+  String get diagnoseGallery => 'गॅलरीमधून निवडा';
+
+  @override
+  String get diagnoseGuide => 'एक बाधित पान पूर्ण फ्रेममध्ये घ्या';
+
+  @override
+  String get diagnoseHealthy => 'निरोगी';
+
+  @override
+  String get diagnoseHowToFix => 'चांगला फोटो कसा काढावा';
+
+  @override
+  String get diagnoseInfected => 'रोग आढळला';
+
+  @override
+  String get diagnoseKeepPhoto =>
+      'तुमचा फोटो जतन केला आहे. तुम्ही पुन्हा प्रयत्न करू शकता.';
+
+  @override
+  String get diagnoseMatching => 'उपचार शोधत आहे';
+
+  @override
+  String get diagnoseNoCamera => 'या फोनमध्ये कॅमेरा उपलब्ध नाही.';
+
+  @override
+  String get diagnosePermission => 'पीक तपासण्यासाठी कॅमेऱ्याची परवानगी द्या.';
+
+  @override
+  String get diagnoseRetake => 'दुसरे पान तपासा';
+
+  @override
+  String get diagnoseSlowNote => 'दिवसातील पहिल्या तपासणीस एक मिनिट लागू शकतो.';
+
+  @override
+  String get diagnoseSymptoms => 'काय पहावे';
+
+  @override
+  String get diagnoseTakePhoto => 'फोटो काढा';
+
+  @override
+  String get diagnoseTooLarge => 'हा फोटो खूप मोठा आहे. कृपया नवीन फोटो काढा.';
+
+  @override
+  String get diagnoseUnclear => 'फोटो पुरेसा स्पष्ट नव्हता';
+
+  @override
+  String get diagnoseUploading => 'पाठवत आहे';
+
+  @override
+  String get diagnoseWhatToDo => 'आता काय करावे';
+
+  @override
   String get diseasesPage_bestSeason => 'सर्वोत्तम हंगाम: खरीप (पावसाळा)';
 
   @override
@@ -1035,6 +1191,124 @@ class L10nMr extends L10n {
   String get diseasesPage_viewStoreProducts => 'स्टोअर उत्पादने पहा';
 
   @override
+  String get farmAddCrop => 'पीक जोडा';
+
+  @override
+  String get farmAddField => 'शेत जोडा';
+
+  @override
+  String get farmArea => 'क्षेत्र';
+
+  @override
+  String get farmBack => 'मागे';
+
+  @override
+  String get farmBadNumber => 'संख्या टाका';
+
+  @override
+  String get farmCancel => 'रद्द करा';
+
+  @override
+  String get farmCropName => 'पीक';
+
+  @override
+  String get farmCrops => 'पिके';
+
+  @override
+  String get farmCultivationMethod => 'कसे पेरले';
+
+  @override
+  String farmDayCount(String days) {
+    return 'दिवस $days';
+  }
+
+  @override
+  String get farmDelete => 'काढून टाका';
+
+  @override
+  String get farmDeleteField => 'हे शेत काढायचे?';
+
+  @override
+  String get farmDeleteFieldNote => 'त्यातील पिकेही काढली जातील.';
+
+  @override
+  String get farmDistrict => 'जिल्हा';
+
+  @override
+  String get farmFieldName => 'शेताचे नाव';
+
+  @override
+  String get farmFields => 'शेत';
+
+  @override
+  String get farmFrequency => 'पाणी देणे';
+
+  @override
+  String get farmIrrigation => 'सिंचन';
+
+  @override
+  String get farmNext => 'पुढे';
+
+  @override
+  String get farmNoCrops => 'या शेतात अजून पीक नाही';
+
+  @override
+  String get farmNoFields => 'अजून शेत नाही';
+
+  @override
+  String get farmNoFieldsHint => 'सल्ला मिळवण्यासाठी तुमचे पहिले शेत जोडा.';
+
+  @override
+  String get farmNotes => 'टिपा';
+
+  @override
+  String get farmPreviousCrop => 'मागील पीक';
+
+  @override
+  String get farmRequired => 'कृपया हे भरा';
+
+  @override
+  String get farmReview => 'तुमची उत्तरे तपासा';
+
+  @override
+  String get farmSave => 'जतन करा';
+
+  @override
+  String get farmSaved => 'जतन केले';
+
+  @override
+  String get farmSaving => 'जतन करत आहे';
+
+  @override
+  String get farmSoilType => 'मातीचा प्रकार';
+
+  @override
+  String get farmSowingDate => 'पेरणीची तारीख';
+
+  @override
+  String get farmState => 'राज्य';
+
+  @override
+  String farmStep(String current, String total) {
+    return 'पायरी $current / $total';
+  }
+
+  @override
+  String get farmTaluka => 'तालुका';
+
+  @override
+  String get farmUseLocation => 'माझे स्थान घ्या';
+
+  @override
+  String get farmVariety => 'जात';
+
+  @override
+  String get farmVillage => 'गाव';
+
+  @override
+  String get farmWaterSource => 'पाण्याचा स्रोत';
+
+  @override
   String get fertilizer_area => 'शेताचे क्षेत्रफळ (एकड)';
 
   @override
@@ -1066,6 +1340,56 @@ class L10nMr extends L10n {
 
   @override
   String get fertilizer_totalBags => 'एकूण आवश्यक पोती';
+
+  @override
+  String homeGreeting(String name) {
+    return 'नमस्ते, $name';
+  }
+
+  @override
+  String get homeMyCrops => 'माझी पिके';
+
+  @override
+  String mandiArrival(String date) {
+    return 'बाजार दिनांक $date';
+  }
+
+  @override
+  String get mandiCrop => 'पीक';
+
+  @override
+  String get mandiEstimate => 'अंदाजित दर';
+
+  @override
+  String get mandiEstimateNote =>
+      'येथे या पिकाचा थेट दर उपलब्ध नाही. हा सरकारी आधार दर आहे, विकला गेलेला भाव नाही.';
+
+  @override
+  String get mandiIndicative => 'निर्देशक दर';
+
+  @override
+  String get mandiIndicativeNote =>
+      'खरी सरकारी माहिती, पण आजचा तुमच्या स्थानिक बाजाराचा ताजा दर नाही.';
+
+  @override
+  String get mandiLive => 'सरकारी थेट दर';
+
+  @override
+  String get mandiNotYourDistrict => 'जवळचे बाजार';
+
+  @override
+  String get mandiPerQuintal => 'प्रति क्विंटल';
+
+  @override
+  String mandiRange(String max, String min) {
+    return 'श्रेणी $min – $max';
+  }
+
+  @override
+  String get mandiState => 'राज्य';
+
+  @override
+  String get mandiTitle => 'बाजार भाव';
 
   @override
   String get myCrop_acres => 'Acres';
@@ -1291,6 +1615,34 @@ class L10nMr extends L10n {
 
   @override
   String get navigation_yieldAi => 'उत्पन्न AI';
+
+  @override
+  String get onboardDistrict => 'जिल्हा';
+
+  @override
+  String get onboardFinish => 'पुढे जा';
+
+  @override
+  String get onboardMainCrop => 'मुख्य पीक';
+
+  @override
+  String get onboardMobile => 'मोबाइल नंबर';
+
+  @override
+  String get onboardName => 'तुमचे नाव';
+
+  @override
+  String get onboardSkip => 'आत्ता वगळा';
+
+  @override
+  String get onboardTitle => 'तुमच्या शेताबद्दल सांगा';
+
+  @override
+  String get onboardVillage => 'गाव';
+
+  @override
+  String get onboardWhy =>
+      'यामुळे आम्ही तुमच्या भागानुसार आणि पिकानुसार सल्ला देऊ शकू.';
 
   @override
   String get productsPage_allProducts => '← सर्व उत्पादने';
@@ -2060,6 +2412,26 @@ class L10nMr extends L10n {
   String get profitPredictor_totalCost => 'एकूण खर्च';
 
   @override
+  String weatherFeels(String value) {
+    return 'जाणवते $value°';
+  }
+
+  @override
+  String get weatherForecast => 'पुढील दिवस';
+
+  @override
+  String get weatherHeatWarn => 'खूप उष्णता. पहाटे किंवा संध्याकाळी पाणी द्या.';
+
+  @override
+  String get weatherHumidity => 'आर्द्रता';
+
+  @override
+  String get weatherLocating => 'तुमचे स्थान शोधत आहे';
+
+  @override
+  String get weatherLocationDenied => 'स्थान बंद आहे. तुमच्या गावाचे नाव शोधा.';
+
+  @override
   String get weatherPage_allowLocation =>
       'विचारल्यावर स्थान प्रवेशास अनुमती द्या';
 
@@ -2150,6 +2522,17 @@ class L10nMr extends L10n {
   String get weatherPage_wind => 'वारा';
 
   @override
+  String weatherRain(String value) {
+    return '$value% पावसाची शक्यता';
+  }
+
+  @override
+  String get weatherSearchHint => 'गाव, शहर किंवा जिल्हा';
+
+  @override
+  String get weatherSprayWarn => 'पाऊस अपेक्षित — आज फवारणी करू नका.';
+
+  @override
   String get weatherTips_clear =>
       '✅ निरभ्र आकाश — शेतातील कामे आणि खत फवारणीसाठी योग्य.';
 
@@ -2195,6 +2578,16 @@ class L10nMr extends L10n {
   @override
   String get weatherTips_sunnyClear =>
       '🌤️ चांगला सूर्यप्रकाश — कापणी आणि धान्य वाळवण्यासाठी उत्तम.';
+
+  @override
+  String get weatherUseLocation => 'माझे स्थान घ्या';
+
+  @override
+  String get weatherWind => 'वारा';
+
+  @override
+  String get weatherWindWarn =>
+      'जोरदार वारा — फवारणी वाहून जाईल. वारा शांत होऊ द्या.';
 
   @override
   String get yieldPredictor_areaRequired => 'योग्य क्षेत्रफळ आवश्यक आहे';
