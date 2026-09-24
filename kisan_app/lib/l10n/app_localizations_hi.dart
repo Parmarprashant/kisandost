@@ -10,6 +10,41 @@ class L10nHi extends L10n {
   L10nHi([String locale = 'hi']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count पिछले चरण बीत चुके हैं';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return 'आपके खेत के लिए $amount';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'यह फ़सल की उम्र के हिसाब से सामान्य सलाह है, आपके खेत की जाँच नहीं। छिड़काव से पहले फ़सल खुद देखें और डिब्बे पर लिखा निर्देश मानें।';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'अगला, $days दिन में';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'खेत और फ़सल जोड़ें, फिर यह पन्ना हर चरण पर बताएगा कि क्या करना है।';
+
+  @override
+  String get advisoryNoneForCrop => 'इस फ़सल के लिए अभी चरण सूची नहीं है।';
+
+  @override
+  String get advisoryNothingDue => 'अभी कुछ करना नहीं है। अगला कदम नीचे है।';
+
+  @override
+  String get advisoryNow => 'अभी यह करें';
+
+  @override
+  String get advisoryTitle => 'फ़सल कैलेंडर';
+
+  @override
   String get appError => 'कुछ गड़बड़ हो गई।';
 
   @override
@@ -1743,6 +1778,10 @@ class L10nHi extends L10n {
   @override
   String get predEstimatedPrice =>
       'यह अनुमान आधार भाव पर है, लाइव मंडी भाव पर नहीं।';
+
+  @override
+  String get predFallbackNote =>
+      'पूर्वानुमान मॉडल तक पहुँच नहीं पाए, इसलिए यह इस फ़सल के औसत आँकड़ों से बना मोटा अनुमान है।';
 
   @override
   String get predFertCost => 'खाद का खर्च (₹)';

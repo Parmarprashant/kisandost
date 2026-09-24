@@ -328,4 +328,22 @@ class PredictionFields {
     required ValueChanged<String> onChanged,
     required String label,
   }) => _CropField(value: value, onChanged: onChanged, label: label);
+
+  static Widget slider({
+    required String label,
+    required double value,
+    required double min,
+    required double max,
+    required String display,
+    required ValueChanged<double> onChanged,
+    String? help,
+  }) => _Slider(
+    label: label,
+    value: value,
+    min: min,
+    max: max,
+    display: display,
+    onChanged: onChanged,
+    help: help,
+  );
 }

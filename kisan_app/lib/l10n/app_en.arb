@@ -1,5 +1,35 @@
 {
   "@@locale": "en",
+  "advisoryDone": "{count} earlier stages have passed",
+  "@advisoryDone": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryDose": "{amount} for your plot",
+  "@advisoryDose": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryGeneralNote": "A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.",
+  "advisoryNextIn": "NEXT, IN {days} DAYS",
+  "@advisoryNextIn": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryNoCrops": "Add a field and a crop, and this page will tell you what to do at each stage.",
+  "advisoryNoneForCrop": "No stage guide for this crop yet.",
+  "advisoryNothingDue": "Nothing is due right now. The next step is below.",
+  "advisoryNow": "DO THIS NOW",
+  "advisoryTitle": "Crop calendar",
   "appError": "Something went wrong.",
   "appLanguage": "Language",
   "appLastUpdated": "Updated {time}",
@@ -662,6 +692,7 @@
   "predCosts": "Your input costs",
   "predCrop": "Crop",
   "predEstimatedPrice": "This estimate uses a baseline price, not a live market rate.",
+  "predFallbackNote": "The prediction model could not be reached, so this is a rough estimate from average figures for this crop.",
   "predFertCost": "Fertilizer cost (₹)",
   "predIrrigCost": "Irrigation cost (₹)",
   "predLoss": "You may not cover your input costs.",

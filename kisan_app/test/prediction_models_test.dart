@@ -26,6 +26,7 @@ const _yieldJson = '''
 /// both conventions, which is why they have separate models.
 const _profitJson = '''
 {
+  "modelSource": "ml",
   "predictedProfit": 193379.68,
   "confidenceScore": 0.8973,
   "expectedRevenue": 199679.68,
@@ -162,6 +163,35 @@ void main() {
     test('survives a response with no mandi details', () {
       final bare = ProfitPrediction.fromJson({'predictedProfit': 100});
       expect(bare.mandi, isNull);
+    });
+
+    group('model source', () {
+      test('trusts the model only when the route says it ran', () {
+        expect(result.usedModel, isTrue);
+      });
+
+      test('marks the arithmetic fallback as not a model result', () {
+        // The route answers from hardcoded per-crop baselines when the model
+        // is unreachable, in exactly the same response shape.
+        final fallback = ProfitPrediction.fromJson({
+          'modelSource': 'fallback',
+          'predictedProfit': 5000,
+          'confidenceScore': 0.85,
+        });
+        expect(fallback.usedModel, isFalse);
+      });
+
+      test('assumes a fallback when the flag is missing', () {
+        // An older backend does not send it. Defaulting the other way would
+        // let the screen show a confidence no model produced.
+        final old = ProfitPrediction.fromJson({'predictedProfit': 5000});
+        expect(old.usedModel, isFalse);
+      });
+
+      test('does not accept an unexpected value as a model result', () {
+        final odd = ProfitPrediction.fromJson({'modelSource': 'ML'});
+        expect(odd.usedModel, isFalse);
+      });
     });
   });
 

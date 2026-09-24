@@ -27,6 +27,8 @@ class _ProfitTabState extends ConsumerState<ProfitTab> {
   final _rainfall = TextEditingController(
     text: defaultRainfall.round().toString(),
   );
+  double _ndvi = defaultNdvi;
+  double _soilMoisture = defaultSoilMoisture;
 
   bool _running = false;
   String? _error;
@@ -75,6 +77,8 @@ class _ProfitTabState extends ConsumerState<ProfitTab> {
             nitrogen: defaultNitrogen,
             phosphorus: defaultPhosphorus,
             potassium: defaultPotassium,
+            ndvi: _ndvi,
+            soilMoisture: _soilMoisture,
             state: location?.state,
             district: location?.district ?? user?.district,
           );
@@ -136,6 +140,28 @@ class _ProfitTabState extends ConsumerState<ProfitTab> {
           controller: _rainfall,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(labelText: l10n.predRainfall),
+        ),
+        const SizedBox(height: 20),
+
+        // The model will not answer without these two. They were previously
+        // never sent, so every "prediction" on this tab came from the route's
+        // hardcoded fallback table instead.
+        PredictionFields.slider(
+          label: l10n.predNdvi,
+          help: l10n.predNdviHelp,
+          value: _ndvi,
+          min: 0.1,
+          max: 0.95,
+          display: _ndvi.toStringAsFixed(2),
+          onChanged: (v) => setState(() => _ndvi = v),
+        ),
+        PredictionFields.slider(
+          label: l10n.predSoilMoisture,
+          value: _soilMoisture,
+          min: 5,
+          max: 90,
+          display: '${_soilMoisture.round()}%',
+          onChanged: (v) => setState(() => _soilMoisture = v),
         ),
 
         const SizedBox(height: 24),
@@ -233,10 +259,27 @@ class _ProfitResult extends StatelessWidget {
           label: '${l10n.predCosts}: ${rupees(result.totalCost)}',
           icon: Icons.receipt_long_outlined,
         ),
-        _Row(
-          label: l10n.predConfidence('${result.confidencePercent}'),
-          icon: Icons.insights,
-        ),
+        if (result.usedModel)
+          _Row(
+            label: l10n.predConfidence('${result.confidencePercent}'),
+            icon: Icons.insights,
+          ),
+
+        // A confidence score belongs to the model. When the route answered
+        // from its fallback table there is no model behind the number, so the
+        // score is withheld and the estimate is labelled instead.
+        if (!result.usedModel) ...[
+          const SizedBox(height: 4),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.secondary.withValues(alpha: 0.12),
+            ),
+            child: Text(l10n.predFallbackNote, style: text.bodyLarge),
+          ),
+          const SizedBox(height: 12),
+        ],
 
         if (result.mandi != null) ...[
           const SizedBox(height: 12),

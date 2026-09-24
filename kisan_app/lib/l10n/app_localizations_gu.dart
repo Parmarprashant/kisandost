@@ -10,6 +10,42 @@ class L10nGu extends L10n {
   L10nGu([String locale = 'gu']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count અગાઉના તબક્કા પસાર ચૂક્યા છે';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return 'તમારા ખેતર માટે $amount';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'આ પાકની ઉંમર પ્રમાણે સામાન્ય માર્ગદર્શન છે, તમારા ખેતરની તપાસ નહીં. છંટકાવ પહેલાં પાક જાતે જુઓ અને પેક પરની સૂચના પાળો.';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'આગળ, $days દિવસમાં';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'ખેતર અને પાક ઉમેરો, પછી આ પાનું દરેક તબક્કે શું કરવું તે જણાવશે.';
+
+  @override
+  String get advisoryNoneForCrop => 'આ પાક માટે હજુ તબક્કાવાર માર્ગદર્શન નથી.';
+
+  @override
+  String get advisoryNothingDue =>
+      'હમણાં કંઈ કરવાનું નથી. આગળનું પગલું નીચે છે.';
+
+  @override
+  String get advisoryNow => 'હમણાં આ કરો';
+
+  @override
+  String get advisoryTitle => 'પાક કૅલેન્ડર';
+
+  @override
   String get appError => 'કંઈક ખોટું થયું.';
 
   @override
@@ -1738,6 +1774,10 @@ class L10nGu extends L10n {
   @override
   String get predEstimatedPrice =>
       'આ અંદાજ આધાર ભાવ પર છે, જીવંત બજાર ભાવ પર નહીં.';
+
+  @override
+  String get predFallbackNote =>
+      'આગાહી મોડલ સુધી પહોંચી શકાયું નહીં, તેથી આ આ પાકના સરેરાશ આંકડા પરથી તૈયાર કરેલો અંદાજ છે.';
 
   @override
   String get predFertCost => 'ખાતરનો ખર્ચ (₹)';

@@ -52,6 +52,8 @@ class PredictionRepository {
     required double nitrogen,
     required double phosphorus,
     required double potassium,
+    required double ndvi,
+    required double soilMoisture,
     String? state,
     String? district,
   }) async {
@@ -65,6 +67,10 @@ class PredictionRepository {
       'fertilizerCost': fertilizerCost,
       'pesticideCost': pesticideCost,
       'irrigationCost': irrigationCost,
+      // The model behind this route requires both; without them it rejects the
+      // call and the route silently answers from a hardcoded table instead.
+      'ndvi': ndvi,
+      'soilMoisture': soilMoisture,
       if (state != null && state.isNotEmpty) 'state': state,
       if (district != null && district.isNotEmpty) 'district': district,
     });

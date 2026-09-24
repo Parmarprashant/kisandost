@@ -10,6 +10,42 @@ class L10nEn extends L10n {
   L10nEn([String locale = 'en']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count earlier stages have passed';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return '$amount for your plot';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'NEXT, IN $days DAYS';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'Add a field and a crop, and this page will tell you what to do at each stage.';
+
+  @override
+  String get advisoryNoneForCrop => 'No stage guide for this crop yet.';
+
+  @override
+  String get advisoryNothingDue =>
+      'Nothing is due right now. The next step is below.';
+
+  @override
+  String get advisoryNow => 'DO THIS NOW';
+
+  @override
+  String get advisoryTitle => 'Crop calendar';
+
+  @override
   String get appError => 'Something went wrong.';
 
   @override
@@ -1734,6 +1770,10 @@ class L10nEn extends L10n {
   @override
   String get predEstimatedPrice =>
       'This estimate uses a baseline price, not a live market rate.';
+
+  @override
+  String get predFallbackNote =>
+      'The prediction model could not be reached, so this is a rough estimate from average figures for this crop.';
 
   @override
   String get predFertCost => 'Fertilizer cost (₹)';

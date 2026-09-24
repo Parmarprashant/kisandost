@@ -101,6 +101,60 @@ abstract class L10n {
     Locale('mr'),
   ];
 
+  /// No description provided for @advisoryDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} earlier stages have passed'**
+  String advisoryDone(String count);
+
+  /// No description provided for @advisoryDose.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} for your plot'**
+  String advisoryDose(String amount);
+
+  /// No description provided for @advisoryGeneralNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.'**
+  String get advisoryGeneralNote;
+
+  /// No description provided for @advisoryNextIn.
+  ///
+  /// In en, this message translates to:
+  /// **'NEXT, IN {days} DAYS'**
+  String advisoryNextIn(String days);
+
+  /// No description provided for @advisoryNoCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a field and a crop, and this page will tell you what to do at each stage.'**
+  String get advisoryNoCrops;
+
+  /// No description provided for @advisoryNoneForCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'No stage guide for this crop yet.'**
+  String get advisoryNoneForCrop;
+
+  /// No description provided for @advisoryNothingDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is due right now. The next step is below.'**
+  String get advisoryNothingDue;
+
+  /// No description provided for @advisoryNow.
+  ///
+  /// In en, this message translates to:
+  /// **'DO THIS NOW'**
+  String get advisoryNow;
+
+  /// No description provided for @advisoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop calendar'**
+  String get advisoryTitle;
+
   /// No description provided for @appError.
   ///
   /// In en, this message translates to:
@@ -3202,6 +3256,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'This estimate uses a baseline price, not a live market rate.'**
   String get predEstimatedPrice;
+
+  /// No description provided for @predFallbackNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The prediction model could not be reached, so this is a rough estimate from average figures for this crop.'**
+  String get predFallbackNote;
 
   /// No description provided for @predFertCost.
   ///

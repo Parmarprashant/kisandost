@@ -10,6 +10,42 @@ class L10nMr extends L10n {
   L10nMr([String locale = 'mr']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count मागील टप्पे संपले आहेत';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return 'तुमच्या शेतासाठी $amount';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'हे पिकाच्या वयानुसार सर्वसाधारण मार्गदर्शन आहे, तुमच्या शेताची पाहणी नव्हे. फवारणीपूर्वी पीक स्वतः पाहा आणि पाकिटावरील सूचना पाळा.';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'पुढे, $days दिवसांनी';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'शेत आणि पीक जोडा, मग हे पान प्रत्येक टप्प्यावर काय करायचे ते सांगेल.';
+
+  @override
+  String get advisoryNoneForCrop => 'या पिकासाठी अजून टप्पा मार्गदर्शन नाही.';
+
+  @override
+  String get advisoryNothingDue =>
+      'सध्या काही करायचे नाही. पुढची पायरी खाली आहे.';
+
+  @override
+  String get advisoryNow => 'आता हे करा';
+
+  @override
+  String get advisoryTitle => 'पीक दिनदर्शिका';
+
+  @override
   String get appError => 'काहीतरी चूक झाली.';
 
   @override
@@ -1736,6 +1772,10 @@ class L10nMr extends L10n {
   @override
   String get predEstimatedPrice =>
       'हा अंदाज आधारभूत दरावर आहे, थेट बाजारभावावर नाही.';
+
+  @override
+  String get predFallbackNote =>
+      'अंदाज मॉडेलपर्यंत पोहोचता आले नाही, म्हणून हा या पिकाच्या सरासरी आकडेवारीवरून केलेला साधारण अंदाज आहे.';
 
   @override
   String get predFertCost => 'खताचा खर्च (₹)';

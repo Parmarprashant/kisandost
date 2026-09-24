@@ -72,6 +72,7 @@ class ProfitPrediction {
     required this.irrigationCost,
     required this.confidence,
     required this.recommendation,
+    required this.usedModel,
     this.mandi,
   });
 
@@ -100,6 +101,17 @@ class ProfitPrediction {
   final double confidence;
 
   final String recommendation;
+
+  /// Whether the yield behind this figure came from the trained model or from
+  /// the route's arithmetic fallback.
+  ///
+  /// The route calls a FastAPI model and, if that call fails for any reason,
+  /// quietly computes a number from hardcoded per-crop baselines instead. Both
+  /// come back in the same shape, so without this flag a fallback estimate is
+  /// indistinguishable from a prediction — and the screen would claim a
+  /// confidence the model never produced.
+  final bool usedModel;
+
   final MandiDetails? mandi;
 
   int get confidencePercent => (confidence * 100).round().clamp(0, 100);
@@ -124,6 +136,9 @@ class ProfitPrediction {
       irrigationCost: _toDouble(json['irrigationCost']),
       confidence: _toDouble(json['confidenceScore']),
       recommendation: json['recommendation'] as String? ?? '',
+      // Absent on an older backend that predates the flag. Treated as a
+      // fallback, because assuming the model ran is the failure that misleads.
+      usedModel: json['modelSource'] == 'ml',
       mandi: mandi is Map<String, dynamic>
           ? MandiDetails.fromJson(mandi)
           : null,
