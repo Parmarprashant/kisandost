@@ -1307,6 +1307,72 @@ class L10nEn extends L10n {
   String get farmWaterSource => 'Water source';
 
   @override
+  String get fertArea => 'Area (acres)';
+
+  @override
+  String fertBags(String count) {
+    return 'About $count bags of 50 kg';
+  }
+
+  @override
+  String get fertBuy => 'What to buy';
+
+  @override
+  String get fertCalculate => 'Calculate';
+
+  @override
+  String fertCost(String amount) {
+    return 'Roughly ₹$amount';
+  }
+
+  @override
+  String get fertCostNote =>
+      'An estimate from indicative shop prices, not a quote.';
+
+  @override
+  String get fertCrop => 'Crop';
+
+  @override
+  String get fertDap => 'DAP';
+
+  @override
+  String get fertExistingK => 'Potassium in soil (kg/acre)';
+
+  @override
+  String get fertExistingN => 'Nitrogen in soil (kg/acre)';
+
+  @override
+  String get fertExistingP => 'Phosphorus in soil (kg/acre)';
+
+  @override
+  String fertKg(String value) {
+    return '$value kg';
+  }
+
+  @override
+  String get fertMop => 'MOP';
+
+  @override
+  String get fertReduced =>
+      'Your soil test reduced the dose — you need to buy less.';
+
+  @override
+  String get fertSoil => 'Soil type';
+
+  @override
+  String get fertSoilTest => 'I have a soil test';
+
+  @override
+  String get fertSplitNote =>
+      'Apply nitrogen in 2–3 splits through the season, not all at sowing.';
+
+  @override
+  String get fertTitle => 'Fertilizer calculator';
+
+  @override
+  String get fertUrea => 'Urea';
+
+  @override
   String get fertilizer_area => 'Farm area (acres)';
 
   @override
@@ -2406,6 +2472,36 @@ class L10nEn extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'Total Cost';
+
+  @override
+  String get schemesAll => 'All';
+
+  @override
+  String get schemesBenefits => 'What you get';
+
+  @override
+  String get schemesCuratedNote =>
+      'A hand-checked list, not a live government feed. Always confirm details on the official site.';
+
+  @override
+  String get schemesEligibility => 'Who can apply';
+
+  @override
+  String schemesLaunched(String when) {
+    return 'Started $when';
+  }
+
+  @override
+  String get schemesNone => 'No schemes match that search';
+
+  @override
+  String get schemesOpen => 'Open official website';
+
+  @override
+  String get schemesSearch => 'Search schemes';
+
+  @override
+  String get schemesTitle => 'Government schemes';
 
   @override
   String weatherFeels(String value) {

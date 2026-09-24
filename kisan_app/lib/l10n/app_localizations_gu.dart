@@ -1312,6 +1312,70 @@ class L10nGu extends L10n {
   String get farmWaterSource => 'પાણીનો સ્રોત';
 
   @override
+  String get fertArea => 'વિસ્તાર (એકર)';
+
+  @override
+  String fertBags(String count) {
+    return 'આશરે $count બોરી (50 કિ.ગ્રા.)';
+  }
+
+  @override
+  String get fertBuy => 'શું ખરીદવું';
+
+  @override
+  String get fertCalculate => 'ગણતરી કરો';
+
+  @override
+  String fertCost(String amount) {
+    return 'આશરે ₹$amount';
+  }
+
+  @override
+  String get fertCostNote => 'અંદાજિત દુકાન ભાવ પરથી અંદાજ, પાકો ભાવ નથી.';
+
+  @override
+  String get fertCrop => 'પાક';
+
+  @override
+  String get fertDap => 'ડીએપી';
+
+  @override
+  String get fertExistingK => 'જમીનમાં પોટાશ (કિ.ગ્રા./એકર)';
+
+  @override
+  String get fertExistingN => 'જમીનમાં નાઇટ્રોજન (કિ.ગ્રા./એકર)';
+
+  @override
+  String get fertExistingP => 'જમીનમાં ફોસ્ફરસ (કિ.ગ્રા./એકર)';
+
+  @override
+  String fertKg(String value) {
+    return '$value કિ.ગ્રા.';
+  }
+
+  @override
+  String get fertMop => 'એમઓપી';
+
+  @override
+  String get fertReduced =>
+      'તમારી જમીન ચકાસણીથી માત્રા ઘટી — ઓછું ખરીદવું પડશે.';
+
+  @override
+  String get fertSoil => 'જમીનનો પ્રકાર';
+
+  @override
+  String get fertSoilTest => 'મારી પાસે જમીન ચકાસણી છે';
+
+  @override
+  String get fertSplitNote => 'નાઇટ્રોજન 2–3 વારમાં આપો, વાવણી વખતે બધું નહીં.';
+
+  @override
+  String get fertTitle => 'ખાતર કૅલ્ક્યુલેટર';
+
+  @override
+  String get fertUrea => 'યુરિયા';
+
+  @override
   String get fertilizer_area => 'ખેતરનો વિસ્તાર (એકર)';
 
   @override
@@ -2413,6 +2477,36 @@ class L10nGu extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
+
+  @override
+  String get schemesAll => 'બધી';
+
+  @override
+  String get schemesBenefits => 'શું મળશે';
+
+  @override
+  String get schemesCuratedNote =>
+      'આ ચકાસેલી યાદી છે, સરકારી લાઇવ ફીડ નથી. વિગતો સત્તાવાર સાઇટ પર ચકાસો.';
+
+  @override
+  String get schemesEligibility => 'કોણ અરજી કરી શકે';
+
+  @override
+  String schemesLaunched(String when) {
+    return '$when માં શરૂ';
+  }
+
+  @override
+  String get schemesNone => 'આ શોધથી કોઈ યોજના મળી નહીં';
+
+  @override
+  String get schemesOpen => 'સત્તાવાર વેબસાઇટ ખોલો';
+
+  @override
+  String get schemesSearch => 'યોજના શોધો';
+
+  @override
+  String get schemesTitle => 'સરકારી યોજનાઓ';
 
   @override
   String weatherFeels(String value) {

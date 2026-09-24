@@ -463,6 +463,46 @@
   "farmVariety": "Variety",
   "farmVillage": "Village",
   "farmWaterSource": "Water source",
+  "fertArea": "Area (acres)",
+  "fertBags": "About {count} bags of 50 kg",
+  "@fertBags": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "fertBuy": "What to buy",
+  "fertCalculate": "Calculate",
+  "fertCost": "Roughly ₹{amount}",
+  "@fertCost": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "fertCostNote": "An estimate from indicative shop prices, not a quote.",
+  "fertCrop": "Crop",
+  "fertDap": "DAP",
+  "fertExistingK": "Potassium in soil (kg/acre)",
+  "fertExistingN": "Nitrogen in soil (kg/acre)",
+  "fertExistingP": "Phosphorus in soil (kg/acre)",
+  "fertKg": "{value} kg",
+  "@fertKg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "fertMop": "MOP",
+  "fertReduced": "Your soil test reduced the dose — you need to buy less.",
+  "fertSoil": "Soil type",
+  "fertSoilTest": "I have a soil test",
+  "fertSplitNote": "Apply nitrogen in 2–3 splits through the season, not all at sowing.",
+  "fertTitle": "Fertilizer calculator",
+  "fertUrea": "Urea",
   "fertilizer_area": "Farm area (acres)",
   "fertilizer_calculate": "Calculate",
   "fertilizer_cost": "Cost Estimate",
@@ -804,6 +844,22 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "schemesAll": "All",
+  "schemesBenefits": "What you get",
+  "schemesCuratedNote": "A hand-checked list, not a live government feed. Always confirm details on the official site.",
+  "schemesEligibility": "Who can apply",
+  "schemesLaunched": "Started {when}",
+  "@schemesLaunched": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "schemesNone": "No schemes match that search",
+  "schemesOpen": "Open official website",
+  "schemesSearch": "Search schemes",
+  "schemesTitle": "Government schemes",
   "weatherFeels": "Feels like {value}°",
   "@weatherFeels": {
     "placeholders": {

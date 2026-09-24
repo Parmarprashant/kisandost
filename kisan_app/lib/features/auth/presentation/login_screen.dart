@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/locale_controller.dart';
+import '../../../core/config/env.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/auth_controller.dart';
@@ -94,11 +94,11 @@ class LoginScreen extends ConsumerWidget {
               ),
 
               // Google's callback returns through a custom scheme that only
-              // resolves on a device, so the app cannot be signed into on
-              // Windows or in a browser. This panel exists purely so the rest
-              // of the app can be driven during development, and it is
-              // compiled out of release builds entirely.
-              if (kDebugMode) const _DeveloperSignIn(),
+              // resolves on a real device, so without this the app cannot be
+              // signed into on Windows or on the web — and there would be no
+              // way in at all if the intent filter misbehaved on a phone.
+              // Off unless the build asks for it; see Env.allowPasswordLogin.
+              if (Env.allowPasswordLogin) const _DeveloperSignIn(),
 
               const SizedBox(height: 24),
             ],
@@ -184,11 +184,11 @@ class _FailureNote extends StatelessWidget {
   }
 }
 
-/// Debug-only username + password sign-in.
+/// Username + password sign-in, shown only when the build opted in.
 ///
-/// Stripped from release builds by the `kDebugMode` guard at its only call
-/// site — `kDebugMode` is a compile-time constant, so the tree shaker removes
-/// this widget and the code path behind it from a release binary.
+/// `Env.allowPasswordLogin` is a `bool.fromEnvironment` constant, so when the
+/// flag is absent the tree shaker removes this widget and everything behind it
+/// from the binary.
 class _DeveloperSignIn extends ConsumerStatefulWidget {
   const _DeveloperSignIn();
 
@@ -213,7 +213,7 @@ class _DeveloperSignInState extends ConsumerState<_DeveloperSignIn> {
     if (!_open) {
       return TextButton(
         onPressed: () => setState(() => _open = true),
-        child: const Text('Developer sign-in'),
+        child: const Text('Sign in with username'),
       );
     }
 
@@ -234,10 +234,7 @@ class _DeveloperSignInState extends ConsumerState<_DeveloperSignIn> {
             onSubmitted: (_) => _submit(),
           ),
           const SizedBox(height: 10),
-          OutlinedButton(
-            onPressed: _submit,
-            child: const Text('Sign in (dev)'),
-          ),
+          OutlinedButton(onPressed: _submit, child: const Text('Sign in')),
         ],
       ),
     );

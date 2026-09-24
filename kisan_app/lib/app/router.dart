@@ -8,10 +8,12 @@ import '../features/auth/presentation/onboarding_screen.dart';
 import '../features/auth/presentation/profile_screen.dart';
 import '../features/community/presentation/community_screen.dart';
 import '../features/diagnosis/presentation/diagnose_screen.dart';
+import '../features/fertilizer/presentation/fertilizer_screen.dart';
 import '../features/farm/presentation/farm_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/mandi/presentation/mandi_screen.dart';
 import '../features/more/more_screen.dart';
+import '../features/schemes/presentation/schemes_screen.dart';
 import '../features/weather/presentation/weather_screen.dart';
 import '../l10n/app_localizations.dart';
 
@@ -109,6 +111,11 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (_, _) => const CommunityScreen(),
           ),
           GoRoute(path: '/weather', builder: (_, _) => const WeatherScreen()),
+          GoRoute(
+            path: '/fertilizer',
+            builder: (_, _) => const FertilizerScreen(),
+          ),
+          GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
           GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
         ],
       ),

@@ -369,7 +369,7 @@ class _QuickActions extends StatelessWidget {
     final actions = [
       (Icons.camera_alt_outlined, l10n.navigation_diseases, '/diagnose'),
       (Icons.trending_up, l10n.navigation_ai, '/insights'),
-      (Icons.science_outlined, l10n.navigation_calculator, '/insights'),
+      (Icons.science_outlined, l10n.navigation_calculator, '/fertilizer'),
     ];
 
     return Row(

@@ -2405,6 +2405,120 @@ abstract class L10n {
   /// **'Water source'**
   String get farmWaterSource;
 
+  /// No description provided for @fertArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (acres)'**
+  String get fertArea;
+
+  /// No description provided for @fertBags.
+  ///
+  /// In en, this message translates to:
+  /// **'About {count} bags of 50 kg'**
+  String fertBags(String count);
+
+  /// No description provided for @fertBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'What to buy'**
+  String get fertBuy;
+
+  /// No description provided for @fertCalculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate'**
+  String get fertCalculate;
+
+  /// No description provided for @fertCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Roughly ₹{amount}'**
+  String fertCost(String amount);
+
+  /// No description provided for @fertCostNote.
+  ///
+  /// In en, this message translates to:
+  /// **'An estimate from indicative shop prices, not a quote.'**
+  String get fertCostNote;
+
+  /// No description provided for @fertCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get fertCrop;
+
+  /// No description provided for @fertDap.
+  ///
+  /// In en, this message translates to:
+  /// **'DAP'**
+  String get fertDap;
+
+  /// No description provided for @fertExistingK.
+  ///
+  /// In en, this message translates to:
+  /// **'Potassium in soil (kg/acre)'**
+  String get fertExistingK;
+
+  /// No description provided for @fertExistingN.
+  ///
+  /// In en, this message translates to:
+  /// **'Nitrogen in soil (kg/acre)'**
+  String get fertExistingN;
+
+  /// No description provided for @fertExistingP.
+  ///
+  /// In en, this message translates to:
+  /// **'Phosphorus in soil (kg/acre)'**
+  String get fertExistingP;
+
+  /// No description provided for @fertKg.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} kg'**
+  String fertKg(String value);
+
+  /// No description provided for @fertMop.
+  ///
+  /// In en, this message translates to:
+  /// **'MOP'**
+  String get fertMop;
+
+  /// No description provided for @fertReduced.
+  ///
+  /// In en, this message translates to:
+  /// **'Your soil test reduced the dose — you need to buy less.'**
+  String get fertReduced;
+
+  /// No description provided for @fertSoil.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil type'**
+  String get fertSoil;
+
+  /// No description provided for @fertSoilTest.
+  ///
+  /// In en, this message translates to:
+  /// **'I have a soil test'**
+  String get fertSoilTest;
+
+  /// No description provided for @fertSplitNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply nitrogen in 2–3 splits through the season, not all at sowing.'**
+  String get fertSplitNote;
+
+  /// No description provided for @fertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer calculator'**
+  String get fertTitle;
+
+  /// No description provided for @fertUrea.
+  ///
+  /// In en, this message translates to:
+  /// **'Urea'**
+  String get fertUrea;
+
   /// No description provided for @fertilizer_area.
   ///
   /// In en, this message translates to:
@@ -4306,6 +4420,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
+
+  /// No description provided for @schemesAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get schemesAll;
+
+  /// No description provided for @schemesBenefits.
+  ///
+  /// In en, this message translates to:
+  /// **'What you get'**
+  String get schemesBenefits;
+
+  /// No description provided for @schemesCuratedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A hand-checked list, not a live government feed. Always confirm details on the official site.'**
+  String get schemesCuratedNote;
+
+  /// No description provided for @schemesEligibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Who can apply'**
+  String get schemesEligibility;
+
+  /// No description provided for @schemesLaunched.
+  ///
+  /// In en, this message translates to:
+  /// **'Started {when}'**
+  String schemesLaunched(String when);
+
+  /// No description provided for @schemesNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No schemes match that search'**
+  String get schemesNone;
+
+  /// No description provided for @schemesOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open official website'**
+  String get schemesOpen;
+
+  /// No description provided for @schemesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search schemes'**
+  String get schemesSearch;
+
+  /// No description provided for @schemesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Government schemes'**
+  String get schemesTitle;
 
   /// No description provided for @weatherFeels.
   ///

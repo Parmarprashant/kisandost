@@ -22,6 +22,8 @@ class MoreScreen extends ConsumerWidget {
     final entries = <_Entry>[
       _Entry(Icons.forum_outlined, l10n.communityTitle, '/community'),
       _Entry(Icons.cloud_outlined, l10n.navigation_weather, '/weather'),
+      _Entry(Icons.science_outlined, l10n.fertTitle, '/fertilizer'),
+      _Entry(Icons.account_balance_outlined, l10n.schemesTitle, '/schemes'),
       _Entry(Icons.person_outline, l10n.authProfile, '/profile'),
     ];
 
@@ -58,9 +60,9 @@ class MoreScreen extends ConsumerWidget {
           // see what is deliberately still to come.
           ListTile(
             enabled: false,
-            leading: const Icon(Icons.account_balance_outlined),
+            leading: const Icon(Icons.more_horiz),
             title: Text(l10n.comingSoon),
-            subtitle: const Text('Schemes · Products · QR scanner'),
+            subtitle: const Text('Products · QR scanner · Predictors'),
           ),
         ],
       ),

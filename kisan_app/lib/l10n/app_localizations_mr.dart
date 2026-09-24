@@ -1309,6 +1309,71 @@ class L10nMr extends L10n {
   String get farmWaterSource => 'पाण्याचा स्रोत';
 
   @override
+  String get fertArea => 'क्षेत्र (एकर)';
+
+  @override
+  String fertBags(String count) {
+    return 'अंदाजे $count पोती (50 कि.ग्रा.)';
+  }
+
+  @override
+  String get fertBuy => 'काय खरेदी करावे';
+
+  @override
+  String get fertCalculate => 'गणना करा';
+
+  @override
+  String fertCost(String amount) {
+    return 'अंदाजे ₹$amount';
+  }
+
+  @override
+  String get fertCostNote => 'अंदाजित दुकान दरांवरून अंदाज, ठरलेला दर नाही.';
+
+  @override
+  String get fertCrop => 'पीक';
+
+  @override
+  String get fertDap => 'डीएपी';
+
+  @override
+  String get fertExistingK => 'मातीत पोटॅश (कि.ग्रा./एकर)';
+
+  @override
+  String get fertExistingN => 'मातीत नायट्रोजन (कि.ग्रा./एकर)';
+
+  @override
+  String get fertExistingP => 'मातीत फॉस्फरस (कि.ग्रा./एकर)';
+
+  @override
+  String fertKg(String value) {
+    return '$value कि.ग्रा.';
+  }
+
+  @override
+  String get fertMop => 'एमओपी';
+
+  @override
+  String get fertReduced =>
+      'तुमच्या माती परीक्षणाने मात्रा कमी झाली — कमी खरेदी करावी लागेल.';
+
+  @override
+  String get fertSoil => 'मातीचा प्रकार';
+
+  @override
+  String get fertSoilTest => 'माझ्याकडे माती परीक्षण आहे';
+
+  @override
+  String get fertSplitNote =>
+      'नायट्रोजन 2–3 हप्त्यांत द्या, पेरणीच्या वेळी सर्व नाही.';
+
+  @override
+  String get fertTitle => 'खत कॅल्क्युलेटर';
+
+  @override
+  String get fertUrea => 'युरिया';
+
+  @override
   String get fertilizer_area => 'शेताचे क्षेत्रफळ (एकड)';
 
   @override
@@ -2410,6 +2475,36 @@ class L10nMr extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'एकूण खर्च';
+
+  @override
+  String get schemesAll => 'सर्व';
+
+  @override
+  String get schemesBenefits => 'काय मिळेल';
+
+  @override
+  String get schemesCuratedNote =>
+      'ही तपासलेली यादी आहे, शासकीय थेट फीड नाही. तपशील अधिकृत संकेतस्थळावर तपासा.';
+
+  @override
+  String get schemesEligibility => 'कोण अर्ज करू शकते';
+
+  @override
+  String schemesLaunched(String when) {
+    return '$when मध्ये सुरू';
+  }
+
+  @override
+  String get schemesNone => 'या शोधाशी जुळणारी योजना नाही';
+
+  @override
+  String get schemesOpen => 'अधिकृत संकेतस्थळ उघडा';
+
+  @override
+  String get schemesSearch => 'योजना शोधा';
+
+  @override
+  String get schemesTitle => 'शासकीय योजना';
 
   @override
   String weatherFeels(String value) {

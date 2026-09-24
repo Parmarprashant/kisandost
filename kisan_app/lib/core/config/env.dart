@@ -29,4 +29,19 @@ class Env {
   static const Duration receiveTimeout = Duration(seconds: 60);
 
   static bool get isProduction => apiBaseUrl.startsWith('https://');
+
+  /// Shows the username + password sign-in panel.
+  ///
+  /// Google is the intended path, but its callback returns through a custom
+  /// scheme that only resolves on a real Android device — so the app cannot be
+  /// signed into on Windows, on the web, or on a device where the intent
+  /// filter is misbehaving. Building with
+  ///
+  ///     --dart-define=ALLOW_PASSWORD_LOGIN=true
+  ///
+  /// re-enables the password path. It is off unless asked for, so a normal
+  /// release build has no second way in.
+  static const bool allowPasswordLogin = bool.fromEnvironment(
+    'ALLOW_PASSWORD_LOGIN',
+  );
 }
