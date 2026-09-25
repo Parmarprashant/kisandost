@@ -2,18 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../features/auth/data/auth_controller.dart';
+import '../features/notifications/data/push_service.dart';
 import '../l10n/app_localizations.dart';
 import 'locale_controller.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
 
-class KisanApp extends ConsumerWidget {
+class KisanApp extends ConsumerStatefulWidget {
   const KisanApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<KisanApp> createState() => _KisanAppState();
+}
+
+class _KisanAppState extends ConsumerState<KisanApp> {
+  @override
+  Widget build(BuildContext context) {
     final locale = ref.watch(localeProvider);
     final router = ref.watch(routerProvider);
+
+    // Registering a token needs a signed-in user, so this waits for sign-in
+    // rather than running at launch. Signing out is left alone deliberately:
+    // clearing the token server-side is the backend's job and there is no
+    // route for it.
+    ref.listen(authControllerProvider, (previous, next) {
+      if (next is! SignedIn || previous is SignedIn) return;
+
+      final push = ref.read(pushServiceProvider);
+      push.start().then((_) {
+        final route = push.pendingRoute;
+        if (route == null) return;
+        push.pendingRoute = null;
+        // The router exists by now; a notification tap lands on the screen it
+        // was about instead of the dashboard.
+        router.go(route);
+      });
+    });
 
     return MaterialApp.router(
       title: 'KisanDost',

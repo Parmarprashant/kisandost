@@ -106,7 +106,15 @@ jobs:
       # API_BASE_URL defaults to the deployed app (see lib/core/config/env.dart),
       # so this APK talks to production out of the box — which is what we want
       # for a demo build handed to someone to install.
-      - run: flutter build apk --debug
+      #
+      # ALLOW_PASSWORD_LOGIN keeps the username sign-in available in this
+      # testing APK. Google's callback comes back through a custom scheme, and
+      # if that intent filter misbehaves on a given device there would
+      # otherwise be no way into the app to find out what else is broken. A
+      # release build omits the flag and has no second way in.
+      - run: >
+          flutter build apk --debug
+          --dart-define=ALLOW_PASSWORD_LOGIN=true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

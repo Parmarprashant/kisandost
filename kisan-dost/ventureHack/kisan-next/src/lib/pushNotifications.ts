@@ -56,7 +56,11 @@ export async function sendPushNotificationToUser(options: PushOptions) {
           console.error(`[PushNotifications] Send failed for token ${deviceTokens[idx]}. Firebase Error Code: ${errorCode}`);
           if (
             errorCode === 'messaging/invalid-registration-token' ||
-            errorCode === 'messaging/registration-token-not-registered'
+            errorCode === 'messaging/registration-token-not-registered' ||
+            // A token that is not even well-formed comes back as
+            // invalid-argument. Without this it stays active and is retried
+            // on every send for the life of the row.
+            errorCode === 'messaging/invalid-argument'
           ) {
             failedTokens.push(deviceTokens[idx]);
           }

@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/locale_controller.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/auth_controller.dart';
+import '../data/auth_models.dart';
+import '../data/auth_repository.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -17,7 +20,17 @@ class ProfileScreen extends ConsumerWidget {
     final locale = ref.watch(localeProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.authProfile)),
+      appBar: AppBar(
+        title: Text(l10n.authProfile),
+        actions: [
+          if (user != null)
+            IconButton(
+              icon: const Icon(Icons.edit_outlined),
+              tooltip: l10n.profileEdit,
+              onPressed: () => _EditProfileSheet.open(context, user),
+            ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
         children: [
@@ -162,6 +175,162 @@ class _Row extends StatelessWidget {
             child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Edits the five profile fields the API allows.
+///
+/// Deliberately the same five as onboarding — name, mobile, village, district
+/// and main crop. Identity fields (email, username, password) are not editable
+/// through this route, so they are not offered here either.
+class _EditProfileSheet extends ConsumerStatefulWidget {
+  const _EditProfileSheet({required this.user});
+
+  final AppUser user;
+
+  static Future<void> open(BuildContext context, AppUser user) {
+    return showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => _EditProfileSheet(user: user),
+    );
+  }
+
+  @override
+  ConsumerState<_EditProfileSheet> createState() => _EditProfileSheetState();
+}
+
+class _EditProfileSheetState extends ConsumerState<_EditProfileSheet> {
+  late final _name = TextEditingController(text: widget.user.name);
+  late final _mobile = TextEditingController(text: widget.user.mobile ?? '');
+  late final _village = TextEditingController(text: widget.user.village ?? '');
+  late final _district = TextEditingController(
+    text: widget.user.district ?? '',
+  );
+  late final _crop = TextEditingController(text: widget.user.mainCrop ?? '');
+
+  bool _saving = false;
+  String? _error;
+
+  @override
+  void dispose() {
+    for (final c in [_name, _mobile, _village, _district, _crop]) {
+      c.dispose();
+    }
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    setState(() {
+      _saving = true;
+      _error = null;
+    });
+
+    // Only non-empty values are sent: the route ignores blanks, and clearing a
+    // field is not something this form offers.
+    final fields = <String, String>{
+      for (final entry in {
+        'name': _name,
+        'mobile': _mobile,
+        'village': _village,
+        'district': _district,
+        'mainCrop': _crop,
+      }.entries)
+        if (entry.value.text.trim().isNotEmpty)
+          entry.key: entry.value.text.trim(),
+    };
+
+    try {
+      final updated = await ref
+          .read(authRepositoryProvider)
+          .updateProfile(fields);
+      ref.read(authControllerProvider.notifier).updateUser(updated);
+
+      if (!mounted) return;
+      final saved = L10n.of(context).profileSaved;
+      final messenger = ScaffoldMessenger.of(context);
+      Navigator.of(context).pop();
+      messenger.showSnackBar(SnackBar(content: Text(saved)));
+    } on ApiException catch (error) {
+      if (!mounted) return;
+      final l10n = L10n.of(context);
+      setState(() {
+        _error = switch (error.kind) {
+          ApiErrorKind.offline => l10n.appOffline,
+          ApiErrorKind.timeout => l10n.appSlow,
+          _ => l10n.appError,
+        };
+      });
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.profileEdit,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _name,
+                decoration: InputDecoration(labelText: l10n.onboardName),
+              ),
+              const SizedBox(height: 14),
+              TextField(
+                controller: _mobile,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(labelText: l10n.onboardMobile),
+              ),
+              const SizedBox(height: 14),
+              TextField(
+                controller: _village,
+                decoration: InputDecoration(labelText: l10n.onboardVillage),
+              ),
+              const SizedBox(height: 14),
+              TextField(
+                controller: _district,
+                decoration: InputDecoration(labelText: l10n.onboardDistrict),
+              ),
+              const SizedBox(height: 14),
+              TextField(
+                controller: _crop,
+                decoration: InputDecoration(labelText: l10n.onboardMainCrop),
+              ),
+
+              if (_error != null) ...[
+                const SizedBox(height: 16),
+                Text(
+                  _error!,
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(color: AppColors.danger),
+                ),
+              ],
+
+              const SizedBox(height: 24),
+              FilledButton(
+                onPressed: _saving ? null : _save,
+                child: Text(_saving ? l10n.farmSaving : l10n.farmSave),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

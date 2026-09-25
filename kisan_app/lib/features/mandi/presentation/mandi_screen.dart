@@ -8,8 +8,23 @@ import '../../../l10n/app_localizations.dart';
 import '../data/mandi_models.dart';
 import '../data/mandi_repository.dart';
 
+/// Standalone mandi screen, with its own app bar.
 class MandiScreen extends ConsumerWidget {
   const MandiScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      appBar: AppBar(title: Text(L10n.of(context).mandiTitle)),
+      body: const MandiBody(),
+    );
+  }
+}
+
+/// The mandi content without a Scaffold, so it can sit inside the Insights
+/// tab bar without stacking a second app bar on top of the first.
+class MandiBody extends ConsumerWidget {
+  const MandiBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,39 +33,34 @@ class MandiScreen extends ConsumerWidget {
     final crops = ref.watch(cropsProvider);
     final price = ref.watch(mandiPriceProvider(query));
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.mandiTitle)),
-      body: RefreshIndicator(
-        onRefresh: () async => ref.refresh(mandiPriceProvider(query).future),
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-          children: [
-            _Picker(
-              label: l10n.mandiCrop,
-              value: query.crop,
-              options: crops.value ?? fallbackCrops,
-              onChanged: (v) =>
-                  ref.read(mandiQueryProvider.notifier).setCrop(v),
+    return RefreshIndicator(
+      onRefresh: () async => ref.refresh(mandiPriceProvider(query).future),
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+        children: [
+          _Picker(
+            label: l10n.mandiCrop,
+            value: query.crop,
+            options: crops.value ?? fallbackCrops,
+            onChanged: (v) => ref.read(mandiQueryProvider.notifier).setCrop(v),
+          ),
+          const SizedBox(height: 12),
+          _Picker(
+            label: l10n.mandiState,
+            value: query.state,
+            options: indianStates,
+            onChanged: (v) => ref.read(mandiQueryProvider.notifier).setState(v),
+          ),
+          const SizedBox(height: 24),
+          price.when(
+            loading: () => const Padding(
+              padding: EdgeInsets.symmetric(vertical: 48),
+              child: Center(child: CircularProgressIndicator()),
             ),
-            const SizedBox(height: 12),
-            _Picker(
-              label: l10n.mandiState,
-              value: query.state,
-              options: indianStates,
-              onChanged: (v) =>
-                  ref.read(mandiQueryProvider.notifier).setState(v),
-            ),
-            const SizedBox(height: 24),
-            price.when(
-              loading: () => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 48),
-                child: Center(child: CircularProgressIndicator()),
-              ),
-              error: (error, _) => _Error(error: error, query: query),
-              data: (data) => _PriceCard(price: data),
-            ),
-          ],
-        ),
+            error: (error, _) => _Error(error: error, query: query),
+            data: (data) => _PriceCard(price: data),
+          ),
+        ],
       ),
     );
   }

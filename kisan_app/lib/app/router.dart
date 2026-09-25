@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/advisory/presentation/advisory_screen.dart';
 import '../features/auth/data/auth_controller.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/onboarding_screen.dart';
 import '../features/auth/presentation/profile_screen.dart';
 import '../features/community/presentation/community_screen.dart';
 import '../features/diagnosis/presentation/diagnose_screen.dart';
+import '../features/fertilizer/presentation/fertilizer_screen.dart';
 import '../features/farm/presentation/farm_screen.dart';
 import '../features/home/home_screen.dart';
-import '../features/mandi/presentation/mandi_screen.dart';
 import '../features/more/more_screen.dart';
+import '../features/predictions/presentation/insights_screen.dart';
+import '../features/products/presentation/products_screen.dart';
+import '../features/schemes/presentation/schemes_screen.dart';
 import '../features/weather/presentation/weather_screen.dart';
 import '../l10n/app_localizations.dart';
 
@@ -102,13 +106,20 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
           GoRoute(path: '/farm', builder: (_, _) => const FarmScreen()),
           GoRoute(path: '/diagnose', builder: (_, _) => const DiagnoseScreen()),
-          GoRoute(path: '/insights', builder: (_, _) => const MandiScreen()),
+          GoRoute(path: '/insights', builder: (_, _) => const InsightsScreen()),
           GoRoute(path: '/more', builder: (_, _) => const MoreScreen()),
           GoRoute(
             path: '/community',
             builder: (_, _) => const CommunityScreen(),
           ),
           GoRoute(path: '/weather', builder: (_, _) => const WeatherScreen()),
+          GoRoute(
+            path: '/fertilizer',
+            builder: (_, _) => const FertilizerScreen(),
+          ),
+          GoRoute(path: '/advisory', builder: (_, _) => const AdvisoryScreen()),
+          GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
+          GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),
           GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
         ],
       ),

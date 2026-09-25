@@ -5,6 +5,13 @@ import PredictionHistory from "@/models/PredictionHistory";
 
 import { getDetailedMarketPrice } from "@/lib/apmc/marketData";
 
+// The model requires a vegetation index and a root-zone moisture reading. When
+// the caller has no satellite or sensor figure to give, these mid-range values
+// stand in — they are the centre of the ranges the model accepts, not a
+// measurement of anyone's field.
+const DEFAULT_NDVI = 0.6;
+const DEFAULT_SOIL_MOISTURE = 40;
+
 export async function POST(req: Request) {
   try {
     console.log("POST /api/predict-yield - Entry");
@@ -51,6 +58,8 @@ export async function POST(req: Request) {
       fertilizerCost,
       pesticideCost,
       irrigationCost = 0,
+      ndvi,
+      soilMoisture,
       mandi,
       state = "Rajasthan",
       district,
@@ -70,6 +79,10 @@ export async function POST(req: Request) {
     console.log("Calling FastAPI Yield Predictor...");
     let predictedYield;
     let confidenceScore;
+    // Which branch produced the yield below: the trained model, or the
+    // arithmetic fallback. Returned to the client so a fallback result is
+    // never presented as a model prediction.
+    let modelSource: "ml" | "fallback" = "fallback";
     try {
       const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:8000";
       const mlResponse = await fetch(`${backendUrl}/predict-yield`, {
@@ -77,13 +90,14 @@ export async function POST(req: Request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           crop: cropType,
-          nitrogen: Number(soilNitrogen),
-          phosphorus: Number(soilPhosphorus),
-          potassium: Number(soilPotassium),
+          land_area: Number(landArea),
+          fertilizer_cost: Number(fertilizerCost),
+          pesticide_cost: Number(pesticideCost),
+          irrigation_cost: Number(irrigationCost) || 0,
+          ndvi: Number(ndvi) || DEFAULT_NDVI,
+          soil_moisture: Number(soilMoisture) || DEFAULT_SOIL_MOISTURE,
           rainfall: Number(rainfall),
-          temperature: 28.0, // Optimized default for prediction
-          soil_ph: 6.8,      // Optimized default
-          state: "Rajasthan" 
+          state,
         })
       });
       
@@ -95,6 +109,7 @@ export async function POST(req: Request) {
       
       predictedYield = mlData.predicted_yield * Number(landArea);
       confidenceScore = mlData.confidence;
+      modelSource = "ml";
       console.log(`ML Prediction Success: Predicted Yield ${predictedYield} quintals`);
       
     } catch (mlErr: any) {
@@ -194,6 +209,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       predictedProfit,
       confidenceScore,
+      modelSource,
       expectedRevenue,
       totalCost,
       fertilizerCost: Number(fertilizerCost),

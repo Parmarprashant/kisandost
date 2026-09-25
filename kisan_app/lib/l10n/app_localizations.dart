@@ -101,6 +101,60 @@ abstract class L10n {
     Locale('mr'),
   ];
 
+  /// No description provided for @advisoryDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} earlier stages have passed'**
+  String advisoryDone(String count);
+
+  /// No description provided for @advisoryDose.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} for your plot'**
+  String advisoryDose(String amount);
+
+  /// No description provided for @advisoryGeneralNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.'**
+  String get advisoryGeneralNote;
+
+  /// No description provided for @advisoryNextIn.
+  ///
+  /// In en, this message translates to:
+  /// **'NEXT, IN {days} DAYS'**
+  String advisoryNextIn(String days);
+
+  /// No description provided for @advisoryNoCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a field and a crop, and this page will tell you what to do at each stage.'**
+  String get advisoryNoCrops;
+
+  /// No description provided for @advisoryNoneForCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'No stage guide for this crop yet.'**
+  String get advisoryNoneForCrop;
+
+  /// No description provided for @advisoryNothingDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is due right now. The next step is below.'**
+  String get advisoryNothingDue;
+
+  /// No description provided for @advisoryNow.
+  ///
+  /// In en, this message translates to:
+  /// **'DO THIS NOW'**
+  String get advisoryNow;
+
+  /// No description provided for @advisoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop calendar'**
+  String get advisoryTitle;
+
   /// No description provided for @appError.
   ///
   /// In en, this message translates to:
@@ -2405,6 +2459,120 @@ abstract class L10n {
   /// **'Water source'**
   String get farmWaterSource;
 
+  /// No description provided for @fertArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (acres)'**
+  String get fertArea;
+
+  /// No description provided for @fertBags.
+  ///
+  /// In en, this message translates to:
+  /// **'About {count} bags of 50 kg'**
+  String fertBags(String count);
+
+  /// No description provided for @fertBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'What to buy'**
+  String get fertBuy;
+
+  /// No description provided for @fertCalculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate'**
+  String get fertCalculate;
+
+  /// No description provided for @fertCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Roughly ₹{amount}'**
+  String fertCost(String amount);
+
+  /// No description provided for @fertCostNote.
+  ///
+  /// In en, this message translates to:
+  /// **'An estimate from indicative shop prices, not a quote.'**
+  String get fertCostNote;
+
+  /// No description provided for @fertCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get fertCrop;
+
+  /// No description provided for @fertDap.
+  ///
+  /// In en, this message translates to:
+  /// **'DAP'**
+  String get fertDap;
+
+  /// No description provided for @fertExistingK.
+  ///
+  /// In en, this message translates to:
+  /// **'Potassium in soil (kg/acre)'**
+  String get fertExistingK;
+
+  /// No description provided for @fertExistingN.
+  ///
+  /// In en, this message translates to:
+  /// **'Nitrogen in soil (kg/acre)'**
+  String get fertExistingN;
+
+  /// No description provided for @fertExistingP.
+  ///
+  /// In en, this message translates to:
+  /// **'Phosphorus in soil (kg/acre)'**
+  String get fertExistingP;
+
+  /// No description provided for @fertKg.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} kg'**
+  String fertKg(String value);
+
+  /// No description provided for @fertMop.
+  ///
+  /// In en, this message translates to:
+  /// **'MOP'**
+  String get fertMop;
+
+  /// No description provided for @fertReduced.
+  ///
+  /// In en, this message translates to:
+  /// **'Your soil test reduced the dose — you need to buy less.'**
+  String get fertReduced;
+
+  /// No description provided for @fertSoil.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil type'**
+  String get fertSoil;
+
+  /// No description provided for @fertSoilTest.
+  ///
+  /// In en, this message translates to:
+  /// **'I have a soil test'**
+  String get fertSoilTest;
+
+  /// No description provided for @fertSplitNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply nitrogen in 2–3 splits through the season, not all at sowing.'**
+  String get fertSplitNote;
+
+  /// No description provided for @fertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer calculator'**
+  String get fertTitle;
+
+  /// No description provided for @fertUrea.
+  ///
+  /// In en, this message translates to:
+  /// **'Urea'**
+  String get fertUrea;
+
   /// No description provided for @fertilizer_area.
   ///
   /// In en, this message translates to:
@@ -3047,6 +3215,198 @@ abstract class L10n {
   /// **'This lets us give advice for your area and your crops.'**
   String get onboardWhy;
 
+  /// No description provided for @predAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% above your region'**
+  String predAbove(String value);
+
+  /// No description provided for @predArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (acres)'**
+  String get predArea;
+
+  /// No description provided for @predBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% below your region'**
+  String predBelow(String value);
+
+  /// No description provided for @predConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}% confident'**
+  String predConfidence(String value);
+
+  /// No description provided for @predCosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Your input costs'**
+  String get predCosts;
+
+  /// No description provided for @predCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get predCrop;
+
+  /// No description provided for @predEstimatedPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'This estimate uses a baseline price, not a live market rate.'**
+  String get predEstimatedPrice;
+
+  /// No description provided for @predFallbackNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The prediction model could not be reached, so this is a rough estimate from average figures for this crop.'**
+  String get predFallbackNote;
+
+  /// No description provided for @predFertCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer cost (₹)'**
+  String get predFertCost;
+
+  /// No description provided for @predIrrigCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation cost (₹)'**
+  String get predIrrigCost;
+
+  /// No description provided for @predLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'You may not cover your input costs.'**
+  String get predLoss;
+
+  /// No description provided for @predMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Left after input costs'**
+  String get predMargin;
+
+  /// No description provided for @predMarginNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.'**
+  String get predMarginNote;
+
+  /// No description provided for @predNdvi.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop greenness (NDVI)'**
+  String get predNdvi;
+
+  /// No description provided for @predNdviHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'How green and healthy the crop looks from above. Leave as-is if unsure.'**
+  String get predNdviHelp;
+
+  /// No description provided for @predPerAcre.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} t per acre'**
+  String predPerAcre(String value);
+
+  /// No description provided for @predPestCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide cost (₹)'**
+  String get predPestCost;
+
+  /// No description provided for @predPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'₹{value} per quintal'**
+  String predPrice(String value);
+
+  /// No description provided for @predQuintals.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} quintals'**
+  String predQuintals(String value);
+
+  /// No description provided for @predRainfall.
+  ///
+  /// In en, this message translates to:
+  /// **'Season rainfall (mm)'**
+  String get predRainfall;
+
+  /// No description provided for @predRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected revenue'**
+  String get predRevenue;
+
+  /// No description provided for @predRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate'**
+  String get predRun;
+
+  /// No description provided for @predRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Working'**
+  String get predRunning;
+
+  /// No description provided for @predSoilMoisture.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil moisture (%)'**
+  String get predSoilMoisture;
+
+  /// No description provided for @predTabMandi.
+  ///
+  /// In en, this message translates to:
+  /// **'Mandi'**
+  String get predTabMandi;
+
+  /// No description provided for @predTabProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit'**
+  String get predTabProfit;
+
+  /// No description provided for @predTabYield.
+  ///
+  /// In en, this message translates to:
+  /// **'Yield'**
+  String get predTabYield;
+
+  /// No description provided for @predTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} tonnes'**
+  String predTonnes(String value);
+
+  /// No description provided for @predVsRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'Regional average {value} t per acre'**
+  String predVsRegion(String value);
+
+  /// No description provided for @predYieldResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected harvest'**
+  String get predYieldResult;
+
+  /// No description provided for @productsFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Why it helps'**
+  String get productsFeatures;
+
+  /// No description provided for @productsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No products match that search'**
+  String get productsNone;
+
   /// No description provided for @productsPage_allProducts.
   ///
   /// In en, this message translates to:
@@ -3154,6 +3514,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'View Product →'**
   String get productsPage_viewProduct;
+
+  /// No description provided for @productsPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'₹{amount}'**
+  String productsPrice(String amount);
+
+  /// No description provided for @productsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products'**
+  String get productsSearch;
+
+  /// No description provided for @productsStaticNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A reference list of common agri-inputs. Prices are indicative — check with your dealer.'**
+  String get productsStaticNote;
+
+  /// No description provided for @productsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get productsTitle;
+
+  /// No description provided for @productsUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use'**
+  String get productsUsage;
 
   /// No description provided for @products_Abamectin_description.
   ///
@@ -4109,6 +4499,18 @@ abstract class L10n {
   /// **'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection'**
   String get products_TransfluthrinLV_usage_indoor;
 
+  /// No description provided for @profileEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEdit;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get profileSaved;
+
   /// No description provided for @profitPredictor_autoFetchDesc.
   ///
   /// In en, this message translates to:
@@ -4306,6 +4708,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
+
+  /// No description provided for @schemesAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get schemesAll;
+
+  /// No description provided for @schemesBenefits.
+  ///
+  /// In en, this message translates to:
+  /// **'What you get'**
+  String get schemesBenefits;
+
+  /// No description provided for @schemesCuratedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A hand-checked list, not a live government feed. Always confirm details on the official site.'**
+  String get schemesCuratedNote;
+
+  /// No description provided for @schemesEligibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Who can apply'**
+  String get schemesEligibility;
+
+  /// No description provided for @schemesLaunched.
+  ///
+  /// In en, this message translates to:
+  /// **'Started {when}'**
+  String schemesLaunched(String when);
+
+  /// No description provided for @schemesNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No schemes match that search'**
+  String get schemesNone;
+
+  /// No description provided for @schemesOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open official website'**
+  String get schemesOpen;
+
+  /// No description provided for @schemesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search schemes'**
+  String get schemesSearch;
+
+  /// No description provided for @schemesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Government schemes'**
+  String get schemesTitle;
 
   /// No description provided for @weatherFeels.
   ///

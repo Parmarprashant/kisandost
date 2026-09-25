@@ -10,6 +10,42 @@ class L10nEn extends L10n {
   L10nEn([String locale = 'en']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count earlier stages have passed';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return '$amount for your plot';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'NEXT, IN $days DAYS';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'Add a field and a crop, and this page will tell you what to do at each stage.';
+
+  @override
+  String get advisoryNoneForCrop => 'No stage guide for this crop yet.';
+
+  @override
+  String get advisoryNothingDue =>
+      'Nothing is due right now. The next step is below.';
+
+  @override
+  String get advisoryNow => 'DO THIS NOW';
+
+  @override
+  String get advisoryTitle => 'Crop calendar';
+
+  @override
   String get appError => 'Something went wrong.';
 
   @override
@@ -1307,6 +1343,72 @@ class L10nEn extends L10n {
   String get farmWaterSource => 'Water source';
 
   @override
+  String get fertArea => 'Area (acres)';
+
+  @override
+  String fertBags(String count) {
+    return 'About $count bags of 50 kg';
+  }
+
+  @override
+  String get fertBuy => 'What to buy';
+
+  @override
+  String get fertCalculate => 'Calculate';
+
+  @override
+  String fertCost(String amount) {
+    return 'Roughly ₹$amount';
+  }
+
+  @override
+  String get fertCostNote =>
+      'An estimate from indicative shop prices, not a quote.';
+
+  @override
+  String get fertCrop => 'Crop';
+
+  @override
+  String get fertDap => 'DAP';
+
+  @override
+  String get fertExistingK => 'Potassium in soil (kg/acre)';
+
+  @override
+  String get fertExistingN => 'Nitrogen in soil (kg/acre)';
+
+  @override
+  String get fertExistingP => 'Phosphorus in soil (kg/acre)';
+
+  @override
+  String fertKg(String value) {
+    return '$value kg';
+  }
+
+  @override
+  String get fertMop => 'MOP';
+
+  @override
+  String get fertReduced =>
+      'Your soil test reduced the dose — you need to buy less.';
+
+  @override
+  String get fertSoil => 'Soil type';
+
+  @override
+  String get fertSoilTest => 'I have a soil test';
+
+  @override
+  String get fertSplitNote =>
+      'Apply nitrogen in 2–3 splits through the season, not all at sowing.';
+
+  @override
+  String get fertTitle => 'Fertilizer calculator';
+
+  @override
+  String get fertUrea => 'Urea';
+
+  @override
   String get fertilizer_area => 'Farm area (acres)';
 
   @override
@@ -1642,6 +1744,122 @@ class L10nEn extends L10n {
       'This lets us give advice for your area and your crops.';
 
   @override
+  String predAbove(String value) {
+    return '$value% above your region';
+  }
+
+  @override
+  String get predArea => 'Area (acres)';
+
+  @override
+  String predBelow(String value) {
+    return '$value% below your region';
+  }
+
+  @override
+  String predConfidence(String value) {
+    return '$value% confident';
+  }
+
+  @override
+  String get predCosts => 'Your input costs';
+
+  @override
+  String get predCrop => 'Crop';
+
+  @override
+  String get predEstimatedPrice =>
+      'This estimate uses a baseline price, not a live market rate.';
+
+  @override
+  String get predFallbackNote =>
+      'The prediction model could not be reached, so this is a rough estimate from average figures for this crop.';
+
+  @override
+  String get predFertCost => 'Fertilizer cost (₹)';
+
+  @override
+  String get predIrrigCost => 'Irrigation cost (₹)';
+
+  @override
+  String get predLoss => 'You may not cover your input costs.';
+
+  @override
+  String get predMargin => 'Left after input costs';
+
+  @override
+  String get predMarginNote =>
+      'This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.';
+
+  @override
+  String get predNdvi => 'Crop greenness (NDVI)';
+
+  @override
+  String get predNdviHelp =>
+      'How green and healthy the crop looks from above. Leave as-is if unsure.';
+
+  @override
+  String predPerAcre(String value) {
+    return '$value t per acre';
+  }
+
+  @override
+  String get predPestCost => 'Pesticide cost (₹)';
+
+  @override
+  String predPrice(String value) {
+    return '₹$value per quintal';
+  }
+
+  @override
+  String predQuintals(String value) {
+    return '$value quintals';
+  }
+
+  @override
+  String get predRainfall => 'Season rainfall (mm)';
+
+  @override
+  String get predRevenue => 'Expected revenue';
+
+  @override
+  String get predRun => 'Estimate';
+
+  @override
+  String get predRunning => 'Working';
+
+  @override
+  String get predSoilMoisture => 'Soil moisture (%)';
+
+  @override
+  String get predTabMandi => 'Mandi';
+
+  @override
+  String get predTabProfit => 'Profit';
+
+  @override
+  String get predTabYield => 'Yield';
+
+  @override
+  String predTonnes(String value) {
+    return '$value tonnes';
+  }
+
+  @override
+  String predVsRegion(String value) {
+    return 'Regional average $value t per acre';
+  }
+
+  @override
+  String get predYieldResult => 'Expected harvest';
+
+  @override
+  String get productsFeatures => 'Why it helps';
+
+  @override
+  String get productsNone => 'No products match that search';
+
+  @override
   String get productsPage_allProducts => '← All Products';
 
   @override
@@ -1698,6 +1916,24 @@ class L10nEn extends L10n {
 
   @override
   String get productsPage_viewProduct => 'View Product →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'Search products';
+
+  @override
+  String get productsStaticNote =>
+      'A reference list of common agri-inputs. Prices are indicative — check with your dealer.';
+
+  @override
+  String get productsTitle => 'Products';
+
+  @override
+  String get productsUsage => 'How to use';
 
   @override
   String get products_Abamectin_description =>
@@ -2302,6 +2538,12 @@ class L10nEn extends L10n {
       'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection';
 
   @override
+  String get profileEdit => 'Edit profile';
+
+  @override
+  String get profileSaved => 'Saved';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'Retrieving weather and environmental data';
 
@@ -2406,6 +2648,36 @@ class L10nEn extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'Total Cost';
+
+  @override
+  String get schemesAll => 'All';
+
+  @override
+  String get schemesBenefits => 'What you get';
+
+  @override
+  String get schemesCuratedNote =>
+      'A hand-checked list, not a live government feed. Always confirm details on the official site.';
+
+  @override
+  String get schemesEligibility => 'Who can apply';
+
+  @override
+  String schemesLaunched(String when) {
+    return 'Started $when';
+  }
+
+  @override
+  String get schemesNone => 'No schemes match that search';
+
+  @override
+  String get schemesOpen => 'Open official website';
+
+  @override
+  String get schemesSearch => 'Search schemes';
+
+  @override
+  String get schemesTitle => 'Government schemes';
 
   @override
   String weatherFeels(String value) {

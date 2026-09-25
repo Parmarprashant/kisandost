@@ -10,8 +10,11 @@
 const AGRIVISION_BASE_URL =
   process.env.AGRIVISION_API_URL ||
   "https://parmarprashant--agrivision-diagnostic-engine-fastapi-app.modal.run";
+// Port 8010, not 8000: 8000 is the yield model (ai-service/server.py), which
+// has no /api/v1/diagnose route. Defaulting to it sent every local diagnosis
+// to the wrong service and returned a 404 that looked like the model was down.
 const AGRIVISION_LOCAL_URL =
-  process.env.AGRIVISION_LOCAL_API_URL || "http://127.0.0.1:8000";
+  process.env.AGRIVISION_LOCAL_API_URL || "http://127.0.0.1:8010";
 
 /** Shape of the API response */
 export interface AgriVisionRawResponse {

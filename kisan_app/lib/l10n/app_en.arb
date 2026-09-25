@@ -1,5 +1,35 @@
 {
   "@@locale": "en",
+  "advisoryDone": "{count} earlier stages have passed",
+  "@advisoryDone": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryDose": "{amount} for your plot",
+  "@advisoryDose": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryGeneralNote": "A general guide by crop age, not an inspection of your field. Check the crop yourself before spraying, and follow the label on the pack.",
+  "advisoryNextIn": "NEXT, IN {days} DAYS",
+  "@advisoryNextIn": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "advisoryNoCrops": "Add a field and a crop, and this page will tell you what to do at each stage.",
+  "advisoryNoneForCrop": "No stage guide for this crop yet.",
+  "advisoryNothingDue": "Nothing is due right now. The next step is below.",
+  "advisoryNow": "DO THIS NOW",
+  "advisoryTitle": "Crop calendar",
   "appError": "Something went wrong.",
   "appLanguage": "Language",
   "appLastUpdated": "Updated {time}",
@@ -463,6 +493,46 @@
   "farmVariety": "Variety",
   "farmVillage": "Village",
   "farmWaterSource": "Water source",
+  "fertArea": "Area (acres)",
+  "fertBags": "About {count} bags of 50 kg",
+  "@fertBags": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "fertBuy": "What to buy",
+  "fertCalculate": "Calculate",
+  "fertCost": "Roughly ₹{amount}",
+  "@fertCost": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "fertCostNote": "An estimate from indicative shop prices, not a quote.",
+  "fertCrop": "Crop",
+  "fertDap": "DAP",
+  "fertExistingK": "Potassium in soil (kg/acre)",
+  "fertExistingN": "Nitrogen in soil (kg/acre)",
+  "fertExistingP": "Phosphorus in soil (kg/acre)",
+  "fertKg": "{value} kg",
+  "@fertKg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "fertMop": "MOP",
+  "fertReduced": "Your soil test reduced the dose — you need to buy less.",
+  "fertSoil": "Soil type",
+  "fertSoilTest": "I have a soil test",
+  "fertSplitNote": "Apply nitrogen in 2–3 splits through the season, not all at sowing.",
+  "fertTitle": "Fertilizer calculator",
+  "fertUrea": "Urea",
   "fertilizer_area": "Farm area (acres)",
   "fertilizer_calculate": "Calculate",
   "fertilizer_cost": "Cost Estimate",
@@ -594,6 +664,94 @@
   "onboardTitle": "Tell us about your farm",
   "onboardVillage": "Village",
   "onboardWhy": "This lets us give advice for your area and your crops.",
+  "predAbove": "{value}% above your region",
+  "@predAbove": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predArea": "Area (acres)",
+  "predBelow": "{value}% below your region",
+  "@predBelow": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predConfidence": "{value}% confident",
+  "@predConfidence": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predCosts": "Your input costs",
+  "predCrop": "Crop",
+  "predEstimatedPrice": "This estimate uses a baseline price, not a live market rate.",
+  "predFallbackNote": "The prediction model could not be reached, so this is a rough estimate from average figures for this crop.",
+  "predFertCost": "Fertilizer cost (₹)",
+  "predIrrigCost": "Irrigation cost (₹)",
+  "predLoss": "You may not cover your input costs.",
+  "predMargin": "Left after input costs",
+  "predMarginNote": "This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.",
+  "predNdvi": "Crop greenness (NDVI)",
+  "predNdviHelp": "How green and healthy the crop looks from above. Leave as-is if unsure.",
+  "predPerAcre": "{value} t per acre",
+  "@predPerAcre": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predPestCost": "Pesticide cost (₹)",
+  "predPrice": "₹{value} per quintal",
+  "@predPrice": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predQuintals": "{value} quintals",
+  "@predQuintals": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predRainfall": "Season rainfall (mm)",
+  "predRevenue": "Expected revenue",
+  "predRun": "Estimate",
+  "predRunning": "Working",
+  "predSoilMoisture": "Soil moisture (%)",
+  "predTabMandi": "Mandi",
+  "predTabProfit": "Profit",
+  "predTabYield": "Yield",
+  "predTonnes": "{value} tonnes",
+  "@predTonnes": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predVsRegion": "Regional average {value} t per acre",
+  "@predVsRegion": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "predYieldResult": "Expected harvest",
+  "productsFeatures": "Why it helps",
+  "productsNone": "No products match that search",
   "productsPage_allProducts": "← All Products",
   "productsPage_buyOnWhatsApp": "Buy on WhatsApp",
   "productsPage_footer": "© 2026 KisanDost · Empowering Indian Farmers",
@@ -612,6 +770,18 @@
   "productsPage_tabs_overview": "Overview",
   "productsPage_tabs_usage": "Usage",
   "productsPage_viewProduct": "View Product →",
+  "productsPrice": "₹{amount}",
+  "@productsPrice": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "productsSearch": "Search products",
+  "productsStaticNote": "A reference list of common agri-inputs. Prices are indicative — check with your dealer.",
+  "productsTitle": "Products",
+  "productsUsage": "How to use",
   "products_Abamectin_description": "Effective against mites and leaf miners in a variety of crops.",
   "products_Abamectin_longDescription": "Abamectin 1.9% EC is a mixture of avermectins, producing toxic effects in insects and mites by stimulating the release of gamma-aminobutyric acid (GABA), an inhibitory neurotransmitter. It provides excellent control of spider mites and leaf miners in crops like roses, grapes, apples, and tomatoes.",
   "products_Abamectin_name": "Abamectin 1.9% EC",
@@ -771,6 +941,8 @@
   "products_TransfluthrinLV_tag": "Household Insecticide",
   "products_TransfluthrinLV_usage_area": "Effective for rooms up to 300-400 sq.ft",
   "products_TransfluthrinLV_usage_indoor": "Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection",
+  "profileEdit": "Edit profile",
+  "profileSaved": "Saved",
   "profitPredictor_autoFetchDesc": "Retrieving weather and environmental data",
   "profitPredictor_autoFetchTitle": "Auto-fetching data...",
   "profitPredictor_confidence": "Confidence",
@@ -804,6 +976,22 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "schemesAll": "All",
+  "schemesBenefits": "What you get",
+  "schemesCuratedNote": "A hand-checked list, not a live government feed. Always confirm details on the official site.",
+  "schemesEligibility": "Who can apply",
+  "schemesLaunched": "Started {when}",
+  "@schemesLaunched": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "schemesNone": "No schemes match that search",
+  "schemesOpen": "Open official website",
+  "schemesSearch": "Search schemes",
+  "schemesTitle": "Government schemes",
   "weatherFeels": "Feels like {value}°",
   "@weatherFeels": {
     "placeholders": {

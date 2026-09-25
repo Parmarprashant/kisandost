@@ -10,6 +10,42 @@ class L10nGu extends L10n {
   L10nGu([String locale = 'gu']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count અગાઉના તબક્કા પસાર ચૂક્યા છે';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return 'તમારા ખેતર માટે $amount';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'આ પાકની ઉંમર પ્રમાણે સામાન્ય માર્ગદર્શન છે, તમારા ખેતરની તપાસ નહીં. છંટકાવ પહેલાં પાક જાતે જુઓ અને પેક પરની સૂચના પાળો.';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'આગળ, $days દિવસમાં';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'ખેતર અને પાક ઉમેરો, પછી આ પાનું દરેક તબક્કે શું કરવું તે જણાવશે.';
+
+  @override
+  String get advisoryNoneForCrop => 'આ પાક માટે હજુ તબક્કાવાર માર્ગદર્શન નથી.';
+
+  @override
+  String get advisoryNothingDue =>
+      'હમણાં કંઈ કરવાનું નથી. આગળનું પગલું નીચે છે.';
+
+  @override
+  String get advisoryNow => 'હમણાં આ કરો';
+
+  @override
+  String get advisoryTitle => 'પાક કૅલેન્ડર';
+
+  @override
   String get appError => 'કંઈક ખોટું થયું.';
 
   @override
@@ -1312,6 +1348,70 @@ class L10nGu extends L10n {
   String get farmWaterSource => 'પાણીનો સ્રોત';
 
   @override
+  String get fertArea => 'વિસ્તાર (એકર)';
+
+  @override
+  String fertBags(String count) {
+    return 'આશરે $count બોરી (50 કિ.ગ્રા.)';
+  }
+
+  @override
+  String get fertBuy => 'શું ખરીદવું';
+
+  @override
+  String get fertCalculate => 'ગણતરી કરો';
+
+  @override
+  String fertCost(String amount) {
+    return 'આશરે ₹$amount';
+  }
+
+  @override
+  String get fertCostNote => 'અંદાજિત દુકાન ભાવ પરથી અંદાજ, પાકો ભાવ નથી.';
+
+  @override
+  String get fertCrop => 'પાક';
+
+  @override
+  String get fertDap => 'ડીએપી';
+
+  @override
+  String get fertExistingK => 'જમીનમાં પોટાશ (કિ.ગ્રા./એકર)';
+
+  @override
+  String get fertExistingN => 'જમીનમાં નાઇટ્રોજન (કિ.ગ્રા./એકર)';
+
+  @override
+  String get fertExistingP => 'જમીનમાં ફોસ્ફરસ (કિ.ગ્રા./એકર)';
+
+  @override
+  String fertKg(String value) {
+    return '$value કિ.ગ્રા.';
+  }
+
+  @override
+  String get fertMop => 'એમઓપી';
+
+  @override
+  String get fertReduced =>
+      'તમારી જમીન ચકાસણીથી માત્રા ઘટી — ઓછું ખરીદવું પડશે.';
+
+  @override
+  String get fertSoil => 'જમીનનો પ્રકાર';
+
+  @override
+  String get fertSoilTest => 'મારી પાસે જમીન ચકાસણી છે';
+
+  @override
+  String get fertSplitNote => 'નાઇટ્રોજન 2–3 વારમાં આપો, વાવણી વખતે બધું નહીં.';
+
+  @override
+  String get fertTitle => 'ખાતર કૅલ્ક્યુલેટર';
+
+  @override
+  String get fertUrea => 'યુરિયા';
+
+  @override
   String get fertilizer_area => 'ખેતરનો વિસ્તાર (એકર)';
 
   @override
@@ -1648,6 +1748,122 @@ class L10nGu extends L10n {
       'આથી અમે તમારા વિસ્તાર અને પાક પ્રમાણે સલાહ આપી શકીશું.';
 
   @override
+  String predAbove(String value) {
+    return 'તમારા વિસ્તાર કરતાં $value% વધુ';
+  }
+
+  @override
+  String get predArea => 'વિસ્તાર (એકર)';
+
+  @override
+  String predBelow(String value) {
+    return 'તમારા વિસ્તાર કરતાં $value% ઓછું';
+  }
+
+  @override
+  String predConfidence(String value) {
+    return '$value% ખાતરી';
+  }
+
+  @override
+  String get predCosts => 'તમારો ખર્ચ';
+
+  @override
+  String get predCrop => 'પાક';
+
+  @override
+  String get predEstimatedPrice =>
+      'આ અંદાજ આધાર ભાવ પર છે, જીવંત બજાર ભાવ પર નહીં.';
+
+  @override
+  String get predFallbackNote =>
+      'આગાહી મોડલ સુધી પહોંચી શકાયું નહીં, તેથી આ આ પાકના સરેરાશ આંકડા પરથી તૈયાર કરેલો અંદાજ છે.';
+
+  @override
+  String get predFertCost => 'ખાતરનો ખર્ચ (₹)';
+
+  @override
+  String get predIrrigCost => 'પિયતનો ખર્ચ (₹)';
+
+  @override
+  String get predLoss => 'કદાચ ખર્ચ પણ નહીં નીકળે.';
+
+  @override
+  String get predMargin => 'ખર્ચ પછી બચત';
+
+  @override
+  String get predMarginNote =>
+      'આમાં ફક્ત તમે નાખેલ ખાતર, દવા અને પિયત ગણ્યાં છે. બિયારણ, મજૂરી, જમીન અને વાહનખર્ચ નથી, તેથી સાચો નફો ઓછો હશે.';
+
+  @override
+  String get predNdvi => 'પાકની હરિયાળી (NDVI)';
+
+  @override
+  String get predNdviHelp =>
+      'ઉપરથી પાક કેટલો લીલો અને તંદુરસ્ત દેખાય છે. ખબર ન હોય તો એમ જ રહેવા દો.';
+
+  @override
+  String predPerAcre(String value) {
+    return '$value ટન પ્રતિ એકર';
+  }
+
+  @override
+  String get predPestCost => 'દવાનો ખર્ચ (₹)';
+
+  @override
+  String predPrice(String value) {
+    return '₹$value પ્રતિ ક્વિન્ટલ';
+  }
+
+  @override
+  String predQuintals(String value) {
+    return '$value ક્વિન્ટલ';
+  }
+
+  @override
+  String get predRainfall => 'મોસમનો વરસાદ (મિ.મી.)';
+
+  @override
+  String get predRevenue => 'અંદાજિત આવક';
+
+  @override
+  String get predRun => 'અંદાજ કાઢો';
+
+  @override
+  String get predRunning => 'ગણતરી થઈ રહી છે';
+
+  @override
+  String get predSoilMoisture => 'જમીનનો ભેજ (%)';
+
+  @override
+  String get predTabMandi => 'બજાર';
+
+  @override
+  String get predTabProfit => 'નફો';
+
+  @override
+  String get predTabYield => 'ઉપજ';
+
+  @override
+  String predTonnes(String value) {
+    return '$value ટન';
+  }
+
+  @override
+  String predVsRegion(String value) {
+    return 'પ્રાદેશિક સરેરાશ $value ટન પ્રતિ એકર';
+  }
+
+  @override
+  String get predYieldResult => 'અંદાજિત ઉપજ';
+
+  @override
+  String get productsFeatures => 'કેમ ઉપયોગી છે';
+
+  @override
+  String get productsNone => 'આ શોધથી કોઈ ઉત્પાદન મળ્યું નહીં';
+
+  @override
   String get productsPage_allProducts => '← બધા ઉત્પાદનો';
 
   @override
@@ -1705,6 +1921,24 @@ class L10nGu extends L10n {
 
   @override
   String get productsPage_viewProduct => 'ઉત્પાદન જુઓ →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'ઉત્પાદન શોધો';
+
+  @override
+  String get productsStaticNote =>
+      'સામાન્ય ખેતી સામગ્રીની સંદર્ભ યાદી. ભાવ અંદાજિત છે — તમારા ડીલર પાસે ચકાસો.';
+
+  @override
+  String get productsTitle => 'ઉત્પાદનો';
+
+  @override
+  String get productsUsage => 'કેવી રીતે વાપરવું';
 
   @override
   String get products_Abamectin_description =>
@@ -2309,6 +2543,12 @@ class L10nGu extends L10n {
       'Use with standard liquid vaporizer machine, one refill provides 30-45 nights protection';
 
   @override
+  String get profileEdit => 'પ્રોફાઇલ બદલો';
+
+  @override
+  String get profileSaved => 'સાચવ્યું';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'હવામાન અને પર્યાવરણીય માહિતી પ્રાપ્ત થાય છે';
 
@@ -2413,6 +2653,36 @@ class L10nGu extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
+
+  @override
+  String get schemesAll => 'બધી';
+
+  @override
+  String get schemesBenefits => 'શું મળશે';
+
+  @override
+  String get schemesCuratedNote =>
+      'આ ચકાસેલી યાદી છે, સરકારી લાઇવ ફીડ નથી. વિગતો સત્તાવાર સાઇટ પર ચકાસો.';
+
+  @override
+  String get schemesEligibility => 'કોણ અરજી કરી શકે';
+
+  @override
+  String schemesLaunched(String when) {
+    return '$when માં શરૂ';
+  }
+
+  @override
+  String get schemesNone => 'આ શોધથી કોઈ યોજના મળી નહીં';
+
+  @override
+  String get schemesOpen => 'સત્તાવાર વેબસાઇટ ખોલો';
+
+  @override
+  String get schemesSearch => 'યોજના શોધો';
+
+  @override
+  String get schemesTitle => 'સરકારી યોજનાઓ';
 
   @override
   String weatherFeels(String value) {

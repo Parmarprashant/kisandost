@@ -10,6 +10,41 @@ class L10nHi extends L10n {
   L10nHi([String locale = 'hi']) : super(locale);
 
   @override
+  String advisoryDone(String count) {
+    return '$count पिछले चरण बीत चुके हैं';
+  }
+
+  @override
+  String advisoryDose(String amount) {
+    return 'आपके खेत के लिए $amount';
+  }
+
+  @override
+  String get advisoryGeneralNote =>
+      'यह फ़सल की उम्र के हिसाब से सामान्य सलाह है, आपके खेत की जाँच नहीं। छिड़काव से पहले फ़सल खुद देखें और डिब्बे पर लिखा निर्देश मानें।';
+
+  @override
+  String advisoryNextIn(String days) {
+    return 'अगला, $days दिन में';
+  }
+
+  @override
+  String get advisoryNoCrops =>
+      'खेत और फ़सल जोड़ें, फिर यह पन्ना हर चरण पर बताएगा कि क्या करना है।';
+
+  @override
+  String get advisoryNoneForCrop => 'इस फ़सल के लिए अभी चरण सूची नहीं है।';
+
+  @override
+  String get advisoryNothingDue => 'अभी कुछ करना नहीं है। अगला कदम नीचे है।';
+
+  @override
+  String get advisoryNow => 'अभी यह करें';
+
+  @override
+  String get advisoryTitle => 'फ़सल कैलेंडर';
+
+  @override
   String get appError => 'कुछ गड़बड़ हो गई।';
 
   @override
@@ -1314,6 +1349,71 @@ class L10nHi extends L10n {
   String get farmWaterSource => 'पानी का स्रोत';
 
   @override
+  String get fertArea => 'क्षेत्रफल (एकड़)';
+
+  @override
+  String fertBags(String count) {
+    return 'लगभग $count बोरी (50 कि.ग्रा.)';
+  }
+
+  @override
+  String get fertBuy => 'क्या ख़रीदें';
+
+  @override
+  String get fertCalculate => 'गणना करें';
+
+  @override
+  String fertCost(String amount) {
+    return 'लगभग ₹$amount';
+  }
+
+  @override
+  String get fertCostNote => 'अनुमानित दुकान भाव से आकलन, पक्का भाव नहीं।';
+
+  @override
+  String get fertCrop => 'फ़सल';
+
+  @override
+  String get fertDap => 'डीएपी';
+
+  @override
+  String get fertExistingK => 'मिट्टी में पोटाश (कि.ग्रा./एकड़)';
+
+  @override
+  String get fertExistingN => 'मिट्टी में नाइट्रोजन (कि.ग्रा./एकड़)';
+
+  @override
+  String get fertExistingP => 'मिट्टी में फॉस्फोरस (कि.ग्रा./एकड़)';
+
+  @override
+  String fertKg(String value) {
+    return '$value कि.ग्रा.';
+  }
+
+  @override
+  String get fertMop => 'एमओपी';
+
+  @override
+  String get fertReduced =>
+      'आपकी मिट्टी जाँच से मात्रा घटी — कम ख़रीदना पड़ेगा।';
+
+  @override
+  String get fertSoil => 'मिट्टी का प्रकार';
+
+  @override
+  String get fertSoilTest => 'मेरे पास मिट्टी जाँच है';
+
+  @override
+  String get fertSplitNote =>
+      'नाइट्रोजन 2–3 बार में दें, बुवाई के समय पूरा नहीं।';
+
+  @override
+  String get fertTitle => 'खाद कैलकुलेटर';
+
+  @override
+  String get fertUrea => 'यूरिया';
+
+  @override
   String get fertilizer_area => 'खेत का क्षेत्र (एकड़)';
 
   @override
@@ -1652,6 +1752,122 @@ class L10nHi extends L10n {
       'इससे हम आपके इलाक़े और फ़सल के हिसाब से सलाह दे पाएँगे।';
 
   @override
+  String predAbove(String value) {
+    return 'आपके क्षेत्र से $value% ज़्यादा';
+  }
+
+  @override
+  String get predArea => 'क्षेत्रफल (एकड़)';
+
+  @override
+  String predBelow(String value) {
+    return 'आपके क्षेत्र से $value% कम';
+  }
+
+  @override
+  String predConfidence(String value) {
+    return '$value% निश्चित';
+  }
+
+  @override
+  String get predCosts => 'आपका लागत खर्च';
+
+  @override
+  String get predCrop => 'फ़सल';
+
+  @override
+  String get predEstimatedPrice =>
+      'यह अनुमान आधार भाव पर है, लाइव मंडी भाव पर नहीं।';
+
+  @override
+  String get predFallbackNote =>
+      'पूर्वानुमान मॉडल तक पहुँच नहीं पाए, इसलिए यह इस फ़सल के औसत आँकड़ों से बना मोटा अनुमान है।';
+
+  @override
+  String get predFertCost => 'खाद का खर्च (₹)';
+
+  @override
+  String get predIrrigCost => 'सिंचाई का खर्च (₹)';
+
+  @override
+  String get predLoss => 'हो सकता है लागत भी न निकले।';
+
+  @override
+  String get predMargin => 'लागत के बाद बचत';
+
+  @override
+  String get predMarginNote =>
+      'इसमें सिर्फ़ आपकी डाली हुई खाद, दवा और सिंचाई गिनी है। बीज, मज़दूरी, ज़मीन और भाड़ा शामिल नहीं, इसलिए असली मुनाफ़ा कम होगा।';
+
+  @override
+  String get predNdvi => 'फ़सल की हरियाली (NDVI)';
+
+  @override
+  String get predNdviHelp =>
+      'ऊपर से फ़सल कितनी हरी और स्वस्थ दिखती है। पता न हो तो वैसे ही रहने दें।';
+
+  @override
+  String predPerAcre(String value) {
+    return '$value टन प्रति एकड़';
+  }
+
+  @override
+  String get predPestCost => 'दवा का खर्च (₹)';
+
+  @override
+  String predPrice(String value) {
+    return '₹$value प्रति क्विंटल';
+  }
+
+  @override
+  String predQuintals(String value) {
+    return '$value क्विंटल';
+  }
+
+  @override
+  String get predRainfall => 'मौसम की बारिश (मि.मी.)';
+
+  @override
+  String get predRevenue => 'अनुमानित आमदनी';
+
+  @override
+  String get predRun => 'अनुमान लगाएँ';
+
+  @override
+  String get predRunning => 'गणना हो रही है';
+
+  @override
+  String get predSoilMoisture => 'मिट्टी की नमी (%)';
+
+  @override
+  String get predTabMandi => 'मंडी';
+
+  @override
+  String get predTabProfit => 'मुनाफ़ा';
+
+  @override
+  String get predTabYield => 'उपज';
+
+  @override
+  String predTonnes(String value) {
+    return '$value टन';
+  }
+
+  @override
+  String predVsRegion(String value) {
+    return 'क्षेत्रीय औसत $value टन प्रति एकड़';
+  }
+
+  @override
+  String get predYieldResult => 'अनुमानित पैदावार';
+
+  @override
+  String get productsFeatures => 'क्यों फ़ायदेमंद है';
+
+  @override
+  String get productsNone => 'इस खोज से कोई उत्पाद नहीं मिला';
+
+  @override
   String get productsPage_allProducts => '← सभी उत्पाद';
 
   @override
@@ -1709,6 +1925,24 @@ class L10nHi extends L10n {
 
   @override
   String get productsPage_viewProduct => 'उत्पाद देखें →';
+
+  @override
+  String productsPrice(String amount) {
+    return '₹$amount';
+  }
+
+  @override
+  String get productsSearch => 'उत्पाद खोजें';
+
+  @override
+  String get productsStaticNote =>
+      'आम कृषि सामग्री की संदर्भ सूची। भाव अनुमानित हैं — अपने डीलर से पुष्टि करें।';
+
+  @override
+  String get productsTitle => 'उत्पाद';
+
+  @override
+  String get productsUsage => 'कैसे इस्तेमाल करें';
 
   @override
   String get products_Abamectin_description =>
@@ -2314,6 +2548,12 @@ class L10nHi extends L10n {
       'मानक लिक्विड वेपोराइजर मशीन के साथ प्रयोग करें, एक रिफिल 30-45 रातों की सुरक्षा प्रदान करता है';
 
   @override
+  String get profileEdit => 'प्रोफ़ाइल बदलें';
+
+  @override
+  String get profileSaved => 'सहेजा गया';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'मौसम और पर्यावरण डेटा प्राप्त कर रहे हैं';
 
@@ -2419,6 +2659,36 @@ class L10nHi extends L10n {
 
   @override
   String get profitPredictor_totalCost => 'कुल लागत';
+
+  @override
+  String get schemesAll => 'सभी';
+
+  @override
+  String get schemesBenefits => 'क्या मिलेगा';
+
+  @override
+  String get schemesCuratedNote =>
+      'यह जाँची हुई सूची है, सरकारी लाइव फ़ीड नहीं। जानकारी आधिकारिक साइट पर ज़रूर देखें।';
+
+  @override
+  String get schemesEligibility => 'कौन आवेदन कर सकता है';
+
+  @override
+  String schemesLaunched(String when) {
+    return '$when में शुरू';
+  }
+
+  @override
+  String get schemesNone => 'इस खोज से कोई योजना नहीं मिली';
+
+  @override
+  String get schemesOpen => 'आधिकारिक वेबसाइट खोलें';
+
+  @override
+  String get schemesSearch => 'योजना खोजें';
+
+  @override
+  String get schemesTitle => 'सरकारी योजनाएँ';
 
   @override
   String weatherFeels(String value) {
