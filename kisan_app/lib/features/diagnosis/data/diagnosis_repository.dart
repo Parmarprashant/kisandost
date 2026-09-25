@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
@@ -52,8 +53,19 @@ class DiagnosisRepository {
 
     onStage?.call(DiagnosisStage.uploading);
 
+    // Declare what this actually is. Without a content type Dio sends
+    // application/octet-stream, which is a lie about a JPEG and leaves
+    // anything downstream that checks the type guessing. The type is read
+    // from the bytes rather than the filename, because compression rewrites
+    // the image without renaming the file it came from.
+    final mediaType = _mediaTypeOf(bytes);
+
     final form = FormData.fromMap({
-      'file': MultipartFile.fromBytes(bytes, filename: p.basename(photo.path)),
+      'file': MultipartFile.fromBytes(
+        bytes,
+        filename: _filenameFor(p.basename(photo.path), mediaType),
+        contentType: mediaType,
+      ),
     });
 
     try {
@@ -108,4 +120,39 @@ class DiagnosisRepository {
     // size check above decide.
     return file.readAsBytes();
   }
+}
+
+/// The image type, read from the first bytes rather than the file extension.
+///
+/// A photo picked as `.heic` or `.png` and then compressed is JPEG by the
+/// time it is uploaded, so the original name says nothing useful.
+MediaType _mediaTypeOf(List<int> bytes) {
+  bool startsWith(List<int> magic) {
+    if (bytes.length < magic.length) return false;
+    for (var i = 0; i < magic.length; i++) {
+      if (bytes[i] != magic[i]) return false;
+    }
+    return true;
+  }
+
+  if (startsWith(const [0xFF, 0xD8, 0xFF])) return MediaType('image', 'jpeg');
+  if (startsWith(const [0x89, 0x50, 0x4E, 0x47])) {
+    return MediaType('image', 'png');
+  }
+  if (startsWith(const [0x52, 0x49, 0x46, 0x46])) {
+    return MediaType('image', 'webp');
+  }
+
+  // Unrecognised: claim JPEG, which is what the camera produces and what
+  // compression emits. Better than octet-stream, which tells nobody anything.
+  return MediaType('image', 'jpeg');
+}
+
+/// Keeps the original name but corrects the extension to match the bytes.
+String _filenameFor(String original, MediaType type) {
+  final base = original.contains('.')
+      ? original.substring(0, original.lastIndexOf('.'))
+      : original;
+  final safe = base.trim().isEmpty ? 'photo' : base;
+  return '$safe.${type.subtype == 'jpeg' ? 'jpg' : type.subtype}';
 }
