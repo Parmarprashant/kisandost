@@ -4,13 +4,13 @@ importScripts("https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-comp
 // Using hardcoded config inside the SW because process.env is not available here in Next.js public directory.
 // This is completely safe and standard for Firebase (all these values are public identifiers anyway).
 const firebaseConfig = {
-  apiKey: "AIzaSyD1wkZErb9JQpBZRG93nYGsJoxPoJKnsM8",
-  authDomain: "kisandost-29975.firebaseapp.com",
-  projectId: "kisandost-29975",
-  storageBucket: "kisandost-29975.firebasestorage.app",
-  messagingSenderId: "91129459714",
-  appId: "1:91129459714:web:e2611e0f3fb548c9bd231b",
-  measurementId: "G-C6FG8R3RF5"
+  apiKey: "AIzaSyDWXQ4IgWZq5_i6PL11p4AZfhR-rukTb4",
+  authDomain: "kisan-dost-bd105.firebaseapp.com",
+  projectId: "kisan-dost-bd105",
+  storageBucket: "kisan-dost-bd105.firebasestorage.app",
+  messagingSenderId: "941983720623",
+  appId: "1:941983720623:web:4a074f0bdf8256278ba05a",
+  measurementId: "G-WRQ2469FD8"
 };
 
 try {

@@ -68,12 +68,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         return NextResponse.json({ error: 'Field not found or access denied' }, { status: 404 });
       }
 
-      if (areaNum > field.area) {
-        return NextResponse.json(
-          { error: `Crop area (${areaNum} ${cultivatedAreaUnit || 'Acre'}) cannot exceed field area (${field.area} ${field.areaUnit})` },
-          { status: 400 }
-        );
-      }
+      const effectiveArea = areaNum > field.area ? field.area : areaNum;
 
       let validatedZoneId = null;
       if (zoneId) {
@@ -99,14 +94,31 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         zoneId: validatedZoneId,
         cropName,
         cropMasterId: cropMasterId || '',
+        icarCropId: cropName.toLowerCase().trim(),
         variety: variety || '',
         sowingDate: new Date(sowingDate),
-        cultivatedArea: areaNum,
+        cultivatedArea: effectiveArea,
         cultivatedAreaUnit: cultivatedAreaUnit || field.areaUnit || 'Acre',
         cultivationMethod: cultivationMethod || 'Direct Sowing',
         status: 'Active',
         notes: notes || '',
       });
+
+      // Synchronize to FarmerCrop for advisory alerts
+      try {
+        const { FarmerCrop } = await import('@/models/FarmerCrop');
+        await FarmerCrop.create({
+          farmerId: userId,
+          cropType: cropName.toLowerCase().trim(),
+          plantationDate: new Date(sowingDate),
+          landArea: effectiveArea,
+          location: [field.location?.village, field.location?.district].filter(Boolean).join(', ') || 'Farm',
+          phoneNumber: body.phoneNumber || '',
+          initialAdvisorySent: false,
+        });
+      } catch (fcErr) {
+        // Non-blocking advisory synchronization
+      }
 
       return NextResponse.json(newCrop, { status: 201 });
     } catch (dbErr) {

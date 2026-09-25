@@ -1,82 +1,157 @@
-# VentureHack (KisanDost) 🌾
+# KisanDost 🌾 — AI-Powered Precision Agriculture Platform
 
-VentureHack (KisanDost) is a comprehensive digital platform designed to empower farmers with modern technology. It provides tools for disease detection, expense management, weather updates, and a marketplace for agricultural products.
+KisanDost is a full-stack precision agriculture platform built for Indian farmers. It combines neural AI crop disease diagnosis, satellite farm mapping, GPS zone scouting, multilingual voice assistance, yield & profit prediction, and real-time weather — all in one unified web app.
 
-## 🚀 Features
+---
 
-- **AI Disease Detection**: Identify crop diseases using AI models and receive treatment recommendations.
-- **Agricultural Marketplace**: Buy and sell agricultural products and tools.
-- **Expense Tracker**: Manage farm finances and track seasonal expenses.
-- **Fertilizer Calculator**: Calculate precise fertilizer requirements for various crops.
-- **Weather Integration**: Stay updated with real-time weather forecasts tailored for farming.
-- **Community Forum**: Connect with other farmers and experts.
+## 🚀 Core Features
+
+| Feature | Description |
+|---------|-------------|
+| 🛰️ **Satellite Farm Map** | Mapbox Standard Satellite — draw field boundaries, generate monitoring zones, test GPS coordinates |
+| 🧠 **AgriVision AI Disease Engine** | EfficientNet-B5 + CBAM neural model with Gemini Vision fallback for crop disease diagnosis |
+| 📊 **Yield & Profit Predictor** | ML-based yield forecasting and profit simulation per crop/field |
+| 🌦️ **Real-Time Weather** | Open-Meteo + WeatherAPI with automatic IP geolocation fallback |
+| 🌱 **My Crops** | Full crop lifecycle management — sow, track GDD/DAS progression, scan for disease |
+| 🎙️ **Vexyl-TTS** | Indic language text-to-speech voice assistant (Hindi, Gujarati, English) |
+| 💬 **KisanDost AI Chat** | Gemini-powered agricultural advisory chatbot |
+| 📦 **Marketplace** | Buy/sell crops, tools, and inputs with real-time mandi pricing |
+| 👨‍🌾 **Expert Connect** | Consult verified agronomists with scheduled sessions |
+| 📣 **SMS/WhatsApp Alerts** | Twilio-powered disease & weather advisory notifications |
+| 🌍 **i18n** | Full English, Hindi, and Gujarati localization via next-intl |
+
+---
 
 ## 🛠 Tech Stack
 
-### Frontend & Web App
-- **Next.js 15+**: Modern React framework for the web interface.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Framer Motion**: For smooth animations and transitions.
-- **Lucide React**: Icon library for a clean UI.
+### Frontend (Web)
+- **Next.js 15** — App Router, Server Components, `next-intl`
+- **Mapbox GL JS** — Standard Satellite map with polygon drawing & GPS zone resolution
+- **Tailwind CSS + shadcn/ui** — Design system
+- **Lucide React** — Icons
 
-### Backend & AI
-- **Python (Flask/FastAPI)**: AI service for model inference.
-- **Mongoose / MongoDB**: Database for managing user data and products.
-- **TensorFlow.js**: Client-side machine learning capabilities.
-- **Google Generative AI**: Gemini integration for intelligent agricultural assistance.
+### AI & Backend Services
+- **AgriVision Engine** — EfficientNet-B5 + CBAM, deployed on Modal cloud GPU (FastAPI/uvicorn)
+- **Gemini 2.5 Flash** — Multimodal vision fallback + chat advisory
+- **Python Yield AI** — FastAPI service on port 8001 (uvicorn)
+- **Vexyl-TTS** — Indic TTS microservice on port 8092
 
-### Mobile & Tools
-- **Capacitor**: Cross-platform mobile app development.
-- **Clerk**: Authentication and user management.
-- **Next-Intl**: Internationalization support (English, Hindi, Gujarati).
-- **Leaflet**: Interactive maps for location-based services.
+### Database & Auth
+- **MongoDB Atlas** — via Mongoose ODM
+- **Custom JWT Auth** — Google OAuth + email/password
 
-## 🗺 Application Routes
+### Notifications
+- **Twilio** — SMS + WhatsApp alerts
+- **Firebase FCM** — Web push notifications
 
-| Route | Description |
-| :--- | :--- |
-| `/` | Landing page with project overview. |
-| `/dashboard` | Central hub for farmer activities and summaries. |
-| `/marketplace` | Buy and sell crops, tools, and fertilizers. |
-| `/diseases` | Upload photos to detect crop diseases via AI. |
-| `/expenses` | Log and visualize farm income and expenditures. |
-| `/fertilizer-calculator` | Tool to determine optimal fertilizer ratios. |
-| `/weather` | Localized weather forecasts and farming alerts. |
-| `/communities` | Discussion boards for agricultural sharing. |
-| `/tools` | Access to various farming utility tools. |
-| `/pricing` | Information about premium features or service plans. |
+---
 
 ## 📦 Project Structure
 
-```text
-├── ai-service/        # Python-based AI models and inference server
-├── kisan-next/        # Next.js frontend application (Web & Mobile)
-├── android/           # Native Android integration files
-├── capacitor.config.json # Capacitor configuration
-└── package.json       # Root project configuration
+```
+kisandost/
+├── kisan-next/                     # Next.js 15 web application
+│   ├── src/
+│   │   ├── app/                    # App Router pages & API routes
+│   │   │   ├── [locale]/(app)/     # Localized page routes
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── my-crops/   # Satellite map + disease scouting
+│   │   │   │   │   ├── add-crop/   # Crop registration
+│   │   │   │   │   ├── yield-predictor/
+│   │   │   │   │   └── profit-predictor/
+│   │   │   │   └── ...
+│   │   │   └── api/                # Next.js API routes
+│   │   ├── components/
+│   │   │   ├── farmer-tools/       # FarmBoundaryEditor (Mapbox), AIMapComponent
+│   │   │   └── ui/                 # shadcn/ui components
+│   │   └── lib/                    # agriVisionService, geminiService, geoUtils
+│   └── .env.local                  # Environment config (see below)
+│
+├── crop-diseases-model/            # AgriVision AI model
+│   └── inference/
+│       ├── pipeline.py             # EfficientNet-B5 + CBAM inference (modal.run)
+│       └── crop_taxonomy.py        # Supported crop taxonomy
+│
+└── vexyl_tts_server.py             # Indic TTS microservice
 ```
 
-## 🛠 Getting Started
+---
 
-### Prerequisites
-- Node.js 18+
-- Python 3.9+ (for AI service)
+## ⚙️ Environment Variables (`.env.local`)
 
-### Installation
+```env
+# MongoDB
+MONGODB_URI=...
 
-1. **Frontend Setup**:
-   ```bash
-   cd kisan-next
-   npm install
-   npm run dev
-   ```
+# Auth
+JWT_SECRET=...
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
 
-2. **AI Service Setup**:
-   ```bash
-   cd ai-service
-   pip install -r requirements.txt
-   python server.py
-   ```
+# AI Services
+GEMINI_API_KEY=...
+AGRIVISION_API_URL=http://127.0.0.1:8000       # Local AgriVision
+AGRIVISION_LOCAL_API_URL=http://127.0.0.1:8000
+PYTHON_AI_SERVICE_URL=http://localhost:8001     # Yield predictor
+
+# Maps
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.eyJ1...
+
+# Weather
+WEATHER_API_KEY=...
+
+# TTS
+VEXYL_TTS_URL=http://127.0.0.1:8092
+
+# Twilio
+TWILIO_ACCOUNT_SID=...
+TWILIO_AUTH_TOKEN=...
+TWILIO_SMS_FROM=...
+
+# Firebase
+NEXT_PUBLIC_FIREBASE_API_KEY=...
+FIREBASE_PRIVATE_KEY=...
+```
 
 ---
-Built with ❤️ for the farming community.
+
+## 🚀 Running Locally
+
+### 1. Next.js Web App
+```bash
+cd kisan-next
+npm install
+# Run with 8GB heap to handle Mapbox + heavy bundles on Windows
+node --max-old-space-size=8192 node_modules/next/dist/bin/next dev
+```
+→ http://localhost:3000
+
+### 2. AgriVision AI Engine (GPU — port 8000)
+```bash
+cd crop-diseases-model
+python start_server_production.py
+```
+
+### 3. Yield Predictor (port 8001)
+```bash
+cd kisan-next   # or wherever server.py is
+python -m uvicorn server:app --host 127.0.0.1 --port 8001
+```
+
+### 4. Vexyl-TTS Voice Service (port 8092)
+```bash
+python vexyl_tts_server.py
+```
+
+---
+
+## 🛰️ My Crops — Spatial Map
+
+The **MyCrops** page features a full Mapbox Standard Satellite map with:
+- **Draw Boundary** — click to place polygon vertices on the satellite image
+- **Generate Monitoring Zones** — auto-subdivides the boundary into spatial scouting zones (Z01–Z06)
+- **Test GPS** — two-stage location: fast network (WiFi/IP) → GPS refinement. Places a red pin on the map, auto-opens popup with coordinates + zone match result
+
+---
+
+Built with ❤️ for India's farming community.

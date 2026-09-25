@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, TrendingUp, IndianRupee, Sprout, MapPin, Database, CheckCircle2, FlaskConical, CloudLightning, FileJson, BellRing } from "lucide-react";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
-import { requestNotificationPermission, getFCMToken } from "@/lib/fcm";
+import { requestNotificationPermission, getFCMToken, saveFCMTokenToBackend } from "@/lib/fcm";
 
 const FarmMap = dynamic(() => import("@/components/farmer-tools/FarmMap").then(mod => mod.FarmMap), {
   ssr: false,
@@ -113,8 +113,15 @@ export function ProfitPredictorForm({ onPredict }: ProfitPredictorFormProps) {
       
       if (tokenResult.token) {
         setFcmToken(tokenResult.token);
-        setFcmStatus("Token generated");
-        toast.success("FCM Token successfully generated!");
+        setFcmStatus("Registering token with backend...");
+        const saveResult = await saveFCMTokenToBackend(tokenResult.token);
+        if (saveResult.success) {
+          setFcmStatus("Token generated & registered!");
+          toast.success("FCM Token generated and registered successfully!");
+        } else {
+          setFcmStatus("Token generated (register requires login)");
+          toast.info("Token generated! Please log in to enable backend push delivery.");
+        }
         console.log("FCM Test Token:", tokenResult.token);
       } else {
         setFcmStatus("Failed to enable notifications");

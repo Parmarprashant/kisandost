@@ -49,6 +49,9 @@ export interface IRiskEvent extends Document {
   threatName?: string | null;
   ruleId?: string | null;
   scanId?: mongoose.Types.ObjectId | null; // References CropDiseaseScan._id
+  originalRiskEventId?: mongoose.Types.ObjectId | null; // References superseded historical RiskEvent
+  expertReviewId?: mongoose.Types.ObjectId | null; // References ExpertReview._id
+  reEvaluationReason?: string | null; // e.g. 'EXPERT_VERIFICATION'
   weatherObservationId?: mongoose.Types.ObjectId | null;
   growthStageId?: string | null;
   riskStatus: RiskStatusType;
@@ -105,6 +108,22 @@ const RiskEventSchema: Schema = new Schema(
     scanId: {
       type: Schema.Types.ObjectId,
       ref: 'CropDiseaseScan',
+      default: null,
+    },
+    originalRiskEventId: {
+      type: Schema.Types.ObjectId,
+      ref: 'RiskEvent',
+      default: null,
+      index: true,
+    },
+    expertReviewId: {
+      type: Schema.Types.ObjectId,
+      ref: 'ExpertReview',
+      default: null,
+      index: true,
+    },
+    reEvaluationReason: {
+      type: String,
       default: null,
     },
     weatherObservationId: {

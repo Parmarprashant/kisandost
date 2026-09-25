@@ -45,6 +45,8 @@ dataSet/
 # Uploaded scan test files
 public/uploads/scans/*
 !public/uploads/scans/.gitkeep
+public/uploads/audio/*
+!public/uploads/audio/.gitkeep
 
 # Vercel & Netlify
 .vercel

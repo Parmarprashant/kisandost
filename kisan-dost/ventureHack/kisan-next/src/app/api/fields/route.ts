@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import { Field } from '@/models/Field';
 import { Crop } from '@/models/Crop';
+import { FarmerCrop } from '@/models/FarmerCrop';
 import { memoryFields, memoryCrops, MemoryField } from '@/lib/memoryStore';
 
 // GET all fields for the authenticated farmer (including populated crops)
@@ -17,15 +18,48 @@ export async function GET() {
       await connectDB();
       const fields = await Field.find({ farmerId: userId }).sort({ createdAt: -1 });
       const fieldIds = fields.map((f) => f._id);
-      const crops = await Crop.find({ fieldId: { $in: fieldIds } }).sort({ sowingDate: -1 });
+      let crops = await Crop.find({ fieldId: { $in: fieldIds } }).sort({ sowingDate: -1 });
+
+      // Auto-sync any legacy or advisory FarmerCrop records that aren't yet in Crop
+      if (fields.length > 0) {
+        try {
+          const farmerCrops = await FarmerCrop.find({ farmerId: userId });
+          for (const fc of farmerCrops) {
+            const hasCrop = crops.some(
+              (c) => c.farmerId === userId && c.cropName.toLowerCase() === fc.cropType.toLowerCase()
+            );
+            if (!hasCrop) {
+              const targetField = fields[0];
+              const capName = fc.cropType.charAt(0).toUpperCase() + fc.cropType.slice(1);
+              const newCrop = await Crop.create({
+                farmerId: userId,
+                fieldId: targetField._id,
+                cropName: capName,
+                icarCropId: fc.cropType.toLowerCase(),
+                variety: 'Standard Cultivar',
+                sowingDate: fc.plantationDate || new Date(),
+                cultivatedArea: Math.min(Number(fc.landArea) || targetField.area, targetField.area),
+                cultivatedAreaUnit: targetField.areaUnit || 'Acre',
+                cultivationMethod: 'Direct Sowing',
+                status: 'Active',
+                notes: `Auto-synced from advisory profile for phone ${fc.phoneNumber}`,
+              });
+              crops.push(newCrop);
+            }
+          }
+        } catch (syncErr) {
+          console.warn('Auto-sync FarmerCrops error:', syncErr);
+        }
+      }
 
       const fieldsWithCrops = fields.map((field) => {
         const fieldObj = field.toObject() as any;
-        fieldObj.crops = crops.filter((c) => c.fieldId.toString() === field._id.toString());
+        fieldObj.crops = crops.filter((c) => c.fieldId && c.fieldId.toString() === field._id.toString());
         return fieldObj;
       });
 
       return NextResponse.json(fieldsWithCrops, { status: 200 });
+
     } catch (dbErr) {
       console.warn('MongoDB connection failed, using memory store fallback:', dbErr);
       const userFields = memoryFields.filter((f) => f.farmerId === userId);

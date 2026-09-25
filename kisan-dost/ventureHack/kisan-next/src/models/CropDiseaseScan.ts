@@ -68,7 +68,7 @@ const ConfidenceSchema = new Schema(
       type: Number,
       required: true,
       min: 0,
-      max: 1,
+      max: 100,
     },
   },
   { _id: false }

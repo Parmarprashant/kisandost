@@ -44,6 +44,54 @@ const UserSchema = new mongoose.Schema({
   mainCrop: {
     type: String,
   },
+  role: {
+    type: String,
+    enum: ['farmer', 'reviewer', 'admin', 'expert'],
+    default: 'farmer',
+  },
+  preferredLanguage: {
+    type: String,
+    enum: ['hi-IN', 'gu-IN', 'mr-IN', 'hi', 'gu', 'mr', 'en'],
+    default: 'hi-IN',
+  },
+  notificationChannels: {
+    type: [String],
+    default: ['FCM', 'WHATSAPP'],
+  },
+  whatsappNumber: {
+    type: String,
+    default: null,
+  },
+  smsNumber: {
+    type: String,
+    default: null,
+  },
+  voiceEnabled: {
+    type: Boolean,
+    default: true,
+  },
 }, { timestamps: true });
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export interface IUser extends mongoose.Document {
+  googleId?: string;
+  email?: string;
+  username: string;
+  password?: string;
+  name: string;
+  avatar?: string;
+  mobile?: string;
+  village?: string;
+  district?: string;
+  mainCrop?: string;
+  role: 'farmer' | 'reviewer' | 'admin' | 'expert';
+  preferredLanguage: string;
+  notificationChannels: string[];
+  whatsappNumber?: string | null;
+  smsNumber?: string | null;
+  voiceEnabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export const User = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+export default User;
