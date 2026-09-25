@@ -2855,6 +2855,36 @@ abstract class L10n {
   /// **'Fertilizer calculator'**
   String get fertTitle;
 
+  /// No description provided for @fertilizerWorksOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Works with no signal'**
+  String get fertilizerWorksOffline;
+
+  /// No description provided for @fertilizerOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'On device'**
+  String get fertilizerOnDevice;
+
+  /// No description provided for @fertilizerTotalBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy this much, in total'**
+  String get fertilizerTotalBuy;
+
+  /// No description provided for @fertilizerWhenToApply.
+  ///
+  /// In en, this message translates to:
+  /// **'When to put it on'**
+  String get fertilizerWhenToApply;
+
+  /// No description provided for @fertilizerFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on ICAR\'s recommended rates. A Soil Health Card test for your own field would beat this — it is free, and it is on the schemes list.'**
+  String get fertilizerFootnote;
+
   /// No description provided for @fertUrea.
   ///
   /// In en, this message translates to:

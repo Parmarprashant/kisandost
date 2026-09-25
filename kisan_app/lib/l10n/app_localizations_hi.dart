@@ -1569,6 +1569,22 @@ class L10nHi extends L10n {
   String get fertTitle => 'खाद कैलकुलेटर';
 
   @override
+  String get fertilizerWorksOffline => 'बिना इंटरनेट के काम करता है';
+
+  @override
+  String get fertilizerOnDevice => 'डिवाइस पर';
+
+  @override
+  String get fertilizerTotalBuy => 'कुल इतना खरीदें';
+
+  @override
+  String get fertilizerWhenToApply => 'कब डालना है';
+
+  @override
+  String get fertilizerFootnote =>
+      'ICAR की अनुशंसित दरों पर आधारित। आपके अपने खेत का सॉइल हेल्थ कार्ड परीक्षण इससे बेहतर होगा — यह मुफ़्त है, और योजनाओं की सूची में है।';
+
+  @override
   String get fertUrea => 'यूरिया';
 
   @override

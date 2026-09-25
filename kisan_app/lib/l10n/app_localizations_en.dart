@@ -1564,6 +1564,22 @@ class L10nEn extends L10n {
   String get fertTitle => 'Fertilizer calculator';
 
   @override
+  String get fertilizerWorksOffline => 'Works with no signal';
+
+  @override
+  String get fertilizerOnDevice => 'On device';
+
+  @override
+  String get fertilizerTotalBuy => 'Buy this much, in total';
+
+  @override
+  String get fertilizerWhenToApply => 'When to put it on';
+
+  @override
+  String get fertilizerFootnote =>
+      'Based on ICAR\'s recommended rates. A Soil Health Card test for your own field would beat this — it is free, and it is on the schemes list.';
+
+  @override
   String get fertUrea => 'Urea';
 
   @override

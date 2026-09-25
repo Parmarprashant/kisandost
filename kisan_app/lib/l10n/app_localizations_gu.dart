@@ -1567,6 +1567,22 @@ class L10nGu extends L10n {
   String get fertTitle => 'ખાતર કૅલ્ક્યુલેટર';
 
   @override
+  String get fertilizerWorksOffline => 'ઇન્ટરનેટ વિના પણ કામ કરે છે';
+
+  @override
+  String get fertilizerOnDevice => 'ડિવાઇસ પર';
+
+  @override
+  String get fertilizerTotalBuy => 'કુલ આટલું ખરીદો';
+
+  @override
+  String get fertilizerWhenToApply => 'ક્યારે નાખવું';
+
+  @override
+  String get fertilizerFootnote =>
+      'ICAR ના ભલામણ કરેલ દરો પર આધારિત. તમારા પોતાના ખેતરનું સોઇલ હેલ્થ કાર્ડ પરીક્ષણ આના કરતાં વધુ સારું રહેશે — તે મફત છે, અને યોજનાઓની સૂચિમાં છે.';
+
+  @override
   String get fertUrea => 'યુરિયા';
 
   @override
