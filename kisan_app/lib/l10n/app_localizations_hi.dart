@@ -2773,6 +2773,18 @@ class L10nHi extends L10n {
   String get schemesTitle => 'सरकारी योजनाएँ';
 
   @override
+  String get voiceListening => 'सुन रहे हैं — रोकने के लिए दबाएँ';
+
+  @override
+  String get voiceSpeak => 'बोलकर बताएँ';
+
+  @override
+  String get voiceStart => 'लिखने के बजाय बोलें';
+
+  @override
+  String get voiceStop => 'रोकें';
+
+  @override
   String weatherFeels(String value) {
     return 'महसूस $value°';
   }

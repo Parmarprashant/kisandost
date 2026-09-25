@@ -2765,6 +2765,18 @@ class L10nMr extends L10n {
   String get schemesTitle => 'शासकीय योजना';
 
   @override
+  String get voiceListening => 'ऐकत आहोत — थांबवण्यास दाबा';
+
+  @override
+  String get voiceSpeak => 'बोलून सांगा';
+
+  @override
+  String get voiceStart => 'लिहिण्याऐवजी बोला';
+
+  @override
+  String get voiceStop => 'थांबा';
+
+  @override
   String weatherFeels(String value) {
     return 'जाणवते $value°';
   }

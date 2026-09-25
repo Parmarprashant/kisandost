@@ -1,4 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Dictation. RECORD_AUDIO is the obvious half; the <queries> block is
+         the half that is easy to miss. From Android 11 an app cannot see the
+         system speech recogniser unless it declares it here, and without it
+         SpeechToText.initialize() just returns false and the microphone never
+         appears — with no error a farmer could act on. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
     <application
         android:label="kisan_app"
         android:name="${applicationName}"

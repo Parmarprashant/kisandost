@@ -2767,6 +2767,18 @@ class L10nGu extends L10n {
   String get schemesTitle => 'સરકારી યોજનાઓ';
 
   @override
+  String get voiceListening => 'સાંભીએ છીએ — બંધ કરવા દબાવો';
+
+  @override
+  String get voiceSpeak => 'બોલીને જણાવો';
+
+  @override
+  String get voiceStart => 'લખવાને બદલે બોલો';
+
+  @override
+  String get voiceStop => 'બંધ કરો';
+
+  @override
   String weatherFeels(String value) {
     return 'અનુભવ $value°';
   }

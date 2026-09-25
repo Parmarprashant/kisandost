@@ -4913,6 +4913,30 @@ abstract class L10n {
   /// **'Government schemes'**
   String get schemesTitle;
 
+  /// No description provided for @voiceListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening — tap to stop'**
+  String get voiceListening;
+
+  /// No description provided for @voiceSpeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak your answer'**
+  String get voiceSpeak;
+
+  /// No description provided for @voiceStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak instead of typing'**
+  String get voiceStart;
+
+  /// No description provided for @voiceStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get voiceStop;
+
   /// No description provided for @weatherFeels.
   ///
   /// In en, this message translates to:

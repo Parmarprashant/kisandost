@@ -1031,6 +1031,10 @@
   "schemesOpen": "Open official website",
   "schemesSearch": "Search schemes",
   "schemesTitle": "Government schemes",
+  "voiceListening": "Listening — tap to stop",
+  "voiceSpeak": "Speak your answer",
+  "voiceStart": "Speak instead of typing",
+  "voiceStop": "Stop",
   "weatherFeels": "Feels like {value}°",
   "@weatherFeels": {
     "placeholders": {

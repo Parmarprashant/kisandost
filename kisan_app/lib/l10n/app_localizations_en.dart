@@ -2762,6 +2762,18 @@ class L10nEn extends L10n {
   String get schemesTitle => 'Government schemes';
 
   @override
+  String get voiceListening => 'Listening — tap to stop';
+
+  @override
+  String get voiceSpeak => 'Speak your answer';
+
+  @override
+  String get voiceStart => 'Speak instead of typing';
+
+  @override
+  String get voiceStop => 'Stop';
+
+  @override
   String weatherFeels(String value) {
     return 'Feels like $value°';
   }

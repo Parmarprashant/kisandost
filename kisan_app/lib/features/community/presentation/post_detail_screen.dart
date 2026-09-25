@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/voice/voice_input_button.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/data/auth_controller.dart';
 import '../data/community_models.dart';
@@ -193,6 +194,10 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: l10n.communityAddComment,
+                          // Replying to a neighbour is the longest free text
+                          // in the app, and the hardest to type in Devanagari
+                          // or Gujarati on a phone.
+                          suffixIcon: VoiceInputButton(controller: _reply),
                         ),
                       ),
                     ),
