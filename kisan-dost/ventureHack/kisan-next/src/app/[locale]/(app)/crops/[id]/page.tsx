@@ -44,6 +44,7 @@ export default function CropDetailPage() {
   const [loadingScans, setLoadingScans] = useState(false);
   const [riskData, setRiskData] = useState<any | null>(null);
   const [evaluatingRisk, setEvaluatingRisk] = useState(false);
+  const [loadingRisk, setLoadingRisk] = useState(false);
 
   // Advisory & Field Work Plan States
   const [advisories, setAdvisories] = useState<any[]>([]);
@@ -125,8 +126,9 @@ export default function CropDetailPage() {
 
   // Evaluate AgriShield Risk
   async function handleEvaluateRisk() {
-    if (!cropId) return;
+    if (!cropId || evaluatingRisk) return;
     setEvaluatingRisk(true);
+    setLoadingRisk(true);
     try {
       const res = await fetch(`/api/crops/${cropId}/risk`);
       if (res.ok) {
@@ -143,12 +145,14 @@ export default function CropDetailPage() {
       toast.error("Network error evaluating crop risk");
     } finally {
       setEvaluatingRisk(false);
+      setLoadingRisk(false);
     }
   }
 
   // Load existing Risk Assessment silently on mount
   async function loadRiskSilently() {
     if (!cropId) return;
+    setLoadingRisk(true);
     try {
       const res = await fetch(`/api/crops/${cropId}/risk`);
       if (res.ok) {
@@ -157,6 +161,8 @@ export default function CropDetailPage() {
       }
     } catch {
       /* silent */
+    } finally {
+      setLoadingRisk(false);
     }
   }
 
@@ -529,26 +535,86 @@ export default function CropDetailPage() {
       </div>
 
       {/* Comprehensive Risk Assessment Card */}
-      {riskData && (
-        <Card className="border-amber-300 bg-amber-50/20 shadow-xs">
+      {loadingRisk && !riskData ? (
+        <Card className="border-amber-300 bg-amber-50/30 shadow-xs animate-in fade-in duration-300">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-amber-600 animate-pulse" />
+                AgriShield 360° Comprehensive Risk Assessment
+              </CardTitle>
+              <Badge variant="outline" className="border-amber-300 bg-amber-100/60 text-amber-800 text-xs">
+                <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                Evaluating Risk...
+              </Badge>
+            </div>
+            <CardDescription className="text-xs">
+              Analyzing satellite thermal time, micro-climate weather history, and multi-angle leaf disease scans...
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3.5 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-background/80 p-3 rounded-lg border text-[11px] animate-pulse">
+              <div className="space-y-1.5">
+                <div className="h-3 w-16 bg-muted rounded" />
+                <div className="h-4 w-24 bg-muted/80 rounded" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="h-3 w-16 bg-muted rounded" />
+                <div className="h-4 w-24 bg-muted/80 rounded" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="h-3 w-16 bg-muted rounded" />
+                <div className="h-4 w-24 bg-muted/80 rounded" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="h-3 w-16 bg-muted rounded" />
+                <div className="h-4 w-24 bg-muted/80 rounded" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : riskData ? (
+        <Card className="border-amber-300 bg-amber-50/20 shadow-xs animate-in fade-in duration-300">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
                 <ShieldAlert className="w-5 h-5 text-amber-600" />
                 AgriShield 360° Comprehensive Risk Assessment
               </CardTitle>
-              <Badge
-                variant="outline"
-                className={`font-semibold ${
-                  riskData.overallStatus === "HIGH_RISK"
-                    ? "border-red-400 bg-red-50 text-red-800"
-                    : riskData.overallStatus === "ATTENTION"
-                    ? "border-amber-400 bg-amber-50 text-amber-800"
-                    : "border-emerald-400 bg-emerald-50 text-emerald-800"
-                }`}
-              >
-                {riskData.overallStatus || "NORMAL"}
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className={`font-semibold ${
+                    riskData.overallStatus === "POTENTIAL_CONCERN" || riskData.overallStatus === "HIGH_RISK"
+                      ? "border-red-400 bg-red-50 text-red-800"
+                      : riskData.overallStatus === "INCONCLUSIVE" || riskData.overallStatus === "ATTENTION"
+                      ? "border-amber-400 bg-amber-50 text-amber-800"
+                      : riskData.overallStatus === "INSUFFICIENT_DATA"
+                      ? "border-muted-foreground/30 bg-muted/50 text-muted-foreground"
+                      : "border-emerald-400 bg-emerald-50 text-emerald-800"
+                  }`}
+                >
+                  {riskData.overallStatus === "POTENTIAL_CONCERN"
+                    ? "POTENTIAL CONCERN"
+                    : riskData.overallStatus === "INCONCLUSIVE"
+                    ? "INCONCLUSIVE"
+                    : riskData.overallStatus === "INSUFFICIENT_DATA"
+                    ? "INSUFFICIENT DATA"
+                    : riskData.overallStatus === "NO_CONCERN"
+                    ? "NO CONCERN DETECTED"
+                    : riskData.overallStatus || "NORMAL"}
+                </Badge>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 px-2 text-xs text-amber-800 hover:bg-amber-100"
+                  disabled={evaluatingRisk}
+                  onClick={handleEvaluateRisk}
+                  title="Re-run risk evaluation"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${evaluatingRisk ? "animate-spin" : ""}`} />
+                </Button>
+              </div>
             </div>
             <CardDescription className="text-xs">
               Evidence-based agronomic evaluation cross-referencing micro-climate weather, phenology, and in-field crop imagery
@@ -558,7 +624,9 @@ export default function CropDetailPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-background p-2.5 rounded-lg border text-[11px]">
               <div>
                 <span className="text-muted-foreground block">Growth Stage:</span>
-                <span className="font-semibold text-foreground">{riskData.evidenceCompleteness?.cropStageAvailable ? "✓ Grounded" : "—"}</span>
+                <span className="font-semibold text-foreground">
+                  {riskData.evidenceCompleteness?.cropStageAvailable ? "✓ Grounded" : "—"}
+                </span>
               </div>
               <div>
                 <span className="text-muted-foreground block">Weather History:</span>
@@ -570,40 +638,115 @@ export default function CropDetailPage() {
               </div>
               <div>
                 <span className="text-muted-foreground block">Zone Scans:</span>
-                <span className="font-semibold text-foreground">{riskData.evidenceCompleteness?.imageScanAvailable ? "✓ Recorded" : "— Ready to Scan"}</span>
+                <span className="font-semibold text-foreground">
+                  {riskData.evidenceCompleteness?.imageScanAvailable ? "✓ Recorded" : "— Ready to Scan"}
+                </span>
               </div>
               <div>
                 <span className="text-muted-foreground block">Cultivar Genetics:</span>
-                <span className="font-semibold text-foreground">{riskData.evidenceCompleteness?.varietyDataAvailable ? "✓ ICAR" : "✓ General"}</span>
+                <span className="font-semibold text-foreground">
+                  {riskData.evidenceCompleteness?.varietyDataAvailable ? "✓ ICAR" : "✓ General"}
+                </span>
               </div>
             </div>
 
-            {/* Evaluated Threat Badges if any */}
-            {riskData.evaluatedThreats && riskData.evaluatedThreats.length > 0 && (
+            {/* Evaluated Threat Badges */}
+            {riskData.evaluatedThreats && riskData.evaluatedThreats.length > 0 ? (
               <div className="space-y-1.5 pt-1">
                 <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   Identified Agronomic Threats ({riskData.evaluatedThreats.length}):
                 </span>
-                <div className="flex flex-wrap gap-2">
-                  {riskData.evaluatedThreats.map((threat: any, idx: number) => (
-                    <Badge
-                      key={idx}
-                      variant="outline"
-                      className={`text-xs py-1 px-2.5 ${
-                        threat.level === "HIGH"
-                          ? "bg-red-50 text-red-800 border-red-300"
-                          : threat.level === "MEDIUM"
-                          ? "bg-amber-50 text-amber-800 border-amber-300"
-                          : "bg-emerald-50 text-emerald-800 border-emerald-300"
-                      }`}
-                    >
-                      {threat.threatName || threat.diseaseName || "Agronomic Threat"} — {threat.level} Risk
-                    </Badge>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {riskData.evaluatedThreats.map((threat: any, idx: number) => {
+                    const isAlert =
+                      threat.riskLevel === "POTENTIAL_CONCERN" ||
+                      threat.status === "POTENTIAL_CONCERN" ||
+                      threat.level === "HIGH";
+                    const isInconclusive =
+                      threat.riskLevel === "INCONCLUSIVE" ||
+                      threat.status === "INCONCLUSIVE" ||
+                      threat.level === "MEDIUM";
+                    const isInsufficient =
+                      threat.riskLevel === "INSUFFICIENT_DATA" ||
+                      threat.status === "INSUFFICIENT_DATA";
+
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-2.5 rounded-lg border text-xs space-y-1 ${
+                          isAlert
+                            ? "bg-red-50/80 border-red-200 text-red-900 dark:bg-red-950/30 dark:border-red-900 dark:text-red-200"
+                            : isInconclusive
+                            ? "bg-amber-50/80 border-amber-200 text-amber-900 dark:bg-amber-950/30 dark:border-amber-900 dark:text-amber-200"
+                            : isInsufficient
+                            ? "bg-muted/40 border-border text-foreground"
+                            : "bg-emerald-50/80 border-emerald-200 text-emerald-900 dark:bg-emerald-950/30 dark:border-emerald-900 dark:text-emerald-200"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold">{threat.threatName || "Agronomic Threat"}</span>
+                          <Badge
+                            variant="outline"
+                            className={`text-[10px] ${
+                              isAlert
+                                ? "border-red-400 bg-red-100 text-red-800"
+                                : isInconclusive
+                                ? "border-amber-400 bg-amber-100 text-amber-800"
+                                : isInsufficient
+                                ? "border-border bg-background text-muted-foreground"
+                                : "border-emerald-400 bg-emerald-100 text-emerald-800"
+                            }`}
+                          >
+                            {threat.riskLevel || threat.status || threat.level || "EVALUATED"}
+                          </Badge>
+                        </div>
+                        {threat.explanation && (
+                          <p className="text-[11px] opacity-80 line-clamp-2">{threat.explanation}</p>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
+            ) : (
+              <p className="text-muted-foreground text-xs italic">
+                No active threats flagged under current crop growth stage.
+              </p>
             )}
           </CardContent>
+        </Card>
+      ) : (
+        <Card className="border-dashed border-amber-300/80 bg-amber-50/10 shadow-xs">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-amber-600" />
+                AgriShield 360° Comprehensive Risk Assessment
+              </CardTitle>
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-amber-300 text-amber-800 hover:bg-amber-50 text-xs font-medium"
+                disabled={evaluatingRisk}
+                onClick={handleEvaluateRisk}
+              >
+                {evaluatingRisk ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                    Evaluating...
+                  </>
+                ) : (
+                  <>
+                    <ShieldAlert className="w-3.5 h-3.5 mr-1.5 text-amber-600" />
+                    Evaluate Risk
+                  </>
+                )}
+              </Button>
+            </div>
+            <CardDescription className="text-xs">
+              Run automated risk evaluation across micro-climate, visual zone scans, and stage vulnerability.
+            </CardDescription>
+          </CardHeader>
         </Card>
       )}
 
