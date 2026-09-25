@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/shell/app_drawer.dart';
 import '../../app/locale_controller.dart';
 import '../../app/theme/app_colors.dart';
 import '../../core/network/api_exception.dart';
@@ -40,6 +41,7 @@ class HomeScreen extends ConsumerWidget {
     _syncHomeWidget(ref, l10n, weather.value, location);
 
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: Text(
           user == null

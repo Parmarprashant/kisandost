@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/shell/app_drawer.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../mandi/presentation/mandi_screen.dart';
 import 'profit_tab.dart';
@@ -20,6 +21,7 @@ class InsightsScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        drawer: const AppDrawer(),
         appBar: AppBar(
           title: Text(l10n.navInsights),
           bottom: TabBar(

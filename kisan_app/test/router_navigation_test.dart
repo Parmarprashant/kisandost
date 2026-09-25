@@ -105,18 +105,24 @@ void main() {
   });
 
   group('which tab is lit', () {
-    // Sub-pages reached from More used to fall through to index 0, so a
-    // farmer on the products list was told they were on Home — and tapped
-    // Home to get back, which is exactly what "it goes to the home page"
-    // looks like from the outside.
     test('a bar destination lights itself', () {
       expect(tabIndexFor('/home'), 0);
       expect(tabIndexFor('/farm'), 1);
-      expect(tabIndexFor('/more'), 4);
+      expect(tabIndexFor('/diagnose'), 2);
+      expect(tabIndexFor('/insights'), 3);
     });
 
-    test('every More destination keeps More lit, not Home', () {
-      const fromMore = [
+    test('the bar holds only the four daily actions', () {
+      // The fifth slot used to be a "More" list of links. Spending a fifth of
+      // the bar on a menu left the things a farmer opens every day crowded.
+      expect(tabIndexFor('/insights'), 3);
+      expect(tabIndexFor('/more'), isNull);
+    });
+
+    test('a drawer screen lights nothing', () {
+      // Null rather than Home. Lighting a tab the farmer is not on is what
+      // made this look like the app was bouncing them to the dashboard.
+      const fromDrawer = [
         '/products',
         '/profile',
         '/community',
@@ -128,31 +134,33 @@ void main() {
         '/scan',
       ];
 
-      for (final path in fromMore) {
+      for (final path in fromDrawer) {
         expect(
           tabIndexFor(path),
-          4,
-          reason: '$path lit tab ${tabIndexFor(path)} instead of More',
+          isNull,
+          reason: '$path lit tab ${tabIndexFor(path)}',
         );
       }
     });
 
-    test('an unknown path falls back to Home rather than crashing', () {
-      expect(tabIndexFor('/nowhere'), 0);
-      expect(tabIndexFor(''), 0);
+    test('an unknown path lights nothing rather than guessing', () {
+      expect(tabIndexFor('/nowhere'), isNull);
+      expect(tabIndexFor(''), isNull);
     });
 
-    test('a sub-path of a destination keeps its own tab', () {
-      expect(tabIndexFor('/community/abc123'), 4);
+    test('a sub-path of a bar destination keeps its tab', () {
       expect(tabIndexFor('/farm/field/1'), 1);
+    });
+
+    test('a sub-path of a drawer screen still lights nothing', () {
+      expect(tabIndexFor('/community/abc123'), isNull);
     });
   });
 
   group('a profile that is not filled in yet', () {
     testWidgets('is sent to onboarding from anywhere', (tester) async {
-      // This is the redirect that makes every destination bounce. If a
-      // farmer's village or district is blank, needsOnboarding is true and
-      // nothing else in the app is reachable.
+      // If a farmer's village or district is blank, needsOnboarding is true
+      // and nothing else in the app is reachable until it is filled in.
       final container = await _pump(tester, const SignedIn(_incompleteUser));
       final router = container.read(routerProvider);
 
