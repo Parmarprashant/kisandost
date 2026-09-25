@@ -21,7 +21,9 @@ class AssistantScreen extends ConsumerStatefulWidget {
 class _AssistantScreenState extends ConsumerState<AssistantScreen> {
   final _input = TextEditingController();
   final _scroll = ScrollController();
-  final _messages = <ChatMessage>[];
+  // Lives in a provider, so leaving this screen does not wipe the
+  // conversation the farmer just paid for.
+  List<ChatMessage> get _messages => ref.read(assistantThreadProvider);
 
   bool _waiting = false;
 
@@ -39,8 +41,10 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
     final user = ref.read(currentUserProvider);
     final crops = ref.read(activeCropsProvider);
 
+    ref
+        .read(assistantThreadProvider.notifier)
+        .add(ChatMessage(sender: Sender.farmer, text: question));
     setState(() {
-      _messages.add(ChatMessage(sender: Sender.farmer, text: question));
       _input.clear();
       _waiting = true;
     });
@@ -66,9 +70,9 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
           );
 
       if (!mounted) return;
-      setState(() {
-        _messages.add(ChatMessage(sender: Sender.assistant, text: answer));
-      });
+      ref
+          .read(assistantThreadProvider.notifier)
+          .add(ChatMessage(sender: Sender.assistant, text: answer));
     } on ApiException catch (error) {
       if (!mounted) return;
       final l10n = L10n.of(context);
@@ -78,11 +82,9 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
         ApiErrorKind.unauthorized => l10n.aiSignIn,
         _ => l10n.appError,
       };
-      setState(() {
-        _messages.add(
-          ChatMessage(sender: Sender.assistant, text: text, failed: true),
-        );
-      });
+      ref
+          .read(assistantThreadProvider.notifier)
+          .add(ChatMessage(sender: Sender.assistant, text: text, failed: true));
     } finally {
       if (mounted) setState(() => _waiting = false);
       _toBottom();
@@ -103,21 +105,22 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final messages = ref.watch(assistantThreadProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.aiTitle)),
       body: Column(
         children: [
           Expanded(
-            child: _messages.isEmpty
+            child: messages.isEmpty
                 ? _Empty(onPick: _send)
                 : ListView.builder(
                     controller: _scroll,
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                    itemCount: _messages.length + (_waiting ? 1 : 0),
+                    itemCount: messages.length + (_waiting ? 1 : 0),
                     itemBuilder: (context, i) {
-                      if (i == _messages.length) return const _Thinking();
-                      return _Bubble(message: _messages[i]);
+                      if (i == messages.length) return const _Thinking();
+                      return _Bubble(message: messages[i]);
                     },
                   ),
           ),

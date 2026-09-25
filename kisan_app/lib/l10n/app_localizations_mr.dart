@@ -1537,6 +1537,9 @@ class L10nMr extends L10n {
   String get homeMyCrops => 'माझी पिके';
 
   @override
+  String get homeNextUp => 'पुढे काय करायचे';
+
+  @override
   String mandiArrival(String date) {
     return 'बाजार दिनांक $date';
   }
@@ -2888,6 +2891,30 @@ class L10nMr extends L10n {
 
   @override
   String get schemesTitle => 'शासकीय योजना';
+
+  @override
+  String get suggestAddField => 'तुमचे शेत जोडा';
+
+  @override
+  String get suggestAddFieldWhy =>
+      'बाकी सर्व — सल्ला, भाव, पीक दिनदर्शिका — तुमच्या शेतावरून चालते.';
+
+  @override
+  String get suggestAsk => 'किसानदोस्तला विचारा';
+
+  @override
+  String suggestAskCrop(String crop) {
+    return 'तुमच्या $crop विषयी विचारा';
+  }
+
+  @override
+  String get suggestAskWhy =>
+      'कोणताही प्रश्न, तुमच्या शब्दांत. सोपे असल्यास बोलून विचारा.';
+
+  @override
+  String suggestInDays(String days) {
+    return '$days दिवसांनी';
+  }
 
   @override
   String get voiceListening => 'ऐकत आहोत — थांबवण्यास दाबा';

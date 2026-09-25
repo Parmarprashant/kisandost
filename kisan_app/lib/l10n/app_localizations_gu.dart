@@ -1539,6 +1539,9 @@ class L10nGu extends L10n {
   String get homeMyCrops => 'મારા પાક';
 
   @override
+  String get homeNextUp => 'હવે શું કરવું';
+
+  @override
   String mandiArrival(String date) {
     return 'બજાર તારીખ $date';
   }
@@ -2890,6 +2893,30 @@ class L10nGu extends L10n {
 
   @override
   String get schemesTitle => 'સરકારી યોજનાઓ';
+
+  @override
+  String get suggestAddField => 'તમારું ખેતર ઉમેરો';
+
+  @override
+  String get suggestAddFieldWhy =>
+      'બીજું બધું — સલાહ, ભાવ, પાક કૅલેન્ડર — તમારા ખેતર પરથી ચાલે છે.';
+
+  @override
+  String get suggestAsk => 'કિસાનદોસ્તને પૂછો';
+
+  @override
+  String suggestAskCrop(String crop) {
+    return 'તમારા $crop વિષે પૂછો';
+  }
+
+  @override
+  String get suggestAskWhy =>
+      'કોઈપણ સવાલ, તમારા શબ્દોમાં. સરળ હોય તો બોલીને પૂછો.';
+
+  @override
+  String suggestInDays(String days) {
+    return '$days દિવસમાં';
+  }
 
   @override
   String get voiceListening => 'સાંભીએ છીએ — બંધ કરવા દબાવો';

@@ -28,7 +28,8 @@ class _YieldTabState extends ConsumerState<YieldTab> {
 
   bool _running = false;
   String? _error;
-  YieldPrediction? _result;
+  // Mirrors the kept provider, so the answer survives leaving the tab.
+  YieldPrediction? get _result => ref.watch(keptYieldProvider);
 
   @override
   void initState() {
@@ -64,7 +65,7 @@ class _YieldTabState extends ConsumerState<YieldTab> {
             soilMoisture: _soilMoisture,
             rainfall: double.tryParse(_rainfall.text.trim()) ?? defaultRainfall,
           );
-      setState(() => _result = result);
+      ref.read(keptYieldProvider.notifier).set(result);
     } on ApiException catch (error) {
       if (!mounted) return;
       final l10n = L10n.of(context);
@@ -93,7 +94,7 @@ class _YieldTabState extends ConsumerState<YieldTab> {
           onChanged: (v) => setState(() {
             _crop = v;
             // A result for the previous crop must not sit under a new one.
-            _result = null;
+            ref.read(keptYieldProvider.notifier).clear();
             _error = null;
           }),
           label: l10n.predCrop,

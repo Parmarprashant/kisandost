@@ -2813,6 +2813,12 @@ abstract class L10n {
   /// **'My crops'**
   String get homeMyCrops;
 
+  /// No description provided for @homeNextUp.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do next'**
+  String get homeNextUp;
+
   /// No description provided for @mandiArrival.
   ///
   /// In en, this message translates to:
@@ -5134,6 +5140,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Government schemes'**
   String get schemesTitle;
+
+  /// No description provided for @suggestAddField.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your field'**
+  String get suggestAddField;
+
+  /// No description provided for @suggestAddFieldWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything else — advice, prices, the crop calendar — works from your field.'**
+  String get suggestAddFieldWhy;
+
+  /// No description provided for @suggestAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask KisanDost'**
+  String get suggestAsk;
+
+  /// No description provided for @suggestAskCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your {crop}'**
+  String suggestAskCrop(String crop);
+
+  /// No description provided for @suggestAskWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Any question, in your own words. Speak it if that is easier.'**
+  String get suggestAskWhy;
+
+  /// No description provided for @suggestInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'In {days} days'**
+  String suggestInDays(String days);
 
   /// No description provided for @voiceListening.
   ///

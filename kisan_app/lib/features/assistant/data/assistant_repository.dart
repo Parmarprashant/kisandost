@@ -59,3 +59,23 @@ class AssistantRepository {
 final assistantRepositoryProvider = Provider<AssistantRepository>(
   (ref) => AssistantRepository(ref.watch(dioProvider)),
 );
+
+/// The conversation so far.
+///
+/// Held outside the screen because walking away from a chat and coming back
+/// to a blank one is the fastest way to make an assistant feel useless — and
+/// every answer in it was paid for on the farmer's data.
+final assistantThreadProvider =
+    NotifierProvider<AssistantThread, List<ChatMessage>>(AssistantThread.new);
+
+class AssistantThread extends Notifier<List<ChatMessage>> {
+  @override
+  List<ChatMessage> build() {
+    ref.keepAlive();
+    return const [];
+  }
+
+  void add(ChatMessage message) => state = [...state, message];
+
+  void clear() => state = const [];
+}

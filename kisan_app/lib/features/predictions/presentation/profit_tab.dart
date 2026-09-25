@@ -32,7 +32,8 @@ class _ProfitTabState extends ConsumerState<ProfitTab> {
 
   bool _running = false;
   String? _error;
-  ProfitPrediction? _result;
+  // Mirrors the kept provider, so the answer survives leaving the tab.
+  ProfitPrediction? get _result => ref.watch(keptProfitProvider);
 
   @override
   void initState() {
@@ -82,7 +83,7 @@ class _ProfitTabState extends ConsumerState<ProfitTab> {
             state: location?.state,
             district: location?.district ?? user?.district,
           );
-      setState(() => _result = result);
+      ref.read(keptProfitProvider.notifier).set(result);
     } on ApiException catch (error) {
       if (!mounted) return;
       final l10n = L10n.of(context);

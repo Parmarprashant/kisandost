@@ -1537,6 +1537,9 @@ class L10nEn extends L10n {
   String get homeMyCrops => 'My crops';
 
   @override
+  String get homeNextUp => 'What to do next';
+
+  @override
   String mandiArrival(String date) {
     return 'Market date $date';
   }
@@ -2886,6 +2889,30 @@ class L10nEn extends L10n {
 
   @override
   String get schemesTitle => 'Government schemes';
+
+  @override
+  String get suggestAddField => 'Add your field';
+
+  @override
+  String get suggestAddFieldWhy =>
+      'Everything else — advice, prices, the crop calendar — works from your field.';
+
+  @override
+  String get suggestAsk => 'Ask KisanDost';
+
+  @override
+  String suggestAskCrop(String crop) {
+    return 'Ask about your $crop';
+  }
+
+  @override
+  String get suggestAskWhy =>
+      'Any question, in your own words. Speak it if that is easier.';
+
+  @override
+  String suggestInDays(String days) {
+    return 'In $days days';
+  }
 
   @override
   String get voiceListening => 'Listening — tap to stop';

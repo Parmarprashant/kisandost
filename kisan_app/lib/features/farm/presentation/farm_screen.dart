@@ -7,6 +7,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/farm_models.dart';
+import '../../../app/shell/ask_fab.dart';
 import '../../../core/offline/offline_banner.dart';
 import '../data/farm_repository.dart';
 import 'add_crop_sheet.dart';
@@ -23,13 +24,16 @@ class FarmScreen extends ConsumerWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(title: Text(l10n.navFarm)),
-      floatingActionButton: fields.hasValue && fields.value!.isNotEmpty
-          ? FloatingActionButton.extended(
-              onPressed: () => FieldWizard.open(context),
-              icon: const Icon(Icons.add),
-              label: Text(l10n.farmAddField),
-            )
-          : null,
+      floatingActionButton: FabColumn(
+        primary: fields.hasValue && fields.value!.isNotEmpty
+            ? FloatingActionButton.extended(
+                heroTag: 'farm-add-field',
+                onPressed: () => FieldWizard.open(context),
+                icon: const Icon(Icons.add),
+                label: Text(l10n.farmAddField),
+              )
+            : null,
+      ),
       body: RefreshIndicator(
         onRefresh: () async => ref.refresh(fieldsProvider.future),
         child: fields.when(

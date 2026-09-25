@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/shell/app_drawer.dart';
+import '../../../app/shell/ask_fab.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../mandi/presentation/mandi_screen.dart';
 import 'profit_tab.dart';
@@ -32,6 +33,7 @@ class InsightsScreen extends StatelessWidget {
             ],
           ),
         ),
+        floatingActionButton: const AskFab(),
         body: const TabBarView(
           children: [
             // Mandi keeps its own scaffold-free body so it sits inside the
