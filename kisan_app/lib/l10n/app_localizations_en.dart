@@ -1370,6 +1370,28 @@ class L10nEn extends L10n {
   String get farmNext => 'Next';
 
   @override
+  String get farmBoundary => 'Field boundary and zones';
+
+  @override
+  String get farmNextUp => 'Worth doing next';
+
+  @override
+  String get farmNothingNext =>
+      'Nothing waiting. Every field has its soil, water and crop on record.';
+
+  @override
+  String get farmSoilMissingWhy =>
+      'Set it and the fertiliser dose stops guessing.';
+
+  @override
+  String get farmSoilUnknown => 'Soil not set';
+
+  @override
+  String farmSummary(String fields, String crops) {
+    return '$fields fields · $crops crops standing';
+  }
+
+  @override
   String get farmNoCrops => 'No crops in this field yet';
 
   @override

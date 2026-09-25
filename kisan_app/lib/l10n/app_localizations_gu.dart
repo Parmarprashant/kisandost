@@ -1375,6 +1375,28 @@ class L10nGu extends L10n {
   String get farmNext => 'આગળ';
 
   @override
+  String get farmBoundary => 'ખેતરની સીમા અને વિસ્તાર';
+
+  @override
+  String get farmNextUp => 'હવે પછી કરવા જેવું';
+
+  @override
+  String get farmNothingNext =>
+      'કંઈ બાકી નથી. દરેક ખેતરની માટી, પાણી અને પાક નોંધાયેલા છે.';
+
+  @override
+  String get farmSoilMissingWhy =>
+      'તે ભરો અને ખાતરની માત્રા અટકળ કરવાનું બંધ કરશે.';
+
+  @override
+  String get farmSoilUnknown => 'માટી નોંધી નથી';
+
+  @override
+  String farmSummary(String fields, String crops) {
+    return '$fields ખેતર · $crops પાક ઊભા';
+  }
+
+  @override
   String get farmNoCrops => 'આ ખેતરમાં હજી કોઈ પાક નથી';
 
   @override

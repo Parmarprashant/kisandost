@@ -2507,6 +2507,42 @@ abstract class L10n {
   /// **'Next'**
   String get farmNext;
 
+  /// No description provided for @farmBoundary.
+  ///
+  /// In en, this message translates to:
+  /// **'Field boundary and zones'**
+  String get farmBoundary;
+
+  /// No description provided for @farmNextUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Worth doing next'**
+  String get farmNextUp;
+
+  /// No description provided for @farmNothingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing waiting. Every field has its soil, water and crop on record.'**
+  String get farmNothingNext;
+
+  /// No description provided for @farmSoilMissingWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Set it and the fertiliser dose stops guessing.'**
+  String get farmSoilMissingWhy;
+
+  /// No description provided for @farmSoilUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil not set'**
+  String get farmSoilUnknown;
+
+  /// No description provided for @farmSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{fields} fields · {crops} crops standing'**
+  String farmSummary(String fields, String crops);
+
   /// No description provided for @farmNoCrops.
   ///
   /// In en, this message translates to:

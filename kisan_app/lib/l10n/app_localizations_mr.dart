@@ -1372,6 +1372,28 @@ class L10nMr extends L10n {
   String get farmNext => 'पुढे';
 
   @override
+  String get farmBoundary => 'शेताची सीमा आणि क्षेत्र';
+
+  @override
+  String get farmNextUp => 'पुढे करण्यासारखे';
+
+  @override
+  String get farmNothingNext =>
+      'काही बाकी नाही. प्रत्येक शेताची माती, पाणी आणि पीक नोंदलेले आहे.';
+
+  @override
+  String get farmSoilMissingWhy =>
+      'ते भरा आणि खताची मात्रा अंदाज लावणे थांबवेल.';
+
+  @override
+  String get farmSoilUnknown => 'माती नोंदलेली नाही';
+
+  @override
+  String farmSummary(String fields, String crops) {
+    return '$fields शेते · $crops पिके उभी';
+  }
+
+  @override
   String get farmNoCrops => 'या शेतात अजून पीक नाही';
 
   @override
