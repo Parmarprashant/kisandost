@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { GeoPolygon } from "@/lib/geoUtils";
+import { useWeather } from "@/context/WeatherContext";
 
 // Dynamically import FarmBoundaryEditor with SSR disabled for Leaflet
 const FarmBoundaryEditor = dynamic(
@@ -89,6 +90,7 @@ interface FieldItem {
 
 export default function MyCropsPage() {
   const t = useTranslations("Dashboard");
+  const { weatherData } = useWeather() || {};
 
   const [loading, setLoading] = useState(true);
   const [fields, setFields] = useState<FieldItem[]>([]);
@@ -106,6 +108,72 @@ export default function MyCropsPage() {
   // Active sub-tab: 'spatial' | 'crops' | 'scouting'
   const [activeTab, setActiveTab] = useState<"spatial" | "crops" | "scouting">("spatial");
   const [updatingCropId, setUpdatingCropId] = useState<string | null>(null);
+
+  // Add Crop Modal state
+  const [showAddCropModal, setShowAddCropModal] = useState(false);
+  const [addingCrop, setAddingCrop] = useState(false);
+  const [newCropType, setNewCropType] = useState("Cotton");
+  const [customCropName, setCustomCropName] = useState("");
+  const [newCropVariety, setNewCropVariety] = useState("");
+  const [newCropSowingDate, setNewCropSowingDate] = useState(() =>
+    new Date().toISOString().split("T")[0]
+  );
+  const [newCropArea, setNewCropArea] = useState("");
+  const [newCropZoneId, setNewCropZoneId] = useState("");
+  const [newCropPhone, setNewCropPhone] = useState("");
+
+  const handleAddCropToField = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedField) return;
+
+    const finalCropName = newCropType === "Other" ? customCropName.trim() : newCropType;
+    if (!finalCropName) {
+      toast.error("Please enter or select a crop name.");
+      return;
+    }
+    const areaNum = Number(newCropArea) || selectedField.area;
+    if (areaNum <= 0) {
+      toast.error("Please enter a valid cultivated area.");
+      return;
+    }
+
+    setAddingCrop(true);
+    try {
+      const res = await fetch(`/api/fields/${selectedField._id}/crops`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cropName: finalCropName,
+          variety: newCropVariety.trim(),
+          sowingDate: newCropSowingDate || new Date().toISOString(),
+          cultivatedArea: areaNum,
+          cultivatedAreaUnit: selectedField.areaUnit || "Acre",
+          zoneId: newCropZoneId || null,
+          phoneNumber: newCropPhone.trim(),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to register crop");
+      }
+
+      toast.success(`${finalCropName} planted on ${selectedField.name}!`);
+      setShowAddCropModal(false);
+      setNewCropVariety("");
+      setNewCropArea("");
+      setNewCropZoneId("");
+      setCustomCropName("");
+      setActiveTab("crops");
+
+      await loadFields();
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Failed to add crop to field");
+    } finally {
+      setAddingCrop(false);
+    }
+  };
 
   // Phase 4 Progressive Zone Scouting States
   const [fieldZones, setFieldZones] = useState<any[]>([]);
@@ -183,8 +251,8 @@ export default function MyCropsPage() {
           location: {
             village: newFieldVillage.trim(),
             district: newFieldDistrict.trim(),
-            latitude: 23.2156, // Default Gujarat agricultural reference
-            longitude: 72.6369,
+            latitude: weatherData?.location?.lat ? Number(weatherData.location.lat) : 23.2156,
+            longitude: weatherData?.location?.lon ? Number(weatherData.location.lon) : 72.6369,
           },
         }),
       });
@@ -638,8 +706,10 @@ export default function MyCropsPage() {
                     fieldId={selectedField._id}
                     fieldName={selectedField.name}
                     initialCenter={[
-                      selectedField.location?.latitude || 23.2156,
-                      selectedField.location?.longitude || 72.6369,
+                      selectedField.location?.latitude ||
+                        (weatherData?.location?.lat ? Number(weatherData.location.lat) : 23.2156),
+                      selectedField.location?.longitude ||
+                        (weatherData?.location?.lon ? Number(weatherData.location.lon) : 72.6369),
                     ]}
                     initialArea={selectedField.area}
                     areaUnit={selectedField.areaUnit}
@@ -658,14 +728,27 @@ export default function MyCropsPage() {
                 {/* Planted Crops View */}
                 {activeTab === "crops" && (
                   <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
-                        <Sprout className="w-5 h-5 text-emerald-600" />
-                        Active Crops on {selectedField.name}
-                      </CardTitle>
-                      <CardDescription>
-                        Crops planted on this field will link directly to spatial monitoring zones for localized health evaluation.
-                      </CardDescription>
+                    <CardHeader className="flex flex-row items-center justify-between pb-4">
+                      <div>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Sprout className="w-5 h-5 text-emerald-600" />
+                          Active Crops on {selectedField.name}
+                        </CardTitle>
+                        <CardDescription>
+                          Crops planted on this field will link directly to spatial monitoring zones for localized health evaluation.
+                        </CardDescription>
+                      </div>
+                      <Button
+                        size="sm"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
+                        onClick={() => {
+                          setNewCropArea(String(selectedField.area));
+                          setShowAddCropModal(true);
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-1.5" />
+                        Add Crop
+                      </Button>
                     </CardHeader>
                     <CardContent>
                       {(!selectedField.crops || selectedField.crops.length === 0) ? (
@@ -674,11 +757,11 @@ export default function MyCropsPage() {
                             No active crops are registered on this field yet.
                           </p>
                           <Button
-                            variant="outline"
                             size="sm"
-                            className="text-emerald-700 border-emerald-300"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
                             onClick={() => {
-                              window.location.href = "/dashboard/add-crop";
+                              setNewCropArea(String(selectedField.area));
+                              setShowAddCropModal(true);
                             }}
                           >
                             <Plus className="w-4 h-4 mr-1" />
@@ -1311,6 +1394,172 @@ export default function MyCropsPage() {
           </div>
         </div>
       )}
+      {/* Add Crop Modal */}
+      {showAddCropModal && selectedField && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
+          <Card className="w-full max-w-lg border-t-4 border-emerald-500 shadow-xl max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl flex items-center gap-2">
+                  <Sprout className="w-5 h-5 text-emerald-600" />
+                  Plant New Crop on {selectedField.name}
+                </CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowAddCropModal(false)}
+                  className="h-8 w-8 p-0"
+                >
+                  ✕
+                </Button>
+              </div>
+              <CardDescription>
+                Register a crop planted on this field ({selectedField.area} {selectedField.areaUnit}) to track phenology, thermal time (GDD), and spatial zone health.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleAddCropToField} className="space-y-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="cropTypeSelect">Crop Name / Type *</Label>
+                  <select
+                    id="cropTypeSelect"
+                    value={newCropType}
+                    onChange={(e) => setNewCropType(e.target.value)}
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                    required
+                  >
+                    <option value="Cotton">Cotton (કપાસ)</option>
+                    <option value="Wheat">Wheat (ઘઉં)</option>
+                    <option value="Rice">Rice / Paddy (ડાંગર)</option>
+                    <option value="Groundnut">Groundnut (મગફળી)</option>
+                    <option value="Maize">Maize / Corn (મકાઈ)</option>
+                    <option value="Soybean">Soybean (સોયાબીન)</option>
+                    <option value="Tomato">Tomato (ટામેટા)</option>
+                    <option value="Potato">Potato (બટાકા)</option>
+                    <option value="Onion">Onion (ડુંગળી)</option>
+                    <option value="Sugarcane">Sugarcane (શેરડી)</option>
+                    <option value="Chickpea">Chickpea / Chana (ચણા)</option>
+                    <option value="Mustard">Mustard (રાયડા)</option>
+                    <option value="Other">Other / Custom Crop</option>
+                  </select>
+                </div>
+
+                {newCropType === "Other" && (
+                  <div className="space-y-1.5">
+                    <Label htmlFor="customCrop">Enter Crop Name *</Label>
+                    <Input
+                      id="customCrop"
+                      placeholder="e.g. Cumin, Fennel, Garlic"
+                      value={customCropName}
+                      onChange={(e) => setCustomCropName(e.target.value)}
+                      required
+                    />
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="cropVariety">Cultivar / Variety</Label>
+                    <Input
+                      id="cropVariety"
+                      placeholder="e.g. BT Cotton, HD-2967"
+                      value={newCropVariety}
+                      onChange={(e) => setNewCropVariety(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="sowingDate">Plantation / Sowing Date *</Label>
+                    <Input
+                      id="sowingDate"
+                      type="date"
+                      value={newCropSowingDate}
+                      onChange={(e) => setNewCropSowingDate(e.target.value)}
+                      max={new Date().toISOString().split("T")[0]}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="cropArea">Cultivated Area ({selectedField.areaUnit}) *</Label>
+                    <Input
+                      id="cropArea"
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      placeholder={`Max ${selectedField.area}`}
+                      value={newCropArea}
+                      onChange={(e) => setNewCropArea(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="zoneAssign">Assign Monitoring Zone (Optional)</Label>
+                    <select
+                      id="zoneAssign"
+                      value={newCropZoneId}
+                      onChange={(e) => setNewCropZoneId(e.target.value)}
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                    >
+                      <option value="">No Specific Zone (Whole Field)</option>
+                      {fieldZones.map((z) => (
+                        <option key={z._id} value={z._id}>
+                          {z.zoneCode}: {z.zoneName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="cropPhone">Farmer Phone (For SMS Advisory Alerts)</Label>
+                  <Input
+                    id="cropPhone"
+                    type="tel"
+                    placeholder="e.g. +91 9876543210"
+                    value={newCropPhone}
+                    onChange={(e) => setNewCropPhone(e.target.value)}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Optional: Daily pesticide, fertilizer, and weather schedules will be sent to this number.
+                  </p>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-3 border-t">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => setShowAddCropModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={addingCrop}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    {addingCrop ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
+                        Planting Crop...
+                      </>
+                    ) : (
+                      <>
+                        <Sprout className="w-4 h-4 mr-1.5" />
+                        Plant Crop on Field
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
+

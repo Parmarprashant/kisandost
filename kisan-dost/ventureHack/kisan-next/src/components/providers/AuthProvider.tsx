@@ -12,6 +12,7 @@ type User = {
   village?: string;
   district?: string;
   mainCrop?: string;
+  role?: string;
 };
 
 type AuthContextType = {

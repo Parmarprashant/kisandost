@@ -14,7 +14,7 @@ import { evaluateCropRisk } from '@/lib/risk/riskEngine';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -22,7 +22,7 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const cropId = params.id;
+    const { id: cropId } = await params;
     if (!cropId) {
       return NextResponse.json({ error: 'Crop ID is required' }, { status: 400 });
     }

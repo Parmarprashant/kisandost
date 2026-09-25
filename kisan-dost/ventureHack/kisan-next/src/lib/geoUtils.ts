@@ -169,6 +169,23 @@ export function isPointInGeoPolygon(point: { latitude: number; longitude: number
 }
 
 /**
+ * Calculates geodesic distance between two [lat, lon] points in meters using Haversine formula.
+ */
+export function haversineDistanceMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371000; // meters
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+/**
  * Resolves a GPS coordinate against a Field boundary and its monitoring zones.
  */
 export function resolveGpsPoint(
@@ -179,6 +196,7 @@ export function resolveGpsPoint(
   insideFarm: boolean;
   matchedZone: { zoneId: string; zoneCode: string; zoneName: string } | null;
   message: string;
+  distanceMeters?: number;
 } {
   if (!fieldBoundary || !fieldBoundary.coordinates || fieldBoundary.coordinates.length === 0) {
     return {
@@ -190,10 +208,22 @@ export function resolveGpsPoint(
 
   const insideFarm = isPointInGeoPolygon(point, fieldBoundary);
   if (!insideFarm) {
+    // Calculate distance to nearest point on the boundary polygon
+    const ring = fieldBoundary.coordinates[0];
+    let minDistanceMeters = Infinity;
+    for (const [lng, lat] of ring) {
+      const d = haversineDistanceMeters(point.latitude, point.longitude, lat, lng);
+      if (d < minDistanceMeters) minDistanceMeters = d;
+    }
+    const distStr = minDistanceMeters >= 1000
+      ? `${(minDistanceMeters / 1000).toFixed(1)} km`
+      : `${Math.round(minDistanceMeters)} meters`;
+
     return {
       insideFarm: false,
       matchedZone: null,
-      message: 'Point is outside farm boundary.',
+      message: `Point is outside farm boundary (~${distStr} away).`,
+      distanceMeters: Math.round(minDistanceMeters),
     };
   }
 

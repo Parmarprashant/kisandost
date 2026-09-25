@@ -60,6 +60,7 @@ export async function POST(
         insideFarm: resolution.insideFarm,
         matchedZone: resolution.matchedZone,
         message: resolution.message,
+        distanceMeters: resolution.distanceMeters,
       },
       { status: 200 }
     );

@@ -231,6 +231,13 @@ export async function processZoneImage(
     });
   }
 
+  const normalizedConfidence =
+    typeof agriResult.confidence === 'number'
+      ? agriResult.confidence > 1
+        ? Math.min(1, agriResult.confidence / 100)
+        : Math.max(0, Math.min(1, agriResult.confidence))
+      : 0.8;
+
   // 5. Create Individual CropDiseaseScan Document
   const scanDoc = await CropDiseaseScan.create({
     farmerId: userId,
@@ -249,8 +256,8 @@ export async function processZoneImage(
       status: agriResult.diseaseName.toLowerCase().includes('healthy') ? 'healthy' : 'suspected',
     },
     confidence: {
-      level: agriResult.confidence >= 0.75 ? 'High' : agriResult.confidence >= 0.45 ? 'Medium' : 'Low',
-      score: agriResult.confidence,
+      level: normalizedConfidence >= 0.75 ? 'High' : normalizedConfidence >= 0.45 ? 'Medium' : 'Low',
+      score: Number(normalizedConfidence.toFixed(4)),
     },
     severity: null, // Strictly null - AgriVision does not provide clinical severity
     cropStageAtScan: currentStage,
