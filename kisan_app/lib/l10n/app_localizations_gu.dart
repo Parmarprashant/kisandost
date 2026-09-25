@@ -2971,6 +2971,22 @@ class L10nGu extends L10n {
   String get scanTitle => 'દવા તપાસો';
 
   @override
+  String get scanSubtitle => 'દુકાનદારને ચૂકવણી કરતા પહેલા QR સ્કેન કરો';
+
+  @override
+  String get scanPacketReal => 'શું આ પેકેટ અસલી છે?';
+
+  @override
+  String get scanWhatOthersLookLike => 'અન્ય પરિણામો કેવા દેખાય છે';
+
+  @override
+  String get scanNotOnList => 'અમારી યાદીમાં નથી';
+
+  @override
+  String get scanFootnote =>
+      'અમારા પોતાના બેચ ડેટાબેઝ સાથે ચકાસાયેલ, સત્તાવાર સરકારી રજિસ્ટ્રી ફીડથી નહીં — જે હજુ જાહેરમાં ઉપલબ્ધ નથી. \'અસલી\' પરિણામ સારો પુરાવો છે, ગેરંટી નથી.';
+
+  @override
   String get scanType => 'પ્રકાર';
 
   @override

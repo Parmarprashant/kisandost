@@ -2966,6 +2966,22 @@ class L10nEn extends L10n {
   String get scanTitle => 'Check pesticide';
 
   @override
+  String get scanSubtitle => 'Scan the QR before you pay the shop';
+
+  @override
+  String get scanPacketReal => 'Is this packet real?';
+
+  @override
+  String get scanWhatOthersLookLike => 'What the other answers look like';
+
+  @override
+  String get scanNotOnList => 'Not on our list';
+
+  @override
+  String get scanFootnote =>
+      'Checked against our own database of batches, not an official government registry feed — that does not exist publicly yet. A \'genuine\' result is good evidence, not a guarantee.';
+
+  @override
   String get scanType => 'Type';
 
   @override

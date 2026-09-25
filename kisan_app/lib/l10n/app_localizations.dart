@@ -5279,6 +5279,36 @@ abstract class L10n {
   /// **'Check pesticide'**
   String get scanTitle;
 
+  /// No description provided for @scanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR before you pay the shop'**
+  String get scanSubtitle;
+
+  /// No description provided for @scanPacketReal.
+  ///
+  /// In en, this message translates to:
+  /// **'Is this packet real?'**
+  String get scanPacketReal;
+
+  /// No description provided for @scanWhatOthersLookLike.
+  ///
+  /// In en, this message translates to:
+  /// **'What the other answers look like'**
+  String get scanWhatOthersLookLike;
+
+  /// No description provided for @scanNotOnList.
+  ///
+  /// In en, this message translates to:
+  /// **'Not on our list'**
+  String get scanNotOnList;
+
+  /// No description provided for @scanFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked against our own database of batches, not an official government registry feed — that does not exist publicly yet. A \'genuine\' result is good evidence, not a guarantee.'**
+  String get scanFootnote;
+
   /// No description provided for @scanType.
   ///
   /// In en, this message translates to:

@@ -2969,6 +2969,22 @@ class L10nMr extends L10n {
   String get scanTitle => 'औषध तपासा';
 
   @override
+  String get scanSubtitle => 'दुकानदाराला पैसे देण्यापूर्वी QR स्कॅन करा';
+
+  @override
+  String get scanPacketReal => 'हे पाकीट खरे आहे का?';
+
+  @override
+  String get scanWhatOthersLookLike => 'इतर उत्तरे कशी दिसतात';
+
+  @override
+  String get scanNotOnList => 'आमच्या यादीत नाही';
+
+  @override
+  String get scanFootnote =>
+      'आमच्या स्वतःच्या बॅच डेटाबेसवरून तपासले गेले, अधिकृत सरकारी नोंदणी फीडवरून नाही — जे अद्याप सार्वजनिकपणे उपलब्ध नाही. \'खरे\' निकाल हा चांगला पुरावा आहे, हमी नाही.';
+
+  @override
   String get scanType => 'प्रकार';
 
   @override

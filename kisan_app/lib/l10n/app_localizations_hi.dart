@@ -2977,6 +2977,22 @@ class L10nHi extends L10n {
   String get scanTitle => 'दवा जाँचें';
 
   @override
+  String get scanSubtitle => 'दुकानदार को भुगतान करने से पहले QR स्कैन करें';
+
+  @override
+  String get scanPacketReal => 'क्या यह पैकेट असली है?';
+
+  @override
+  String get scanWhatOthersLookLike => 'अन्य परिणाम कैसे दिखते हैं';
+
+  @override
+  String get scanNotOnList => 'हमारी सूची में नहीं है';
+
+  @override
+  String get scanFootnote =>
+      'हमारे अपने बैच डेटाबेस से जाँचा गया, आधिकारिक सरकारी रजिस्ट्री फ़ीड से नहीं — जो अभी सार्वजनिक रूप से उपलब्ध नहीं है। \'असली\' परिणाम अच्छा प्रमाण है, गारंटी नहीं।';
+
+  @override
   String get scanType => 'प्रकार';
 
   @override
