@@ -2988,6 +2988,12 @@ class L10nGu extends L10n {
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
 
   @override
+  String get provenanceEntered => 'તમે ભર્યું છે';
+
+  @override
+  String get provenanceEstimate => 'અંદાજ, મોડેલનું પરિણામ નથી';
+
+  @override
   String get scanAgain => 'બીજું તપાસો';
 
   @override

@@ -2994,6 +2994,12 @@ class L10nHi extends L10n {
   String get profitPredictor_totalCost => 'कुल लागत';
 
   @override
+  String get provenanceEntered => 'आपने भरा है';
+
+  @override
+  String get provenanceEstimate => 'अनुमान, मॉडल का परिणाम नहीं';
+
+  @override
   String get scanAgain => 'दूसरी जाँचें';
 
   @override

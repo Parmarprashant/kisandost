@@ -2984,6 +2984,12 @@ class L10nEn extends L10n {
   String get profitPredictor_totalCost => 'Total Cost';
 
   @override
+  String get provenanceEntered => 'You entered this';
+
+  @override
+  String get provenanceEstimate => 'Estimate, not a model result';
+
+  @override
   String get scanAgain => 'Check another';
 
   @override
