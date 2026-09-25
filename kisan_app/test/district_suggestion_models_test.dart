@@ -12,7 +12,7 @@ void main() {
         'season': 'Kharif',
         'water_availability': 'Medium',
         'crops': ['Cotton', 'Groundnut', 'Maize'],
-        'reason': 'These crops give good yield with moderate water.'
+        'reason': 'These crops give good yield with moderate water.',
       };
 
       final data = DistrictData.fromJson(json);

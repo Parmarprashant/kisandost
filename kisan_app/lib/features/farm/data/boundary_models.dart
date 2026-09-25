@@ -49,10 +49,12 @@ class FieldBoundaryInfo {
     double? centerLat;
     double? centerLng;
     if (loc is Map) {
-      if (loc['latitude'] is num)
+      if (loc['latitude'] is num) {
         centerLat = (loc['latitude'] as num).toDouble();
-      if (loc['longitude'] is num)
+      }
+      if (loc['longitude'] is num) {
         centerLng = (loc['longitude'] as num).toDouble();
+      }
     }
 
     return FieldBoundaryInfo(

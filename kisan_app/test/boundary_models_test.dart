@@ -18,17 +18,14 @@ void main() {
               [71.1950, 22.2610],
               [71.1924, 22.2610],
               [71.1924, 22.2587],
-            ]
-          ]
+            ],
+          ],
         },
         'area': 3.5,
         'areaUnit': 'Acres',
         'calculatedArea': 3.48,
         'zoneCount': 4,
-        'location': {
-          'latitude': 22.2598,
-          'longitude': 71.1937,
-        },
+        'location': {'latitude': 22.2598, 'longitude': 71.1937},
       };
 
       final info = FieldBoundaryInfo.fromJson(json);
@@ -71,18 +68,21 @@ void main() {
       expect(ring.first, [70.0, 20.0]);
     });
 
-    test('calculateAreaInAcres returns sensible positive area for valid polygon', () {
-      final pts = [
-        const LatLng(22.2587, 71.1924),
-        const LatLng(22.2587, 71.1950),
-        const LatLng(22.2610, 71.1950),
-        const LatLng(22.2610, 71.1924),
-      ];
+    test(
+      'calculateAreaInAcres returns sensible positive area for valid polygon',
+      () {
+        final pts = [
+          const LatLng(22.2587, 71.1924),
+          const LatLng(22.2587, 71.1950),
+          const LatLng(22.2610, 71.1950),
+          const LatLng(22.2610, 71.1924),
+        ];
 
-      final area = FieldBoundaryInfo.calculateAreaInAcres(pts);
-      expect(area, greaterThan(0.0));
-      expect(area, lessThan(100.0)); // Small farm plot
-    });
+        final area = FieldBoundaryInfo.calculateAreaInAcres(pts);
+        expect(area, greaterThan(0.0));
+        expect(area, lessThan(100.0)); // Small farm plot
+      },
+    );
 
     test('calculateAreaInAcres returns 0 for fewer than 3 vertices', () {
       expect(FieldBoundaryInfo.calculateAreaInAcres([]), 0.0);
@@ -115,9 +115,9 @@ void main() {
               [71.2, 22.1],
               [71.2, 22.2],
               [71.1, 22.2],
-            ]
-          ]
-        }
+            ],
+          ],
+        },
       };
 
       final zone = ZoneItem.fromJson(json);

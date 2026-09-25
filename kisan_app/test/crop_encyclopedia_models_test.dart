@@ -12,7 +12,11 @@ void main() {
         'name': {'en': 'Cotton', 'hi': 'कपास', 'gu': 'કપાસ'},
         'image': 'https://example.test/cotton.png',
         'season': {'en': 'Kharif', 'hi': 'खरीफ', 'gu': 'ખરીફ'},
-        'soilType': {'en': 'Black Soil', 'hi': 'काली मिट्टी', 'gu': 'કાળી માટી'},
+        'soilType': {
+          'en': 'Black Soil',
+          'hi': 'काली मिट्टी',
+          'gu': 'કાળી માટી',
+        },
         'waterNeed': {'en': 'Moderate', 'hi': 'मध्यम', 'gu': 'મધ્યમ'},
         'health': 'Healthy',
         'ndvi': 0.68,
@@ -23,12 +27,28 @@ void main() {
         },
         'diseases': [
           {
-            'name': {'en': 'Pink Bollworm', 'hi': 'गुलाबी सुंडी', 'gu': 'ગુલાબી ઈયળ'},
-            'symptoms': {'en': 'Rosetted flowers', 'hi': 'गुलाब जैसे फूल', 'gu': 'ગુલાબ જેવું ફૂલ'},
-            'favorableConditions': {'en': 'High humidity', 'hi': 'उच्च आर्द्रता', 'gu': 'ઉચ્ચ ભેજ'},
-            'management': {'en': 'Spray Profenophos 50 EC', 'hi': 'प्रोफेनोफोस 50 EC छिड़कें', 'gu': 'પ્રોફેનોફોસ છાંટો'},
+            'name': {
+              'en': 'Pink Bollworm',
+              'hi': 'गुलाबी सुंडी',
+              'gu': 'ગુલાબી ઈયળ',
+            },
+            'symptoms': {
+              'en': 'Rosetted flowers',
+              'hi': 'गुलाब जैसे फूल',
+              'gu': 'ગુલાબ જેવું ફૂલ',
+            },
+            'favorableConditions': {
+              'en': 'High humidity',
+              'hi': 'उच्च आर्द्रता',
+              'gu': 'ઉચ્ચ ભેજ',
+            },
+            'management': {
+              'en': 'Spray Profenophos 50 EC',
+              'hi': 'प्रोफेनोफोस 50 EC छिड़कें',
+              'gu': 'પ્રોફેનોફોસ છાંટો',
+            },
             'icon': '🐛',
-          }
+          },
         ],
       };
 
