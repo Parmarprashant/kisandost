@@ -3,6 +3,16 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
+import {
+  localizeCropName,
+  localizeGrowthStage,
+  localizeProgressionMode,
+  localizeStatus,
+  localizeThreatName,
+  localizeUnits,
+  localizeScoutingAngle,
+} from "@/lib/i18n/agriculturalData";
 import {
   Sprout,
   Tractor,
@@ -37,6 +47,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export default function CropDetailPage() {
+  const t = useTranslations("CropDetail");
+  const locale = useLocale();
   const params = useParams();
   const router = useRouter();
   const cropId = params?.id as string;
@@ -311,43 +323,44 @@ export default function CropDetailPage() {
 
   // Dynamic phenological stage resolution grounded in crop taxonomy
   const getDynamicStageName = (cropName: string, das: number, storedStage?: string) => {
-    if (storedStage && storedStage !== "Vegetative Stage") return storedStage;
-    const name = (cropName || "").toLowerCase();
-    if (name.includes("soybean") || name.includes("soya")) {
-      if (das <= 7) return "Germination & Emergence (VE)";
-      if (das <= 20) return "Early Vegetative (V1 - V3)";
-      if (das <= 45) return "Rapid Vegetative Growth (V4 - R1)";
-      if (das <= 70) return "Flowering & Pod Formation (R2 - R4)";
-      if (das <= 95) return "Seed Filling & Maturation (R5 - R7)";
-      return "Full Maturity & Harvest Ready (R8)";
+    let stage = storedStage;
+    if (!stage || stage === "Vegetative Stage") {
+      const name = (cropName || "").toLowerCase();
+      if (name.includes("soybean") || name.includes("soya")) {
+        if (das <= 7) stage = "Germination & Emergence (VE)";
+        else if (das <= 20) stage = "Early Vegetative (V1 - V3)";
+        else if (das <= 45) stage = "Rapid Vegetative Growth (V4 - R1)";
+        else if (das <= 70) stage = "Flowering & Pod Formation (R2 - R4)";
+        else if (das <= 95) stage = "Seed Filling & Maturation (R5 - R7)";
+        else stage = "Full Maturity & Harvest Ready (R8)";
+      } else if (name.includes("cotton")) {
+        if (das <= 12) stage = "Germination & Emergence";
+        else if (das <= 40) stage = "Vegetative & Squaring";
+        else if (das <= 85) stage = "Flowering & Boll Development";
+        else if (das <= 130) stage = "Boll Maturation & Bursting";
+        else stage = "Harvest Window";
+      } else if (name.includes("wheat")) {
+        if (das <= 15) stage = "Crown Root Initiation (CRI)";
+        else if (das <= 35) stage = "Tillering Stage";
+        else if (das <= 60) stage = "Jointing & Booting";
+        else if (das <= 85) stage = "Heading & Flowering";
+        else if (das <= 110) stage = "Milking & Dough Stage";
+        else stage = "Ripening & Maturity";
+      } else if (name.includes("groundnut") || name.includes("peanut")) {
+        if (das <= 15) stage = "Emergence & Seedling";
+        else if (das <= 40) stage = "Vegetative & Flowering";
+        else if (das <= 70) stage = "Pegging & Pod Initiation";
+        else if (das <= 105) stage = "Pod Development";
+        else stage = "Maturity & Harvesting";
+      } else {
+        if (das <= 10) stage = "Germination & Emergence";
+        else if (das <= 35) stage = "Active Vegetative Growth";
+        else if (das <= 70) stage = "Flowering & Reproductive";
+        else if (das <= 100) stage = "Fruit/Grain Development";
+        else stage = "Maturity & Ripening";
+      }
     }
-    if (name.includes("cotton")) {
-      if (das <= 12) return "Germination & Emergence";
-      if (das <= 40) return "Vegetative & Squaring";
-      if (das <= 85) return "Flowering & Boll Development";
-      if (das <= 130) return "Boll Maturation & Bursting";
-      return "Harvest Window";
-    }
-    if (name.includes("wheat")) {
-      if (das <= 15) return "Crown Root Initiation (CRI)";
-      if (das <= 35) return "Tillering Stage";
-      if (das <= 60) return "Jointing & Booting";
-      if (das <= 85) return "Heading & Flowering";
-      if (das <= 110) return "Milking & Dough Stage";
-      return "Ripening & Maturity";
-    }
-    if (name.includes("groundnut") || name.includes("peanut")) {
-      if (das <= 15) return "Emergence & Seedling";
-      if (das <= 40) return "Vegetative & Flowering";
-      if (das <= 70) return "Pegging & Pod Initiation";
-      if (das <= 105) return "Pod Development";
-      return "Maturity & Harvesting";
-    }
-    if (das <= 10) return "Germination & Emergence";
-    if (das <= 35) return "Active Vegetative Growth";
-    if (das <= 70) return "Flowering & Reproductive";
-    if (das <= 100) return "Fruit/Grain Development";
-    return "Maturity & Ripening";
+    return localizeGrowthStage(stage || "Vegetative Stage", locale);
   };
 
   return (
@@ -356,12 +369,12 @@ export default function CropDetailPage() {
       <div className="flex items-center justify-between">
         <Link href="/dashboard/my-crops">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4 mr-1.5" /> Back to My Crops
+            <ArrowLeft className="w-4 h-4 mr-1.5" /> {t("backToMyCrops")}
           </Button>
         </Link>
         <div className="flex items-center gap-2">
           <Badge variant={crop.status === "Active" ? "default" : "secondary"}>
-            {crop.status}
+            {localizeStatus(crop.status, locale)}
           </Badge>
         </div>
       </div>
@@ -372,12 +385,12 @@ export default function CropDetailPage() {
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight flex items-center gap-2.5">
               <Sprout className="w-7 h-7 text-emerald-600" />
-              {crop.cropName}
+              {localizeCropName(crop.cropName, locale)}
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Variety: <strong className="text-foreground">{crop.variety || "Unspecified"}</strong>
+              {t("variety")}: <strong className="text-foreground">{crop.variety || "—"}</strong>
               {" • "}
-              Planted Area: <strong className="text-foreground">{crop.cultivatedArea} {crop.cultivatedAreaUnit}</strong>
+              {t("plantedArea")}: <strong className="text-foreground">{crop.cultivatedArea} {localizeUnits(crop.cultivatedAreaUnit, locale)}</strong>
             </p>
           </div>
 
@@ -394,7 +407,7 @@ export default function CropDetailPage() {
               ) : (
                 <ShieldCheck className="w-3.5 h-3.5 mr-1.5 text-amber-600" />
               )}
-              {evaluatingRisk ? "Evaluating Risk..." : "Evaluate Crop Risk"}
+              {evaluatingRisk ? t("evaluatingRisk") : t("evaluateRisk")}
             </Button>
 
             <Button
@@ -408,7 +421,7 @@ export default function CropDetailPage() {
               ) : (
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" />
               )}
-              {resolvingAdvisory ? "Generating Advisory..." : "Generate Advisory"}
+              {resolvingAdvisory ? t("generatingAdvisory") : t("generateAdvisory")}
             </Button>
           </div>
         </div>
@@ -421,41 +434,41 @@ export default function CropDetailPage() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Compass className="w-4 h-4 text-emerald-600" />
-              Spatial &amp; Location Hierarchy
+              {t("spatialHierarchy")}
             </CardTitle>
             <CardDescription className="text-xs">
-              Farmer → Field → Location → Boundary → Monitoring Zone
+              {t("spatialHierarchyDesc")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3.5 text-xs">
             <div className="flex items-start justify-between border-b pb-2">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Tractor className="w-3.5 h-3.5" /> Field Name:
+                <Tractor className="w-3.5 h-3.5" /> {t("fieldName")}:
               </span>
-              <span className="font-semibold text-foreground">{field?.name || "Unknown Field"}</span>
+              <span className="font-semibold text-foreground">{field?.name || "—"}</span>
             </div>
             <div className="flex items-start justify-between border-b pb-2">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" /> Location:
+                <MapPin className="w-3.5 h-3.5" /> {t("location")}:
               </span>
               <span className="font-medium text-foreground text-right">{locationSummary}</span>
             </div>
             <div className="flex items-start justify-between border-b pb-2">
-              <span className="text-muted-foreground">Field Boundary:</span>
+              <span className="text-muted-foreground">{t("fieldBoundary")}:</span>
               <span>
                 {hasBoundary ? (
                   <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-300">
-                    <CheckCircle2 className="w-2.5 h-2.5 mr-1" /> Boundary Defined
+                    <CheckCircle2 className="w-2.5 h-2.5 mr-1" /> {t("boundaryDefined")}
                   </Badge>
                 ) : (
                   <Badge variant="outline" className="text-[10px] text-muted-foreground">
-                    Point Centroid
+                    {t("pointCentroid")}
                   </Badge>
                 )}
               </span>
             </div>
             <div className="flex items-start justify-between pt-0.5">
-              <span className="text-muted-foreground">Monitoring Zone:</span>
+              <span className="text-muted-foreground">{t("monitoringZone")}:</span>
               <span>
                 {zone ? (
                   <Badge variant="outline" className="text-[10px] border-emerald-500 bg-emerald-50 text-emerald-800">
@@ -463,7 +476,7 @@ export default function CropDetailPage() {
                   </Badge>
                 ) : (
                   <Badge variant="outline" className="text-[10px] text-muted-foreground">
-                    Field-wide Monitoring
+                    {t("fieldWideMonitoring")}
                   </Badge>
                 )}
               </span>
@@ -478,24 +491,24 @@ export default function CropDetailPage() {
               <div>
                 <CardTitle className="text-base flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-emerald-600" />
-                  Phenological Lifecycle &amp; GDD Tracking
+                  {t("phenologicalLifecycle")}
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Real-time thermal accumulation and crop growth stage progression
+                  {t("phenologicalDesc")}
                 </CardDescription>
               </div>
               <Badge variant="outline" className="bg-emerald-50 text-emerald-800 border-emerald-300 text-xs">
-                Day {calculatedDas}
+                {t("days")}: {calculatedDas}
               </Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-3.5 text-xs">
             <div className="flex items-start justify-between border-b pb-2">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-slate-500" /> Sowing Date:
+                <Clock className="w-3.5 h-3.5 text-slate-500" /> {t("sowingDate")}:
               </span>
               <span className="font-semibold text-foreground">
-                {new Date(crop.sowingDate).toLocaleDateString(undefined, {
+                {new Date(crop.sowingDate).toLocaleDateString(locale, {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -504,13 +517,13 @@ export default function CropDetailPage() {
             </div>
             <div className="flex items-start justify-between border-b pb-2">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Activity className="w-3.5 h-3.5 text-emerald-600" /> Days After Sowing (DAS):
+                <Activity className="w-3.5 h-3.5 text-emerald-600" /> {t("daysAfterSowing")}:
               </span>
-              <span className="font-bold text-foreground text-sm text-emerald-700">{calculatedDas} Days</span>
+              <span className="font-bold text-foreground text-sm text-emerald-700">{calculatedDas} {t("days")}</span>
             </div>
             <div className="flex items-start justify-between border-b pb-2">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Sprout className="w-3.5 h-3.5 text-emerald-600" /> Active Growth Stage:
+                <Sprout className="w-3.5 h-3.5 text-emerald-600" /> {t("activeGrowthStage")}:
               </span>
               <div className="text-right">
                 <span className="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
@@ -520,7 +533,7 @@ export default function CropDetailPage() {
             </div>
             <div className="flex items-start justify-between pt-0.5">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Thermometer className="w-3.5 h-3.5 text-amber-500" /> Progression Mode:
+                <Thermometer className="w-3.5 h-3.5 text-amber-500" /> {t("progressionMode")}:
               </span>
               <div className="flex items-center gap-2">
                 {crop.cumulativeGdd !== undefined && crop.cumulativeGdd !== null && crop.cumulativeGdd > 0 && (
@@ -529,11 +542,7 @@ export default function CropDetailPage() {
                   </span>
                 )}
                 <Badge variant="outline" className="text-[10px] font-mono bg-slate-50">
-                  {crop.progressionMode === "DYNAMIC_GDD"
-                    ? "Dynamic GDD"
-                    : crop.progressionMode === "HYBRID_DAS"
-                    ? "Hybrid GDD + DAS"
-                    : "Physiological DAS"}
+                  {localizeProgressionMode(crop.progressionMode, locale)}
                 </Badge>
               </div>
             </div>
@@ -554,20 +563,20 @@ export default function CropDetailPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base font-bold text-foreground">
-                      AgriShield 360° Comprehensive Risk Assessment
+                      {t("riskCardTitle")}
                     </CardTitle>
                     <Badge variant="secondary" className="text-[10px] font-semibold py-0 h-4">
                       v2.4 Engine
                     </Badge>
                   </div>
                   <CardDescription className="text-xs text-muted-foreground mt-0.5">
-                    Synthesizing canopy phenology, micro-climate weather, and multi-angle leaf disease scans...
+                    {t("run360AssessmentDesc")}
                   </CardDescription>
                 </div>
               </div>
               <Badge variant="outline" className="border-amber-300 bg-amber-100/60 text-amber-800 text-xs py-1 px-3 rounded-full flex items-center gap-1.5 font-medium">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                Synthesizing Telemetry...
+                {t("evaluatingRisk")}
               </Badge>
             </div>
           </CardHeader>
@@ -624,14 +633,14 @@ export default function CropDetailPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base font-bold text-foreground">
-                      AgriShield 360° Comprehensive Risk Assessment
+                      {t("riskCardTitle")}
                     </CardTitle>
                     <Badge variant="secondary" className="text-[10px] font-semibold py-0 h-4">
                       v2.4 Engine
                     </Badge>
                   </div>
                   <CardDescription className="text-xs text-muted-foreground mt-0.5">
-                    Autonomous multi-source telemetry analyzing canopy phenology, micro-climate weather, and leaf disease scans.
+                    {t("run360AssessmentDesc")}
                   </CardDescription>
                 </div>
               </div>
@@ -653,17 +662,17 @@ export default function CropDetailPage() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                       </span>
-                      Potential Concern Detected
+                      {t("potentialConcern")}
                     </>
                   ) : riskData.overallStatus === "INCONCLUSIVE" ? (
                     <>
                       <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
-                      Multi-Symptom Scrutiny
+                      {t("multiSymptomScrutiny")}
                     </>
                   ) : (
                     <>
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      No Concern Detected
+                      {t("noConcern")}
                     </>
                   )}
                 </Badge>
@@ -674,10 +683,10 @@ export default function CropDetailPage() {
                   className="h-8 px-2.5 text-xs rounded-lg text-muted-foreground hover:text-foreground border-border hover:bg-muted"
                   disabled={evaluatingRisk}
                   onClick={handleEvaluateRisk}
-                  title="Re-run real-time risk evaluation"
+                  title={t("reevaluateRisk")}
                 >
                   <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${evaluatingRisk ? "animate-spin text-amber-600" : ""}`} />
-                  Re-evaluate
+                  {t("reevaluateRisk")}
                 </Button>
               </div>
             </div>
@@ -692,13 +701,13 @@ export default function CropDetailPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
-                    Phenology Stage
+                    {t("phenologyStage")}
                   </span>
                   <p className="text-xs font-semibold text-foreground truncate mt-0.5">
-                    {crop?.stage || "Vegetative Stage"}
+                    {localizeGrowthStage(crop?.stage || "Vegetative Stage", locale)}
                   </p>
                   <span className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
-                    <CheckCircle2 className="w-3 h-3" /> Grounded (GDD)
+                    <CheckCircle2 className="w-3 h-3" /> {t("groundedGdd")}
                   </span>
                 </div>
               </div>
@@ -709,7 +718,7 @@ export default function CropDetailPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
-                    Micro-Climate
+                    {t("microClimate")}
                   </span>
                   <p className="text-xs font-semibold text-foreground truncate mt-0.5">
                     {riskData.evidenceCompleteness?.weatherCoveragePercent > 0
@@ -728,7 +737,7 @@ export default function CropDetailPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
-                    Diagnostic Vision
+                    {t("diagnosticVision")}
                   </span>
                   <p className="text-xs font-semibold text-foreground truncate mt-0.5">
                     {scans.length > 0 ? `${scans.length} Zone Scans` : "Ready to Scout"}
@@ -745,7 +754,7 @@ export default function CropDetailPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
-                    Cultivar Genetics
+                    {t("cultivarGenetics")}
                   </span>
                   <p className="text-xs font-semibold text-foreground truncate mt-0.5">
                     {crop?.variety ? `Variety ${crop.variety}` : "ICAR Catalog"}
@@ -764,7 +773,7 @@ export default function CropDetailPage() {
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-2.5">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-foreground">
-                      Identified Agronomic Threats
+                      {t("identifiedThreats")}
                     </span>
                     <Badge variant="secondary" className="text-[10px] px-2 py-0.5">
                       {riskData.evaluatedThreats.length}
@@ -780,7 +789,7 @@ export default function CropDetailPage() {
                       }`}
                       onClick={() => setThreatFilter("ALL")}
                     >
-                      All ({riskData.evaluatedThreats.length})
+                      {t("all")} ({riskData.evaluatedThreats.length})
                     </Button>
                     <Button
                       size="sm"
@@ -792,13 +801,13 @@ export default function CropDetailPage() {
                       }`}
                       onClick={() => setThreatFilter("ACTION")}
                     >
-                      🚨 Action Required (
+                      🚨 {t("actionRequired")} (
                       {
                         riskData.evaluatedThreats.filter(
-                          (t: any) =>
-                            t.riskLevel === "POTENTIAL_CONCERN" ||
-                            t.status === "POTENTIAL_CONCERN" ||
-                            t.level === "HIGH"
+                          (tItem: any) =>
+                            tItem.riskLevel === "POTENTIAL_CONCERN" ||
+                            tItem.status === "POTENTIAL_CONCERN" ||
+                            tItem.level === "HIGH"
                         ).length
                       }
                       )
@@ -811,14 +820,14 @@ export default function CropDetailPage() {
                       }`}
                       onClick={() => setThreatFilter("BENCHMARK")}
                     >
-                      🌿 ICAR Rules (
+                      🌿 {t("icarRules")} (
                       {
                         riskData.evaluatedThreats.filter(
-                          (t: any) =>
+                          (tItem: any) =>
                             !(
-                              t.riskLevel === "POTENTIAL_CONCERN" ||
-                              t.status === "POTENTIAL_CONCERN" ||
-                              t.level === "HIGH"
+                              tItem.riskLevel === "POTENTIAL_CONCERN" ||
+                              tItem.status === "POTENTIAL_CONCERN" ||
+                              tItem.level === "HIGH"
                             )
                         ).length
                       }
@@ -882,7 +891,7 @@ export default function CropDetailPage() {
                             <div className="flex items-start justify-between gap-2">
                               <div>
                                 <span className="font-semibold text-foreground text-sm block">
-                                  {threat.threatName || "Agronomic Threat"}
+                                  {localizeThreatName(threat.threatName || "Agronomic Threat", locale)}
                                 </span>
                                 {threat.threatCategory && (
                                   <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
@@ -905,22 +914,22 @@ export default function CropDetailPage() {
                                 {isAlert ? (
                                   <>
                                     <AlertTriangle className="w-3 h-3 text-rose-600" />
-                                    Action Recommended
+                                    {t("actionRecommended")}
                                   </>
                                 ) : isInconclusive ? (
                                   <>
                                     <HelpCircle className="w-3 h-3 text-amber-600" />
-                                    Under Observation
+                                    {t("underObservation")}
                                   </>
                                 ) : isInsufficient ? (
                                   <>
                                     <Info className="w-3 h-3 text-slate-500" />
-                                    Baseline Metric
+                                    {t("baselineMetric")}
                                   </>
                                 ) : (
                                   <>
                                     <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                                    Clear • Low Risk
+                                    {t("clearLowRisk")}
                                   </>
                                 )}
                               </Badge>
@@ -938,7 +947,7 @@ export default function CropDetailPage() {
                                 className="text-[10px] bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 font-medium border-0 gap-1"
                               >
                                 <Camera className="w-3 h-3" />
-                                AI In-Field Vision Scan
+                                {t("aiVisionScan")}
                               </Badge>
                             ) : (
                               <Badge
@@ -946,7 +955,7 @@ export default function CropDetailPage() {
                                 className="text-[10px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 font-medium border-0 gap-1"
                               >
                                 <Dna className="w-3 h-3" />
-                                ICAR Scientific Baseline
+                                {t("icarScientific")}
                               </Badge>
                             )}
 
@@ -958,7 +967,7 @@ export default function CropDetailPage() {
                                 }}
                                 className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 flex items-center gap-1 transition-colors"
                               >
-                                View Action Plan <ChevronRight className="w-3 h-3" />
+                                {t("viewActionPlan")} <ChevronRight className="w-3 h-3" />
                               </button>
                             )}
                           </div>
@@ -970,9 +979,9 @@ export default function CropDetailPage() {
             ) : (
               <div className="py-6 text-center border border-dashed rounded-xl">
                 <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto mb-1.5" />
-                <p className="text-sm font-semibold text-foreground">All Agronomic Checks Clear</p>
+                <p className="text-sm font-semibold text-foreground">{t("allChecksClear")}</p>
                 <p className="text-xs text-muted-foreground">
-                  No active concerns detected for current phenology and weather conditions.
+                  {t("allChecksClearDesc")}
                 </p>
               </div>
             )}
@@ -988,10 +997,10 @@ export default function CropDetailPage() {
                 </div>
                 <div>
                   <CardTitle className="text-base font-bold text-foreground">
-                    AgriShield 360° Comprehensive Risk Assessment
+                    {t("riskCardTitle")}
                   </CardTitle>
                   <CardDescription className="text-xs text-muted-foreground mt-0.5">
-                    Run autonomous risk evaluation across micro-climate, visual zone scans, and stage vulnerability.
+                    {t("run360AssessmentDesc")}
                   </CardDescription>
                 </div>
               </div>
@@ -1004,12 +1013,12 @@ export default function CropDetailPage() {
                 {evaluatingRisk ? (
                   <>
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    Evaluating Risk...
+                    {t("evaluatingRisk")}
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-3.5 h-3.5 text-emerald-200" />
-                    Run 360° Risk Assessment
+                    {t("run360Assessment")}
                   </>
                 )}
               </Button>
@@ -1025,15 +1034,15 @@ export default function CropDetailPage() {
             <div>
               <CardTitle className="text-base flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-emerald-600" />
-                Actionable Advisory &amp; Integrated Pest Management (IPM)
+                {t("advisoryTitle")}
               </CardTitle>
               <CardDescription className="text-xs">
-                Zero-hallucination agronomic recommendations validated against ICAR packages and CIB&amp;RC guidelines
+                {t("advisoryDesc")}
               </CardDescription>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="text-xs border-emerald-400 text-emerald-800 bg-emerald-50">
-                {advisories.length} Active Advisor{advisories.length === 1 ? "y" : "ies"}
+                {advisories.length} {advisories.length === 1 ? t("activeAdvisoryCount") : t("activeAdvisoriesCount")}
               </Badge>
               <Button
                 variant="outline"
@@ -1043,7 +1052,7 @@ export default function CropDetailPage() {
                 disabled={resolvingAdvisory}
               >
                 {resolvingAdvisory ? <Loader2 className="w-3 h-3 animate-spin mr-1" /> : <RefreshCw className="w-3 h-3 mr-1" />}
-                Refresh
+                {resolvingAdvisory ? t("generatingAdvisory") : t("generateAdvisory")}
               </Button>
             </div>
           </div>
@@ -1051,7 +1060,7 @@ export default function CropDetailPage() {
         <CardContent className="space-y-4">
           {loadingAdvisories ? (
             <div className="py-6 text-center text-xs text-muted-foreground flex items-center justify-center">
-              <Loader2 className="w-4 h-4 animate-spin mr-2" /> Loading validated advisories...
+              <Loader2 className="w-4 h-4 animate-spin mr-2" /> {t("generatingAdvisory")}
             </div>
           ) : advisories.length === 0 ? (
             <div className="py-8 text-center border border-dashed rounded-lg space-y-3 bg-muted/20">
@@ -1060,10 +1069,10 @@ export default function CropDetailPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-foreground">
-                  No active advisory generated yet for this crop cycle.
+                  {t("noInterventions")}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Generate targeted agronomic advice based on current weather, soil, and crop growth stage.
+                  {t("workPlanDesc")}
                 </p>
               </div>
               <Button
@@ -1077,7 +1086,7 @@ export default function CropDetailPage() {
                 ) : (
                   <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                 )}
-                Generate Advisory &amp; IPM Plan
+                {t("generateAdvisory")}
               </Button>
             </div>
           ) : (
@@ -1093,7 +1102,7 @@ export default function CropDetailPage() {
                       <p className="text-xs text-muted-foreground mt-0.5">{adv.advisorySummary}</p>
                     </div>
                     <Badge variant="outline" className="text-[10px] font-mono">
-                      Valid until: {new Date(adv.validUntil).toLocaleDateString()}
+                      {t("validUntil")}: {new Date(adv.validUntil).toLocaleDateString(locale)}
                     </Badge>
                   </div>
 
@@ -1101,7 +1110,7 @@ export default function CropDetailPage() {
                   {adv.culturalActions && adv.culturalActions.length > 0 && (
                     <div className="space-y-1.5 text-xs">
                       <span className="font-semibold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
-                        🌱 Cultural &amp; Preventive Management:
+                        🌱 {t("culturalManagement")}
                       </span>
                       <ul className="list-disc list-inside space-y-1 text-muted-foreground pl-1">
                         {adv.culturalActions.map((c: string, idx: number) => (
@@ -1112,7 +1121,7 @@ export default function CropDetailPage() {
                               disabled={actionInProgress === `schedule_${c}`}
                               className="text-[10px] text-emerald-600 underline hover:text-emerald-800 ml-1.5 font-medium"
                             >
-                              [+ Schedule Action]
+                              [{t("scheduleAction")}]
                             </button>
                           </li>
                         ))}
@@ -1124,7 +1133,7 @@ export default function CropDetailPage() {
                   {adv.biologicalActions && adv.biologicalActions.length > 0 && (
                     <div className="space-y-1.5 text-xs">
                       <span className="font-semibold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
-                        🐞 Biological &amp; Bio-agent Controls:
+                        🐞 {t("biologicalManagement")}
                       </span>
                       <ul className="list-disc list-inside space-y-1 text-muted-foreground pl-1">
                         {adv.biologicalActions.map((b: string, idx: number) => (
@@ -1135,7 +1144,7 @@ export default function CropDetailPage() {
                               disabled={actionInProgress === `schedule_${b}`}
                               className="text-[10px] text-emerald-600 underline hover:text-emerald-800 ml-1.5 font-medium"
                             >
-                              [+ Schedule Action]
+                              [{t("scheduleAction")}]
                             </button>
                           </li>
                         ))}
@@ -1146,7 +1155,7 @@ export default function CropDetailPage() {
                   {/* Strict Chemical Recommendation Gate Display */}
                   <div className="text-xs p-3 rounded-lg border bg-muted/30">
                     <span className="font-semibold text-foreground flex items-center gap-1.5 mb-1.5">
-                      🧪 Chemical Intervention (Strict Safety Gate):
+                      🧪 {t("chemicalIntervention")}
                     </span>
                     {adv.chemicalAction?.offered ? (
                       <div className="space-y-1.5 text-xs">
@@ -1155,17 +1164,17 @@ export default function CropDetailPage() {
                             {adv.chemicalAction.activeIngredient} {adv.chemicalAction.formulation}
                           </span>
                           <Badge variant="outline" className="text-[10px] bg-red-50 text-red-800 border-red-300">
-                            PHI: {adv.chemicalAction.phiDays} Days Waiting Period
+                            PHI: {adv.chemicalAction.phiDays} {t("waitingPeriod")}
                           </Badge>
                           <Badge variant="outline" className="text-[10px]">
-                            REI: {adv.chemicalAction.reiHours} Hours
+                            REI: {adv.chemicalAction.reiHours} {t("hours")}
                           </Badge>
                         </div>
                         <p className="text-muted-foreground">
-                          Dosage: <strong>{adv.chemicalAction.dosage} {adv.chemicalAction.unit}</strong> in {adv.chemicalAction.dilution}. Method: {adv.chemicalAction.applicationMethod}.
+                          {t("dosage")}: <strong>{adv.chemicalAction.dosage} {localizeUnits(adv.chemicalAction.unit, locale)}</strong> in {adv.chemicalAction.dilution}. {t("method")}: {adv.chemicalAction.applicationMethod}.
                         </p>
                         <p className="text-[11px] text-amber-700 italic">
-                          ⚠️ Safety: {adv.chemicalAction.safetyPrecaution}
+                          ⚠️ {t("safety")}: {adv.chemicalAction.safetyPrecaution}
                         </p>
                         <Button
                           size="sm"
@@ -1179,12 +1188,12 @@ export default function CropDetailPage() {
                             )
                           }
                         >
-                          <PlusCircle className="w-3 h-3 mr-1" /> Schedule Chemical Application
+                          <PlusCircle className="w-3 h-3 mr-1" /> {t("scheduleChemical")}
                         </Button>
                       </div>
                     ) : (
                       <p className="text-muted-foreground text-xs italic">
-                        🔒 {adv.chemicalAction?.unavailabilityReason || "No chemical application warranted."}
+                        🔒 {adv.chemicalAction?.unavailabilityReason || t("noChemical")}
                       </p>
                     )}
                   </div>
@@ -1192,7 +1201,7 @@ export default function CropDetailPage() {
                   {/* Source Citations Provenance */}
                   {adv.sourceCitations && adv.sourceCitations.length > 0 && (
                     <div className="pt-2 border-t text-[11px] text-muted-foreground/80 space-y-0.5">
-                      <span className="font-semibold text-foreground text-[10px]">Verified Source Provenance:</span>
+                      <span className="font-semibold text-foreground text-[10px]">{t("verifiedProvenance")}</span>
                       {adv.sourceCitations.map((s: any, idx: number) => (
                         <p key={idx} className="italic">
                           • {s.organization}: "{s.title}" (Page {s.page})
@@ -1214,27 +1223,27 @@ export default function CropDetailPage() {
             <div>
               <CardTitle className="text-base flex items-center gap-2">
                 <Clock className="w-5 h-5 text-emerald-600" />
-                Intervention Work Plan &amp; Farmer Confirmation
+                {t("workPlan")}
               </CardTitle>
               <CardDescription className="text-xs">
-                Scheduled in-field actions requiring farmer manual review and verification
+                {t("workPlanDesc")}
               </CardDescription>
             </div>
             <Badge variant="outline" className="text-xs">
-              {interventions.filter((i) => i.status === "SCHEDULED").length} Pending
+              {interventions.filter((i) => i.status === "SCHEDULED").length} {t("pending")}
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           {loadingInterventions ? (
             <div className="py-6 text-center text-xs text-muted-foreground flex items-center justify-center">
-              <Loader2 className="w-4 h-4 animate-spin mr-2" /> Loading intervention schedule...
+              <Loader2 className="w-4 h-4 animate-spin mr-2" /> {t("generatingAdvisory")}
             </div>
           ) : interventions.length === 0 ? (
             <div className="py-8 text-center border border-dashed rounded-lg space-y-1">
-              <p className="text-sm text-muted-foreground">No interventions scheduled yet.</p>
+              <p className="text-sm text-muted-foreground">{t("noInterventions")}</p>
               <p className="text-xs text-muted-foreground">
-                Select cultural, biological, or chemical actions from the advisory above to schedule them into your farm calendar.
+                {t("workPlanDesc")}
               </p>
             </div>
           ) : (
@@ -1254,13 +1263,17 @@ export default function CropDetailPage() {
                             : "bg-amber-50 text-amber-800 border-amber-300 text-[10px]"
                         }
                       >
-                        {item.status}
+                        {item.status === "COMPLETED"
+                          ? t("confirmedByFarmer")
+                          : item.status === "CANCELLED"
+                          ? t("resolved")
+                          : t("pending")}
                       </Badge>
                     </div>
                     <p className="text-muted-foreground">{item.actionText}</p>
                     <p className="text-[11px] text-muted-foreground">
-                      Scheduled: {new Date(item.scheduledDate).toLocaleDateString()}
-                      {item.completedAt && ` • Completed: ${new Date(item.completedAt).toLocaleDateString()}`}
+                      Scheduled: {new Date(item.scheduledDate).toLocaleDateString(locale)}
+                      {item.completedAt && ` • Completed: ${new Date(item.completedAt).toLocaleDateString(locale)}`}
                     </p>
                   </div>
 
@@ -1277,7 +1290,7 @@ export default function CropDetailPage() {
                         ) : (
                           <Check className="w-3.5 h-3.5 mr-1" />
                         )}
-                        Confirm Done
+                        {t("confirmDone")}
                       </Button>
                     )}
                   </div>
@@ -1295,10 +1308,10 @@ export default function CropDetailPage() {
             <div>
               <CardTitle className="text-base flex items-center gap-2">
                 <Camera className="w-4 h-4 text-emerald-600" />
-                Zone-Specific Scouting &amp; Scan History
+                {t("zoneScoutingHistory")}
               </CardTitle>
               <CardDescription className="text-xs">
-                Diagnostic scans performed on monitoring zones for this crop cycle
+                {t("zoneScoutingDesc")}
               </CardDescription>
             </div>
             <Badge variant="outline" className="text-xs">
@@ -1315,11 +1328,11 @@ export default function CropDetailPage() {
           ) : scans.length === 0 ? (
             <div className="py-8 text-center border border-dashed rounded-lg space-y-2">
               <p className="text-sm text-muted-foreground">
-                No diagnostic scans recorded for this crop yet.
+                {t("noDiagnosticScans")}
               </p>
               <Link href="/dashboard/my-crops">
                 <Button variant="outline" size="sm" className="text-xs text-emerald-700 border-emerald-300">
-                  <Camera className="w-3.5 h-3.5 mr-1.5" /> Go to Zone Scouting
+                  <Camera className="w-3.5 h-3.5 mr-1.5" /> {t("goToScouting")}
                 </Button>
               </Link>
             </div>
@@ -1347,15 +1360,19 @@ export default function CropDetailPage() {
                               : "text-muted-foreground text-[10px]"
                           }
                         >
-                          {scan.screeningResult?.replace(/_/g, " ") || "Screening"}
+                          {scan.screeningResult === "POTENTIAL_CONCERN"
+                            ? t("potentialConcern")
+                            : scan.screeningResult === "NO_CONCERN_DETECTED"
+                            ? t("noConcern")
+                            : scan.screeningResult?.replace(/_/g, " ") || "Screening"}
                         </Badge>
                       </div>
                       <p className="text-muted-foreground">
-                        Monitoring Zone: <strong className="text-foreground">{zoneDisplay}</strong>
+                        {t("monitoringZone")}: <strong className="text-foreground">{zoneDisplay}</strong>
                         {" • "}
-                        Captured: {new Date(scan.capturedAt || scan.createdAt).toLocaleString()}
+                        Captured: {new Date(scan.capturedAt || scan.createdAt).toLocaleString(locale)}
                         {" • "}
-                        View: {scan.viewAngle || "screening"}
+                        View: {localizeScoutingAngle(scan.viewAngle || "screening", locale)}
                       </p>
                     </div>
 
@@ -1367,7 +1384,7 @@ export default function CropDetailPage() {
                           rel="noopener noreferrer"
                           className="text-xs text-blue-600 hover:underline"
                         >
-                          View Image
+                          {t("viewImage")}
                         </a>
                       )}
                     </div>

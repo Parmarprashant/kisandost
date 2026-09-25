@@ -283,7 +283,7 @@ export async function evaluateCropRisk(params: {
             }),
           ],
           missingEvidence: [],
-          evaluatedAt: new Date(),
+          evaluatedAt: new Date().toISOString(),
         });
       }
     }

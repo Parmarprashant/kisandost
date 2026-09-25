@@ -20,7 +20,14 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (newLocale: string | null) => {
     if (newLocale) {
+      if (typeof document !== "undefined") {
+        document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+        try {
+          localStorage.setItem("kisan_locale", newLocale);
+        } catch {}
+      }
       router.replace(pathname, { locale: newLocale });
+      router.refresh();
     }
   };
 
