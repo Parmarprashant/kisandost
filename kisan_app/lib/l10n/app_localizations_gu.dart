@@ -46,6 +46,38 @@ class L10nGu extends L10n {
   String get advisoryTitle => 'પાક કૅલેન્ડર';
 
   @override
+  String get aiAsk => 'ખેતી વિષે સવાલ પૂછો';
+
+  @override
+  String get aiBusy => 'સહાયક વ્યસ્ત છે. કૃપા કરીને ફરી પ્રયાસ કરો.';
+
+  @override
+  String get aiDisclaimer =>
+      'આ સલાહ AI તરફથી છે, તમારા જિલ્લા અને પાક પ્રમાણે. પૈસા ખર્ચતા પહેલાં તમારા ખેતીવાડી અધિકારીને જરૂર પૂછો.';
+
+  @override
+  String get aiExample1 => 'મારા કપાસના પાન પીળા થાય છે. શું કરવું?';
+
+  @override
+  String get aiExample2 => 'આ સીઝનમાં ઘઉં ક્યારે વાવવા?';
+
+  @override
+  String get aiExample3 => 'એક એકર ડાંગરમાં કેટલું યુરિયા જોઈએ?';
+
+  @override
+  String get aiIntro =>
+      'તમારા પાક વિષે તમારા શબ્દોમાં કંઈપણ પૂછો. બોલવું હોય તો માઇક દબાવો.';
+
+  @override
+  String get aiSignIn => 'સવાલ પૂછવા સાઇન ઇન કરો.';
+
+  @override
+  String get aiThinking => 'વિચારીએ છીએ';
+
+  @override
+  String get aiTitle => 'કિસાનદોસ્તને પૂછો';
+
+  @override
   String get appError => 'કંઈક ખોટું થયું.';
 
   @override

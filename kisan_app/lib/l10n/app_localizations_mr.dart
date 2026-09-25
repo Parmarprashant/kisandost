@@ -46,6 +46,38 @@ class L10nMr extends L10n {
   String get advisoryTitle => 'पीक दिनदर्शिका';
 
   @override
+  String get aiAsk => 'शेतीविषयी प्रश्न विचारा';
+
+  @override
+  String get aiBusy => 'सहाय्यक व्यस्त आहे. थोड्या वेळाने पुन्हा प्रयत्न करा.';
+
+  @override
+  String get aiDisclaimer =>
+      'हा सल्ला AI चा आहे, तुमचा जिल्हा आणि पिके लक्षात घेऊन. पैसे खर्च करण्याआधी कृषी अधिकार्याला नक्की विचारा.';
+
+  @override
+  String get aiExample1 => 'माझ्या कापसाची पाने पिवळी पडत आहेत. काय करू?';
+
+  @override
+  String get aiExample2 => 'या हंगामात गहू कधी पेरावा?';
+
+  @override
+  String get aiExample3 => 'एक एकर भाताला किती युरिया लागते?';
+
+  @override
+  String get aiIntro =>
+      'तुमच्या पिकाविषयी तुमच्या शब्दांत काहीही विचारा. बोलायचे असल्यास मायक दाबा.';
+
+  @override
+  String get aiSignIn => 'प्रश्न विचारण्यासाठी साइन इन करा.';
+
+  @override
+  String get aiThinking => 'विचार करत आहे';
+
+  @override
+  String get aiTitle => 'किसानदोस्तला विचारा';
+
+  @override
   String get appError => 'काहीतरी चूक झाली.';
 
   @override

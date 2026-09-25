@@ -46,6 +46,39 @@ class L10nEn extends L10n {
   String get advisoryTitle => 'Crop calendar';
 
   @override
+  String get aiAsk => 'Ask a farming question';
+
+  @override
+  String get aiBusy => 'The assistant is busy. Please try again in a moment.';
+
+  @override
+  String get aiDisclaimer =>
+      'Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.';
+
+  @override
+  String get aiExample1 =>
+      'My cotton leaves are turning yellow. What should I do?';
+
+  @override
+  String get aiExample2 => 'When should I sow wheat this season?';
+
+  @override
+  String get aiExample3 => 'How much urea does one acre of rice need?';
+
+  @override
+  String get aiIntro =>
+      'Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.';
+
+  @override
+  String get aiSignIn => 'Sign in to ask a question.';
+
+  @override
+  String get aiThinking => 'Thinking';
+
+  @override
+  String get aiTitle => 'Ask KisanDost';
+
+  @override
   String get appError => 'Something went wrong.';
 
   @override

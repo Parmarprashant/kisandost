@@ -45,6 +45,38 @@ class L10nHi extends L10n {
   String get advisoryTitle => 'फ़सल कैलेंडर';
 
   @override
+  String get aiAsk => 'खेती का सवाल पूछें';
+
+  @override
+  String get aiBusy => 'सहायक व्यस्त है। थोड़ी देर में फिर कोशिश करें।';
+
+  @override
+  String get aiDisclaimer =>
+      'यह सलाह AI से है, आपके जिले और फ़सलों के हिसाब से। पैसा खर्च करने से पहले अपने कृषि अधिकारी से ज़रूर पूछ लें।';
+
+  @override
+  String get aiExample1 => 'मेरी कपास के पत्ते पीले हो रहे हैं। क्या करूँ?';
+
+  @override
+  String get aiExample2 => 'इस मौसम में गेहूँ कब बोऊँ?';
+
+  @override
+  String get aiExample3 => 'एक एकड़ धान में कितनी यूरिया लगती है?';
+
+  @override
+  String get aiIntro =>
+      'अपनी फ़सल के बारे में अपने शब्दों में कुछ भी पूछें। बोलना हो तो माइक दबाएँ।';
+
+  @override
+  String get aiSignIn => 'सवाल पूछने के लिए साइन इन करें।';
+
+  @override
+  String get aiThinking => 'सोच रहे हैं';
+
+  @override
+  String get aiTitle => 'किसानदोस्त से पूछें';
+
+  @override
   String get appError => 'कुछ गड़बड़ हो गई।';
 
   @override

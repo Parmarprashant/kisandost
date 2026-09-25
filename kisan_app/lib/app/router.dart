@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/advisory/presentation/advisory_screen.dart';
+import '../features/assistant/presentation/assistant_screen.dart';
 import '../features/scanner/presentation/scanner_screen.dart';
 import '../features/auth/data/auth_controller.dart';
 import '../features/auth/presentation/login_screen.dart';
@@ -119,6 +120,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (_, _) => const FertilizerScreen(),
           ),
           GoRoute(path: '/advisory', builder: (_, _) => const AdvisoryScreen()),
+          GoRoute(path: '/ask', builder: (_, _) => const AssistantScreen()),
           GoRoute(path: '/scan', builder: (_, _) => const ScannerScreen()),
           GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
           GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),

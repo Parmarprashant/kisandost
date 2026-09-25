@@ -155,6 +155,66 @@ abstract class L10n {
   /// **'Crop calendar'**
   String get advisoryTitle;
 
+  /// No description provided for @aiAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask a farming question'**
+  String get aiAsk;
+
+  /// No description provided for @aiBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'The assistant is busy. Please try again in a moment.'**
+  String get aiBusy;
+
+  /// No description provided for @aiDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.'**
+  String get aiDisclaimer;
+
+  /// No description provided for @aiExample1.
+  ///
+  /// In en, this message translates to:
+  /// **'My cotton leaves are turning yellow. What should I do?'**
+  String get aiExample1;
+
+  /// No description provided for @aiExample2.
+  ///
+  /// In en, this message translates to:
+  /// **'When should I sow wheat this season?'**
+  String get aiExample2;
+
+  /// No description provided for @aiExample3.
+  ///
+  /// In en, this message translates to:
+  /// **'How much urea does one acre of rice need?'**
+  String get aiExample3;
+
+  /// No description provided for @aiIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.'**
+  String get aiIntro;
+
+  /// No description provided for @aiSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to ask a question.'**
+  String get aiSignIn;
+
+  /// No description provided for @aiThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking'**
+  String get aiThinking;
+
+  /// No description provided for @aiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask KisanDost'**
+  String get aiTitle;
+
   /// No description provided for @appError.
   ///
   /// In en, this message translates to:
