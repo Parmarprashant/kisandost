@@ -65,7 +65,7 @@ export default function CropDetailPage() {
       const data = await res.json();
       setCrop(data);
     } catch (err: any) {
-      console.error(err);
+      console.warn("Crop load notice:", err);
       toast.error(err.message || "Failed to load crop details");
     } finally {
       setLoading(false);
@@ -83,7 +83,7 @@ export default function CropDetailPage() {
         setScans(data);
       }
     } catch (err) {
-      console.error("Failed to load scans:", err);
+      console.warn("Notice: scan history fetch skipped:", err);
     } finally {
       setLoadingScans(false);
     }
@@ -100,7 +100,7 @@ export default function CropDetailPage() {
         setAdvisories(data);
       }
     } catch (err) {
-      console.error("Failed to load advisories:", err);
+      console.warn("Notice: advisories fetch skipped:", err);
     } finally {
       setLoadingAdvisories(false);
     }
@@ -117,7 +117,7 @@ export default function CropDetailPage() {
         setInterventions(data);
       }
     } catch (err) {
-      console.error("Failed to load interventions:", err);
+      console.warn("Notice: interventions fetch skipped:", err);
     } finally {
       setLoadingInterventions(false);
     }

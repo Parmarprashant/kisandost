@@ -101,11 +101,30 @@ async function retryFetch(
   options?: RequestInit,
   retries = MAX_RETRIES
 ): Promise<Response> {
+  if (options?.signal?.aborted) {
+    const abortErr = new Error("Request aborted");
+    abortErr.name = "AbortError";
+    throw abortErr;
+  }
+
   try {
     return await fetch(url, options);
-  } catch (err) {
+  } catch (err: any) {
+    const isAbort =
+      options?.signal?.aborted ||
+      err?.name === "AbortError" ||
+      (typeof err?.message === "string" &&
+        (err.message.includes("NetworkError") ||
+          err.message.includes("abort") ||
+          err.message.includes("cancelled")));
+
+    if (isAbort) {
+      const abortErr = new Error("Request aborted");
+      abortErr.name = "AbortError";
+      throw abortErr;
+    }
+
     if (retries > 0) {
-      console.log(`[Weather API] Retrying... (${MAX_RETRIES - retries + 1}/${MAX_RETRIES})`);
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
       return retryFetch(url, options, retries - 1);
     }
@@ -130,7 +149,8 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
       abortControllerRef.current.abort();
     }
 
-    abortControllerRef.current = new AbortController();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
     try {
       if (showLoading) setLoading(true);
@@ -138,13 +158,13 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
 
       const res = await retryFetch(
         `/api/weather?q=${encodeURIComponent(q)}`,
-        { signal: abortControllerRef.current.signal }
+        { signal: controller.signal }
       );
 
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         const text = await res.text();
-        console.error(
+        console.warn(
           "[Weather API] Response is not JSON. Status:",
           res.status,
           "Content-Type:",
@@ -153,8 +173,6 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
           text.substring(0, 100)
         );
         setError(`API error: ${res.status} - Invalid response format`);
-        setWeatherData(null);
-        setForecast(null);
         return null;
       }
 
@@ -162,10 +180,8 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
 
       if (!res.ok) {
         const errorMsg = json.error || `HTTP ${res.status}: Failed to fetch weather`;
-        console.error("[Weather API]", errorMsg);
+        console.warn("[Weather API]", errorMsg);
         setError(errorMsg);
-        setWeatherData(null);
-        setForecast(null);
         return null;
       }
 
@@ -184,20 +200,24 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
         setError(null);
       } else {
         setError("Unexpected response format from weather API");
-        setWeatherData(null);
-        setForecast(null);
       }
-    } catch (err) {
-      // Don't log abort errors as they're expected
-      if (err instanceof Error && err.name === "AbortError") {
+    } catch (err: any) {
+      // Don't log abort errors or browser navigation network cancellations as breaking errors
+      const isAbort =
+        controller.signal.aborted ||
+        err?.name === "AbortError" ||
+        (typeof err?.message === "string" &&
+          (err.message.includes("NetworkError") ||
+            err.message.includes("abort") ||
+            err.message.includes("Failed to fetch")));
+
+      if (isAbort) {
         return null;
       }
 
       const errorMsg = err instanceof Error ? err.message : String(err);
-      console.error("[Weather API] Fetch error:", errorMsg);
+      console.warn("[Weather API] Notice:", errorMsg);
       setError(`Unable to fetch weather: ${errorMsg}`);
-      setWeatherData(null);
-      setForecast(null);
     } finally {
       if (showLoading) setLoading(false);
     }
@@ -212,30 +232,24 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
         abortControllerRef.current.abort();
       }
 
-      abortControllerRef.current = new AbortController();
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
 
       try {
         const res = await retryFetch(
           `/api/weather?q=${encodeURIComponent(q)}`,
-          { signal: abortControllerRef.current.signal }
+          { signal: controller.signal }
         );
 
         const contentType = res.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
-          const text = await res.text();
-          console.error(
-            "[Weather API] fetchByQuery: Response is not JSON. Status:",
-            res.status,
-            "Body start:",
-            text.substring(0, 100)
-          );
           return null;
         }
 
         const json = await res.json();
 
         if (!res.ok) {
-          console.error("[Weather API]", json.error);
+          console.warn("[Weather API]", json.error);
           return null;
         }
 
@@ -253,11 +267,19 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
           return weatherResponse;
         }
         return null;
-      } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") {
+      } catch (err: any) {
+        const isAbort =
+          controller.signal.aborted ||
+          err?.name === "AbortError" ||
+          (typeof err?.message === "string" &&
+            (err.message.includes("NetworkError") ||
+              err.message.includes("abort") ||
+              err.message.includes("Failed to fetch")));
+
+        if (isAbort) {
           return null;
         }
-        console.error("[Weather API] fetchByQuery error:", err);
+        console.warn("[Weather API] fetchByQuery notice:", err);
         return null;
       }
     },
