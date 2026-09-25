@@ -33,6 +33,7 @@ import {
 import { getRulesForCrop } from './riskRules';
 import { evaluateRule } from './riskEvaluator';
 import { utcMidnightToCalendarDate } from '@/lib/weather/historicalWeatherService';
+import { createEvidence } from './riskEvidence';
 
 /**
  * Computes overall status from a set of individual threat evaluations.
@@ -120,13 +121,17 @@ export async function evaluateCropRisk(params: {
         .limit(30)
         .lean(),
       CropDiseaseScan.find({
-        cropCycleId: crop._id,
+        cropCycleId: { $in: [crop._id, crop._id.toString()] },
         farmerId,
       })
+        .select(
+          '_id farmerId fieldId zoneId cropCycleId scanSessionId viewAngle screeningResult capturedAt createdAt diagnosis confidence infectedAreaPct severity cropStageAtScan dasAtScan'
+        )
         .sort({ capturedAt: -1, createdAt: -1 })
+        .limit(50)
         .lean(),
       ScanSession.findOne({
-        cropId: crop._id,
+        cropId: { $in: [crop._id, crop._id.toString()] },
         farmerId,
       })
         .sort({ createdAt: -1 })
@@ -229,26 +234,85 @@ export async function evaluateCropRisk(params: {
     evaluateRule(rule, context, targetZoneId)
   );
 
+  // 10b. Synthesize evaluated threats from active scans with detected concerns
+  for (const scan of activeScans) {
+    const condition = scan.diagnosis?.primaryCondition;
+    const isConcern =
+      scan.screeningResult === 'POTENTIAL_CONCERN' ||
+      (condition &&
+        !condition.toLowerCase().includes('healthy') &&
+        scan.diagnosis?.status !== 'healthy');
+
+    if (condition && isConcern) {
+      const alreadyCovered = evaluatedThreats.some(
+        (t) =>
+          t.threatName.toLowerCase().includes(condition.toLowerCase()) ||
+          condition.toLowerCase().includes(t.threatName.toLowerCase())
+      );
+
+      if (!alreadyCovered) {
+        evaluatedThreats.push({
+          ruleId: `RULE-SCAN-${scan._id.toString().slice(-6)}`,
+          threatId: condition.toLowerCase().replace(/[^\w]/g, '_'),
+          threatName: condition,
+          threatCategory: (scan.diagnosis?.pathogenType?.toUpperCase() || 'DISEASE') as any,
+          status: 'POTENTIAL_CONCERN',
+          riskLevel: 'POTENTIAL_CONCERN',
+          explanation: `In-field visual scouting scan detected symptoms of ${condition} with ${Math.round(
+            (scan.confidence?.score || 0.8) * 100
+          )}% confidence.`,
+          supportingEvidence: [
+            createEvidence({
+              sourceType: 'AGRIVISION_SCAN',
+              sourceId: scan._id ? scan._id.toString() : 'scan',
+              observationDate: scan.capturedAt || scan.createdAt,
+              cropId: context.crop._id,
+              fieldId: context.field._id,
+              zoneId: scan.zoneId ? scan.zoneId.toString() : null,
+              value: {
+                condition,
+                pathogenType: scan.diagnosis?.pathogenType || 'other',
+                status: scan.diagnosis?.status || 'suspected',
+                screeningResult: scan.screeningResult || null,
+                scanSessionId: scan.scanSessionId ? scan.scanSessionId.toString() : null,
+                viewAngle: scan.viewAngle || 'screening',
+              },
+              confidence: scan.confidence?.score ?? null,
+              sourceDocument: 'AgriVision Diagnostic Service (In-Field Scan)',
+              isHistorical: false,
+            }),
+          ],
+          missingEvidence: [],
+          evaluatedAt: new Date(),
+        });
+      }
+    }
+  }
+
   const { status: overallStatus, level: overallLevel } =
     aggregateOverallStatus(evaluatedThreats);
 
-  // 11. Idempotent RiskEvent Persistence in Parallel
+  // 11. Idempotent RiskEvent Persistence in Background via bulkWrite
   if (persistEvents && evaluatedThreats.length > 0) {
     const evaluatedAtDate = new Date();
+    const bulkOps = evaluatedThreats.map((evaluation) => {
+      const scanRef =
+        activeScans.find(
+          (s) =>
+            s.diagnosis?.primaryCondition?.toLowerCase() === evaluation.threatName.toLowerCase() ||
+            (targetZoneId && s.zoneId?.toString() === targetZoneId.toString())
+        ) || activeScans[0];
+      const weatherRef = recentWeatherDocs[0]?._id;
 
-    await Promise.all(
-      evaluatedThreats.map((evaluation) => {
-        const scanRef = activeScans.find((s) => s.zoneId?.toString() === targetZoneId?.toString());
-        const weatherRef = recentWeatherDocs[0]?._id;
-
-        return RiskEvent.findOneAndUpdate(
-          {
+      return {
+        updateOne: {
+          filter: {
             cropCycleId: crop._id,
             zoneId: targetZoneId ? new mongoose.Types.ObjectId(targetZoneId) : null,
             threatId: evaluation.threatId,
             ruleId: evaluation.ruleId,
           },
-          {
+          update: {
             $set: {
               farmerId,
               fieldId: field._id,
@@ -290,10 +354,14 @@ export async function evaluateCropRisk(params: {
               evaluatedAt: evaluatedAtDate,
             },
           },
-          { upsert: true, returnDocument: 'after' }
-        );
-      })
-    );
+          upsert: true,
+        },
+      };
+    });
+
+    RiskEvent.bulkWrite(bulkOps, { ordered: false }).catch((err) => {
+      console.warn('[evaluateCropRisk] Background RiskEvent persistence notice:', err?.message);
+    });
   }
 
   // 12. Zone-by-Zone Breakdown (if evaluating at field/crop level)

@@ -153,8 +153,10 @@ export default function CropDetailPage() {
   async function loadRiskSilently() {
     if (!cropId) return;
     setLoadingRisk(true);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
     try {
-      const res = await fetch(`/api/crops/${cropId}/risk`);
+      const res = await fetch(`/api/crops/${cropId}/risk`, { signal: controller.signal });
       if (res.ok) {
         const data = await res.json();
         setRiskData(data);
@@ -162,6 +164,7 @@ export default function CropDetailPage() {
     } catch {
       /* silent */
     } finally {
+      clearTimeout(timeoutId);
       setLoadingRisk(false);
     }
   }
