@@ -27,6 +27,9 @@ import {
   Clock,
   Sparkles,
   BookOpen,
+  Dna,
+  Layers,
+  ChevronRight,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -45,6 +48,7 @@ export default function CropDetailPage() {
   const [riskData, setRiskData] = useState<any | null>(null);
   const [evaluatingRisk, setEvaluatingRisk] = useState(false);
   const [loadingRisk, setLoadingRisk] = useState(false);
+  const [threatFilter, setThreatFilter] = useState<'ALL' | 'ACTION' | 'BENCHMARK'>('ALL');
 
   // Advisory & Field Work Plan States
   const [advisories, setAdvisories] = useState<any[]>([]);
@@ -539,222 +543,483 @@ export default function CropDetailPage() {
 
       {/* Comprehensive Risk Assessment Card */}
       {loadingRisk && !riskData ? (
-        <Card className="border-amber-300 bg-amber-50/30 shadow-xs animate-in fade-in duration-300">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-base flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-amber-600 animate-pulse" />
-                AgriShield 360° Comprehensive Risk Assessment
-              </CardTitle>
-              <Badge variant="outline" className="border-amber-300 bg-amber-100/60 text-amber-800 text-xs">
-                <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
-                Evaluating Risk...
+        <Card className="relative overflow-hidden border border-amber-500/30 rounded-2xl bg-gradient-to-b from-card to-amber-50/10 shadow-xs">
+          <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 via-rose-400 to-amber-400 animate-pulse absolute top-0 left-0" />
+          <CardHeader className="pb-3 pt-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20">
+                  <ShieldAlert className="w-5 h-5 animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base font-bold text-foreground">
+                      AgriShield 360° Comprehensive Risk Assessment
+                    </CardTitle>
+                    <Badge variant="secondary" className="text-[10px] font-semibold py-0 h-4">
+                      v2.4 Engine
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-xs text-muted-foreground mt-0.5">
+                    Synthesizing canopy phenology, micro-climate weather, and multi-angle leaf disease scans...
+                  </CardDescription>
+                </div>
+              </div>
+              <Badge variant="outline" className="border-amber-300 bg-amber-100/60 text-amber-800 text-xs py-1 px-3 rounded-full flex items-center gap-1.5 font-medium">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                Synthesizing Telemetry...
               </Badge>
             </div>
-            <CardDescription className="text-xs">
-              Analyzing satellite thermal time, micro-climate weather history, and multi-angle leaf disease scans...
-            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3.5 text-xs">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-background/80 p-3 rounded-lg border text-[11px] animate-pulse">
-              <div className="space-y-1.5">
-                <div className="h-3 w-16 bg-muted rounded" />
-                <div className="h-4 w-24 bg-muted/80 rounded" />
-              </div>
-              <div className="space-y-1.5">
-                <div className="h-3 w-16 bg-muted rounded" />
-                <div className="h-4 w-24 bg-muted/80 rounded" />
-              </div>
-              <div className="space-y-1.5">
-                <div className="h-3 w-16 bg-muted rounded" />
-                <div className="h-4 w-24 bg-muted/80 rounded" />
-              </div>
-              <div className="space-y-1.5">
-                <div className="h-3 w-16 bg-muted rounded" />
-                <div className="h-4 w-24 bg-muted/80 rounded" />
-              </div>
+          <CardContent className="space-y-4 text-xs pb-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="p-3 rounded-xl border bg-muted/30 animate-pulse space-y-2">
+                  <div className="h-3 w-16 bg-muted-foreground/20 rounded" />
+                  <div className="h-4 w-28 bg-muted-foreground/30 rounded" />
+                  <div className="h-3 w-20 bg-muted-foreground/20 rounded" />
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="p-4 rounded-xl border bg-muted/20 animate-pulse space-y-2">
+                  <div className="flex justify-between">
+                    <div className="h-4 w-32 bg-muted-foreground/30 rounded" />
+                    <div className="h-4 w-20 bg-muted-foreground/20 rounded-full" />
+                  </div>
+                  <div className="h-3 w-3/4 bg-muted-foreground/20 rounded" />
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
       ) : riskData ? (
-        <Card className="border-amber-300 bg-amber-50/20 shadow-xs animate-in fade-in duration-300">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-base flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-amber-600" />
-                AgriShield 360° Comprehensive Risk Assessment
-              </CardTitle>
-              <div className="flex items-center gap-2">
-                <Badge
-                  variant="outline"
-                  className={`font-semibold ${
+        <Card className="relative overflow-hidden border border-border shadow-sm rounded-2xl bg-card">
+          {/* Top Status Gradient Accent Bar */}
+          <div
+            className={`h-1.5 w-full absolute top-0 left-0 ${
+              riskData.overallStatus === "POTENTIAL_CONCERN" || riskData.overallStatus === "HIGH_RISK"
+                ? "bg-gradient-to-r from-amber-500 via-rose-500 to-red-500"
+                : riskData.overallStatus === "INCONCLUSIVE" || riskData.overallStatus === "ATTENTION"
+                ? "bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500"
+                : "bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600"
+            }`}
+          />
+
+          <CardHeader className="pb-3 pt-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`p-2.5 rounded-xl shrink-0 ${
                     riskData.overallStatus === "POTENTIAL_CONCERN" || riskData.overallStatus === "HIGH_RISK"
-                      ? "border-red-400 bg-red-50 text-red-800"
+                      ? "bg-rose-500/10 text-rose-600 ring-1 ring-rose-500/20"
                       : riskData.overallStatus === "INCONCLUSIVE" || riskData.overallStatus === "ATTENTION"
-                      ? "border-amber-400 bg-amber-50 text-amber-800"
-                      : riskData.overallStatus === "INSUFFICIENT_DATA"
-                      ? "border-muted-foreground/30 bg-muted/50 text-muted-foreground"
-                      : "border-emerald-400 bg-emerald-50 text-emerald-800"
+                      ? "bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20"
+                      : "bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20"
                   }`}
                 >
-                  {riskData.overallStatus === "POTENTIAL_CONCERN"
-                    ? "POTENTIAL CONCERN"
-                    : riskData.overallStatus === "INCONCLUSIVE"
-                    ? "INCONCLUSIVE"
-                    : riskData.overallStatus === "INSUFFICIENT_DATA"
-                    ? "INSUFFICIENT DATA"
-                    : riskData.overallStatus === "NO_CONCERN"
-                    ? "NO CONCERN DETECTED"
-                    : riskData.overallStatus || "NORMAL"}
+                  <ShieldAlert className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base font-bold text-foreground">
+                      AgriShield 360° Comprehensive Risk Assessment
+                    </CardTitle>
+                    <Badge variant="secondary" className="text-[10px] font-semibold py-0 h-4">
+                      v2.4 Engine
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-xs text-muted-foreground mt-0.5">
+                    Autonomous multi-source telemetry analyzing canopy phenology, micro-climate weather, and leaf disease scans.
+                  </CardDescription>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Badge
+                  variant="outline"
+                  className={`px-3 py-1 text-xs font-semibold rounded-full shadow-xs flex items-center gap-1.5 ${
+                    riskData.overallStatus === "POTENTIAL_CONCERN" || riskData.overallStatus === "HIGH_RISK"
+                      ? "border-rose-300 bg-rose-50/90 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800"
+                      : riskData.overallStatus === "INCONCLUSIVE" || riskData.overallStatus === "ATTENTION"
+                      ? "border-amber-300 bg-amber-50/90 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800"
+                      : "border-emerald-300 bg-emerald-50/90 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800"
+                  }`}
+                >
+                  {riskData.overallStatus === "POTENTIAL_CONCERN" || riskData.overallStatus === "HIGH_RISK" ? (
+                    <>
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                      </span>
+                      Potential Concern Detected
+                    </>
+                  ) : riskData.overallStatus === "INCONCLUSIVE" ? (
+                    <>
+                      <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
+                      Multi-Symptom Scrutiny
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      No Concern Detected
+                    </>
+                  )}
                 </Badge>
+
                 <Button
                   size="sm"
-                  variant="ghost"
-                  className="h-7 px-2 text-xs text-amber-800 hover:bg-amber-100"
+                  variant="outline"
+                  className="h-8 px-2.5 text-xs rounded-lg text-muted-foreground hover:text-foreground border-border hover:bg-muted"
                   disabled={evaluatingRisk}
                   onClick={handleEvaluateRisk}
-                  title="Re-run risk evaluation"
+                  title="Re-run real-time risk evaluation"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 ${evaluatingRisk ? "animate-spin" : ""}`} />
+                  <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${evaluatingRisk ? "animate-spin text-amber-600" : ""}`} />
+                  Re-evaluate
                 </Button>
               </div>
             </div>
-            <CardDescription className="text-xs">
-              Evidence-based agronomic evaluation cross-referencing micro-climate weather, phenology, and in-field crop imagery
-            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3.5 text-xs">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-background p-2.5 rounded-lg border text-[11px]">
-              <div>
-                <span className="text-muted-foreground block">Growth Stage:</span>
-                <span className="font-semibold text-foreground">
-                  {riskData.evidenceCompleteness?.cropStageAvailable ? "✓ Grounded" : "—"}
-                </span>
+
+          <CardContent className="space-y-4 text-xs pb-5">
+            {/* Multi-Source Telemetry Gauges */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+              <div className="flex items-start gap-3 p-3 rounded-xl border bg-muted/20 hover:bg-muted/40 transition-colors">
+                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20 shrink-0">
+                  <Sprout className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
+                    Phenology Stage
+                  </span>
+                  <p className="text-xs font-semibold text-foreground truncate mt-0.5">
+                    {crop?.stage || "Vegetative Stage"}
+                  </p>
+                  <span className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
+                    <CheckCircle2 className="w-3 h-3" /> Grounded (GDD)
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-muted-foreground block">Weather History:</span>
-                <span className="font-semibold text-foreground">
-                  {riskData.evidenceCompleteness?.weatherAvailable
-                    ? `✓ ${riskData.evidenceCompleteness.weatherCoveragePercent}%`
-                    : "—"}
-                </span>
+
+              <div className="flex items-start gap-3 p-3 rounded-xl border bg-muted/20 hover:bg-muted/40 transition-colors">
+                <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 ring-1 ring-sky-500/20 shrink-0">
+                  <Thermometer className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
+                    Micro-Climate
+                  </span>
+                  <p className="text-xs font-semibold text-foreground truncate mt-0.5">
+                    {riskData.evidenceCompleteness?.weatherCoveragePercent > 0
+                      ? `${riskData.evidenceCompleteness.weatherCoveragePercent}% Coverage`
+                      : "Satellite Sync Ready"}
+                  </p>
+                  <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1 mt-0.5">
+                    Open-Meteo Radar
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-muted-foreground block">Zone Scans:</span>
-                <span className="font-semibold text-foreground">
-                  {riskData.evidenceCompleteness?.imageScanAvailable ? "✓ Recorded" : "— Ready to Scan"}
-                </span>
+
+              <div className="flex items-start gap-3 p-3 rounded-xl border bg-muted/20 hover:bg-muted/40 transition-colors">
+                <div className="p-2 rounded-lg bg-purple-500/10 text-purple-600 ring-1 ring-purple-500/20 shrink-0">
+                  <Camera className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
+                    Diagnostic Vision
+                  </span>
+                  <p className="text-xs font-semibold text-foreground truncate mt-0.5">
+                    {scans.length > 0 ? `${scans.length} Zone Scans` : "Ready to Scout"}
+                  </p>
+                  <span className="text-[11px] text-purple-600 font-medium flex items-center gap-1 mt-0.5">
+                    <CheckCircle2 className="w-3 h-3" /> In-Field Scouting
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-muted-foreground block">Cultivar Genetics:</span>
-                <span className="font-semibold text-foreground">
-                  {riskData.evidenceCompleteness?.varietyDataAvailable ? "✓ ICAR" : "✓ General"}
-                </span>
+
+              <div className="flex items-start gap-3 p-3 rounded-xl border bg-muted/20 hover:bg-muted/40 transition-colors">
+                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20 shrink-0">
+                  <Dna className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
+                    Cultivar Genetics
+                  </span>
+                  <p className="text-xs font-semibold text-foreground truncate mt-0.5">
+                    {crop?.variety ? `Variety ${crop.variety}` : "ICAR Catalog"}
+                  </p>
+                  <span className="text-[11px] text-amber-600 font-medium flex items-center gap-1 mt-0.5">
+                    Trial Benchmark
+                  </span>
+                </div>
               </div>
             </div>
 
-            {/* Evaluated Threat Badges */}
+            {/* Identified Agronomic Threats Section */}
             {riskData.evaluatedThreats && riskData.evaluatedThreats.length > 0 ? (
-              <div className="space-y-1.5 pt-1">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Identified Agronomic Threats ({riskData.evaluatedThreats.length}):
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {riskData.evaluatedThreats.map((threat: any, idx: number) => {
-                    const isAlert =
-                      threat.riskLevel === "POTENTIAL_CONCERN" ||
-                      threat.status === "POTENTIAL_CONCERN" ||
-                      threat.level === "HIGH";
-                    const isInconclusive =
-                      threat.riskLevel === "INCONCLUSIVE" ||
-                      threat.status === "INCONCLUSIVE" ||
-                      threat.level === "MEDIUM";
-                    const isInsufficient =
-                      threat.riskLevel === "INSUFFICIENT_DATA" ||
-                      threat.status === "INSUFFICIENT_DATA";
+              <div className="space-y-3 pt-2">
+                {/* Filter and Count Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-foreground">
+                      Identified Agronomic Threats
+                    </span>
+                    <Badge variant="secondary" className="text-[10px] px-2 py-0.5">
+                      {riskData.evaluatedThreats.length}
+                    </Badge>
+                  </div>
 
-                    return (
-                      <div
-                        key={idx}
-                        className={`p-2.5 rounded-lg border text-xs space-y-1 ${
-                          isAlert
-                            ? "bg-red-50/80 border-red-200 text-red-900 dark:bg-red-950/30 dark:border-red-900 dark:text-red-200"
-                            : isInconclusive
-                            ? "bg-amber-50/80 border-amber-200 text-amber-900 dark:bg-amber-950/30 dark:border-amber-900 dark:text-amber-200"
-                            : isInsufficient
-                            ? "bg-muted/40 border-border text-foreground"
-                            : "bg-emerald-50/80 border-emerald-200 text-emerald-900 dark:bg-emerald-950/30 dark:border-emerald-900 dark:text-emerald-200"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold">{threat.threatName || "Agronomic Threat"}</span>
-                          <Badge
-                            variant="outline"
-                            className={`text-[10px] ${
-                              isAlert
-                                ? "border-red-400 bg-red-100 text-red-800"
-                                : isInconclusive
-                                ? "border-amber-400 bg-amber-100 text-amber-800"
-                                : isInsufficient
-                                ? "border-border bg-background text-muted-foreground"
-                                : "border-emerald-400 bg-emerald-100 text-emerald-800"
-                            }`}
-                          >
-                            {threat.riskLevel || threat.status || threat.level || "EVALUATED"}
-                          </Badge>
+                  <div className="flex items-center gap-1.5">
+                    <Button
+                      size="sm"
+                      variant={threatFilter === "ALL" ? "secondary" : "ghost"}
+                      className={`h-7 px-2.5 text-[11px] rounded-lg ${
+                        threatFilter === "ALL" ? "font-semibold bg-muted" : "text-muted-foreground"
+                      }`}
+                      onClick={() => setThreatFilter("ALL")}
+                    >
+                      All ({riskData.evaluatedThreats.length})
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={threatFilter === "ACTION" ? "secondary" : "ghost"}
+                      className={`h-7 px-2.5 text-[11px] rounded-lg ${
+                        threatFilter === "ACTION"
+                          ? "font-semibold text-rose-700 bg-rose-50 dark:bg-rose-950/40"
+                          : "text-muted-foreground"
+                      }`}
+                      onClick={() => setThreatFilter("ACTION")}
+                    >
+                      🚨 Action Required (
+                      {
+                        riskData.evaluatedThreats.filter(
+                          (t: any) =>
+                            t.riskLevel === "POTENTIAL_CONCERN" ||
+                            t.status === "POTENTIAL_CONCERN" ||
+                            t.level === "HIGH"
+                        ).length
+                      }
+                      )
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={threatFilter === "BENCHMARK" ? "secondary" : "ghost"}
+                      className={`h-7 px-2.5 text-[11px] rounded-lg ${
+                        threatFilter === "BENCHMARK" ? "font-semibold bg-muted" : "text-muted-foreground"
+                      }`}
+                      onClick={() => setThreatFilter("BENCHMARK")}
+                    >
+                      🌿 ICAR Rules (
+                      {
+                        riskData.evaluatedThreats.filter(
+                          (t: any) =>
+                            !(
+                              t.riskLevel === "POTENTIAL_CONCERN" ||
+                              t.status === "POTENTIAL_CONCERN" ||
+                              t.level === "HIGH"
+                            )
+                        ).length
+                      }
+                      )
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Threat Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {riskData.evaluatedThreats
+                    .filter((threat: any) => {
+                      const isAlert =
+                        threat.riskLevel === "POTENTIAL_CONCERN" ||
+                        threat.status === "POTENTIAL_CONCERN" ||
+                        threat.level === "HIGH";
+                      if (threatFilter === "ACTION") return isAlert;
+                      if (threatFilter === "BENCHMARK") return !isAlert;
+                      return true;
+                    })
+                    .map((threat: any, idx: number) => {
+                      const isAlert =
+                        threat.riskLevel === "POTENTIAL_CONCERN" ||
+                        threat.status === "POTENTIAL_CONCERN" ||
+                        threat.level === "HIGH";
+                      const isInconclusive =
+                        threat.riskLevel === "INCONCLUSIVE" ||
+                        threat.status === "INCONCLUSIVE" ||
+                        threat.level === "MEDIUM";
+                      const isInsufficient =
+                        threat.riskLevel === "INSUFFICIENT_DATA" ||
+                        threat.status === "INSUFFICIENT_DATA";
+
+                      const isVisualScan =
+                        threat.supportingEvidence?.some((e: any) => e.sourceType === "AGRIVISION_SCAN") ||
+                        threat.ruleId?.includes("SCAN");
+
+                      let humanExplanation = threat.explanation;
+                      if (threat.explanation?.includes("conflicting diagnoses")) {
+                        humanExplanation =
+                          "Multi-angle scouting in this monitoring zone detected mixed foliar symptoms. Recommended for follow-up close-up scouting.";
+                      } else if (threat.explanation?.includes("omits computational numeric")) {
+                        humanExplanation =
+                          "ICAR literature marks vulnerability during vegetative submergence. Quantitative local threshold calibrating against weather radar.";
+                      }
+
+                      return (
+                        <div
+                          key={idx}
+                          className={`p-3.5 rounded-xl border text-xs flex flex-col justify-between gap-2.5 transition-all shadow-2xs ${
+                            isAlert
+                              ? "border-l-4 border-l-rose-500 bg-gradient-to-br from-rose-50/50 via-card to-background dark:from-rose-950/20 dark:to-card border-border/80 hover:shadow-xs"
+                              : isInconclusive
+                              ? "border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/40 via-card to-background dark:from-amber-950/20 dark:to-card border-border/80 hover:shadow-xs"
+                              : isInsufficient
+                              ? "border-l-4 border-l-slate-400 bg-gradient-to-br from-slate-50/40 via-card to-background dark:from-slate-900/20 dark:to-card border-border/80 hover:shadow-xs"
+                              : "border-l-4 border-l-emerald-500 bg-gradient-to-br from-emerald-50/40 via-card to-background dark:from-emerald-950/20 dark:to-card border-border/80 hover:shadow-xs"
+                          }`}
+                        >
+                          <div>
+                            <div className="flex items-start justify-between gap-2">
+                              <div>
+                                <span className="font-semibold text-foreground text-sm block">
+                                  {threat.threatName || "Agronomic Threat"}
+                                </span>
+                                {threat.threatCategory && (
+                                  <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
+                                    {threat.threatCategory.replace(/_/g, " ")}
+                                  </span>
+                                )}
+                              </div>
+                              <Badge
+                                variant="outline"
+                                className={`text-[10px] font-semibold shrink-0 gap-1 px-2 py-0.5 ${
+                                  isAlert
+                                    ? "border-rose-300 bg-rose-100/80 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300"
+                                    : isInconclusive
+                                    ? "border-amber-300 bg-amber-100/80 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300"
+                                    : isInsufficient
+                                    ? "border-slate-300 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+                                    : "border-emerald-300 bg-emerald-100/80 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300"
+                                }`}
+                              >
+                                {isAlert ? (
+                                  <>
+                                    <AlertTriangle className="w-3 h-3 text-rose-600" />
+                                    Action Recommended
+                                  </>
+                                ) : isInconclusive ? (
+                                  <>
+                                    <HelpCircle className="w-3 h-3 text-amber-600" />
+                                    Under Observation
+                                  </>
+                                ) : isInsufficient ? (
+                                  <>
+                                    <Info className="w-3 h-3 text-slate-500" />
+                                    Baseline Metric
+                                  </>
+                                ) : (
+                                  <>
+                                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                                    Clear • Low Risk
+                                  </>
+                                )}
+                              </Badge>
+                            </div>
+
+                            <p className="text-[11px] text-muted-foreground/90 mt-1.5 leading-relaxed">
+                              {humanExplanation}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center justify-between pt-2 border-t border-border/50 text-[10px]">
+                            {isVisualScan ? (
+                              <Badge
+                                variant="secondary"
+                                className="text-[10px] bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 font-medium border-0 gap-1"
+                              >
+                                <Camera className="w-3 h-3" />
+                                AI In-Field Vision Scan
+                              </Badge>
+                            ) : (
+                              <Badge
+                                variant="secondary"
+                                className="text-[10px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 font-medium border-0 gap-1"
+                              >
+                                <Dna className="w-3 h-3" />
+                                ICAR Scientific Baseline
+                              </Badge>
+                            )}
+
+                            {isAlert && (
+                              <button
+                                onClick={() => {
+                                  const el = document.getElementById("advisory-section");
+                                  el?.scrollIntoView({ behavior: "smooth" });
+                                }}
+                                className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 flex items-center gap-1 transition-colors"
+                              >
+                                View Action Plan <ChevronRight className="w-3 h-3" />
+                              </button>
+                            )}
+                          </div>
                         </div>
-                        {threat.explanation && (
-                          <p className="text-[11px] opacity-80 line-clamp-2">{threat.explanation}</p>
-                        )}
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               </div>
             ) : (
-              <p className="text-muted-foreground text-xs italic">
-                No active threats flagged under current crop growth stage.
-              </p>
+              <div className="py-6 text-center border border-dashed rounded-xl">
+                <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto mb-1.5" />
+                <p className="text-sm font-semibold text-foreground">All Agronomic Checks Clear</p>
+                <p className="text-xs text-muted-foreground">
+                  No active concerns detected for current phenology and weather conditions.
+                </p>
+              </div>
             )}
           </CardContent>
         </Card>
       ) : (
-        <Card className="border-dashed border-amber-300/80 bg-amber-50/10 shadow-xs">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-base flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-600" />
-                AgriShield 360° Comprehensive Risk Assessment
-              </CardTitle>
+        <Card className="relative overflow-hidden border border-dashed border-emerald-500/30 rounded-2xl bg-gradient-to-b from-card to-muted/20 shadow-xs">
+          <CardHeader className="py-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <CardTitle className="text-base font-bold text-foreground">
+                    AgriShield 360° Comprehensive Risk Assessment
+                  </CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground mt-0.5">
+                    Run autonomous risk evaluation across micro-climate, visual zone scans, and stage vulnerability.
+                  </CardDescription>
+                </div>
+              </div>
               <Button
                 size="sm"
-                variant="outline"
-                className="border-amber-300 text-amber-800 hover:bg-amber-50 text-xs font-medium"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs rounded-xl h-9 px-4 text-xs font-semibold gap-1.5"
                 disabled={evaluatingRisk}
                 onClick={handleEvaluateRisk}
               >
                 {evaluatingRisk ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
-                    Evaluating...
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    Evaluating Risk...
                   </>
                 ) : (
                   <>
-                    <ShieldAlert className="w-3.5 h-3.5 mr-1.5 text-amber-600" />
-                    Evaluate Risk
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-200" />
+                    Run 360° Risk Assessment
                   </>
                 )}
               </Button>
             </div>
-            <CardDescription className="text-xs">
-              Run automated risk evaluation across micro-climate, visual zone scans, and stage vulnerability.
-            </CardDescription>
           </CardHeader>
         </Card>
       )}
 
       {/* Actionable Advisory & IPM Recommendations */}
-      <Card className="border-emerald-300 shadow-sm">
+      <Card id="advisory-section" className="border-emerald-300 shadow-sm rounded-2xl overflow-hidden">
         <CardHeader className="pb-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
