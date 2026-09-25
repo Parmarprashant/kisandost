@@ -4715,6 +4715,150 @@ abstract class L10n {
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
 
+  /// No description provided for @scanAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Check another'**
+  String get scanAgain;
+
+  /// No description provided for @scanBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get scanBrand;
+
+  /// No description provided for @scanCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get scanCheck;
+
+  /// No description provided for @scanChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking'**
+  String get scanChecking;
+
+  /// No description provided for @scanCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Code on the pack'**
+  String get scanCodeLabel;
+
+  /// No description provided for @scanCodeWas.
+  ///
+  /// In en, this message translates to:
+  /// **'Code read: {code}'**
+  String scanCodeWas(String code);
+
+  /// No description provided for @scanDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Dose per acre'**
+  String get scanDose;
+
+  /// No description provided for @scanFake.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not use'**
+  String get scanFake;
+
+  /// No description provided for @scanFakeDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'This code is flagged as counterfeit in the official registry. Report it to your dealer.'**
+  String get scanFakeDetail;
+
+  /// No description provided for @scanGenuine.
+  ///
+  /// In en, this message translates to:
+  /// **'Genuine'**
+  String get scanGenuine;
+
+  /// No description provided for @scanGenuineDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'This product is in the official registry.'**
+  String get scanGenuineDetail;
+
+  /// No description provided for @scanHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at the QR code on the pack.'**
+  String get scanHelp;
+
+  /// No description provided for @scanHowToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use'**
+  String get scanHowToUse;
+
+  /// No description provided for @scanLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Licence no.'**
+  String get scanLicence;
+
+  /// No description provided for @scanManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Or type the code'**
+  String get scanManual;
+
+  /// No description provided for @scanManufacturer.
+  ///
+  /// In en, this message translates to:
+  /// **'Made by'**
+  String get scanManufacturer;
+
+  /// No description provided for @scanPremiumNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide checking needs a premium membership on your account.'**
+  String get scanPremiumNeeded;
+
+  /// No description provided for @scanPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium feature'**
+  String get scanPremiumTitle;
+
+  /// No description provided for @scanProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get scanProduct;
+
+  /// No description provided for @scanSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to check a pesticide.'**
+  String get scanSignIn;
+
+  /// No description provided for @scanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check pesticide'**
+  String get scanTitle;
+
+  /// No description provided for @scanType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get scanType;
+
+  /// No description provided for @scanUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Not in the registry'**
+  String get scanUnknown;
+
+  /// No description provided for @scanUnknownDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'No record of this code. That does not prove it is fake, but check with your dealer before using it.'**
+  String get scanUnknownDetail;
+
   /// No description provided for @schemesAll.
   ///
   /// In en, this message translates to:

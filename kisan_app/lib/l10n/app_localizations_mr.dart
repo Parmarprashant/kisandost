@@ -2658,6 +2658,83 @@ class L10nMr extends L10n {
   String get profitPredictor_totalCost => 'एकूण खर्च';
 
   @override
+  String get scanAgain => 'पुन्हा तपासा';
+
+  @override
+  String get scanBrand => 'ब्रँड';
+
+  @override
+  String get scanCheck => 'तपासा';
+
+  @override
+  String get scanChecking => 'तपासत आहे';
+
+  @override
+  String get scanCodeLabel => 'पॅकवरील कोड';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'वाचलेला कोड: $code';
+  }
+
+  @override
+  String get scanDose => 'एकरी मात्रा';
+
+  @override
+  String get scanFake => 'वापरू नका';
+
+  @override
+  String get scanFakeDetail =>
+      'हा कोड सरकारी नोंदीत बनावट म्हणून नोंदवला आहे. दुकानदाराला कळवा.';
+
+  @override
+  String get scanGenuine => 'खरे';
+
+  @override
+  String get scanGenuineDetail => 'हे उत्पादन सरकारी नोंदीत आहे.';
+
+  @override
+  String get scanHelp => 'कॅमेरा पॅकवरील QR कोडवर धरा.';
+
+  @override
+  String get scanHowToUse => 'कसे वापरायचे';
+
+  @override
+  String get scanLicence => 'परवाना क्र.';
+
+  @override
+  String get scanManual => 'किंवा कोड लिहा';
+
+  @override
+  String get scanManufacturer => 'उत्पादक';
+
+  @override
+  String get scanPremiumNeeded =>
+      'औषध तपासण्यासाठी तुमच्या खात्यावर प्रीमियम सदस्यत्व हवे.';
+
+  @override
+  String get scanPremiumTitle => 'प्रीमियम सुविधा';
+
+  @override
+  String get scanProduct => 'उत्पादन';
+
+  @override
+  String get scanSignIn => 'औषध तपासण्यासाठी साइन इन करा.';
+
+  @override
+  String get scanTitle => 'औषध तपासा';
+
+  @override
+  String get scanType => 'प्रकार';
+
+  @override
+  String get scanUnknown => 'नोंदीत नाही';
+
+  @override
+  String get scanUnknownDetail =>
+      'या कोडची नोंद नाही. याचा अर्थ बनावट नाही, पण वापरण्याआधी दुकानदाराला विचारा.';
+
+  @override
   String get schemesAll => 'सर्व';
 
   @override

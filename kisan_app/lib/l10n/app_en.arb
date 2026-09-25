@@ -984,6 +984,37 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "scanAgain": "Check another",
+  "scanBrand": "Brand",
+  "scanCheck": "Check",
+  "scanChecking": "Checking",
+  "scanCodeLabel": "Code on the pack",
+  "scanCodeWas": "Code read: {code}",
+  "@scanCodeWas": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "scanDose": "Dose per acre",
+  "scanFake": "Do not use",
+  "scanFakeDetail": "This code is flagged as counterfeit in the official registry. Report it to your dealer.",
+  "scanGenuine": "Genuine",
+  "scanGenuineDetail": "This product is in the official registry.",
+  "scanHelp": "Point the camera at the QR code on the pack.",
+  "scanHowToUse": "How to use",
+  "scanLicence": "Licence no.",
+  "scanManual": "Or type the code",
+  "scanManufacturer": "Made by",
+  "scanPremiumNeeded": "Pesticide checking needs a premium membership on your account.",
+  "scanPremiumTitle": "Premium feature",
+  "scanProduct": "Product",
+  "scanSignIn": "Sign in to check a pesticide.",
+  "scanTitle": "Check pesticide",
+  "scanType": "Type",
+  "scanUnknown": "Not in the registry",
+  "scanUnknownDetail": "No record of this code. That does not prove it is fake, but check with your dealer before using it.",
   "schemesAll": "All",
   "schemesBenefits": "What you get",
   "schemesCuratedNote": "A hand-checked list, not a live government feed. Always confirm details on the official site.",

@@ -2655,6 +2655,83 @@ class L10nEn extends L10n {
   String get profitPredictor_totalCost => 'Total Cost';
 
   @override
+  String get scanAgain => 'Check another';
+
+  @override
+  String get scanBrand => 'Brand';
+
+  @override
+  String get scanCheck => 'Check';
+
+  @override
+  String get scanChecking => 'Checking';
+
+  @override
+  String get scanCodeLabel => 'Code on the pack';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'Code read: $code';
+  }
+
+  @override
+  String get scanDose => 'Dose per acre';
+
+  @override
+  String get scanFake => 'Do not use';
+
+  @override
+  String get scanFakeDetail =>
+      'This code is flagged as counterfeit in the official registry. Report it to your dealer.';
+
+  @override
+  String get scanGenuine => 'Genuine';
+
+  @override
+  String get scanGenuineDetail => 'This product is in the official registry.';
+
+  @override
+  String get scanHelp => 'Point the camera at the QR code on the pack.';
+
+  @override
+  String get scanHowToUse => 'How to use';
+
+  @override
+  String get scanLicence => 'Licence no.';
+
+  @override
+  String get scanManual => 'Or type the code';
+
+  @override
+  String get scanManufacturer => 'Made by';
+
+  @override
+  String get scanPremiumNeeded =>
+      'Pesticide checking needs a premium membership on your account.';
+
+  @override
+  String get scanPremiumTitle => 'Premium feature';
+
+  @override
+  String get scanProduct => 'Product';
+
+  @override
+  String get scanSignIn => 'Sign in to check a pesticide.';
+
+  @override
+  String get scanTitle => 'Check pesticide';
+
+  @override
+  String get scanType => 'Type';
+
+  @override
+  String get scanUnknown => 'Not in the registry';
+
+  @override
+  String get scanUnknownDetail =>
+      'No record of this code. That does not prove it is fake, but check with your dealer before using it.';
+
+  @override
   String get schemesAll => 'All';
 
   @override

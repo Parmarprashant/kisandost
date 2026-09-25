@@ -2660,6 +2660,83 @@ class L10nGu extends L10n {
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
 
   @override
+  String get scanAgain => 'બીજું તપાસો';
+
+  @override
+  String get scanBrand => 'બ્રાન્ડ';
+
+  @override
+  String get scanCheck => 'તપાસો';
+
+  @override
+  String get scanChecking => 'તપાસ ચાલુ છે';
+
+  @override
+  String get scanCodeLabel => 'પેક પરનો કોડ';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'વાંચેલો કોડ: $code';
+  }
+
+  @override
+  String get scanDose => 'એકર દીઠ માત્રા';
+
+  @override
+  String get scanFake => 'વાપરશો નહીં';
+
+  @override
+  String get scanFakeDetail =>
+      'આ કોડ સરકારી યાદીમાં નકલી તરીકે નોંધાયેલો છે. દુકાનદારને જણાવો.';
+
+  @override
+  String get scanGenuine => 'અસલ';
+
+  @override
+  String get scanGenuineDetail => 'આ ઉત્પાદન સરકારી યાદીમાં છે.';
+
+  @override
+  String get scanHelp => 'કૅમેરાને પેક પરના QR કોડ પર રાખો.';
+
+  @override
+  String get scanHowToUse => 'કેવી રીતે વાપરવું';
+
+  @override
+  String get scanLicence => 'લાઇસન્સ નં.';
+
+  @override
+  String get scanManual => 'અથવા કોડ લખો';
+
+  @override
+  String get scanManufacturer => 'બનાવનાર';
+
+  @override
+  String get scanPremiumNeeded =>
+      'દવા તપાસવા માટે તમારા ખાતાપર પ્રીમિયમ સભ્યપદ જરૂરી છે.';
+
+  @override
+  String get scanPremiumTitle => 'પ્રીમિયમ સુવિધા';
+
+  @override
+  String get scanProduct => 'ઉત્પાદન';
+
+  @override
+  String get scanSignIn => 'દવા તપાસવા સાઇન ઇન કરો.';
+
+  @override
+  String get scanTitle => 'દવા તપાસો';
+
+  @override
+  String get scanType => 'પ્રકાર';
+
+  @override
+  String get scanUnknown => 'યાદીમાં નથી';
+
+  @override
+  String get scanUnknownDetail =>
+      'આ કોડની કોઈ નોંધ નથી. એનો અર્થ નકલી નથી, પણ વાપરતા પહેલાં દુકાનદારને પૂછો.';
+
+  @override
   String get schemesAll => 'બધી';
 
   @override
