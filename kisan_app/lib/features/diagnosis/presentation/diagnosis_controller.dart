@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/jobs/app_visibility.dart';
+import '../../../core/jobs/job_notifications.dart';
 import '../../../core/network/api_exception.dart';
 import '../data/diagnosis_models.dart';
 import '../data/diagnosis_repository.dart';
@@ -82,6 +84,15 @@ class DiagnosisController extends Notifier<DiagnosisState> {
   void reset() => state = const DiagnosisIdle();
 
   Future<void> _run(File photo) async {
+    // Riverpod disposes a provider the moment nothing watches it, so leaving
+    // the diagnose screen used to throw away a scan that was already in
+    // flight. Held open until this run ends, so switching tabs or minimising
+    // the phone no longer costs the farmer the photo they walked out to take.
+    final link = ref.keepAlive();
+
+    // Any earlier result is stale now.
+    await ref.read(jobNotificationsProvider).dismiss(JobIds.diagnosis);
+
     state = DiagnosisRunning(photo: photo, stage: DiagnosisStage.compressing);
 
     try {
@@ -100,10 +111,62 @@ class DiagnosisController extends Notifier<DiagnosisState> {
           );
 
       state = DiagnosisSuccess(photo: photo, diagnosis: diagnosis);
+      _announce(
+        title: diagnosis.cropName.isEmpty
+            ? diagnosis.diseaseName
+            : '${diagnosis.cropName} — ${diagnosis.diseaseName}',
+        body: diagnosis.description,
+      );
     } on ApiException catch (error) {
       state = DiagnosisFailure(photo: photo, error: error);
+      _announceFailure();
     } catch (error) {
       state = DiagnosisFailure(photo: photo, error: ApiException.from(error));
+      _announceFailure();
+    } finally {
+      // Once the result is on screen the ordinary lifetime applies again.
+      link.close();
     }
   }
+
+  /// Posts a notification only when nobody is looking.
+  ///
+  /// Buzzing a farmer about a result already in front of them is noise, and
+  /// noise is how a farmer learns to ignore the one notification that
+  /// mattered.
+  void _announce({required String title, required String body}) {
+    if (ref.read(appForegroundProvider)) return;
+
+    ref
+        .read(jobNotificationsProvider)
+        .jobFinished(
+          id: JobIds.diagnosis,
+          title: title,
+          body: body,
+          route: '/diagnose',
+        );
+  }
+
+  void _announceFailure() {
+    if (ref.read(appForegroundProvider)) return;
+
+    // Deliberately wordless about the cause: the screen explains it properly,
+    // and a technical reason in a notification helps nobody.
+    ref
+        .read(jobNotificationsProvider)
+        .jobFinished(
+          id: JobIds.diagnosis,
+          title: _failedTitle,
+          body: _failedBody,
+          route: '/diagnose',
+        );
+  }
 }
+
+/// Notification copy for a failed scan.
+///
+/// Not localised, and that is a real gap: a notification is built outside the
+/// widget tree, so there is no BuildContext to reach L10n through. Wiring a
+/// locale into the controller is the fix; until then this is English.
+const _failedTitle = 'Scan did not finish';
+const _failedBody = 'Open KisanDost to try again.';
