@@ -10,10 +10,26 @@ import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
 import 'diagnosis_models.dart';
 
-/// The route rejects anything over 5 MB. We aim well under that so a slow
-/// rural connection is not spending 30 seconds on the upload alone.
-const _targetBytes = 1024 * 1024;
+/// The route rejects anything over 5 MB.
+///
+/// This used to aim at 1 MB to save a farmer's data, which cost far more than
+/// it saved: the same leaf that the web app diagnoses correctly was being
+/// refused here, because the web app uploads the original file and this was
+/// sending a 1280px re-encode at as low as quality 40. The model's ambiguity
+/// gate needs leaf detail to tell one crop from another, and that detail was
+/// being compressed away before it ever left the phone.
+///
+/// The target now sits just under the server's limit. An upload is slower;
+/// an answer that never comes is slower still.
+const _targetBytes = 4 * 1024 * 1024;
 const _serverLimitBytes = 5 * 1024 * 1024;
+
+/// Never re-encode below this. Past it the artefacts themselves start to
+/// look like lesions, which is worse than a larger upload.
+const _minQuality = 75;
+
+/// Never shrink below this on the long edge. Lesion margins are the signal.
+const _minDimension = 2048;
 
 /// Which stage the request is in, so the UI can show honest progress instead
 /// of a spinner. AgriVision runs on a free Modal tier and can cold-start for
@@ -102,18 +118,24 @@ class DiagnosisRepository {
   /// far better than it survives a failed upload.
   Future<List<int>> _compress(File file) async {
     final original = await file.length();
+
+    // Most phone photos already fit. Sending the file untouched is both
+    // faster and exactly what the web app does, which is the version known
+    // to get a diagnosis out of this model.
     if (original <= _targetBytes) return file.readAsBytes();
 
-    for (final quality in [85, 70, 55, 40]) {
+    for (final quality in [92, 85, _minQuality]) {
       final result = await FlutterImageCompress.compressWithFile(
         file.absolute.path,
         quality: quality,
-        minWidth: 1280,
-        minHeight: 1280,
+        minWidth: _minDimension,
+        minHeight: _minDimension,
       );
 
       if (result == null) break;
-      if (result.length <= _targetBytes || quality == 40) return result;
+      if (result.length <= _targetBytes || quality == _minQuality) {
+        return result;
+      }
     }
 
     // Compression unavailable (or ineffective) — send the original and let the

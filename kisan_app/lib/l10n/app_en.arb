@@ -580,6 +580,7 @@
     }
   },
   "homeMyCrops": "My crops",
+  "homeNextUp": "What to do next",
   "mandiArrival": "Market date {date}",
   "@mandiArrival": {
     "placeholders": {
@@ -1096,6 +1097,26 @@
   "schemesOpen": "Open official website",
   "schemesSearch": "Search schemes",
   "schemesTitle": "Government schemes",
+  "suggestAddField": "Add your field",
+  "suggestAddFieldWhy": "Everything else — advice, prices, the crop calendar — works from your field.",
+  "suggestAsk": "Ask KisanDost",
+  "suggestAskCrop": "Ask about your {crop}",
+  "@suggestAskCrop": {
+    "placeholders": {
+      "crop": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestAskWhy": "Any question, in your own words. Speak it if that is easier.",
+  "suggestInDays": "In {days} days",
+  "@suggestInDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
   "voiceListening": "Listening — tap to stop",
   "voiceSpeak": "Speak your answer",
   "voiceStart": "Speak instead of typing",

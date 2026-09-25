@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/shell/app_drawer.dart';
+import '../../app/shell/ask_fab.dart';
 import '../../app/locale_controller.dart';
 import '../../app/theme/app_colors.dart';
 import '../../core/network/api_exception.dart';
@@ -98,9 +99,15 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             const _QuickActions(),
+
+            const SizedBox(height: 28),
+            const _Suggestions(),
+            // Clear of the floating button.
+            const SizedBox(height: 72),
           ],
         ),
       ),
+      floatingActionButton: const AskFab(),
     );
   }
 
@@ -452,4 +459,150 @@ void _syncHomeWidget(
       updated: l10n.offlineJustNow,
     ),
   );
+}
+
+/// What to do next, from what this farmer actually has.
+///
+/// Nothing here is filler. Every card comes from real state — a stage that is
+/// due, a field that does not exist yet — so an empty home screen fills with
+/// work rather than decoration, and a farmer with nothing pending is not
+/// handed invented tasks.
+class _Suggestions extends ConsumerWidget {
+  const _Suggestions();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final timelines = ref.watch(cropTimelinesProvider);
+    final crops = ref.watch(activeCropsProvider);
+
+    final cards = <_Suggestion>[];
+
+    // Nothing set up yet: the one thing that unlocks everything else.
+    if (crops.isEmpty) {
+      cards.add(
+        _Suggestion(
+          icon: Icons.add_location_alt_outlined,
+          title: l10n.suggestAddField,
+          body: l10n.suggestAddFieldWhy,
+          route: '/farm',
+        ),
+      );
+    }
+
+    // Something due today, on a real crop, from the bundled calendar.
+    for (final entry in timelines) {
+      final current = entry.timeline.current;
+      if (current == null) continue;
+      cards.add(
+        _Suggestion(
+          icon: Icons.event_available_outlined,
+          title: '${entry.crop.cropName}: ${current.stageName}',
+          body: current.purpose,
+          route: '/advisory',
+        ),
+      );
+      if (cards.length >= 2) break;
+    }
+
+    // Nothing due, but something close enough to plan for.
+    if (cards.length < 2) {
+      for (final entry in timelines) {
+        final days = entry.timeline.daysUntilNext;
+        final next = entry.timeline.next;
+        if (next == null || days == null || days > 7) continue;
+        cards.add(
+          _Suggestion(
+            icon: Icons.schedule_outlined,
+            title: '${entry.crop.cropName}: ${next.stageName}',
+            body: l10n.suggestInDays('$days'),
+            route: '/advisory',
+          ),
+        );
+        break;
+      }
+    }
+
+    // Always last, and always available: ask in your own words.
+    cards.add(
+      _Suggestion(
+        icon: Icons.forum_outlined,
+        title: crops.isEmpty
+            ? l10n.suggestAsk
+            : l10n.suggestAskCrop(crops.first.crop.cropName),
+        body: l10n.suggestAskWhy,
+        route: '/ask',
+      ),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.homeNextUp, style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 12),
+        for (final card in cards.take(3))
+          Padding(padding: const EdgeInsets.only(bottom: 10), child: card),
+      ],
+    );
+  }
+}
+
+class _Suggestion extends StatelessWidget {
+  const _Suggestion({
+    required this.icon,
+    required this.title,
+    required this.body,
+    required this.route,
+  });
+
+  final IconData icon;
+  final String title;
+  final String body;
+  final String route;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+
+    return Card(
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => context.push(route),
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryContainer,
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: Icon(icon, size: 20, color: AppColors.primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: text.titleMedium),
+                    const SizedBox(height: 2),
+                    Text(
+                      body,
+                      style: text.bodySmall,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right, color: AppColors.muted),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

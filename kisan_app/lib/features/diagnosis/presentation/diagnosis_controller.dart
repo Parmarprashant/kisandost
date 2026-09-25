@@ -61,11 +61,15 @@ class DiagnosisController extends Notifier<DiagnosisState> {
         .read(imagePickerProvider)
         .pickImage(
           source: source,
-          // Cap at capture time so a 12MP phone camera does not hand us a
-          // 6MB file to shrink afterwards.
-          maxWidth: 2048,
-          maxHeight: 2048,
-          imageQuality: 90,
+          // Deliberately generous. Capping at 2048/q90 here and then
+          // compressing again meant the model saw a doubly-degraded leaf,
+          // while the web app — which diagnoses the same photo correctly —
+          // uploads the original. Detail in the lesion margins is the whole
+          // signal, so it is kept and the size is dealt with once, in the
+          // repository, against the server's real limit.
+          maxWidth: 3264,
+          maxHeight: 3264,
+          imageQuality: 95,
         );
 
     if (picked == null) return;

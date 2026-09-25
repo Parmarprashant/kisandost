@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/jobs/kept_result.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
 import 'prediction_models.dart';
@@ -106,3 +107,16 @@ class PredictionRepository {
     }
   }
 }
+
+/// The last profit estimate, kept so leaving the tab does not throw away a
+/// round trip the farmer already paid for.
+final keptProfitProvider =
+    NotifierProvider<KeptResult<ProfitPrediction>, ProfitPrediction?>(
+      KeptResult<ProfitPrediction>.new,
+    );
+
+/// The last yield estimate, same reasoning.
+final keptYieldProvider =
+    NotifierProvider<KeptResult<YieldPrediction>, YieldPrediction?>(
+      KeptResult<YieldPrediction>.new,
+    );
