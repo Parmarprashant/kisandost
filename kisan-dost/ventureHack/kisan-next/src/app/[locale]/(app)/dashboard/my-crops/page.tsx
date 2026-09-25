@@ -351,7 +351,11 @@ export default function MyCropsPage() {
         throw new Error(data.error || "Failed to analyze zone image");
       }
 
-      setZoneScanSession(data);
+      setZoneScanSession({
+        ...data,
+        scanCount: data.scanCount || 1,
+        scans: data.currentScan ? [data.currentScan] : [],
+      });
       toast.success(data.message);
     } catch (err: any) {
       console.error(err);
@@ -385,10 +389,26 @@ export default function MyCropsPage() {
         throw new Error(data.error || "Failed to process supplementary image");
       }
 
-      setZoneScanSession(data);
-      toast.success(data.message);
+      const updatedCount = data.scanCount ?? ((zoneScanSession?.scanCount || 1) + 1);
+
+      setZoneScanSession((prev: any) => {
+        const existingScans = prev?.scans || (prev?.currentScan ? [prev.currentScan] : []);
+        const newScans = data.currentScan ? [...existingScans, data.currentScan] : existingScans;
+        return {
+          ...prev,
+          ...data,
+          scanCount: updatedCount,
+          scans: newScans,
+        };
+      });
+
+      // Automatically advance to the next recommended angle
+      if (updatedCount === 2) setSupplementaryAngle("canopy");
+      else if (updatedCount === 3) setSupplementaryAngle("stem");
+
+      toast.success(data.message || `View ${updatedCount} uploaded and analyzed.`);
     } catch (err: any) {
-      console.error(err);
+      console.warn("Upload view notice:", err);
       toast.error(err.message || "Failed to upload supplementary image");
     } finally {
       setUploadingSupplementary(false);
@@ -417,15 +437,16 @@ export default function MyCropsPage() {
 
       setZoneScanSession((prev: any) => ({
         ...prev,
-        status: data.summary.status,
-        result: data.summary.result,
-        completedAt: data.summary.completedAt,
-        evidenceSummary: data.summary.evidenceSummary,
-        scans: data.summary.scans,
+        status: data.summary?.status || "COMPLETED",
+        result: data.summary?.result,
+        completedAt: data.summary?.completedAt,
+        evidenceSummary: data.summary?.evidenceSummary,
+        scans: data.summary?.scans || prev?.scans,
+        scanCount: data.summary?.scanCount ?? prev?.scanCount,
       }));
-      toast.success(data.message);
+      toast.success(data.message || "Zone scan completed successfully.");
     } catch (err: any) {
-      console.error(err);
+      console.warn("Complete session notice:", err);
       toast.error(err.message || "Failed to complete zone session");
     } finally {
       setCompletingSession(false);
@@ -1234,29 +1255,84 @@ export default function MyCropsPage() {
                                           <p className="text-xs text-amber-800 dark:text-amber-300">
                                             Initial Finding:{" "}
                                             <span className="font-semibold underline">
-                                              {zoneScanSession.latestDiagnosis?.name || "Suspicious anomaly"}
+                                              {zoneScanSession.currentScan?.diseaseName ||
+                                                zoneScanSession.evidenceSummary?.repeatedDiagnosis ||
+                                                zoneScanSession.evidenceSummary?.diagnoses?.[0] ||
+                                                zoneScanSession.latestDiagnosis?.name ||
+                                                "Suspicious anomaly"}
                                             </span>
+                                            {zoneScanSession.currentScan?.confidence != null && (
+                                              <span className="ml-1 text-[11px] opacity-80">
+                                                ({typeof zoneScanSession.currentScan.confidence === "number" &&
+                                                zoneScanSession.currentScan.confidence <= 1
+                                                  ? (zoneScanSession.currentScan.confidence * 100).toFixed(0)
+                                                  : Number(zoneScanSession.currentScan.confidence).toFixed(0)}
+                                                % confidence)
+                                              </span>
+                                            )}
                                           </p>
                                         </div>
                                       </div>
 
                                       {/* View Angle Recommendation Checklist */}
-                                      <div className="bg-white/80 dark:bg-background/80 p-3 rounded-lg border border-amber-200 text-xs space-y-2">
-                                        <p className="font-semibold text-foreground">
-                                          Recommended supplementary views for Zone {activeZone.zoneCode}:
-                                        </p>
-                                        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-muted-foreground text-[11px]">
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 2:</strong> Close-up of leaf/lesion
+                                      <div className="bg-white/90 dark:bg-background/90 p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/50 text-xs space-y-2">
+                                        <div className="flex items-center justify-between">
+                                          <p className="font-semibold text-foreground">
+                                            Recommended supplementary views for Zone {activeZone.zoneCode}:
+                                          </p>
+                                          <Badge
+                                            variant="outline"
+                                            className="text-[11px] font-mono border-amber-300 text-amber-800 dark:text-amber-300"
+                                          >
+                                            {zoneScanSession.scanCount || 1} / 4 Views Captured
+                                          </Badge>
+                                        </div>
+                                        <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 text-[11px]">
+                                          <li className="flex items-center gap-1.5 p-2 rounded bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            <span>View 1: Screening</span>
                                           </li>
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 3:</strong> Wider canopy view
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 2
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 2 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 2: Close-up</span>
                                           </li>
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 4:</strong> Stem / adjacent plant
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 3
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 3 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 3: Canopy</span>
+                                          </li>
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 4
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 4 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 4: Stem/Side</span>
                                           </li>
                                         </ul>
                                       </div>
@@ -1277,38 +1353,48 @@ export default function MyCropsPage() {
                                           </select>
                                         </div>
 
-                                        <label className="cursor-pointer">
-                                          <input
-                                            type="file"
-                                            accept="image/jpeg,image/png,image/webp"
-                                            className="hidden"
-                                            disabled={uploadingSupplementary}
-                                            onChange={(e) => {
-                                              const file = e.target.files?.[0];
-                                              if (file) handleSupplementaryScan(file);
-                                            }}
-                                          />
-                                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium shadow-xs">
-                                            {uploadingSupplementary ? (
-                                              <>
-                                                <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" />
-                                                Uploading View...
-                                              </>
-                                            ) : (
-                                              <>
-                                                <UploadCloud className="w-3.5 h-3.5 mr-1" />
-                                                Upload View ({zoneScanSession.totalImages || 1}/4)
-                                              </>
-                                            )}
-                                          </div>
-                                        </label>
+                                        {(zoneScanSession.scanCount || 1) < 4 ? (
+                                          <label className="cursor-pointer">
+                                            <input
+                                              type="file"
+                                              accept="image/jpeg,image/png,image/webp"
+                                              className="hidden"
+                                              disabled={uploadingSupplementary}
+                                              onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (file) handleSupplementaryScan(file);
+                                              }}
+                                            />
+                                            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium shadow-xs transition-colors">
+                                              {uploadingSupplementary ? (
+                                                <>
+                                                  <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" />
+                                                  Uploading View {(zoneScanSession.scanCount || 1) + 1}...
+                                                </>
+                                              ) : (
+                                                <>
+                                                  <UploadCloud className="w-3.5 h-3.5 mr-1" />
+                                                  Upload View {(zoneScanSession.scanCount || 1) + 1} of 4
+                                                </>
+                                              )}
+                                            </div>
+                                          </label>
+                                        ) : (
+                                          <Badge
+                                            variant="outline"
+                                            className="px-3 py-1.5 text-xs bg-emerald-100/60 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border-emerald-300 font-medium"
+                                          >
+                                            <CheckCircle2 className="w-3.5 h-3.5 mr-1 inline text-emerald-600" />
+                                            All 4 views captured
+                                          </Badge>
+                                        )}
 
                                         <Button
-                                          variant="outline"
+                                          variant="default"
                                           size="sm"
                                           disabled={completingSession}
                                           onClick={handleCompleteSession}
-                                          className="text-xs border-amber-300 text-amber-800 hover:bg-amber-100"
+                                          className="text-xs bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs"
                                         >
                                           {completingSession ? (
                                             <>
@@ -1348,18 +1434,131 @@ export default function MyCropsPage() {
                                     </Badge>
                                   </div>
 
-                                  <div className="bg-background p-3 rounded-lg border text-xs space-y-1.5">
-                                    <p className="font-medium">
+                                  <div className="bg-background p-3.5 rounded-lg border text-xs space-y-2.5">
+                                    <p className="font-medium text-sm text-foreground">
                                       {zoneScanSession.result === "NO_CONCERN_DETECTED"
                                         ? "No concerning signs detected in this scan."
                                         : zoneScanSession.status === "INCONCLUSIVE"
                                         ? "Diagnosis inconclusive / conflicting evidence across angles. Physical field inspection advised."
                                         : `Potential concern detected in Zone ${activeZone?.zoneCode || ""}.`}
                                     </p>
+
+                                    {/* Safely Render Diagnostic Evidence Consensus */}
                                     {zoneScanSession.evidenceSummary && (
-                                      <p className="text-muted-foreground text-[11px]">
-                                        Evidence: {zoneScanSession.evidenceSummary}
-                                      </p>
+                                      <div className="pt-2 border-t border-border/60 space-y-2">
+                                        <div className="flex items-center justify-between">
+                                          <span className="font-semibold text-foreground text-[11px]">
+                                            Diagnostic Consensus:
+                                          </span>
+                                          <Badge
+                                            variant={
+                                              typeof zoneScanSession.evidenceSummary === "object" &&
+                                              zoneScanSession.evidenceSummary.isConsistent
+                                                ? "default"
+                                                : "secondary"
+                                            }
+                                            className="text-[10px]"
+                                          >
+                                            {typeof zoneScanSession.evidenceSummary === "object" &&
+                                            zoneScanSession.evidenceSummary.isConsistent
+                                              ? "Consistent Across Angles"
+                                              : "Varied / Inconclusive"}
+                                          </Badge>
+                                        </div>
+
+                                        {typeof zoneScanSession.evidenceSummary === "string" ? (
+                                          <p className="text-muted-foreground text-[11px]">
+                                            Evidence: {zoneScanSession.evidenceSummary}
+                                          </p>
+                                        ) : (
+                                          <>
+                                            {zoneScanSession.evidenceSummary.repeatedDiagnosis && (
+                                              <p className="text-foreground text-[11px]">
+                                                <span className="text-muted-foreground">Consensus Threat:</span>{" "}
+                                                <strong className="text-amber-800 dark:text-amber-300 font-semibold">
+                                                  {zoneScanSession.evidenceSummary.repeatedDiagnosis}
+                                                </strong>
+                                              </p>
+                                            )}
+
+                                            {Array.isArray(zoneScanSession.evidenceSummary.diagnoses) &&
+                                              zoneScanSession.evidenceSummary.diagnoses.length > 0 && (
+                                                <div className="space-y-1">
+                                                  <span className="text-muted-foreground text-[11px]">
+                                                    Detected conditions per angle:
+                                                  </span>
+                                                  <div className="flex flex-wrap gap-1.5">
+                                                    {zoneScanSession.evidenceSummary.diagnoses.map(
+                                                      (diag: string, idx: number) => {
+                                                        const conf =
+                                                          zoneScanSession.evidenceSummary?.confidences?.[idx];
+                                                        const confStr =
+                                                          conf != null
+                                                            ? ` (${
+                                                                typeof conf === "number" && conf <= 1
+                                                                  ? (conf * 100).toFixed(0)
+                                                                  : Number(conf).toFixed(0)
+                                                              }% confidence)`
+                                                            : "";
+                                                        return (
+                                                          <span
+                                                            key={idx}
+                                                            className="inline-flex items-center px-2 py-0.5 rounded text-[11px] bg-muted text-foreground border border-border"
+                                                          >
+                                                            Angle {idx + 1}: {diag}
+                                                            {confStr}
+                                                          </span>
+                                                        );
+                                                      }
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+
+                                            {zoneScanSession.evidenceSummary.requiresExpertVerification && (
+                                              <p className="text-amber-700 dark:text-amber-400 text-[11px] font-medium flex items-center gap-1 pt-1">
+                                                <AlertTriangle className="w-3.5 h-3.5 inline shrink-0" />
+                                                Agronomist or expert field verification recommended.
+                                              </p>
+                                            )}
+                                          </>
+                                        )}
+                                      </div>
+                                    )}
+
+                                    {/* Gallery of captured scans if available */}
+                                    {Array.isArray(zoneScanSession.scans) && zoneScanSession.scans.length > 0 && (
+                                      <div className="pt-2 border-t border-border/60 space-y-1.5">
+                                        <p className="text-[11px] font-semibold text-foreground">
+                                          Evidence Image Angles ({zoneScanSession.scans.length}):
+                                        </p>
+                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                          {zoneScanSession.scans.map((s: any, idx: number) => (
+                                            <div
+                                              key={s.scanId || idx}
+                                              className="rounded-lg border bg-background overflow-hidden text-[10px]"
+                                            >
+                                              {s.imageUrl && (
+                                                <img
+                                                  src={s.imageUrl}
+                                                  alt={`View ${idx + 1}`}
+                                                  className="w-full h-18 object-cover"
+                                                />
+                                              )}
+                                              <div className="p-1.5 space-y-0.5">
+                                                <p className="font-semibold truncate capitalize">
+                                                  {s.viewAngle ? s.viewAngle.replace("_", " ") : `View ${idx + 1}`}
+                                                </p>
+                                                {s.diseaseName && (
+                                                  <p className="text-muted-foreground truncate" title={s.diseaseName}>
+                                                    {s.diseaseName}
+                                                  </p>
+                                                )}
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
                                     )}
                                   </div>
 
