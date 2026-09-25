@@ -2843,6 +2843,43 @@ class L10nHi extends L10n {
   String get profileSaved => 'सहेजा गया';
 
   @override
+  String get profileHowWeReachYou => 'हम आपसे कैसे जुड़ते हैं';
+
+  @override
+  String get profileDailySms => 'सुबह 6 बजे दैनिक एसएमएस';
+
+  @override
+  String get profileDailySmsSub => 'बिना इंटरनेट, आपकी भाषा में काम करता है';
+
+  @override
+  String get profilePushNotifs => 'पुश सूचनाएं';
+
+  @override
+  String get profilePushNotifsSub => 'मौसम की चेतावनी और मंडी भाव अलर्ट';
+
+  @override
+  String get profileCommunityReplies => 'समुदाय के जवाब';
+
+  @override
+  String get profileCommunityRepliesSub => 'जब कोई आपके सवाल का जवाब दे';
+
+  @override
+  String get profileTheApp => 'ऐप सेटिंग्स';
+
+  @override
+  String get profileSavedOffline => 'ऑफ़लाइन के लिए सहेजा गया';
+
+  @override
+  String get profileSavedOfflineSub => 'भाव, सलाह और खेत · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'होम स्क्रीन विजेट जोड़ें';
+
+  @override
+  String get profilePrivacyNote =>
+      'आपके खेत, स्कैन और अनुमान आपके खाते पर सुरक्षित रहते हैं। कुछ भी बेचा नहीं जाता और न ही आपकी अनुमति के बिना पोस्ट किया जाता है।';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'मौसम और पर्यावरण डेटा प्राप्त कर रहे हैं';
 

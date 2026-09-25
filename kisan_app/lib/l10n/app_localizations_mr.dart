@@ -2837,6 +2837,44 @@ class L10nMr extends L10n {
   String get profileSaved => 'जतन केले';
 
   @override
+  String get profileHowWeReachYou => 'आम्ही तुमच्यापर्यंत कसे पोहोचतो';
+
+  @override
+  String get profileDailySms => 'सकाळी 6 वाजता दैनिक एसएमएस';
+
+  @override
+  String get profileDailySmsSub => 'डेटा नसतानाही, तुमच्या भाषेत काम करते';
+
+  @override
+  String get profilePushNotifs => 'पुश सूचना';
+
+  @override
+  String get profilePushNotifsSub => 'हवामान चेतावणी आणि भाव अलर्ट';
+
+  @override
+  String get profileCommunityReplies => 'समुदाय उत्तरे';
+
+  @override
+  String get profileCommunityRepliesSub =>
+      'जेव्हा कोणी तुमच्या पोस्टला उत्तर देतो';
+
+  @override
+  String get profileTheApp => 'अॅप';
+
+  @override
+  String get profileSavedOffline => 'ऑफलाइनसाठी जतन केले';
+
+  @override
+  String get profileSavedOfflineSub => 'भाव, सल्ला आणि शेती · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'होम स्क्रीन विजेट जोडा';
+
+  @override
+  String get profilePrivacyNote =>
+      'तुमची शेती, स्कॅन आणि अंदाज तुमच्या खात्यावर सुरक्षित राहतात. काहीही विकले जात नाही आणि तुम्ही पोस्ट केल्याशिवाय काहीही पोस्ट होत नाही.';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'हवामान आणि पर्यावरण डेटा मिळवत आहे';
 

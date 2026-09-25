@@ -2834,6 +2834,43 @@ class L10nEn extends L10n {
   String get profileSaved => 'Saved';
 
   @override
+  String get profileHowWeReachYou => 'How we reach you';
+
+  @override
+  String get profileDailySms => 'Daily SMS at 6 AM';
+
+  @override
+  String get profileDailySmsSub => 'Works with no data, in your language';
+
+  @override
+  String get profilePushNotifs => 'Push notifications';
+
+  @override
+  String get profilePushNotifsSub => 'Weather warnings and price alerts';
+
+  @override
+  String get profileCommunityReplies => 'Community replies';
+
+  @override
+  String get profileCommunityRepliesSub => 'When someone answers your post';
+
+  @override
+  String get profileTheApp => 'The app';
+
+  @override
+  String get profileSavedOffline => 'Saved for offline';
+
+  @override
+  String get profileSavedOfflineSub => 'Rates, advisory and fields · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'Add the home screen widget';
+
+  @override
+  String get profilePrivacyNote =>
+      'Your fields, scans and estimates stay on your account. Nothing is sold, and nothing is posted to the community unless you post it.';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'Retrieving weather and environmental data';
 

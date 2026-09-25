@@ -5033,6 +5033,78 @@ abstract class L10n {
   /// **'Saved'**
   String get profileSaved;
 
+  /// No description provided for @profileHowWeReachYou.
+  ///
+  /// In en, this message translates to:
+  /// **'How we reach you'**
+  String get profileHowWeReachYou;
+
+  /// No description provided for @profileDailySms.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily SMS at 6 AM'**
+  String get profileDailySms;
+
+  /// No description provided for @profileDailySmsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Works with no data, in your language'**
+  String get profileDailySmsSub;
+
+  /// No description provided for @profilePushNotifs.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get profilePushNotifs;
+
+  /// No description provided for @profilePushNotifsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather warnings and price alerts'**
+  String get profilePushNotifsSub;
+
+  /// No description provided for @profileCommunityReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Community replies'**
+  String get profileCommunityReplies;
+
+  /// No description provided for @profileCommunityRepliesSub.
+  ///
+  /// In en, this message translates to:
+  /// **'When someone answers your post'**
+  String get profileCommunityRepliesSub;
+
+  /// No description provided for @profileTheApp.
+  ///
+  /// In en, this message translates to:
+  /// **'The app'**
+  String get profileTheApp;
+
+  /// No description provided for @profileSavedOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved for offline'**
+  String get profileSavedOffline;
+
+  /// No description provided for @profileSavedOfflineSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Rates, advisory and fields · 2.4 MB'**
+  String get profileSavedOfflineSub;
+
+  /// No description provided for @profileAddWidget.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the home screen widget'**
+  String get profileAddWidget;
+
+  /// No description provided for @profilePrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your fields, scans and estimates stay on your account. Nothing is sold, and nothing is posted to the community unless you post it.'**
+  String get profilePrivacyNote;
+
   /// No description provided for @profitPredictor_autoFetchDesc.
   ///
   /// In en, this message translates to:

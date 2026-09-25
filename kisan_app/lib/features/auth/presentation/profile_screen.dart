@@ -4,113 +4,472 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/locale_controller.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../farm/data/farm_repository.dart';
 import '../data/auth_controller.dart';
 import '../data/auth_models.dart';
 import '../data/auth_repository.dart';
 
+/// Profile & settings screen matching Profile.dc.html.
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final user = ref.watch(currentUserProvider);
     final locale = ref.watch(localeProvider);
+    final crops = ref.watch(activeCropsProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.authProfile),
-        actions: [
-          if (user != null)
-            IconButton(
-              icon: const Icon(Icons.edit_outlined),
-              tooltip: l10n.profileEdit,
-              onPressed: () => _EditProfileSheet.open(context, user),
-            ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-        children: [
-          if (user != null) ...[
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 32,
-                  backgroundColor: AppColors.primaryContainer,
-                  // A Google avatar may be missing or fail to load; initials
-                  // are always available.
-                  child: user.avatar != null && user.avatar!.isNotEmpty
-                      ? ClipOval(
-                          child: CachedNetworkImage(
-                            imageUrl: user.avatar!,
-                            width: 64,
-                            height: 64,
-                            fit: BoxFit.cover,
-                            errorWidget: (_, _, _) => _Initials(user.initials),
-                          ),
-                        )
-                      : _Initials(user.initials),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        user.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      if (user.email != null && user.email!.isNotEmpty)
-                        Text(
-                          user.email!,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                    ],
+      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.paper,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.fromLTRB(18, 16, 18, 14),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: isDark ? AppColors.lineDark : AppColors.line,
                   ),
                 ),
-              ],
+              ),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () => Navigator.of(context).maybePop(),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.sunkDark : AppColors.surface,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: isDark ? AppColors.lineDark : AppColors.line,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 20,
+                        color: isDark ? AppColors.inkDark : AppColors.ink,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    l10n.authProfile,
+                    style: TextStyle(
+                      fontFamily: AppTheme.displayFamily,
+                      fontSize: 21,
+                      fontWeight: FontWeight.w600,
+                      height: 1.15,
+                      color: isDark ? AppColors.inkDark : AppColors.ink,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 28),
-            if (user.village != null && user.village!.isNotEmpty)
-              _Row(icon: Icons.home_outlined, label: user.village!),
-            if (user.district != null && user.district!.isNotEmpty)
-              _Row(icon: Icons.map_outlined, label: user.district!),
-            if (user.mainCrop != null && user.mainCrop!.isNotEmpty)
-              _Row(icon: Icons.grass_outlined, label: user.mainCrop!),
-            if (user.mobile != null && user.mobile!.isNotEmpty)
-              _Row(icon: Icons.phone_outlined, label: user.mobile!),
-            const Divider(height: 40),
+
+            // Scrollable Body
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(18, 16, 18, 24),
+                children: [
+                  // User Identity Card
+                  if (user != null)
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? AppColors.surfaceDark
+                            : AppColors.surface,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: isDark ? AppColors.lineDark : AppColors.line,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          // Initials Avatar
+                          Container(
+                            width: 54,
+                            height: 54,
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? AppColors.forestTintDark
+                                  : AppColors.forestTint,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isDark
+                                    ? AppColors.forestLineDark
+                                    : AppColors.forestLine,
+                              ),
+                            ),
+                            child:
+                                user.avatar != null && user.avatar!.isNotEmpty
+                                ? ClipOval(
+                                    child: CachedNetworkImage(
+                                      imageUrl: user.avatar!,
+                                      width: 54,
+                                      height: 54,
+                                      fit: BoxFit.cover,
+                                      errorWidget: (_, _, _) =>
+                                          _InitialsWidget(user.initials),
+                                    ),
+                                  )
+                                : _InitialsWidget(user.initials),
+                          ),
+                          const SizedBox(width: 13),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  user.name,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: isDark
+                                        ? AppColors.inkDark
+                                        : AppColors.ink,
+                                  ),
+                                ),
+                                const SizedBox(height: 1),
+                                Text(
+                                  [
+                                    if (user.village != null &&
+                                        user.village!.isNotEmpty)
+                                      user.village!,
+                                    if (user.district != null &&
+                                        user.district!.isNotEmpty)
+                                      user.district!,
+                                  ].join(', '),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: isDark
+                                        ? AppColors.ink3Dark
+                                        : AppColors.ink3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => _EditProfileSheet.open(context, user),
+                            child: Text(
+                              l10n.profileEdit,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: isDark
+                                    ? AppColors.terracottaDark
+                                    : AppColors.terracottaText,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  // Stats Row (Fields / Scans / Estimates)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        _StatCard(
+                          value: '${crops.length}',
+                          label: 'Fields',
+                          isDark: isDark,
+                        ),
+                        const SizedBox(width: 10),
+                        _StatCard(value: '—', label: 'Scans', isDark: isDark),
+                        const SizedBox(width: 10),
+                        _StatCard(
+                          value: '—',
+                          label: 'Estimates',
+                          isDark: isDark,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // HOW WE REACH YOU
+                  _SectionLabel(l10n.profileHowWeReachYou, isDark: isDark),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.surfaceDark : AppColors.surface,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isDark ? AppColors.lineDark : AppColors.line,
+                      ),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [
+                        _ToggleRow(
+                          title: l10n.profileDailySms,
+                          subtitle: l10n.profileDailySmsSub,
+                          value: true,
+                          isDark: isDark,
+                          hasBorder: true,
+                        ),
+                        _ToggleRow(
+                          title: l10n.profilePushNotifs,
+                          subtitle: l10n.profilePushNotifsSub,
+                          value: true,
+                          isDark: isDark,
+                          hasBorder: true,
+                        ),
+                        _ToggleRow(
+                          title: l10n.profileCommunityReplies,
+                          subtitle: l10n.profileCommunityRepliesSub,
+                          value: false,
+                          isDark: isDark,
+                          hasBorder: false,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // THE APP
+                  _SectionLabel(l10n.profileTheApp, isDark: isDark),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.surfaceDark : AppColors.surface,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isDark ? AppColors.lineDark : AppColors.line,
+                      ),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [
+                        // Language
+                        InkWell(
+                          onTap: () => _showLanguageSheet(context, ref),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: isDark
+                                      ? AppColors.sunkDark
+                                      : AppColors.sunk,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.language,
+                                  size: 20,
+                                  color: isDark
+                                      ? AppColors.ink2Dark
+                                      : AppColors.ink2,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    l10n.appLanguage,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: isDark
+                                          ? AppColors.inkDark
+                                          : AppColors.ink,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  localeNames[locale.languageCode] ??
+                                      locale.languageCode,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: isDark
+                                        ? AppColors.ink3Dark
+                                        : AppColors.ink3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        // Saved offline
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: isDark
+                                    ? AppColors.sunkDark
+                                    : AppColors.sunk,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.wifi_off,
+                                size: 20,
+                                color: isDark
+                                    ? AppColors.ink2Dark
+                                    : AppColors.ink2,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      l10n.profileSavedOffline,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: isDark
+                                            ? AppColors.inkDark
+                                            : AppColors.ink,
+                                      ),
+                                    ),
+                                    Text(
+                                      l10n.profileSavedOfflineSub,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: isDark
+                                            ? AppColors.ink3Dark
+                                            : AppColors.ink3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Home screen widget
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: isDark
+                                    ? AppColors.sunkDark
+                                    : AppColors.sunk,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.widgets_outlined,
+                                size: 20,
+                                color: isDark
+                                    ? AppColors.ink2Dark
+                                    : AppColors.ink2,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                l10n.profileAddWidget,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDark
+                                      ? AppColors.inkDark
+                                      : AppColors.ink,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Sign out
+                        InkWell(
+                          onTap: () => ref
+                              .read(authControllerProvider.notifier)
+                              .signOut(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.logout,
+                                  size: 20,
+                                  color: isDark
+                                      ? AppColors.dangerDark
+                                      : AppColors.danger,
+                                ),
+                                const SizedBox(width: 12),
+                                Text(
+                                  l10n.authSignOut,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: isDark
+                                        ? AppColors.dangerDark
+                                        : AppColors.danger,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Privacy Note
+                  Container(
+                    margin: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.sunkDark : AppColors.sunk,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isDark ? AppColors.lineDark : AppColors.line,
+                      ),
+                    ),
+                    child: Text(
+                      l10n.profilePrivacyNote,
+                      style: TextStyle(
+                        fontSize: 12,
+                        height: 1.55,
+                        color: isDark ? AppColors.ink2Dark : AppColors.ink2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.language),
-            title: Text(l10n.appLanguage),
-            subtitle: Text(
-              localeNames[locale.languageCode] ?? locale.languageCode,
-            ),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => _showLanguageSheet(context, ref),
-          ),
-
-          const SizedBox(height: 24),
-          OutlinedButton.icon(
-            onPressed: () =>
-                ref.read(authControllerProvider.notifier).signOut(),
-            icon: const Icon(Icons.logout),
-            label: Text(l10n.authSignOut),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   void _showLanguageSheet(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet<void>(
       context: context,
+      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surface,
       builder: (sheetContext) {
         final current = ref.read(localeProvider);
         return SafeArea(
@@ -122,10 +481,18 @@ class ProfileScreen extends ConsumerWidget {
                 ListTile(
                   title: Text(
                     localeNames[locale.languageCode] ?? locale.languageCode,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: isDark ? AppColors.inkDark : AppColors.ink,
+                    ),
                   ),
                   trailing: locale == current
-                      ? const Icon(Icons.check, color: AppColors.primary)
+                      ? Icon(
+                          Icons.check,
+                          color: isDark
+                              ? AppColors.forestDark
+                              : AppColors.forest,
+                        )
                       : null,
                   onTap: () {
                     ref.read(localeProvider.notifier).change(locale);
@@ -140,9 +507,8 @@ class ProfileScreen extends ConsumerWidget {
   }
 }
 
-class _Initials extends StatelessWidget {
-  const _Initials(this.initials);
-
+class _InitialsWidget extends StatelessWidget {
+  const _InitialsWidget(this.initials);
   final String initials;
 
   @override
@@ -150,29 +516,181 @@ class _Initials extends StatelessWidget {
     return Center(
       child: Text(
         initials,
-        style: Theme.of(context).textTheme.titleLarge
-            ?.copyWith(color: AppColors.primary),
+        style: const TextStyle(
+          fontSize: 19,
+          fontWeight: FontWeight.w700,
+          color: AppColors.forest,
+        ),
       ),
     );
   }
 }
 
-class _Row extends StatelessWidget {
-  const _Row({required this.icon, required this.label});
-
-  final IconData icon;
+class _StatCard extends StatelessWidget {
+  const _StatCard({
+    required this.value,
+    required this.label,
+    required this.isDark,
+  });
+  final String value;
   final String label;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(14, 13, 14, 13),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.surfaceDark : AppColors.surface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isDark ? AppColors.lineDark : AppColors.line,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              value,
+              style: TextStyle(
+                fontFamily: AppTheme.displayFamily,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+                height: 1,
+                color: isDark ? AppColors.inkDark : AppColors.ink,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                color: isDark ? AppColors.ink3Dark : AppColors.ink3,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SectionLabel extends StatelessWidget {
+  const _SectionLabel(this.label, {required this.isDark});
+  final String label;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(top: 18, bottom: 10),
+      child: Text(
+        label.toUpperCase(),
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2,
+          color: isDark ? AppColors.ink3Dark : AppColors.ink3,
+        ),
+      ),
+    );
+  }
+}
+
+class _ToggleRow extends StatefulWidget {
+  const _ToggleRow({
+    required this.title,
+    required this.subtitle,
+    required this.value,
+    required this.isDark,
+    required this.hasBorder,
+  });
+  final String title;
+  final String subtitle;
+  final bool value;
+  final bool isDark;
+  final bool hasBorder;
+
+  @override
+  State<_ToggleRow> createState() => _ToggleRowState();
+}
+
+class _ToggleRowState extends State<_ToggleRow> {
+  late bool _on;
+
+  @override
+  void initState() {
+    super.initState();
+    _on = widget.value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        border: widget.hasBorder
+            ? Border(
+                bottom: BorderSide(
+                  color: widget.isDark ? AppColors.sunkDark : AppColors.sunk,
+                ),
+              )
+            : null,
+      ),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.muted),
-          const SizedBox(width: 12),
           Expanded(
-            child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: widget.isDark ? AppColors.inkDark : AppColors.ink,
+                  ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  widget.subtitle,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: widget.isDark ? AppColors.ink3Dark : AppColors.ink3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          GestureDetector(
+            onTap: () => setState(() => _on = !_on),
+            child: Container(
+              width: 48,
+              height: 28,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: _on
+                    ? (widget.isDark ? AppColors.forestDark : AppColors.forest)
+                    : (widget.isDark
+                          ? AppColors.lineDark
+                          : AppColors.lineStrong),
+              ),
+              child: AnimatedAlign(
+                alignment: _on ? Alignment.centerRight : Alignment.centerLeft,
+                duration: const Duration(milliseconds: 200),
+                child: Container(
+                  margin: const EdgeInsets.all(3),
+                  width: 22,
+                  height: 22,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -181,10 +699,6 @@ class _Row extends StatelessWidget {
 }
 
 /// Edits the five profile fields the API allows.
-///
-/// Deliberately the same five as onboarding — name, mobile, village, district
-/// and main crop. Identity fields (email, username, password) are not editable
-/// through this route, so they are not offered here either.
 class _EditProfileSheet extends ConsumerStatefulWidget {
   const _EditProfileSheet({required this.user});
 
@@ -228,8 +742,6 @@ class _EditProfileSheetState extends ConsumerState<_EditProfileSheet> {
       _error = null;
     });
 
-    // Only non-empty values are sent: the route ignores blanks, and clearing a
-    // field is not something this form offers.
     final fields = <String, String>{
       for (final entry in {
         'name': _name,

@@ -2838,6 +2838,43 @@ class L10nGu extends L10n {
   String get profileSaved => 'સાચવ્યું';
 
   @override
+  String get profileHowWeReachYou => 'અમે તમારા સુધી કેવી રીતે પહોંચીએ છીએ';
+
+  @override
+  String get profileDailySms => 'સવારે 6 વાગ્યે દૈનિક SMS';
+
+  @override
+  String get profileDailySmsSub => 'ડેટા વિના, તમારી ભાષામાં કામ કરે છે';
+
+  @override
+  String get profilePushNotifs => 'પુશ સૂચનાઓ';
+
+  @override
+  String get profilePushNotifsSub => 'હવામાનની ચેતવણી અને ભાવ ચેતવણીઓ';
+
+  @override
+  String get profileCommunityReplies => 'સમુદાય જવાબો';
+
+  @override
+  String get profileCommunityRepliesSub => 'જ્યારે કોઈ તમારી પોસ્ટનો જવાબ આપે';
+
+  @override
+  String get profileTheApp => 'એપ્લિકેશન';
+
+  @override
+  String get profileSavedOffline => 'ઑફલાઇન માટે સાચવ્યું';
+
+  @override
+  String get profileSavedOfflineSub => 'ભાવ, સલાહ અને ખેતર · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'હોમ સ્ક્રીન વિજેટ ઉમેરો';
+
+  @override
+  String get profilePrivacyNote =>
+      'તમારા ખેતર, સ્કેન અને અંદાજો તમારા ખાતા પર સુરક્ષિત રહે છે. કંઈ વેચાતું નથી અને તમે પોસ્ટ ન કરો ત્યાં સુધી કંઈ પોસ્ટ થતું નથી.';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'હવામાન અને પર્યાવરણીય માહિતી પ્રાપ્ત થાય છે';
 
