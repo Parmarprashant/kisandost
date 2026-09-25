@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121912494117",
+    "project_id": "kisandost-app-2a36f",
+    "storage_bucket": "kisandost-app-2a36f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121912494117:android:4308fd4224fd11e49f57cc",
+        "android_client_info": {
+          "package_name": "com.kisandost.kisan_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8OoOKFLBdva9NNBpZCPq8kmsUGo_0mHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
