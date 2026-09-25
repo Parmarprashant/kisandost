@@ -21,7 +21,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     }
 
     const crops = await Crop.find({ fieldId: id, farmerId: userId }).sort({ sowingDate: -1 });
-    const fieldObj = field.toObject();
+    const fieldObj = field.toObject() as any;
     fieldObj.crops = crops;
 
     return NextResponse.json(fieldObj, { status: 200 });

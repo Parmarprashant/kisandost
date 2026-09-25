@@ -25,15 +25,22 @@ export interface IIrrigationInfo {
   frequency?: string; // Daily, Every 2–3 days, Weekly, As required, Rain-dependent, Other
 }
 
+export interface IGeoPolygon {
+  type: 'Polygon';
+  coordinates: number[][][]; // GeoJSON array of linear rings of [longitude, latitude]
+}
+
 export interface IField extends Document {
   farmerId: string;
   name: string;
   area: number;
   areaUnit: 'Acre' | 'Hectare';
   location: IFieldLocation;
+  boundary?: IGeoPolygon;
   soil: ISoilInfo;
   irrigation: IIrrigationInfo;
   previousCrop?: string;
+  crops?: any[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -72,6 +79,21 @@ const IrrigationSchema = new Schema(
   { _id: false }
 );
 
+const BoundarySchema = new Schema(
+  {
+    type: {
+      type: String,
+      enum: ['Polygon'],
+      default: 'Polygon',
+    },
+    coordinates: {
+      type: [[[Number]]],
+      default: undefined,
+    },
+  },
+  { _id: false }
+);
+
 const FieldSchema: Schema = new Schema(
   {
     farmerId: {
@@ -98,6 +120,10 @@ const FieldSchema: Schema = new Schema(
     location: {
       type: LocationSchema,
       default: () => ({}),
+    },
+    boundary: {
+      type: BoundarySchema,
+      default: undefined,
     },
     soil: {
       type: SoilSchema,

@@ -15,7 +15,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     await connectDB();
 
-    const crop = await Crop.findOne({ _id: id, farmerId: userId }).populate('fieldId');
+    const crop = await Crop.findOne({ _id: id, farmerId: userId })
+      .populate('fieldId')
+      .populate('zoneId');
     if (!crop) {
       return NextResponse.json({ error: 'Crop not found' }, { status: 404 });
     }
@@ -57,6 +59,28 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
       crop.cultivatedArea = Number(body.cultivatedArea);
     }
 
+    // Handle zoneId assignment with strict field and farmer validation
+    if (body.zoneId !== undefined) {
+      if (body.zoneId === null || body.zoneId === '') {
+        crop.zoneId = null;
+      } else {
+        const { FarmZone } = await import('@/models/FarmZone');
+        const validZone = await FarmZone.findOne({
+          _id: body.zoneId,
+          fieldId: crop.fieldId,
+          farmerId: userId,
+          active: true,
+        });
+        if (!validZone) {
+          return NextResponse.json(
+            { error: 'Specified zone does not belong to this crop\'s field or access denied' },
+            { status: 400 }
+          );
+        }
+        crop.zoneId = validZone._id;
+      }
+    }
+
     if (body.cropName !== undefined) crop.cropName = body.cropName;
     if (body.variety !== undefined) crop.variety = body.variety;
     if (body.sowingDate !== undefined) crop.sowingDate = new Date(body.sowingDate);
@@ -67,7 +91,11 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 
     await crop.save();
 
-    return NextResponse.json(crop, { status: 200 });
+    const updatedCrop = await Crop.findById(crop._id)
+      .populate('fieldId')
+      .populate('zoneId');
+
+    return NextResponse.json(updatedCrop, { status: 200 });
   } catch (error: any) {
     console.error('Error updating crop:', error);
     return NextResponse.json({ error: 'Failed to update crop' }, { status: 500 });

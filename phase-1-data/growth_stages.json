@@ -1,0 +1,344 @@
+[
+  {
+    "crop_name": "Wheat",
+    "variety_name": "HD 2967, HD 3086, HI 1544, HI 1500",
+    "stage_name": "seedling stage",
+    "stage_order": 1,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Seedling stage evaluated for coleoptile length, seedling shoot length, plant height, and resistance to stripe rust pathotypes at Flowerdale station.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 143,
+        "section": "Crop Protection / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "variety_name": "Zero-tillage wheat cultivars",
+    "stage_name": "crown-root initiation (CRI)",
+    "stage_order": 2,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": 16,
+    "description": "Crown-root initiation recorded in zero-tillage wheat at 16 DAS under conservation agriculture.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 66,
+        "section": "Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "variety_name": "All field wheat cultivars",
+    "stage_name": "vegetative stage",
+    "stage_order": 3,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Vegetative stage documented under natural field conditions for diseases, insect pests, and health monitoring comprising nearly 17,000 leaf images.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 121,
+        "section": "Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "variety_name": "10 wheat cultivars",
+    "stage_name": "heading and flowering stage",
+    "stage_order": 4,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Flowering and heading stage monitored for susceptibility to Karnal bunt (Tilletia indica) and loose smut/flag smut using qPCR diagnostic assay across growth stages.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 289,
+        "section": "Crop Management / Diagnostic Technologies"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "variety_name": "High-yielding wheat cultivars",
+    "stage_name": "grain filling / physiological maturity stage",
+    "stage_order": 5,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Terminal grain filling and maturity stage subject to elevated temperature and heat stress, evaluated across 105 to 171 days depending on zone.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 35,
+        "section": "Crop Improvement - Wheat"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "variety_name": "Pelleted direct-seeded rice lines",
+    "stage_name": "germination stage",
+    "stage_order": 1,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Direct sowing of rice seed pellet technology developed for proper germination and stand establishment.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 124,
+        "section": "Mechanization and Energy Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "variety_name": "Rice seedlings",
+    "stage_name": "seedling stage",
+    "stage_order": 2,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": 15,
+    "description": "Rhizosphere metabolites profiled at seedling stage (15 days) to identify root exudates, amino acids, and organic acids under field conditions.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 164,
+        "section": "Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "variety_name": "Samundchini rice Mutant-S49",
+    "stage_name": "tillering stage",
+    "stage_order": 3,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "High tillering ability and dwarfness profiled through integrated omics approaches.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 120,
+        "section": "Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "variety_name": "Rice accessions",
+    "stage_name": "flowering / anthesis stage",
+    "stage_order": 4,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "High night temperature (HNT) exposure during flowering causing spikelet sterility.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 166,
+        "section": "Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "variety_name": "Notified rice varieties",
+    "stage_name": "physiological maturity stage",
+    "stage_order": 5,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Maturity reached within 84 to 160 days depending on early, medium, or late ecology.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 28,
+        "section": "Crop Improvement - Rice"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "variety_name": "Non-Bt and Bt cultivars",
+    "stage_name": "vegetative and squaring stage",
+    "stage_order": 1,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Vegetative phase monitored for sucking pests (jassids, whitefly, thrips, aphids).",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 51,
+        "section": "Crop Improvement - Cotton"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "variety_name": "Commercial cotton cultivars",
+    "stage_name": "critical flowering stage",
+    "stage_order": 2,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Critical flowering stage highlighted for moisture and temperature management.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 207,
+        "section": "Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "variety_name": "Bt and Non-Bt cultivars",
+    "stage_name": "boll development and boll opening stage",
+    "stage_order": 3,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Boll formation and opening stage vulnerable to pink bollworm (PBW) infestation, monitored with AI smart pheromone trap.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 50,
+        "section": "Crop Management / Pest Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "variety_name": "Spanish Bunch and Virginia lines",
+    "stage_name": "germination and seedling emergence stage",
+    "stage_order": 1,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Seed germination and dormancy regulated by Delay of Germination (AhDoG1L) gene family; multi-layer seed coating improves germination and seedling vigour.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 53,
+        "section": "Crop Improvement / Biotechnology"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "variety_name": "MAGIC population lines (500 lines)",
+    "stage_name": "flowering and pegging stage",
+    "stage_order": 2,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Flowering and pegging stage evaluated for drought and high-temperature tolerance.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "variety_name": "Notified groundnut cultivars",
+    "stage_name": "pod development and maturity stage",
+    "stage_order": 3,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Pod development and maturity achieved in 105 to 131 days under kharif and rabi-summer conditions.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 43,
+        "section": "Crop Improvement - Groundnut"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "variety_name": "Soybean germplasm accessions",
+    "stage_name": "seed germination and emergence",
+    "stage_order": 1,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Germination percentage in ambient storage (fresh, 1, 2, and 3 years) and high seed viability recorded.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 105,
+        "section": "Genetic Resources"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "variety_name": "Soybean cultivars",
+    "stage_name": "flowering stage",
+    "stage_order": 2,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Flowering phase sensitive to moisture deficit and high temperature.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Genetic Resources"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "variety_name": "AISb 50, Birsa Soybean-3",
+    "stage_name": "pod development and maturity / harvest stage",
+    "stage_order": 3,
+    "gdd_start": null,
+    "gdd_end": null,
+    "duration_days": null,
+    "description": "Pod development vulnerable to pod blight; pod shattering tolerance evaluated up to 8-10 days of delayed harvest; maturity ranges between 98 and 126 days.",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 44,
+        "section": "Crop Improvement - Soybean"
+      }
+    ]
+  }
+]

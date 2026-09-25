@@ -1,0 +1,3861 @@
+[
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 12,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 19,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 19,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 19,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 19,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 20,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 21,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 59,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 59,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 60,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 60,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 83,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 83,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 88,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 91,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 93,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 102,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 102,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 113,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 134,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 134,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 134,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 152,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 153,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 153,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 154,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 172,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 179,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 179,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 180,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 212,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 263,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 263,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 263,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 263,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 269,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2022-23",
+        "year": "2022-23",
+        "page": 269,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 18,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 18,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 18,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 44,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 44,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 45,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 63,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Early vegetative phase",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 63,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 64,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 64,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 64,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 65,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 67,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 67,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 67,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 78,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 80,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 114,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 135,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 135,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 154,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 155,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 157,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 157,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 161,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 161,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 161,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 161,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 162,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 162,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 252,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 252,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 253,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 257,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 257,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2023-24",
+        "year": "2023-24",
+        "page": 257,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 14,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 49,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 49,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 51,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 66,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 100,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 101,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 103,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 104,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 104,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 104,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 104,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 105,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 105,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 105,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 106,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 106,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 106,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 106,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 118,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 118,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 118,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 118,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 138,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 138,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 141,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 142,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 142,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 156,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 158,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 158,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 160,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 165,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 166,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 169,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 259,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 259,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 259,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 261,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Reproductive / Anthesis stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 261,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 265,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 265,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 265,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 265,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2024-25",
+        "year": "2024-25",
+        "page": 265,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 11,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 13,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 17,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 40,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 48,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 48,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 48,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Early vegetative phase",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 49,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Early vegetative phase",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 49,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 81,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 105,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Early vegetative phase",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 105,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 119,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 119,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 120,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 120,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Flowering / Grain filling stage",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 121,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 123,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 123,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Groundnut",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 123,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Wheat",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 143,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 143,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 149,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 203,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Rice",
+    "growth_stage": "Vegetative to reproductive stage",
+    "condition_type": "moisture",
+    "condition": "drought / moisture stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 208,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Soybean",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "waterlogging",
+    "condition": "waterlogging / submergence",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 216,
+        "section": "Climate Resilient Agriculture / Crop Management"
+      }
+    ]
+  },
+  {
+    "crop_name": "Cotton",
+    "growth_stage": "NOT_FOUND_IN_SOURCE",
+    "condition_type": "temperature",
+    "condition": "elevated temperature / heat stress",
+    "threshold": null,
+    "duration": "NOT_FOUND_IN_SOURCE",
+    "associated_pest_or_disease": "NOT_FOUND_IN_SOURCE",
+    "sources": [
+      {
+        "report": "ICAR Annual Report 2025-26",
+        "year": "2025-26",
+        "page": 217,
+        "section": "Climate Resilient Agriculture / Basic and Strategic Research"
+      }
+    ]
+  }
+]

@@ -63,7 +63,6 @@ export interface AgriVisionDiseaseResult {
   recommendedPesticides: string[];
   recommendedFertilizers: string[];
   requiresExpertVerification: boolean;
-
   /**
    * What the model actually said, unedited.
    *
@@ -72,9 +71,6 @@ export interface AgriVisionDiseaseResult {
    * distant" no matter what the real problem was — exposure, an unsupported
    * crop, not a plant at all. That sends someone back to photograph the same
    * leaf the same wrong way.
-   *
-   * This is the model's own reason, passed through untouched so the app can
-   * tell the farmer the truth and a developer can see what happened.
    */
   diagnostics?: {
     gateStatus?: string;
@@ -87,6 +83,7 @@ export interface AgriVisionDiseaseResult {
     endpoint?: string;
   };
 
+  rawPayload?: AgriVisionRawResponse;
   focusRegion?: {
     isFocused: boolean;
     boxNormalized: [number, number, number, number]; // [ymin, xmin, ymax, xmax]
@@ -428,6 +425,7 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
         accepted: (raw as any)?.primary_model?.accepted,
         endpoint: usedEndpoint,
       },
+      rawPayload: raw,
       focusRegion,
     };
 }

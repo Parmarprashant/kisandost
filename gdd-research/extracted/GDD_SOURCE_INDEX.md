@@ -1,0 +1,30 @@
+# GDD Source Document Index
+
+Comprehensive inventory of all 24 PDF files located in `dataSet/gdd/`, evaluated for agricultural GDD / thermal-time research relevance across Gujarat, Maharashtra, and benchmark agro-climatic zones.
+
+| # | File Name | Publication / Reference | Geographic Location | Target Crop(s) | Records Extracted | Base Temp ($T_b$) | Usability Status |
+|---|-----------|-------------------------|---------------------|----------------|-------------------|-------------------|------------------|
+| 6-5-171-443.pdf | `6-5-171-443.pdf` | Vora et al. (2018), J. Pharmacognosy and Phytochemistry 7(5): 171-174 | Targhadia, Rajkot, Gujarat (North Saurashtra) | Cotton, Spreading Groundnut, Pearl Millet, Castor, Sesame, Black Gram | 108 | Cotton: 15.5°C; Others: 10.0°C | USABLE NUMERICAL DATA |
+| ThermalRequirementofKharifcrop.pdf | `ThermalRequirementofKharifcrop.pdf` | Vora et al. (2018) [Exact byte-for-byte duplicate of 6-5-171-443.pdf] | Targhadia, Rajkot, Gujarat (North Saurashtra) | Cotton, Spreading Groundnut, Pearl Millet, Castor, Sesame, Black Gram | Referenced to primary | Referenced to primary | DUPLICATE OF 6-5-171-443.pdf |
+| Thermal_requirement_of_pearl_millet_varieties_in_S.pdf | `Thermal_requirement_of_pearl_millet_varieties_in_S.pdf` | Bhuva & Detroja (2018), J. Agrometeorology 20(4): 329-331 | Jamnagar, Gujarat (South Saurashtra) | Pearl Millet (GHB 558, GHB 538, Proagro 9444) | 6 | 12.0°C (Ong 1983) | USABLE NUMERICAL DATA |
+| S4.pdf | `S4.pdf` | Bhuva & Detroja (2018) [Exact byte-for-byte duplicate of Thermal_requirement...] | Jamnagar, Gujarat (South Saurashtra) | Pearl Millet | Referenced to primary | Referenced to primary | DUPLICATE OF S4 / Bhuva |
+| 18.RESPONSEOFPEARLMILLETVARIETIESTOHEAT.pdf | `18.RESPONSEOFPEARLMILLETVARIETIESTOHEAT.pdf` | Wankhede et al. (2018), Contemporary Research in India 8(3): 25-29 | Solapur, Maharashtra (Scarcity Zone) | Pearl Millet (Shanti, Mahyco MRB-204, Dhanashakti) | 72 | 10.0°C (Ong 1983) | USABLE NUMERICAL DATA |
+| 18.RESPONSEOFPEARLMILLETVARIETIESTOHEAT (1).pdf | `18.RESPONSEOFPEARLMILLETVARIETIESTOHEAT (1).pdf` | Wankhede et al. (2018) [Exact duplicate of 18.RESPONSE...] | Solapur, Maharashtra (Scarcity Zone) | Pearl Millet | Referenced to primary | Referenced to primary | DUPLICATE FILE |
+| Bhutiya3182025JSRR139829.pdf | `Bhutiya3182025JSRR139829.pdf` | Bhutiya et al. (2025), J. Sci. Res. Rep. 31(8): 691-697 | Junagadh, Gujarat (South Saurashtra) | Summer Groundnut (GJG-31, GG-34, GG-37) | 7 | 10.0°C | USABLE NUMERICAL DATA |
+| 40502_2014_Article_72.pdf | `40502_2014_Article_72.pdf` | Singh et al. (2014), Ind J Plant Physiol. 19(3): 238–243 | Kanpur, Uttar Pradesh (Central Plain) | Indian Mustard (22 genotypes) | 69 | 5.0°C | USABLE NUMERICAL DATA |
+| D. Usha Sri and M. G. Jadhav.pdf | `D. Usha Sri and M. G. Jadhav.pdf` | Usha Sri & Jadhav (2020), IJCMAS 9(6): 4056-4063 | Parbhani, Maharashtra (Marathwada) | Soybean (MAUS-71, MAUS-158, MAUS-162) | 88 | 10.0°C | USABLE NUMERICAL DATA |
+| A-42352.pdf | `A-42352.pdf` | Kaushik et al. (2015), Indian J. Agric. Res. 49(3): 282-285 | Raipur, Chhattisgarh (Chhattisgarh Plains) | Soybean (JS 97-52, JS 335, JS 93-05) | 60 | 10.0°C | USABLE NUMERICAL DATA |
+| AssessmentofGrowingDegreeDays.pdf | `AssessmentofGrowingDegreeDays.pdf` | Nagaraju et al. (2022), Eco. Env. & Cons. 28: S336-S341 | Rahuri / Solapur / Pune, Maharashtra (Western Maharashtra) | Pigeonpea (Vipula, Rajeshwari, BDN 711, ICPH 2740) | 192 | 10.0°C | USABLE NUMERICAL DATA |
+| Atricle+1+IJH79(3).pdf | `Atricle+1+IJH79(3).pdf` | Kumar et al. (2022), Indian J. Hortic. 79(3): 259-265 | Tiruchirappalli, Tamil Nadu (Central TN) | Banana (11 commercial cultivars) | 66 | 13.0°C | USABLE NUMERICAL DATA |
+| 65077-163616-1-SM.pdf | `65077-163616-1-SM.pdf` | Jadhav et al. (1994), Annals of Arid Zone 33(4): 299-302 | Solapur, Maharashtra (Scarcity Zone) | Pearl Millet (WCC-75 across 5 years) | 105 | Not stated (null) | USABLE (MISSING Tb) |
+| BOOKLET_2009.pdf | `BOOKLET_2009.pdf` | Combined Joint AGRESCO (2009), AAU Anand Recommendation | Anand, Gujarat (Middle Gujarat Zone III) | Wheat (GW-496) | 1 | Not stated (null) | USABLE MATURITY ONLY |
+| 2011.pdf | `2011.pdf` | AICRPAM Annual Report 2011-12 (ICAR-CRIDA) | Solapur (MH), Jabalpur (MP), Udaipur (RJ) | Rabi Sorghum, Chickpea, Wheat | 156 | Not stated in tables (null) | USABLE (MISSING Tb) |
+| 2015-16.pdf | `2015-16.pdf` | AICRPAM Annual Report 2015-16 (ICAR-CRIDA) | Pusa, Samastipur, Bihar | Kharif Rice (Multi-sowing pooled) | 30 | Not stated in tables (null) | USABLE (MISSING Tb) |
+| RA_00064.pdf | `RA_00064.pdf` | ICRISAT Research Bulletin (1984) | Patancheru, Telangana / Semi-Arid Tropics | Pearl Millet (BJ-104), Sorghum (6 classes) | 64 | 7.0°C (both crops) | USABLE NUMERICAL DATA |
+| 14th_agresco_proceeding_20251226_769.pdf | `14th_agresco_proceeding_20251226_769.pdf` | 14th Combined Joint AGRESCO Proceedings (2018) | Junagadh Agricultural University, Gujarat | Mango (cv. Kesar) | 0 | Not reported | QUALITATIVE ONLY |
+| IX Agresco proceedings.pdf | `IX Agresco proceedings.pdf` | 9th Combined Joint AGRESCO Proceedings | Junagadh Agricultural University, Gujarat | Mango | 0 | Not reported | NO NUMERICAL DATA |
+| AR03-04.pdf | `AR03-04.pdf` | AICRPAM Annual Report 2003-04 (ICAR-CRIDA) | Anand (Gujarat), Mohanpur (WB), Jorhat (Assam) | Groundnut, Mustard | 0 | Not reported | NO NUMERICAL GDD TABLES |
+| Frontiers in Genetics_14_01-24_2023.pdf | `Frontiers in Genetics_14_01-24_2023.pdf` | Frontiers in Genetics Review (2023) | International | Genomics / Multi-crop | 0 | Not reported | NO NUMERICAL DATA |
+| Genomic Designing Pearl Millet_chapter6.pdf | `Genomic Designing Pearl Millet_chapter6.pdf` | Genomic Designing of Climate-Smart Cereal Crops (2021) | International | Pearl Millet | 0 | Not reported | NO NUMERICAL DATA |
+| RA_00065.pdf | `RA_00065.pdf` | ICRISAT Research Report (1985) | Mexico / Latin America | Highland Sorghum | 0 | Not reported | NO NUMERICAL GDD TABLES |
+| mss-abst-jr.pdf | `mss-abst-jr.pdf` | Symposium Abstract | India | General agriculture | 0 | Not reported | NO NUMERICAL DATA |
