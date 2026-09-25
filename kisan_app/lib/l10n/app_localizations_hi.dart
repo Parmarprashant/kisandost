@@ -2196,11 +2196,39 @@ class L10nHi extends L10n {
   String get productsSearch => 'उत्पाद खोजें';
 
   @override
+  String get productsSubtitle => 'दुकान से क्या मांगें और कितना';
+
+  @override
+  String get productsSearchHint => 'उत्पाद या बीमारी खोजें';
+
+  @override
+  String get productsFilterMyCrops => 'मेरी फसलों के लिए';
+
+  @override
+  String get productsFilterPesticide => 'कीटनाशक';
+
+  @override
+  String get productsFilterFertilizer => 'उर्वरक';
+
+  @override
+  String get productsFilterSeed => 'बीज';
+
+  @override
+  String get productsScanBeforePay => 'दुकान पर, पैसे देने से पहले स्कैन करें';
+
+  @override
+  String get productsScanBeforePaySub => 'नकली दवाएं काफी आम हैं';
+
+  @override
+  String get productsReferenceNote =>
+      'संदर्भ सूची और अनुमानित भाव, कोई दुकान नहीं। ऐप में कुछ नहीं बिकता। मोलभाव करते समय इसे मार्गदर्शक मानें।';
+
+  @override
   String get productsStaticNote =>
       'आम कृषि सामग्री की संदर्भ सूची। भाव अनुमानित हैं — अपने डीलर से पुष्टि करें।';
 
   @override
-  String get productsTitle => 'उत्पाद';
+  String get productsTitle => 'कृषि इनपुट';
 
   @override
   String get productsUsage => 'कैसे इस्तेमाल करें';

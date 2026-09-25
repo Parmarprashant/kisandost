@@ -2188,11 +2188,39 @@ class L10nEn extends L10n {
   String get productsSearch => 'Search products';
 
   @override
+  String get productsSubtitle => 'What to ask the shop for, and how much';
+
+  @override
+  String get productsSearchHint => 'Search a product or a disease';
+
+  @override
+  String get productsFilterMyCrops => 'For my crops';
+
+  @override
+  String get productsFilterPesticide => 'Pesticide';
+
+  @override
+  String get productsFilterFertilizer => 'Fertiliser';
+
+  @override
+  String get productsFilterSeed => 'Seed';
+
+  @override
+  String get productsScanBeforePay => 'At the shop, scan before you pay';
+
+  @override
+  String get productsScanBeforePaySub => 'Counterfeit pesticide is common here';
+
+  @override
+  String get productsReferenceNote =>
+      'A reference list with typical rates, not a shop. Nothing is bought in the app and no seller is quoted. Prices move — treat these as a guide when you bargain.';
+
+  @override
   String get productsStaticNote =>
       'A reference list of common agri-inputs. Prices are indicative — check with your dealer.';
 
   @override
-  String get productsTitle => 'Products';
+  String get productsTitle => 'Inputs';
 
   @override
   String get productsUsage => 'How to use';

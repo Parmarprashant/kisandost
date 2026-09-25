@@ -2192,11 +2192,39 @@ class L10nGu extends L10n {
   String get productsSearch => 'ઉત્પાદન શોધો';
 
   @override
+  String get productsSubtitle => 'દુકાનથી શું માંગવું અને કેટલું';
+
+  @override
+  String get productsSearchHint => 'ઉત્પાદન અથવા રોગ શોધો';
+
+  @override
+  String get productsFilterMyCrops => 'મારા પાક માટે';
+
+  @override
+  String get productsFilterPesticide => 'જંતુનાશક';
+
+  @override
+  String get productsFilterFertilizer => 'ખાતર';
+
+  @override
+  String get productsFilterSeed => 'બિયારણ';
+
+  @override
+  String get productsScanBeforePay => 'દુકાને, પૈસા ચૂકવતા પહેલાં સ્કેન કરો';
+
+  @override
+  String get productsScanBeforePaySub => 'અહીં નકલી જંતુનાશકો ખૂબ સામાન્ય છે';
+
+  @override
+  String get productsReferenceNote =>
+      'સંદર્ભ સૂચિ અને અંદાજિત દરો, કોઈ દુકાન નથી. એપ્લિકેશનમાં કંઈ ખરીદાતું નથી. સોદાબાજી કરતી વખતે આને માર્ગદર્શિકા તરીકે ગણો.';
+
+  @override
   String get productsStaticNote =>
       'સામાન્ય ખેતી સામગ્રીની સંદર્ભ યાદી. ભાવ અંદાજિત છે — તમારા ડીલર પાસે ચકાસો.';
 
   @override
-  String get productsTitle => 'ઉત્પાદનો';
+  String get productsTitle => 'ખેતી સામગ્રી';
 
   @override
   String get productsUsage => 'કેવી રીતે વાપરવું';

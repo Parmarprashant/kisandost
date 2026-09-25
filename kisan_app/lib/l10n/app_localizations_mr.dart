@@ -2190,11 +2190,40 @@ class L10nMr extends L10n {
   String get productsSearch => 'उत्पादन शोधा';
 
   @override
+  String get productsSubtitle => 'दुकानात काय आणि किती मागावे';
+
+  @override
+  String get productsSearchHint => 'उत्पादन किंवा रोग शोधा';
+
+  @override
+  String get productsFilterMyCrops => 'माझ्या पिकांसाठी';
+
+  @override
+  String get productsFilterPesticide => 'कीटकनाशक';
+
+  @override
+  String get productsFilterFertilizer => 'खत';
+
+  @override
+  String get productsFilterSeed => 'बियाणे';
+
+  @override
+  String get productsScanBeforePay => 'दुकानात पैसे देण्यापूर्वी स्कॅन करा';
+
+  @override
+  String get productsScanBeforePaySub =>
+      'येथे बनावट कीटकनाशके खूप सामान्य आहेत';
+
+  @override
+  String get productsReferenceNote =>
+      'संदर्भ यादी आणि अंदाजित दर, कोणतेही दुकान नाही. अॅपमध्ये काहीही विकले जात नाही. भाव करताना याला मार्गदर्शक समजा.';
+
+  @override
   String get productsStaticNote =>
       'सामान्य शेती साहित्याची संदर्भ यादी. दर अंदाजित आहेत — तुमच्या विक्रेत्याकडे तपासा.';
 
   @override
-  String get productsTitle => 'उत्पादने';
+  String get productsTitle => 'शेती निविष्ठा';
 
   @override
   String get productsUsage => 'कसे वापरावे';

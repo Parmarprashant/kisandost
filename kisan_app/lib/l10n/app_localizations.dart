@@ -3995,6 +3995,60 @@ abstract class L10n {
   /// **'Search products'**
   String get productsSearch;
 
+  /// No description provided for @productsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What to ask the shop for, and how much'**
+  String get productsSubtitle;
+
+  /// No description provided for @productsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a product or a disease'**
+  String get productsSearchHint;
+
+  /// No description provided for @productsFilterMyCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'For my crops'**
+  String get productsFilterMyCrops;
+
+  /// No description provided for @productsFilterPesticide.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide'**
+  String get productsFilterPesticide;
+
+  /// No description provided for @productsFilterFertilizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertiliser'**
+  String get productsFilterFertilizer;
+
+  /// No description provided for @productsFilterSeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Seed'**
+  String get productsFilterSeed;
+
+  /// No description provided for @productsScanBeforePay.
+  ///
+  /// In en, this message translates to:
+  /// **'At the shop, scan before you pay'**
+  String get productsScanBeforePay;
+
+  /// No description provided for @productsScanBeforePaySub.
+  ///
+  /// In en, this message translates to:
+  /// **'Counterfeit pesticide is common here'**
+  String get productsScanBeforePaySub;
+
+  /// No description provided for @productsReferenceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A reference list with typical rates, not a shop. Nothing is bought in the app and no seller is quoted. Prices move — treat these as a guide when you bargain.'**
+  String get productsReferenceNote;
+
   /// No description provided for @productsStaticNote.
   ///
   /// In en, this message translates to:
@@ -4004,7 +4058,7 @@ abstract class L10n {
   /// No description provided for @productsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Products'**
+  /// **'Inputs'**
   String get productsTitle;
 
   /// No description provided for @productsUsage.
