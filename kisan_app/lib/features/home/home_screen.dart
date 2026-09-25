@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 import '../../app/locale_controller.dart';
 import '../../app/theme/app_colors.dart';
 import '../../core/network/api_exception.dart';
+import '../../core/widgets/home_widget_service.dart';
 import '../../l10n/app_localizations.dart';
+import '../advisory/data/advisory_repository.dart';
 import '../auth/data/auth_controller.dart';
 import '../farm/data/farm_models.dart';
 import '../farm/data/farm_repository.dart';
@@ -31,6 +33,11 @@ class HomeScreen extends ConsumerWidget {
         ? (crops.first.field.location.weatherQuery ?? _defaultLocation)
         : _defaultLocation;
     final weather = ref.watch(weatherProvider(location));
+
+    // Keep the home-screen widget in step with what is on this screen. Done
+    // here rather than on a timer because this is the moment we know the
+    // figures are fresh and which field they belong to.
+    _syncHomeWidget(ref, l10n, weather.value, location);
 
     return Scaffold(
       appBar: AppBar(
@@ -406,4 +413,41 @@ class _QuickActions extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Pushes the current weather and today's advisory to the Android widget.
+///
+/// Fire and forget: the widget is a convenience, and nothing on this screen
+/// should wait for it or fail because of it.
+void _syncHomeWidget(
+  WidgetRef ref,
+  L10n l10n,
+  WeatherSnapshot? weather,
+  String location,
+) {
+  if (!homeWidgetSupported || weather == null) return;
+
+  final timelines = ref.read(cropTimelinesProvider);
+
+  // The first crop with something actually due. A crop between stages has
+  // nothing to say, and filling the line with the previous stage would tell
+  // a farmer to spray late.
+  String advisory = '';
+  for (final entry in timelines) {
+    final current = entry.timeline.current;
+    if (current != null) {
+      advisory = '${entry.crop.cropName}: ${current.stageName}';
+      break;
+    }
+  }
+
+  const HomeWidgetService().update(
+    HomeWidgetData(
+      place: weather.displayLocation,
+      temperature: '${weather.tempC.round()}°C',
+      condition: weather.condition,
+      advisory: advisory,
+      updated: l10n.offlineJustNow,
+    ),
+  );
 }

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/offline/offline_banner.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/farm_advice.dart';
 import '../data/weather_models.dart';
@@ -397,6 +398,28 @@ class _Error extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final api = ApiException.from(error);
+
+    // Standing in a field with no signal, the last forecast we saw is a far
+    // better answer than an error. Shown with its age so nobody mistakes
+    // yesterday's rain for today's.
+    final cached = ref.read(weatherRepositoryProvider).lastKnown(query);
+    if (cached != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CachedNotice(savedAt: cached.savedAt),
+          _Content(weather: cached.value),
+          const SizedBox(height: 16),
+          Center(
+            child: OutlinedButton.icon(
+              onPressed: () => ref.invalidate(weatherProvider(query)),
+              icon: const Icon(Icons.refresh),
+              label: Text(l10n.appRetry),
+            ),
+          ),
+        ],
+      );
+    }
 
     final message = switch (api.kind) {
       ApiErrorKind.offline => l10n.appOffline,

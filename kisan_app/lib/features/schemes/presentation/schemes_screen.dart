@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/voice/voice_search_field.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/scheme_models.dart';
 import '../data/scheme_repository.dart';
@@ -42,11 +43,8 @@ class _Body extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: l10n.schemesSearch,
-              prefixIcon: const Icon(Icons.search),
-            ),
+          child: VoiceSearchField(
+            hintText: l10n.schemesSearch,
             onChanged: (v) => ref.read(schemeSearchProvider.notifier).update(v),
           ),
         ),

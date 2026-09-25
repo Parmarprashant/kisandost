@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/offline/connectivity.dart';
+import '../core/offline/write_queue.dart';
 import '../features/auth/data/auth_controller.dart';
 import '../features/notifications/data/push_service.dart';
 import '../l10n/app_localizations.dart';
@@ -26,6 +28,12 @@ class _KisanAppState extends ConsumerState<KisanApp> {
     // rather than running at launch. Signing out is left alone deliberately:
     // clearing the token server-side is the backend's job and there is no
     // route for it.
+    // Anything written with no signal goes out the moment there is one.
+    ref.listen(isOnlineProvider, (wasOnline, isOnline) {
+      if (isOnline != true || wasOnline == true) return;
+      ref.read(writeQueueProvider).flush();
+    });
+
     ref.listen(authControllerProvider, (previous, next) {
       if (next is! SignedIn || previous is SignedIn) return;
 

@@ -30,6 +30,16 @@
   "advisoryNothingDue": "Nothing is due right now. The next step is below.",
   "advisoryNow": "DO THIS NOW",
   "advisoryTitle": "Crop calendar",
+  "aiAsk": "Ask a farming question",
+  "aiBusy": "The assistant is busy. Please try again in a moment.",
+  "aiDisclaimer": "Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.",
+  "aiExample1": "My cotton leaves are turning yellow. What should I do?",
+  "aiExample2": "When should I sow wheat this season?",
+  "aiExample3": "How much urea does one acre of rice need?",
+  "aiIntro": "Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.",
+  "aiSignIn": "Sign in to ask a question.",
+  "aiThinking": "Thinking",
+  "aiTitle": "Ask KisanDost",
   "appError": "Something went wrong.",
   "appLanguage": "Language",
   "appLastUpdated": "Updated {time}",
@@ -655,6 +665,41 @@
   "navigation_profile": "Profile",
   "navigation_weather": "Weather",
   "navigation_yieldAi": "Yield AI",
+  "offlineBanner": "No internet. Showing what was saved.",
+  "offlineDays": "{count} days ago",
+  "@offlineDays": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineHours": "{count} hours ago",
+  "@offlineHours": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineJustNow": "just now",
+  "offlineMinutes": "{count} minutes ago",
+  "@offlineMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineQueued": "No signal. Your reply is saved and will be sent when you are back online.",
+  "offlineShowingSaved": "Saved {when}. Connect to get the latest.",
+  "@offlineShowingSaved": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "onboardDistrict": "District",
   "onboardFinish": "Continue",
   "onboardMainCrop": "Main crop",
@@ -700,6 +745,14 @@
   "predMarginNote": "This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.",
   "predNdvi": "Crop greenness (NDVI)",
   "predNdviHelp": "How green and healthy the crop looks from above. Leave as-is if unsure.",
+  "predNoBaseline": "We do not have a yield baseline for {crop} yet. Try the Profit tab, which covers more crops.",
+  "@predNoBaseline": {
+    "placeholders": {
+      "crop": {
+        "type": "String"
+      }
+    }
+  },
   "predPerAcre": "{value} t per acre",
   "@predPerAcre": {
     "placeholders": {
@@ -976,6 +1029,37 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "scanAgain": "Check another",
+  "scanBrand": "Brand",
+  "scanCheck": "Check",
+  "scanChecking": "Checking",
+  "scanCodeLabel": "Code on the pack",
+  "scanCodeWas": "Code read: {code}",
+  "@scanCodeWas": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "scanDose": "Dose per acre",
+  "scanFake": "Do not use",
+  "scanFakeDetail": "This code is flagged as counterfeit in the official registry. Report it to your dealer.",
+  "scanGenuine": "Genuine",
+  "scanGenuineDetail": "This product is in the official registry.",
+  "scanHelp": "Point the camera at the QR code on the pack.",
+  "scanHowToUse": "How to use",
+  "scanLicence": "Licence no.",
+  "scanManual": "Or type the code",
+  "scanManufacturer": "Made by",
+  "scanPremiumNeeded": "Pesticide checking needs a premium membership on your account.",
+  "scanPremiumTitle": "Premium feature",
+  "scanProduct": "Product",
+  "scanSignIn": "Sign in to check a pesticide.",
+  "scanTitle": "Check pesticide",
+  "scanType": "Type",
+  "scanUnknown": "Not in the registry",
+  "scanUnknownDetail": "No record of this code. That does not prove it is fake, but check with your dealer before using it.",
   "schemesAll": "All",
   "schemesBenefits": "What you get",
   "schemesCuratedNote": "A hand-checked list, not a live government feed. Always confirm details on the official site.",
@@ -992,6 +1076,10 @@
   "schemesOpen": "Open official website",
   "schemesSearch": "Search schemes",
   "schemesTitle": "Government schemes",
+  "voiceListening": "Listening — tap to stop",
+  "voiceSpeak": "Speak your answer",
+  "voiceStart": "Speak instead of typing",
+  "voiceStop": "Stop",
   "weatherFeels": "Feels like {value}°",
   "@weatherFeels": {
     "placeholders": {

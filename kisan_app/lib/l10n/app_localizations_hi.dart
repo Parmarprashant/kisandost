@@ -45,6 +45,38 @@ class L10nHi extends L10n {
   String get advisoryTitle => 'फ़सल कैलेंडर';
 
   @override
+  String get aiAsk => 'खेती का सवाल पूछें';
+
+  @override
+  String get aiBusy => 'सहायक व्यस्त है। थोड़ी देर में फिर कोशिश करें।';
+
+  @override
+  String get aiDisclaimer =>
+      'यह सलाह AI से है, आपके जिले और फ़सलों के हिसाब से। पैसा खर्च करने से पहले अपने कृषि अधिकारी से ज़रूर पूछ लें।';
+
+  @override
+  String get aiExample1 => 'मेरी कपास के पत्ते पीले हो रहे हैं। क्या करूँ?';
+
+  @override
+  String get aiExample2 => 'इस मौसम में गेहूँ कब बोऊँ?';
+
+  @override
+  String get aiExample3 => 'एक एकड़ धान में कितनी यूरिया लगती है?';
+
+  @override
+  String get aiIntro =>
+      'अपनी फ़सल के बारे में अपने शब्दों में कुछ भी पूछें। बोलना हो तो माइक दबाएँ।';
+
+  @override
+  String get aiSignIn => 'सवाल पूछने के लिए साइन इन करें।';
+
+  @override
+  String get aiThinking => 'सोच रहे हैं';
+
+  @override
+  String get aiTitle => 'किसानदोस्त से पूछें';
+
+  @override
   String get appError => 'कुछ गड़बड़ हो गई।';
 
   @override
@@ -1724,6 +1756,36 @@ class L10nHi extends L10n {
   String get navigation_yieldAi => 'उपज AI';
 
   @override
+  String get offlineBanner => 'इंटरनेट नहीं। सहेजी हुई जानकारी दिख रही है।';
+
+  @override
+  String offlineDays(String count) {
+    return '$count दिन पहले';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count घंटे पहले';
+  }
+
+  @override
+  String get offlineJustNow => 'अभी';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count मिनट पहले';
+  }
+
+  @override
+  String get offlineQueued =>
+      'सिग्नल नहीं। आपका जवाब सहेज लिया है, इंटरनेट आते ही भेज देंगे।';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return '$when सहेजा गया। नया डेटा पाने के लिए इंटरनेट चालू करें।';
+  }
+
+  @override
   String get onboardDistrict => 'ज़िला';
 
   @override
@@ -1805,6 +1867,11 @@ class L10nHi extends L10n {
   @override
   String get predNdviHelp =>
       'ऊपर से फ़सल कितनी हरी और स्वस्थ दिखती है। पता न हो तो वैसे ही रहने दें।';
+
+  @override
+  String predNoBaseline(String crop) {
+    return '$crop के लिए अभी उपज का आधार नहीं है। मुनाफ़ा टैब आज़माएँ, उसमें ज़्यादा फ़सलें हैं।';
+  }
 
   @override
   String predPerAcre(String value) {
@@ -2661,6 +2728,83 @@ class L10nHi extends L10n {
   String get profitPredictor_totalCost => 'कुल लागत';
 
   @override
+  String get scanAgain => 'दूसरी जाँचें';
+
+  @override
+  String get scanBrand => 'ब्रांड';
+
+  @override
+  String get scanCheck => 'जाँचें';
+
+  @override
+  String get scanChecking => 'जाँच हो रही है';
+
+  @override
+  String get scanCodeLabel => 'डिब्बे पर लिखा कोड';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'पढ़ा गया कोड: $code';
+  }
+
+  @override
+  String get scanDose => 'प्रति एकड़ मात्रा';
+
+  @override
+  String get scanFake => 'इस्तेमाल न करें';
+
+  @override
+  String get scanFakeDetail =>
+      'यह कोड सरकारी सूची में नकली बताया गया है। दुकानदार को बताएँ।';
+
+  @override
+  String get scanGenuine => 'असली';
+
+  @override
+  String get scanGenuineDetail => 'यह उत्पाद सरकारी सूची में दर्ज है।';
+
+  @override
+  String get scanHelp => 'कैमरा डिब्बे पर बने QR कोड पर रखें।';
+
+  @override
+  String get scanHowToUse => 'कैसे इस्तेमाल करें';
+
+  @override
+  String get scanLicence => 'लाइसेंस नं.';
+
+  @override
+  String get scanManual => 'या कोड लिखें';
+
+  @override
+  String get scanManufacturer => 'बनाने वाला';
+
+  @override
+  String get scanPremiumNeeded =>
+      'दवा जाँचने के लिए आपके खाते पर प्रीमियम सदस्यता चाहिए।';
+
+  @override
+  String get scanPremiumTitle => 'प्रीमियम सुविधा';
+
+  @override
+  String get scanProduct => 'उत्पाद';
+
+  @override
+  String get scanSignIn => 'दवा जाँचने के लिए साइन इन करें।';
+
+  @override
+  String get scanTitle => 'दवा जाँचें';
+
+  @override
+  String get scanType => 'प्रकार';
+
+  @override
+  String get scanUnknown => 'सूची में नहीं';
+
+  @override
+  String get scanUnknownDetail =>
+      'इस कोड का रिकॉर्ड नहीं मिला। इसका मतलब नकली नहीं, पर इस्तेमाल से पहले दुकानदार से पूछ लें।';
+
+  @override
   String get schemesAll => 'सभी';
 
   @override
@@ -2689,6 +2833,18 @@ class L10nHi extends L10n {
 
   @override
   String get schemesTitle => 'सरकारी योजनाएँ';
+
+  @override
+  String get voiceListening => 'सुन रहे हैं — रोकने के लिए दबाएँ';
+
+  @override
+  String get voiceSpeak => 'बोलकर बताएँ';
+
+  @override
+  String get voiceStart => 'लिखने के बजाय बोलें';
+
+  @override
+  String get voiceStop => 'रोकें';
 
   @override
   String weatherFeels(String value) {

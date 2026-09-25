@@ -155,6 +155,66 @@ abstract class L10n {
   /// **'Crop calendar'**
   String get advisoryTitle;
 
+  /// No description provided for @aiAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask a farming question'**
+  String get aiAsk;
+
+  /// No description provided for @aiBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'The assistant is busy. Please try again in a moment.'**
+  String get aiBusy;
+
+  /// No description provided for @aiDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.'**
+  String get aiDisclaimer;
+
+  /// No description provided for @aiExample1.
+  ///
+  /// In en, this message translates to:
+  /// **'My cotton leaves are turning yellow. What should I do?'**
+  String get aiExample1;
+
+  /// No description provided for @aiExample2.
+  ///
+  /// In en, this message translates to:
+  /// **'When should I sow wheat this season?'**
+  String get aiExample2;
+
+  /// No description provided for @aiExample3.
+  ///
+  /// In en, this message translates to:
+  /// **'How much urea does one acre of rice need?'**
+  String get aiExample3;
+
+  /// No description provided for @aiIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.'**
+  String get aiIntro;
+
+  /// No description provided for @aiSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to ask a question.'**
+  String get aiSignIn;
+
+  /// No description provided for @aiThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking'**
+  String get aiThinking;
+
+  /// No description provided for @aiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask KisanDost'**
+  String get aiTitle;
+
   /// No description provided for @appError.
   ///
   /// In en, this message translates to:
@@ -3161,6 +3221,48 @@ abstract class L10n {
   /// **'Yield AI'**
   String get navigation_yieldAi;
 
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Showing what was saved.'**
+  String get offlineBanner;
+
+  /// No description provided for @offlineDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String offlineDays(String count);
+
+  /// No description provided for @offlineHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String offlineHours(String count);
+
+  /// No description provided for @offlineJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get offlineJustNow;
+
+  /// No description provided for @offlineMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String offlineMinutes(String count);
+
+  /// No description provided for @offlineQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal. Your reply is saved and will be sent when you are back online.'**
+  String get offlineQueued;
+
+  /// No description provided for @offlineShowingSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {when}. Connect to get the latest.'**
+  String offlineShowingSaved(String when);
+
   /// No description provided for @onboardDistrict.
   ///
   /// In en, this message translates to:
@@ -3304,6 +3406,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'How green and healthy the crop looks from above. Leave as-is if unsure.'**
   String get predNdviHelp;
+
+  /// No description provided for @predNoBaseline.
+  ///
+  /// In en, this message translates to:
+  /// **'We do not have a yield baseline for {crop} yet. Try the Profit tab, which covers more crops.'**
+  String predNoBaseline(String crop);
 
   /// No description provided for @predPerAcre.
   ///
@@ -4709,6 +4817,150 @@ abstract class L10n {
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
 
+  /// No description provided for @scanAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Check another'**
+  String get scanAgain;
+
+  /// No description provided for @scanBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get scanBrand;
+
+  /// No description provided for @scanCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get scanCheck;
+
+  /// No description provided for @scanChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking'**
+  String get scanChecking;
+
+  /// No description provided for @scanCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Code on the pack'**
+  String get scanCodeLabel;
+
+  /// No description provided for @scanCodeWas.
+  ///
+  /// In en, this message translates to:
+  /// **'Code read: {code}'**
+  String scanCodeWas(String code);
+
+  /// No description provided for @scanDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Dose per acre'**
+  String get scanDose;
+
+  /// No description provided for @scanFake.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not use'**
+  String get scanFake;
+
+  /// No description provided for @scanFakeDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'This code is flagged as counterfeit in the official registry. Report it to your dealer.'**
+  String get scanFakeDetail;
+
+  /// No description provided for @scanGenuine.
+  ///
+  /// In en, this message translates to:
+  /// **'Genuine'**
+  String get scanGenuine;
+
+  /// No description provided for @scanGenuineDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'This product is in the official registry.'**
+  String get scanGenuineDetail;
+
+  /// No description provided for @scanHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at the QR code on the pack.'**
+  String get scanHelp;
+
+  /// No description provided for @scanHowToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use'**
+  String get scanHowToUse;
+
+  /// No description provided for @scanLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Licence no.'**
+  String get scanLicence;
+
+  /// No description provided for @scanManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Or type the code'**
+  String get scanManual;
+
+  /// No description provided for @scanManufacturer.
+  ///
+  /// In en, this message translates to:
+  /// **'Made by'**
+  String get scanManufacturer;
+
+  /// No description provided for @scanPremiumNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide checking needs a premium membership on your account.'**
+  String get scanPremiumNeeded;
+
+  /// No description provided for @scanPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium feature'**
+  String get scanPremiumTitle;
+
+  /// No description provided for @scanProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get scanProduct;
+
+  /// No description provided for @scanSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to check a pesticide.'**
+  String get scanSignIn;
+
+  /// No description provided for @scanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check pesticide'**
+  String get scanTitle;
+
+  /// No description provided for @scanType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get scanType;
+
+  /// No description provided for @scanUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Not in the registry'**
+  String get scanUnknown;
+
+  /// No description provided for @scanUnknownDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'No record of this code. That does not prove it is fake, but check with your dealer before using it.'**
+  String get scanUnknownDetail;
+
   /// No description provided for @schemesAll.
   ///
   /// In en, this message translates to:
@@ -4762,6 +5014,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Government schemes'**
   String get schemesTitle;
+
+  /// No description provided for @voiceListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening — tap to stop'**
+  String get voiceListening;
+
+  /// No description provided for @voiceSpeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak your answer'**
+  String get voiceSpeak;
+
+  /// No description provided for @voiceStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak instead of typing'**
+  String get voiceStart;
+
+  /// No description provided for @voiceStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get voiceStop;
 
   /// No description provided for @weatherFeels.
   ///

@@ -20,9 +20,11 @@ class MoreScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
 
     final entries = <_Entry>[
+      _Entry(Icons.support_agent_outlined, l10n.aiTitle, '/ask'),
       _Entry(Icons.forum_outlined, l10n.communityTitle, '/community'),
       _Entry(Icons.cloud_outlined, l10n.navigation_weather, '/weather'),
       _Entry(Icons.event_note_outlined, l10n.advisoryTitle, '/advisory'),
+      _Entry(Icons.qr_code_scanner, l10n.scanTitle, '/scan'),
       _Entry(Icons.science_outlined, l10n.fertTitle, '/fertilizer'),
       _Entry(Icons.account_balance_outlined, l10n.schemesTitle, '/schemes'),
       _Entry(Icons.shopping_bag_outlined, l10n.productsTitle, '/products'),

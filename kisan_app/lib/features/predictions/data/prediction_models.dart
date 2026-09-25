@@ -197,6 +197,40 @@ const defaultNdvi = 0.65;
 const defaultSoilMoisture = 40.0;
 const defaultRainfall = 600.0;
 
+/// Crops `/api/yield-prediction` has a baseline for.
+///
+/// The crop picker is shared with the fertilizer calculator, which knows
+/// twelve crops. The yield route knows six, and returns a 400 for anything
+/// else — so eight of the twelve options used to fail. The screen checks this
+/// set before offering to run, rather than sending a request it knows will be
+/// refused.
+///
+/// Names here are the app's own. [yieldCropApiName] translates to what the
+/// route expects.
+const yieldSupportedCrops = <String>{
+  'Wheat',
+  'Rice',
+  'Maize',
+  'Cotton',
+  'Sugarcane',
+  'Soybean',
+};
+
+/// What the yield route calls a crop.
+///
+/// It uses the American "Corn" for what everyone here calls Maize, which made
+/// a major Indian crop fail for no reason other than the name.
+String yieldCropApiName(String crop) {
+  const aliases = {'Maize': 'Corn'};
+  return aliases[crop.trim()] ?? crop.trim();
+}
+
+/// Whether the yield route can answer for this crop at all.
+bool yieldSupportsCrop(String crop) {
+  final name = crop.trim();
+  return yieldSupportedCrops.any((c) => c.toLowerCase() == name.toLowerCase());
+}
+
 /// Typical soil-test figures in kg/acre, used only as form defaults.
 const defaultNitrogen = 120.0;
 const defaultPhosphorus = 30.0;
