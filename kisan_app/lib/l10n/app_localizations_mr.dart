@@ -1750,6 +1750,36 @@ class L10nMr extends L10n {
   String get navigation_yieldAi => 'उत्पन्न AI';
 
   @override
+  String get offlineBanner => 'इंटरनेट नाही. सेव्ह केलेली माहिती दिसत आहे.';
+
+  @override
+  String offlineDays(String count) {
+    return '$count दिवसांपूर्वी';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count तासांपूर्वी';
+  }
+
+  @override
+  String get offlineJustNow => 'आत्ताच';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count मिनिटेंपूर्वी';
+  }
+
+  @override
+  String get offlineQueued =>
+      'सिग्नल नाही. तुमचे उत्तर सेव्ह केले आहे, इंटरनेट आल्यावर पाठवू.';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return '$when सेव्ह केले. नवीन माहितीसाठी इंटरनेट सुरू करा.';
+  }
+
+  @override
   String get onboardDistrict => 'जिल्हा';
 
   @override

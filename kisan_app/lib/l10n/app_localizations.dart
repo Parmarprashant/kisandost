@@ -3221,6 +3221,48 @@ abstract class L10n {
   /// **'Yield AI'**
   String get navigation_yieldAi;
 
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Showing what was saved.'**
+  String get offlineBanner;
+
+  /// No description provided for @offlineDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String offlineDays(String count);
+
+  /// No description provided for @offlineHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String offlineHours(String count);
+
+  /// No description provided for @offlineJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get offlineJustNow;
+
+  /// No description provided for @offlineMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String offlineMinutes(String count);
+
+  /// No description provided for @offlineQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal. Your reply is saved and will be sent when you are back online.'**
+  String get offlineQueued;
+
+  /// No description provided for @offlineShowingSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {when}. Connect to get the latest.'**
+  String offlineShowingSaved(String when);
+
   /// No description provided for @onboardDistrict.
   ///
   /// In en, this message translates to:

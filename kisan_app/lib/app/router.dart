@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/offline/offline_banner.dart';
 import '../features/advisory/presentation/advisory_screen.dart';
 import '../features/assistant/presentation/assistant_screen.dart';
 import '../features/scanner/presentation/scanner_screen.dart';
@@ -159,7 +160,12 @@ class _AppShell extends StatelessWidget {
     final index = _tabs.indexWhere((t) => location.startsWith(t.path));
 
     return Scaffold(
-      body: child,
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(child: child),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: index < 0 ? 0 : index,
         onDestinationSelected: (i) => context.go(_tabs[i].path),

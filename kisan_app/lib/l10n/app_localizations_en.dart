@@ -1749,6 +1749,36 @@ class L10nEn extends L10n {
   String get navigation_yieldAi => 'Yield AI';
 
   @override
+  String get offlineBanner => 'No internet. Showing what was saved.';
+
+  @override
+  String offlineDays(String count) {
+    return '$count days ago';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String get offlineJustNow => 'just now';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String get offlineQueued =>
+      'No signal. Your reply is saved and will be sent when you are back online.';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return 'Saved $when. Connect to get the latest.';
+  }
+
+  @override
   String get onboardDistrict => 'District';
 
   @override

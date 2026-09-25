@@ -4,16 +4,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/cache_policy.dart';
 import '../../../core/network/dio_client.dart';
+import '../../../core/offline/offline_store.dart';
 import 'weather_models.dart';
 
 final weatherRepositoryProvider = Provider<WeatherRepository>(
-  (ref) => WeatherRepository(ref.read(dioProvider)),
+  (ref) =>
+      WeatherRepository(ref.read(dioProvider), ref.read(offlineStoreProvider)),
 );
 
 class WeatherRepository {
-  WeatherRepository(this._dio);
+  WeatherRepository(this._dio, this._offline);
 
   final Dio _dio;
+  final OfflineStore _offline;
+
+  /// The last forecast that came back for [query], however old.
+  ///
+  /// Returned with its age so the screen can say how stale it is rather than
+  /// passing off yesterday's forecast as today's.
+  CachedPayload<WeatherSnapshot>? lastKnown(String query) {
+    final cached = _offline.readMap(OfflineKeys.weather(query));
+    if (cached == null) return null;
+    try {
+      return CachedPayload(
+        value: WeatherSnapshot.fromJson(cached.value),
+        savedAt: cached.savedAt,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
 
   /// `q` accepts a place name (`Ahmedabad,India`) or `lat,lon` — the Next.js
   /// route handles both.
@@ -32,6 +52,10 @@ class WeatherRepository {
           serverMessage: data?['error'] as String?,
         );
       }
+
+      // Only a real response is kept. Caching a failure would hand the
+      // same error back for days.
+      await _offline.save(OfflineKeys.weather(query), data);
 
       return WeatherSnapshot.fromJson(data);
     } on DioException catch (error) {

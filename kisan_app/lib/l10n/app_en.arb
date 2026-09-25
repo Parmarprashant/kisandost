@@ -665,6 +665,41 @@
   "navigation_profile": "Profile",
   "navigation_weather": "Weather",
   "navigation_yieldAi": "Yield AI",
+  "offlineBanner": "No internet. Showing what was saved.",
+  "offlineDays": "{count} days ago",
+  "@offlineDays": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineHours": "{count} hours ago",
+  "@offlineHours": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineJustNow": "just now",
+  "offlineMinutes": "{count} minutes ago",
+  "@offlineMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineQueued": "No signal. Your reply is saved and will be sent when you are back online.",
+  "offlineShowingSaved": "Saved {when}. Connect to get the latest.",
+  "@offlineShowingSaved": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "onboardDistrict": "District",
   "onboardFinish": "Continue",
   "onboardMainCrop": "Main crop",

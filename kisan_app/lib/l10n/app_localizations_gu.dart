@@ -1752,6 +1752,36 @@ class L10nGu extends L10n {
   String get navigation_yieldAi => 'ઉપજ AI';
 
   @override
+  String get offlineBanner => 'ઇન્ટરનેટ નથી. સાચવેલી માહિતી બતાવીએ છીએ.';
+
+  @override
+  String offlineDays(String count) {
+    return '$count દિવસ પહેલાં';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count કલાક પહેલાં';
+  }
+
+  @override
+  String get offlineJustNow => 'હમણાં જ';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count મિનિટ પહેલાં';
+  }
+
+  @override
+  String get offlineQueued =>
+      'સિગ્નલ નથી. તમારો જવાબ સાચવ્યો છે, ઇન્ટરનેટ આવતાં મોકલીશું.';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return '$when સાચવ્યું. નવી માહિતી માટે ઇન્ટરનેટ ચાલુ કરો.';
+  }
+
+  @override
   String get onboardDistrict => 'જિલ્લો';
 
   @override
