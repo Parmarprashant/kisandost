@@ -4,18 +4,53 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+
+  // ── Silence the lockfile workspace-root warning ──
+  outputFileTracingRoot: "D:\\1winbackup\\desktop\\Ganpat University\\kisandost\\kisan-dost\\ventureHack\\kisan-next",
+
+  experimental: {
+    cpus: 1,
+    workerThreads: false,
+    webpackMemoryOptimizations: true,
+    webpackBuildWorker: false,
+    parallelServerCompiles: false,
+    parallelServerBuildTraces: false,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
+  webpack: (config, { dev, isServer }) => {
+    if (dev) {
+      // Memory cache — avoids disk I/O, keeps compiled modules in RAM
+      config.cache = { type: 'memory' };
+
+      // Limit webpack to 1 concurrent module compilation
+      // This prevents multiple workers from each consuming 1-2 GB on Windows
+      config.parallelism = 1;
+
+      // Disable webpack's internal thread-loader (spawns child processes)
+      // by setting the worker pool size to 0 (inline, single-process compilation)
+      config.module = {
+        ...config.module,
+        rules: (config.module?.rules || []).map((rule: any) => {
+          if (rule && rule.use && Array.isArray(rule.use)) {
+            rule.use = rule.use.filter(
+              (u: any) => !(typeof u === 'object' && u?.loader?.includes?.('thread-loader'))
+            );
+          }
+          return rule;
+        }),
+      };
+    }
+
+    // Exclude mapbox-gl from SSR bundle — it uses browser-only APIs
+    if (isServer) {
+      config.externals = config.externals || [];
+      if (Array.isArray(config.externals)) {
+        config.externals.push({ 'mapbox-gl': 'mapbox-gl' });
+      }
+    }
+    return config;
   },
-}; // Using 'as any' because NextConfig type might not have caught up with Turbopack top-level keys yet
+};
 
 export default withNextIntl(nextConfig);

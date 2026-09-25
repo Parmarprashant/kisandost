@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import { Crop } from '@/models/Crop';
 import { Field } from '@/models/Field';
+import { evaluateCropCycle } from '@/lib/gdd/cropCycleEngine';
 
 // GET crop details
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -14,6 +15,13 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
 
     const { id } = await params;
     await connectDB();
+
+    // Dynamically evaluate and refresh crop physiological cycle (DAS, GDD, growth stage)
+    try {
+      await evaluateCropCycle(id, userId, { autoUpdateDb: true });
+    } catch (cycleErr) {
+      console.warn('[GET /api/crops/[id]] Notice: Dynamic cycle evaluation fallback:', cycleErr);
+    }
 
     const crop = await Crop.findOne({ _id: id, farmerId: userId })
       .populate('fieldId')

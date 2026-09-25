@@ -1,0 +1,31 @@
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04
+
+# System dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3.11 python3-pip python3.11-dev libgomp1 libsndfile1 git curl && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+    torch torchaudio \
+    --index-url https://download.pytorch.org/whl/cu121
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV VEXYL_TTS_HOST=0.0.0.0
+ENV VEXYL_TTS_PORT=8092
+ENV PORT=8092
+ENV VEXYL_TTS_DEVICE=cuda
+ENV VEXYL_TTS_CACHE_SIZE=500
+
+EXPOSE 8092
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8092/health || exit 1
+
+CMD ["python", "vexyl_tts_server.py"]

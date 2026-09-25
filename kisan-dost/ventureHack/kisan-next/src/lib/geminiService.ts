@@ -41,7 +41,8 @@ export async function analyzeCropDisease(file: Blob): Promise<GeminiDiseaseResul
     throw new Error("GEMINI_API_KEY is missing. Please configure your environment variables.");
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+  const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const model = genAI.getGenerativeModel({ model: modelName });
 
   const base64Data = await fileToBase64(file);
   // Ensure we send correct mime type. Fallback to jpeg if unknown.
@@ -59,9 +60,9 @@ export async function analyzeCropDisease(file: Blob): Promise<GeminiDiseaseResul
 Identify:
 1. Crop type
 2. Disease name (if any)
-3. Confidence level (as a number between 0 and 100)
-4. Symptoms
-5. Causes
+3. Confidence level (as an integer number between 0 and 100, e.g. 92)
+4. Symptoms (bullet points of agronomic symptoms observed)
+5. Causes (probable pathogens, environmental triggers)
 6. Precautions farmers should take
 7. Recommended pesticides (generic active ingredients or well-known brands)
 8. Recommended fertilizers
@@ -81,7 +82,7 @@ Return the result strictly in JSON format matching this exact structure, with no
 
 If the crop is healthy, indicate 'Healthy Plant' for diseaseName.`;
 
-  console.log(`[GeminiService] Calling gemini-1.5-flash for image analysis...`);
+  console.log(`[GeminiService] Calling ${modelName} for image analysis...`);
   const result = await model.generateContent([prompt, imagePart]);
   const responseText = result.response.text();
 
@@ -89,6 +90,9 @@ If the crop is healthy, indicate 'Healthy Plant' for diseaseName.`;
     // Strip markdown code block wrappers if Gemini includes them
     const cleanedText = responseText.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
     const parsedData: GeminiDiseaseResult = JSON.parse(cleanedText);
+    if (parsedData.confidence > 0 && parsedData.confidence <= 1) {
+      parsedData.confidence = Math.round(parsedData.confidence * 100);
+    }
     return parsedData;
   } catch (error) {
     console.error("[GeminiService] Failed to parse JSON from Gemini response:", responseText);

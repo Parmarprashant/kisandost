@@ -14,7 +14,7 @@ interface PushOptions {
 export async function sendPushNotificationToUser(options: PushOptions) {
   const { title, body, data, userId, farmerCropId, advisoryId } = options;
 
-  if (!admin) {
+  if (!admin || !admin.apps || admin.apps.length === 0) {
     console.warn('[PushNotifications] Firebase Admin uninitialized, skipping push.');
     return { success: false, reason: 'Firebase Admin not configured' };
   }
