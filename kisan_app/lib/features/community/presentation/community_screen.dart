@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/voice/voice_search_field.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/community_models.dart';
 import '../data/community_repository.dart';
@@ -17,23 +18,54 @@ class CommunityScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final feed = ref.watch(communityFeedProvider);
+    final query = ref.watch(communitySearchProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.communityTitle)),
-      body: RefreshIndicator(
-        onRefresh: () async => ref.refresh(communityFeedProvider.future),
-        child: feed.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, _) => _Error(error: error),
-          data: (page) => page.posts.isEmpty
-              ? _Empty(message: l10n.communityEmpty)
-              : ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-                  itemCount: page.posts.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 14),
-                  itemBuilder: (context, i) => _PostCard(post: page.posts[i]),
-                ),
-        ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+            child: VoiceSearchField(
+              hintText: l10n.communitySearch,
+              onChanged: (v) =>
+                  ref.read(communitySearchProvider.notifier).update(v),
+            ),
+          ),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async => ref.refresh(communityFeedProvider.future),
+              child: feed.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, _) => _Error(error: error),
+                data: (page) {
+                  // Filtered in the app rather than on the server: the feed
+                  // is one page of posts that is already in hand, and a
+                  // round trip per keystroke would cost a farmer data for
+                  // work the phone can do instantly.
+                  final posts = page.posts
+                      .where((p) => p.matches(query))
+                      .toList(growable: false);
+
+                  if (posts.isEmpty) {
+                    return _Empty(
+                      message: query.trim().isEmpty
+                          ? l10n.communityEmpty
+                          : l10n.communityNoMatch,
+                    );
+                  }
+
+                  return ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+                    itemCount: posts.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 14),
+                    itemBuilder: (context, i) => _PostCard(post: posts[i]),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

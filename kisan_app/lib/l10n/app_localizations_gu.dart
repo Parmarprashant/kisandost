@@ -472,6 +472,9 @@ class L10nGu extends L10n {
   String get communityNoComments => 'હજી કોઈ જવાબ નથી. પહેલા તમે લખો.';
 
   @override
+  String get communityNoMatch => 'આ શોધ માટે કોઈ પોસ્ટ નથી';
+
+  @override
   String get communityPost => 'પોસ્ટ કરો';
 
   @override
@@ -479,6 +482,9 @@ class L10nGu extends L10n {
 
   @override
   String get communityPosting => 'પોસ્ટ થઈ રહ્યું છે';
+
+  @override
+  String get communitySearch => 'પોસ્ટ, પાક કે ગામ શોધો';
 
   @override
   String get communitySend => 'મોકલો';
@@ -1145,6 +1151,12 @@ class L10nGu extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'માહિતી કૉપી કરો';
+
+  @override
+  String get diagnoseDetailsCopied => 'કૉપી કર્યું';
+
+  @override
   String get diagnoseExpertNote => 'છંટકાવ પહેલાં નિષ્ણાતની ખાતરી કરો.';
 
   @override
@@ -1171,6 +1183,9 @@ class L10nGu extends L10n {
 
   @override
   String get diagnoseMatching => 'ઉપચાર શોધી રહ્યા છીએ';
+
+  @override
+  String get diagnoseModelDetails => 'મોડલની ટેકનિકલ માહિતી';
 
   @override
   String get diagnoseNoCamera => 'આ ફોનમાં કૅમેરા ઉપલબ્ધ નથી.';

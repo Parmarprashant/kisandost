@@ -470,6 +470,9 @@ class L10nEn extends L10n {
   String get communityNoComments => 'No replies yet. Be the first.';
 
   @override
+  String get communityNoMatch => 'No posts match that search';
+
+  @override
   String get communityPost => 'Post';
 
   @override
@@ -477,6 +480,9 @@ class L10nEn extends L10n {
 
   @override
   String get communityPosting => 'Posting';
+
+  @override
+  String get communitySearch => 'Search posts, crops or villages';
 
   @override
   String get communitySend => 'Send';
@@ -1138,6 +1144,12 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'Copy details';
+
+  @override
+  String get diagnoseDetailsCopied => 'Copied';
+
+  @override
   String get diagnoseExpertNote =>
       'Please confirm with an expert before you spray.';
 
@@ -1164,6 +1176,9 @@ class L10nEn extends L10n {
 
   @override
   String get diagnoseMatching => 'Finding treatments';
+
+  @override
+  String get diagnoseModelDetails => 'Technical details from the model';
 
   @override
   String get diagnoseNoCamera => 'Camera is not available on this device.';

@@ -8,6 +8,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/diagnosis_models.dart';
+import 'model_details_panel.dart';
 import '../data/diagnosis_repository.dart';
 import 'diagnosis_controller.dart';
 
@@ -269,6 +270,9 @@ class _ResultView extends ConsumerWidget {
         _PhotoWithFocus(photo: photo, region: diagnosis.focusRegion),
         const SizedBox(height: 20),
 
+        if (diagnosis.diagnostics != null)
+          ModelDetailsPanel(diagnostics: diagnosis.diagnostics!),
+
         if (diagnosis.cropName.isNotEmpty)
           Text(diagnosis.cropName, style: text.bodySmall),
 
@@ -399,6 +403,10 @@ class _InconclusiveView extends ConsumerWidget {
           ],
         ),
         _Section(title: l10n.diagnoseHowToFix, items: guidance),
+
+        if (diagnosis.diagnostics != null)
+          ModelDetailsPanel(diagnostics: diagnosis.diagnostics!),
+
         const SizedBox(height: 28),
         FilledButton.icon(
           onPressed: () =>

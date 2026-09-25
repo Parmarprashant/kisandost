@@ -49,7 +49,10 @@ class MoreScreen extends ConsumerWidget {
               title: Text(user.name),
               subtitle: user.email == null ? null : Text(user.email!),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go('/profile'),
+              // push, not go: Back should return to this list. With go
+              // the shell has nothing to pop to and lands on Home, which
+              // reads as the app throwing you out.
+              onTap: () => context.push('/profile'),
             ),
           const Divider(),
           for (final entry in entries)
@@ -57,7 +60,7 @@ class MoreScreen extends ConsumerWidget {
               leading: Icon(entry.icon),
               title: Text(entry.label),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go(entry.route),
+              onTap: () => context.push(entry.route),
             ),
           const Divider(),
           // Named rather than silently absent, so a judge or a teammate can

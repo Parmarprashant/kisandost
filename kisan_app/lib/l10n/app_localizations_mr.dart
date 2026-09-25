@@ -473,6 +473,9 @@ class L10nMr extends L10n {
   String get communityNoComments => 'अजून उत्तर नाही. पहिले तुम्ही लिहा.';
 
   @override
+  String get communityNoMatch => 'या शोधासाठी कोणतीही पोस्ट नाही';
+
+  @override
   String get communityPost => 'पोस्ट करा';
 
   @override
@@ -480,6 +483,9 @@ class L10nMr extends L10n {
 
   @override
   String get communityPosting => 'पोस्ट होत आहे';
+
+  @override
+  String get communitySearch => 'पोस्ट, पीक किंवा गाव शोधा';
 
   @override
   String get communitySend => 'पाठवा';
@@ -1142,6 +1148,12 @@ class L10nMr extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'माहिती कॉपी करा';
+
+  @override
+  String get diagnoseDetailsCopied => 'कॉपी केले';
+
+  @override
   String get diagnoseExpertNote => 'फवारणीपूर्वी तज्ञांची खात्री करून घ्या.';
 
   @override
@@ -1168,6 +1180,9 @@ class L10nMr extends L10n {
 
   @override
   String get diagnoseMatching => 'उपचार शोधत आहे';
+
+  @override
+  String get diagnoseModelDetails => 'मॉडेलची तांत्रिक माहिती';
 
   @override
   String get diagnoseNoCamera => 'या फोनमध्ये कॅमेरा उपलब्ध नाही.';

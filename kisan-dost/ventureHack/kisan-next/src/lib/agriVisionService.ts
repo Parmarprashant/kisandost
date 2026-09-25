@@ -63,6 +63,30 @@ export interface AgriVisionDiseaseResult {
   recommendedPesticides: string[];
   recommendedFertilizers: string[];
   requiresExpertVerification: boolean;
+
+  /**
+   * What the model actually said, unedited.
+   *
+   * The farmer-facing copy below is generated from templates, and when a
+   * photo is rejected it used to claim the picture was "wide-angle or
+   * distant" no matter what the real problem was — exposure, an unsupported
+   * crop, not a plant at all. That sends someone back to photograph the same
+   * leaf the same wrong way.
+   *
+   * This is the model's own reason, passed through untouched so the app can
+   * tell the farmer the truth and a developer can see what happened.
+   */
+  diagnostics?: {
+    gateStatus?: string;
+    cropStatus?: string;
+    rejectionReason?: string;
+    rejectionReasons?: string[];
+    rawTopPrediction?: string;
+    rawConfidence?: number;
+    accepted?: boolean;
+    endpoint?: string;
+  };
+
   focusRegion?: {
     isFocused: boolean;
     boxNormalized: [number, number, number, number]; // [ymin, xmin, ymax, xmax]
@@ -206,6 +230,7 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
 
   let raw: AgriVisionRawResponse | null = null;
   let lastError: Error | null = null;
+  let usedEndpoint: string | undefined;
 
   for (const baseUrl of candidateUrls) {
     const controller = new AbortController();
@@ -226,6 +251,7 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       }
 
       raw = await response.json();
+      usedEndpoint = baseUrl;
       console.log(`[AgriVisionService] Diagnosis successfully received from ${baseUrl}: ${raw?.diagnosis?.name}`);
       break;
     } catch (err: any) {
@@ -283,12 +309,28 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       .map(sanitizeText)
       .filter((s) => s.length > 5);
 
+    // The model says WHY it rejected a photo. Use that rather than asserting
+    // the picture was taken from too far away, which was wrong whenever the
+    // real problem was exposure, an unsupported crop, or not a plant.
+    const gateReasons: string[] = [
+      ...((raw as any)?.primary_model?.rejection_reasons ?? []),
+      (raw as any)?.primary_model?.rejection_reason,
+    ]
+      .filter((r: unknown): r is string => typeof r === "string" && r.trim().length > 0)
+      .map((r) => r.replace(/^Image quality gate failed:\s*/i, "").trim());
+
+    const uniqueGateReasons = Array.from(new Set(gateReasons));
+
     const symptoms = isUndetermined
-      ? [
-          "Wide-angle or distant plant photograph detected.",
-          "Individual leaf lesion patterns cannot be resolved with diagnostic certainty.",
-          "Please upload a clear close-up photograph of an individual affected leaf."
-        ]
+      ? (uniqueGateReasons.length > 0
+          ? [
+              ...uniqueGateReasons,
+              "Take a close-up photo of one affected leaf in good daylight.",
+            ]
+          : [
+              "The photo could not be read clearly enough to diagnose.",
+              "Take a close-up photo of one affected leaf in good daylight.",
+            ])
       : matchedSymptoms.length > 0
       ? matchedSymptoms
       : cleanRawEvidence.length > 0
@@ -376,6 +418,16 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       recommendedPesticides,
       recommendedFertilizers,
       requiresExpertVerification: raw.requires_expert_verification ?? false,
+      diagnostics: {
+        gateStatus: (raw as any)?.primary_model?.gate_status,
+        cropStatus: (raw as any)?.crop?.status,
+        rejectionReason: (raw as any)?.primary_model?.rejection_reason,
+        rejectionReasons: (raw as any)?.primary_model?.rejection_reasons,
+        rawTopPrediction: (raw as any)?.primary_model?.raw_top_prediction,
+        rawConfidence: (raw as any)?.primary_model?.raw_confidence,
+        accepted: (raw as any)?.primary_model?.accepted,
+        endpoint: usedEndpoint,
+      },
       focusRegion,
     };
 }

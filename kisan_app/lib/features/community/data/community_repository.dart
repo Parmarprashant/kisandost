@@ -162,3 +162,14 @@ final postCommentsProvider = FutureProvider.family<List<PostComment>, String>((
 ) {
   return ref.read(communityRepositoryProvider).comments(postId);
 });
+
+final communitySearchProvider = NotifierProvider<CommunitySearch, String>(
+  CommunitySearch.new,
+);
+
+class CommunitySearch extends Notifier<String> {
+  @override
+  String build() => '';
+
+  void update(String query) => state = query;
+}
