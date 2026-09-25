@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Shown in the Android widget picker. English only: this is the system
+         widget chooser, which the app's own locale setting does not reach. -->
+    <string name="kisan_widget_description">Weather and today\'s farm advisory</string>
+</resources>
