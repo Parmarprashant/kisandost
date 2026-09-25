@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/voice/voice_search_field.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/community_models.dart';
 import '../data/community_repository.dart';
@@ -140,7 +141,7 @@ class _PostCard extends StatelessWidget {
 
     return Card(
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppTheme.radiusCard),
         onTap: () => PostDetailScreen.open(context, post),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -166,7 +167,7 @@ class _PostCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(post.authorName, style: text.bodyLarge),
+                        Text(post.authorName, style: text.titleSmall),
                         Text(
                           [
                             post.location,
@@ -182,12 +183,14 @@ class _PostCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(post.title, style: text.titleMedium),
-              const SizedBox(height: 6),
+              const SizedBox(height: 5),
               Text(
                 post.problem,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: text.bodyLarge,
+                style: text.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
 
               if (post.hasImages) ...[
@@ -209,23 +212,44 @@ class _PostCard extends StatelessWidget {
                 ),
               ],
 
-              const SizedBox(height: 12),
+              // The counts sit below a rule rather than floating under the
+              // body: they belong to the post, not to the sentence above
+              // them, and a farmer scanning the feed reads them as a block.
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Divider(
+                  height: 1,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
               Row(
                 children: [
                   Icon(
                     post.isHelpfulByMe
                         ? Icons.thumb_up
                         : Icons.thumb_up_outlined,
-                    size: 18,
-                    color: AppColors.muted,
+                    size: 17,
+                    // Marked in brand green once this farmer has voted, so
+                    // "I already answered this" is legible at a glance in a
+                    // feed they scroll every morning.
+                    color: post.isHelpfulByMe
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 6),
-                  Text('${post.helpfulCount}', style: text.labelSmall),
+                  Text(
+                    '${post.helpfulCount}',
+                    style: text.labelMedium?.copyWith(
+                      color: post.isHelpfulByMe
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
                   const SizedBox(width: 18),
-                  const Icon(
+                  Icon(
                     Icons.chat_bubble_outline,
-                    size: 18,
-                    color: AppColors.muted,
+                    size: 17,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 6),
                   Text(
@@ -234,7 +258,29 @@ class _PostCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   if (post.crop.isNotEmpty)
-                    Text(post.crop, style: text.labelMedium),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(
+                          AppTheme.radiusChip,
+                        ),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                      child: Text(
+                        post.crop,
+                        style: text.labelSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ],
