@@ -481,6 +481,9 @@ class L10nGu extends L10n {
   String get communityPostTitle => 'સમસ્યા શું છે?';
 
   @override
+  String get communityPosted => 'પોસ્ટ કર્યું. હવે બીજા ખેડૂતો જોઈ શકે છે.';
+
+  @override
   String get communityPosting => 'પોસ્ટ થઈ રહ્યું છે';
 
   @override
@@ -494,6 +497,39 @@ class L10nGu extends L10n {
 
   @override
   String get communityTitle => 'ખેડૂત સમુદાય';
+
+  @override
+  String get composeIntro =>
+      'બીજા ખેડૂતો આ જોઈને જવાબ આપી શકશે. તમારા શબ્દોમાં લખો — બોલવું સરળ હોય તો માઇક દબાવો.';
+
+  @override
+  String get composeTried => 'તમે અત્યાર સુધી શું કર્યું?';
+
+  @override
+  String get composeTriedHelp =>
+      'જરૂરી નથી, પણ આથી લોકો એ જ સલાહ ફરી નહીં આપે જે તમે કરી ચૂક્યા છો.';
+
+  @override
+  String get composeType => 'પોસ્ટ કયા પ્રકારની છે';
+
+  @override
+  String get composeTypeAsk => 'ખેડૂતોને પૂછો';
+
+  @override
+  String get composeTypeExperience => 'મારો અનુભવ';
+
+  @override
+  String get composeTypeProblem => 'પાકની સમસ્યા';
+
+  @override
+  String get composeTypeSuccess => 'સફળતાની વાર્તા';
+
+  @override
+  String get composeTypeTip => 'બચાવની સલાહ';
+
+  @override
+  String get composeVisibleNote =>
+      'તમારું નામ અને જિલ્લો પોસ્ટ સાથે એપ અને વેબસાઇટ બંને પર દેખાશે.';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {

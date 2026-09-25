@@ -9,6 +9,7 @@ import '../../../core/voice/voice_search_field.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/community_models.dart';
 import '../data/community_repository.dart';
+import 'compose_post_screen.dart';
 import 'post_detail_screen.dart';
 
 class CommunityScreen extends ConsumerWidget {
@@ -22,6 +23,19 @@ class CommunityScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.communityTitle)),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          final posted = await Navigator.of(context).push<bool>(
+            MaterialPageRoute(builder: (_) => const ComposePostScreen()),
+          );
+          if (posted != true || !context.mounted) return;
+
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(l10n.communityPosted)));
+        },
+        icon: const Icon(Icons.edit_outlined),
+        label: Text(l10n.communityAsk),
+      ),
       body: Column(
         children: [
           Padding(

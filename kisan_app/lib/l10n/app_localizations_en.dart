@@ -479,6 +479,9 @@ class L10nEn extends L10n {
   String get communityPostTitle => 'What is the problem?';
 
   @override
+  String get communityPosted => 'Posted. Other farmers can see it now.';
+
+  @override
   String get communityPosting => 'Posting';
 
   @override
@@ -492,6 +495,39 @@ class L10nEn extends L10n {
 
   @override
   String get communityTitle => 'Farmer community';
+
+  @override
+  String get composeIntro =>
+      'Other farmers will see this and can reply. Say it in your own words — tap the microphone if that is easier.';
+
+  @override
+  String get composeTried => 'What have you already tried?';
+
+  @override
+  String get composeTriedHelp =>
+      'Optional, but it saves people suggesting what you have done.';
+
+  @override
+  String get composeType => 'What kind of post';
+
+  @override
+  String get composeTypeAsk => 'Ask farmers';
+
+  @override
+  String get composeTypeExperience => 'My experience';
+
+  @override
+  String get composeTypeProblem => 'Crop problem';
+
+  @override
+  String get composeTypeSuccess => 'Success story';
+
+  @override
+  String get composeTypeTip => 'Prevention tip';
+
+  @override
+  String get composeVisibleNote =>
+      'Your name and district are shown with the post, on the app and on the website.';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {

@@ -479,6 +479,10 @@ class L10nHi extends L10n {
   String get communityPostTitle => 'समस्या क्या है?';
 
   @override
+  String get communityPosted =>
+      'पोस्ट हो गया। अब दूसरे किसान इसे देख सकते हैं।';
+
+  @override
   String get communityPosting => 'पोस्ट हो रहा है';
 
   @override
@@ -493,6 +497,39 @@ class L10nHi extends L10n {
 
   @override
   String get communityTitle => 'किसान समुदाय';
+
+  @override
+  String get composeIntro =>
+      'दूसरे किसान यह देखकर जवाब दे सकेंगे। अपने शब्दों में लिखें — बोलना आसान हो तो माइक दबाएँ।';
+
+  @override
+  String get composeTried => 'आपने अब तक क्या किया है?';
+
+  @override
+  String get composeTriedHelp =>
+      'ज़रूरी नहीं, पर इससे लोग वही सलाह नहीं देंगे जो आप कर चुके हैं।';
+
+  @override
+  String get composeType => 'पोस्ट किस तरह की है';
+
+  @override
+  String get composeTypeAsk => 'किसानों से पूछें';
+
+  @override
+  String get composeTypeExperience => 'मेरा अनुभव';
+
+  @override
+  String get composeTypeProblem => 'फ़सल की समस्या';
+
+  @override
+  String get composeTypeSuccess => 'सफलता की कहानी';
+
+  @override
+  String get composeTypeTip => 'बचाव की सलाह';
+
+  @override
+  String get composeVisibleNote =>
+      'आपका नाम और ज़िला पोस्ट के साथ ऐप और वेबसाइट दोनों पर दिखेगा।';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {

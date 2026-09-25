@@ -947,6 +947,12 @@ abstract class L10n {
   /// **'What is the problem?'**
   String get communityPostTitle;
 
+  /// No description provided for @communityPosted.
+  ///
+  /// In en, this message translates to:
+  /// **'Posted. Other farmers can see it now.'**
+  String get communityPosted;
+
   /// No description provided for @communityPosting.
   ///
   /// In en, this message translates to:
@@ -976,6 +982,66 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Farmer community'**
   String get communityTitle;
+
+  /// No description provided for @composeIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Other farmers will see this and can reply. Say it in your own words — tap the microphone if that is easier.'**
+  String get composeIntro;
+
+  /// No description provided for @composeTried.
+  ///
+  /// In en, this message translates to:
+  /// **'What have you already tried?'**
+  String get composeTried;
+
+  /// No description provided for @composeTriedHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional, but it saves people suggesting what you have done.'**
+  String get composeTriedHelp;
+
+  /// No description provided for @composeType.
+  ///
+  /// In en, this message translates to:
+  /// **'What kind of post'**
+  String get composeType;
+
+  /// No description provided for @composeTypeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask farmers'**
+  String get composeTypeAsk;
+
+  /// No description provided for @composeTypeExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'My experience'**
+  String get composeTypeExperience;
+
+  /// No description provided for @composeTypeProblem.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop problem'**
+  String get composeTypeProblem;
+
+  /// No description provided for @composeTypeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success story'**
+  String get composeTypeSuccess;
+
+  /// No description provided for @composeTypeTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Prevention tip'**
+  String get composeTypeTip;
+
+  /// No description provided for @composeVisibleNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name and district are shown with the post, on the app and on the website.'**
+  String get composeVisibleNote;
 
   /// No description provided for @cropSuggestion_aiAdvisory.
   ///
