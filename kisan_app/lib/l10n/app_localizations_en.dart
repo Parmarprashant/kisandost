@@ -46,6 +46,22 @@ class L10nEn extends L10n {
   String get advisoryTitle => 'Crop calendar';
 
   @override
+  String get advisorySubtitle => 'What to do, when';
+
+  @override
+  String get advisorySmsNoticeTitle => 'You get this as an SMS at 6 AM';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'In your language, even with the app closed and no data';
+
+  @override
+  String get advisoryComingUp => 'Coming up';
+
+  @override
+  String get advisoryToday => 'Today';
+
+  @override
   String get aiAsk => 'Ask a farming question';
 
   @override

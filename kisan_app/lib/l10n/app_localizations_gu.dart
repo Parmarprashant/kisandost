@@ -46,6 +46,23 @@ class L10nGu extends L10n {
   String get advisoryTitle => 'પાક કૅલેન્ડર';
 
   @override
+  String get advisorySubtitle => 'શું અને ક્યારે કરવું';
+
+  @override
+  String get advisorySmsNoticeTitle =>
+      'આ તમને સવારે 6 વાગ્યે SMS દ્વારા મળે છે';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'તમારી ભાષામાં, એપ બંધ હોય અને ઇન્ટરનેટ વિના પણ';
+
+  @override
+  String get advisoryComingUp => 'આગામી કાર્યો';
+
+  @override
+  String get advisoryToday => 'આજે';
+
+  @override
   String get aiAsk => 'ખેતી વિષે સવાલ પૂછો';
 
   @override

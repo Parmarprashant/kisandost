@@ -46,6 +46,23 @@ class L10nMr extends L10n {
   String get advisoryTitle => 'पीक दिनदर्शिका';
 
   @override
+  String get advisorySubtitle => 'काय आणि कधी करावे';
+
+  @override
+  String get advisorySmsNoticeTitle =>
+      'हे तुम्हाला सकाळी 6 वाजता SMS द्वारे मिळते';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'तुमच्या भाषेत, ॲप बंद असताना आणि इंटरनेट नसतानाही';
+
+  @override
+  String get advisoryComingUp => 'आगामी कामे';
+
+  @override
+  String get advisoryToday => 'आज';
+
+  @override
   String get aiAsk => 'शेतीविषयी प्रश्न विचारा';
 
   @override

@@ -155,6 +155,36 @@ abstract class L10n {
   /// **'Crop calendar'**
   String get advisoryTitle;
 
+  /// No description provided for @advisorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do, when'**
+  String get advisorySubtitle;
+
+  /// No description provided for @advisorySmsNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You get this as an SMS at 6 AM'**
+  String get advisorySmsNoticeTitle;
+
+  /// No description provided for @advisorySmsNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'In your language, even with the app closed and no data'**
+  String get advisorySmsNoticeBody;
+
+  /// No description provided for @advisoryComingUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming up'**
+  String get advisoryComingUp;
+
+  /// No description provided for @advisoryToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get advisoryToday;
+
   /// No description provided for @aiAsk.
   ///
   /// In en, this message translates to:

@@ -45,6 +45,22 @@ class L10nHi extends L10n {
   String get advisoryTitle => 'फ़सल कैलेंडर';
 
   @override
+  String get advisorySubtitle => 'क्या और कब करें';
+
+  @override
+  String get advisorySmsNoticeTitle => 'यह आपको सुबह 6 बजे SMS द्वारा मिलता है';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'आपकी भाषा में, ऐप बंद होने और बिना इंटरनेट के भी';
+
+  @override
+  String get advisoryComingUp => 'आगामी कार्य';
+
+  @override
+  String get advisoryToday => 'आज';
+
+  @override
   String get aiAsk => 'खेती का सवाल पूछें';
 
   @override
