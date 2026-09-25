@@ -1807,6 +1807,11 @@ class L10nHi extends L10n {
       'ऊपर से फ़सल कितनी हरी और स्वस्थ दिखती है। पता न हो तो वैसे ही रहने दें।';
 
   @override
+  String predNoBaseline(String crop) {
+    return '$crop के लिए अभी उपज का आधार नहीं है। मुनाफ़ा टैब आज़माएँ, उसमें ज़्यादा फ़सलें हैं।';
+  }
+
+  @override
   String predPerAcre(String value) {
     return '$value टन प्रति एकड़';
   }

@@ -232,6 +232,69 @@ void main() {
     });
   });
 
+  group('yield crop support', () {
+    test('maize is sent as the name the route uses', () {
+      // The route calls it "Corn". Sending "Maize" returned a 400, which
+      // silently broke a major Indian crop for no reason but the name.
+      expect(yieldCropApiName('Maize'), 'Corn');
+    });
+
+    test('leaves every other crop alone', () {
+      expect(yieldCropApiName('Wheat'), 'Wheat');
+      expect(yieldCropApiName('Cotton'), 'Cotton');
+    });
+
+    test('trims whatever the picker handed over', () {
+      expect(yieldCropApiName('  Maize '), 'Corn');
+      expect(yieldCropApiName(' Rice '), 'Rice');
+    });
+
+    test('knows the six crops the route can answer for', () {
+      for (final crop in ['Wheat', 'Rice', 'Maize', 'Cotton', 'Sugarcane']) {
+        expect(yieldSupportsCrop(crop), isTrue, reason: '\$crop should work');
+      }
+    });
+
+    test('knows the ones it cannot', () {
+      // Verified against the deployed route: each of these returns a 400.
+      for (final crop in [
+        'Mango',
+        'Groundnut',
+        'Banana',
+        'Tomato',
+        'Potato',
+        'Onion',
+        'Chickpea',
+      ]) {
+        expect(
+          yieldSupportsCrop(crop),
+          isFalse,
+          reason: '\$crop has no baseline',
+        );
+      }
+    });
+
+    test('matches regardless of case or padding', () {
+      // Crop names arrive from saved field data, not only the picker.
+      expect(yieldSupportsCrop('wheat'), isTrue);
+      expect(yieldSupportsCrop('  COTTON  '), isTrue);
+      expect(yieldSupportsCrop('mango'), isFalse);
+    });
+
+    test('an unknown crop is unsupported rather than an error', () {
+      expect(yieldSupportsCrop('Dragonfruit'), isFalse);
+      expect(yieldSupportsCrop(''), isFalse);
+    });
+
+    test('every supported crop survives the name mapping', () {
+      // A crop in the set whose mapped name the route rejects would be worse
+      // than one that was never offered.
+      for (final crop in yieldSupportedCrops) {
+        expect(yieldCropApiName(crop), isNotEmpty);
+      }
+    });
+  });
+
   group('form defaults', () {
     test('NDVI sits inside the range the model accepts', () {
       // The route rejects values outside 0.1-0.95, and the slider is bounded

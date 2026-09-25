@@ -1799,6 +1799,11 @@ class L10nEn extends L10n {
       'How green and healthy the crop looks from above. Leave as-is if unsure.';
 
   @override
+  String predNoBaseline(String crop) {
+    return 'We do not have a yield baseline for $crop yet. Try the Profit tab, which covers more crops.';
+  }
+
+  @override
   String predPerAcre(String value) {
     return '$value t per acre';
   }

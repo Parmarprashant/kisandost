@@ -3305,6 +3305,12 @@ abstract class L10n {
   /// **'How green and healthy the crop looks from above. Leave as-is if unsure.'**
   String get predNdviHelp;
 
+  /// No description provided for @predNoBaseline.
+  ///
+  /// In en, this message translates to:
+  /// **'We do not have a yield baseline for {crop} yet. Try the Profit tab, which covers more crops.'**
+  String predNoBaseline(String crop);
+
   /// No description provided for @predPerAcre.
   ///
   /// In en, this message translates to:

@@ -1801,6 +1801,11 @@ class L10nMr extends L10n {
       'वरून पीक किती हिरवे आणि निरोगी दिसते. माहीत नसल्यास तसेच ठेवा.';
 
   @override
+  String predNoBaseline(String crop) {
+    return '$crop साठी अजून उत्पादन आधार नाही. नफा टॅब वापरा, त्यात जास्त पिके आहेत.';
+  }
+
+  @override
   String predPerAcre(String value) {
     return '$value टन प्रति एकर';
   }

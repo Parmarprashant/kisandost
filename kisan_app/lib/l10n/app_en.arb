@@ -700,6 +700,14 @@
   "predMarginNote": "This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.",
   "predNdvi": "Crop greenness (NDVI)",
   "predNdviHelp": "How green and healthy the crop looks from above. Leave as-is if unsure.",
+  "predNoBaseline": "We do not have a yield baseline for {crop} yet. Try the Profit tab, which covers more crops.",
+  "@predNoBaseline": {
+    "placeholders": {
+      "crop": {
+        "type": "String"
+      }
+    }
+  },
   "predPerAcre": "{value} t per acre",
   "@predPerAcre": {
     "placeholders": {

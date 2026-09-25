@@ -1803,6 +1803,11 @@ class L10nGu extends L10n {
       'ઉપરથી પાક કેટલો લીલો અને તંદુરસ્ત દેખાય છે. ખબર ન હોય તો એમ જ રહેવા દો.';
 
   @override
+  String predNoBaseline(String crop) {
+    return '$crop માટે હજુ ઉપજનો આધાર નથી. નફો ટેબ અજમાવો, તેમાં વધુ પાક છે.';
+  }
+
+  @override
   String predPerAcre(String value) {
     return '$value ટન પ્રતિ એકર';
   }
