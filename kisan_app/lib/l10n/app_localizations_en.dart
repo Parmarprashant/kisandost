@@ -117,6 +117,9 @@ class L10nEn extends L10n {
   String get authServerError => 'We could not sign you in right now.';
 
   @override
+  String get authSignIn => 'Sign in';
+
+  @override
   String get authSignOut => 'Sign out';
 
   @override
@@ -1718,6 +1721,15 @@ class L10nEn extends L10n {
 
   @override
   String get navFarm => 'My Farm';
+
+  @override
+  String get navGroupAdvice => 'Advice';
+
+  @override
+  String get navGroupReference => 'Look up';
+
+  @override
+  String get navGroupTools => 'Tools';
 
   @override
   String get navInsights => 'Insights';

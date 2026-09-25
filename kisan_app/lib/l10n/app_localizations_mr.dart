@@ -118,6 +118,9 @@ class L10nMr extends L10n {
   String get authServerError => 'आत्ता साइन इन होऊ शकले नाही.';
 
   @override
+  String get authSignIn => 'साइन इन करा';
+
+  @override
   String get authSignOut => 'साइन आउट';
 
   @override
@@ -1718,6 +1721,15 @@ class L10nMr extends L10n {
 
   @override
   String get navFarm => 'माझे शेत';
+
+  @override
+  String get navGroupAdvice => 'सल्ला';
+
+  @override
+  String get navGroupReference => 'माहिती';
+
+  @override
+  String get navGroupTools => 'साधने';
 
   @override
   String get navInsights => 'माहिती';

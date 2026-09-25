@@ -117,6 +117,9 @@ class L10nGu extends L10n {
   String get authServerError => 'અત્યારે સાઇન ઇન થઈ શક્યું નહીં.';
 
   @override
+  String get authSignIn => 'સાઇન ઇન કરો';
+
+  @override
   String get authSignOut => 'સાઇન આઉટ';
 
   @override
@@ -1720,6 +1723,15 @@ class L10nGu extends L10n {
 
   @override
   String get navFarm => 'મારું ખેતર';
+
+  @override
+  String get navGroupAdvice => 'સલાહ';
+
+  @override
+  String get navGroupReference => 'માહિતી';
+
+  @override
+  String get navGroupTools => 'ઉપકરણો';
 
   @override
   String get navInsights => 'માહિતી';

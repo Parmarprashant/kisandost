@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../app/shell/app_drawer.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
@@ -21,6 +22,7 @@ class DiagnoseScreen extends ConsumerWidget {
     final state = ref.watch(diagnosisControllerProvider);
 
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: Text(l10n.navDiagnose),
         actions: [

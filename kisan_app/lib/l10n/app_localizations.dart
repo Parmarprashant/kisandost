@@ -287,6 +287,12 @@ abstract class L10n {
   /// **'We could not sign you in right now.'**
   String get authServerError;
 
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authSignIn;
+
   /// No description provided for @authSignOut.
   ///
   /// In en, this message translates to:
@@ -3160,6 +3166,24 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'My Farm'**
   String get navFarm;
+
+  /// No description provided for @navGroupAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'Advice'**
+  String get navGroupAdvice;
+
+  /// No description provided for @navGroupReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Look up'**
+  String get navGroupReference;
+
+  /// No description provided for @navGroupTools.
+  ///
+  /// In en, this message translates to:
+  /// **'Tools'**
+  String get navGroupTools;
 
   /// No description provided for @navInsights.
   ///
