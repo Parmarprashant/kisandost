@@ -6,79 +6,123 @@ import 'package:intl/intl.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/voice/voice_search_field.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/community_models.dart';
 import '../data/community_repository.dart';
 import 'compose_post_screen.dart';
+import 'farmer_resources_view.dart';
 import 'post_detail_screen.dart';
 
-class CommunityScreen extends ConsumerWidget {
+class CommunityScreen extends ConsumerStatefulWidget {
   const CommunityScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CommunityScreen> createState() => _CommunityScreenState();
+}
+
+class _CommunityScreenState extends ConsumerState<CommunityScreen> {
+  int _selectedTab = 0;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final feed = ref.watch(communityFeedProvider);
     final query = ref.watch(communitySearchProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.communityTitle)),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final posted = await Navigator.of(context).push<bool>(
-            MaterialPageRoute(builder: (_) => const ComposePostScreen()),
-          );
-          if (posted != true || !context.mounted) return;
+      floatingActionButton: _selectedTab == 0
+          ? FloatingActionButton.extended(
+              onPressed: () async {
+                final posted = await Navigator.of(context).push<bool>(
+                  MaterialPageRoute(builder: (_) => const ComposePostScreen()),
+                );
+                if (posted != true || !context.mounted) return;
 
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(l10n.communityPosted)));
-        },
-        icon: const Icon(Icons.edit_outlined),
-        label: Text(l10n.communityAsk),
-      ),
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(l10n.communityPosted)));
+              },
+              icon: const Icon(Icons.edit_outlined),
+              label: Text(l10n.communityAsk),
+            )
+          : null,
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-            child: VoiceSearchField(
-              hintText: l10n.communitySearch,
-              onChanged: (v) =>
-                  ref.read(communitySearchProvider.notifier).update(v),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ChoiceChip(
+                    label: const Center(child: Text('🌾 Farmer Network')),
+                    selected: _selectedTab == 0,
+                    onSelected: (val) {
+                      if (val) setState(() => _selectedTab = 0);
+                    },
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ChoiceChip(
+                    label: const Center(child: Text('🏛️ E-Services & Guides')),
+                    selected: _selectedTab == 1,
+                    onSelected: (val) {
+                      if (val) setState(() => _selectedTab = 1);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: RefreshIndicator(
-              onRefresh: () async => ref.refresh(communityFeedProvider.future),
-              child: feed.when(
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, _) => _Error(error: error),
-                data: (page) {
-                  // Filtered in the app rather than on the server: the feed
-                  // is one page of posts that is already in hand, and a
-                  // round trip per keystroke would cost a farmer data for
-                  // work the phone can do instantly.
-                  final posts = page.posts
-                      .where((p) => p.matches(query))
-                      .toList(growable: false);
-
-                  if (posts.isEmpty) {
-                    return _Empty(
-                      message: query.trim().isEmpty
-                          ? l10n.communityEmpty
-                          : l10n.communityNoMatch,
-                    );
-                  }
-
-                  return ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-                    itemCount: posts.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 14),
-                    itemBuilder: (context, i) => _PostCard(post: posts[i]),
-                  );
-                },
+          if (_selectedTab == 1)
+            const Expanded(child: FarmerResourcesView())
+          else ...[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+              child: VoiceSearchField(
+                hintText: l10n.communitySearch,
+                onChanged: (v) =>
+                    ref.read(communitySearchProvider.notifier).update(v),
               ),
             ),
-          ),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () async =>
+                    ref.refresh(communityFeedProvider.future),
+                child: feed.when(
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (error, _) => _Error(error: error),
+                  data: (page) {
+                    // Filtered in the app rather than on the server: the feed
+                    // is one page of posts that is already in hand, and a
+                    // round trip per keystroke would cost a farmer data for
+                    // work the phone can do instantly.
+                    final posts = page.posts
+                        .where((p) => p.matches(query))
+                        .toList(growable: false);
+
+                    if (posts.isEmpty) {
+                      return _Empty(
+                        message: query.trim().isEmpty
+                            ? l10n.communityEmpty
+                            : l10n.communityNoMatch,
+                      );
+                    }
+
+                    return ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+                      itemCount: posts.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 14),
+                      itemBuilder: (context, i) => _PostCard(post: posts[i]),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -97,7 +141,7 @@ class _PostCard extends StatelessWidget {
 
     return Card(
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppTheme.radiusCard),
         onTap: () => PostDetailScreen.open(context, post),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -123,7 +167,7 @@ class _PostCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(post.authorName, style: text.bodyLarge),
+                        Text(post.authorName, style: text.titleSmall),
                         Text(
                           [
                             post.location,
@@ -139,12 +183,14 @@ class _PostCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(post.title, style: text.titleMedium),
-              const SizedBox(height: 6),
+              const SizedBox(height: 5),
               Text(
                 post.problem,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: text.bodyLarge,
+                style: text.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
 
               if (post.hasImages) ...[
@@ -166,23 +212,44 @@ class _PostCard extends StatelessWidget {
                 ),
               ],
 
-              const SizedBox(height: 12),
+              // The counts sit below a rule rather than floating under the
+              // body: they belong to the post, not to the sentence above
+              // them, and a farmer scanning the feed reads them as a block.
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Divider(
+                  height: 1,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
               Row(
                 children: [
                   Icon(
                     post.isHelpfulByMe
                         ? Icons.thumb_up
                         : Icons.thumb_up_outlined,
-                    size: 18,
-                    color: AppColors.muted,
+                    size: 17,
+                    // Marked in brand green once this farmer has voted, so
+                    // "I already answered this" is legible at a glance in a
+                    // feed they scroll every morning.
+                    color: post.isHelpfulByMe
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 6),
-                  Text('${post.helpfulCount}', style: text.labelSmall),
+                  Text(
+                    '${post.helpfulCount}',
+                    style: text.labelMedium?.copyWith(
+                      color: post.isHelpfulByMe
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
                   const SizedBox(width: 18),
-                  const Icon(
+                  Icon(
                     Icons.chat_bubble_outline,
-                    size: 18,
-                    color: AppColors.muted,
+                    size: 17,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 6),
                   Text(
@@ -191,7 +258,29 @@ class _PostCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   if (post.crop.isNotEmpty)
-                    Text(post.crop, style: text.labelMedium),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(
+                          AppTheme.radiusChip,
+                        ),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                      child: Text(
+                        post.crop,
+                        style: text.labelSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ],

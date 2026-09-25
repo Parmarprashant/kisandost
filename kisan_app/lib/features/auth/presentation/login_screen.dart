@@ -2,152 +2,288 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/locale_controller.dart';
-import '../../../core/config/env.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
+import '../../../core/config/env.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/auth_controller.dart';
 import '../data/auth_models.dart';
 
+/// Sign-in screen matching Login.dc.html (Warm Earth).
+///
+/// The artboard shows OTP entry, but the real auth is Google OAuth.
+/// We keep the Google flow and restyle the chrome to match the artboard.
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final state = ref.watch(authControllerProvider);
     final busy = state is SigningIn;
 
     return Scaffold(
+      backgroundColor: isDark ? AppColors.paperDark : AppColors.paper,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              // The language switch sits above the sign-in button on purpose:
-              // someone who cannot read English has to be able to fix that
-              // before they are asked to do anything else.
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton.icon(
-                  onPressed: () => _showLanguageSheet(context, ref),
-                  icon: const Icon(Icons.language),
-                  label: Text(l10n.appLanguage),
-                ),
-              ),
-
-              const Spacer(),
-
-              Container(
-                width: 120,
-                height: 120,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryContainer,
-                ),
-                child: const Icon(
-                  Icons.eco,
-                  size: 64,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'KisanDost',
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 6),
-              Text(
-                l10n.authTagline,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-
-              const Spacer(),
-
-              if (state is SignedOut && state.failure != null) ...[
-                _FailureNote(failure: state.failure!),
-                const SizedBox(height: 16),
-              ],
-
-              FilledButton.icon(
-                onPressed: busy
-                    ? null
-                    : () => ref
-                          .read(authControllerProvider.notifier)
-                          .signInWithGoogle(),
-                icon: busy
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      // Brand header
+                      Padding(
+                        padding: const EdgeInsets.only(top: 52),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 68,
+                              height: 68,
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? AppColors.forestDark
+                                    : AppColors.forest,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Icon(
+                                Icons.eco,
+                                size: 36,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            Text(
+                              'KisanDost',
+                              style: TextStyle(
+                                fontFamily: AppTheme.displayFamily,
+                                fontSize: 34,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.5,
+                                color: isDark
+                                    ? AppColors.inkDark
+                                    : AppColors.ink,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              l10n.authTagline,
+                              style: TextStyle(
+                                fontSize: 15,
+                                height: 1.55,
+                                color: isDark
+                                    ? AppColors.ink2Dark
+                                    : AppColors.ink2,
+                              ),
+                            ),
+                          ],
                         ),
-                      )
-                    : const Icon(Icons.login),
-                label: Text(busy ? l10n.authSigningIn : l10n.authGoogle),
-              ),
-              const SizedBox(height: 14),
-              Text(
-                l10n.authWhyGoogle,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+                      ),
 
-              // Google's callback returns through a custom scheme that only
-              // resolves on a real device, so without this the app cannot be
-              // signed into on Windows or on the web — and there would be no
-              // way in at all if the intent filter misbehaved on a phone.
-              // Off unless the build asks for it; see Env.allowPasswordLogin.
-              if (Env.allowPasswordLogin) const _DeveloperSignIn(),
+                      const Spacer(),
 
-              const SizedBox(height: 24),
-            ],
-          ),
+                      // Failure note
+                      if (state is SignedOut && state.failure != null) ...[
+                        _FailureNote(failure: state.failure!),
+                        const SizedBox(height: 16),
+                      ],
+
+                      // Sign in button (primary)
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: busy
+                              ? null
+                              : () => ref
+                                    .read(authControllerProvider.notifier)
+                                    .signInWithGoogle(),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isDark
+                                ? AppColors.forestDark
+                                : AppColors.forest,
+                            foregroundColor: Colors.white,
+                            disabledBackgroundColor:
+                                (isDark
+                                        ? AppColors.forestDark
+                                        : AppColors.forest)
+                                    .withValues(alpha: 0.6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 0,
+                          ),
+                          child: busy
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.login, size: 20),
+                                    const SizedBox(width: 9),
+                                    Text(
+                                      l10n.authGoogle,
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+                      Text(
+                        l10n.authWhyGoogle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: isDark ? AppColors.ink3Dark : AppColors.ink3,
+                        ),
+                      ),
+
+                      if (Env.allowPasswordLogin) const _DeveloperSignIn(),
+
+                      // Language picker card
+                      Container(
+                        margin: const EdgeInsets.only(top: 26),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isDark ? AppColors.surfaceDark : Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: isDark ? AppColors.lineDark : AppColors.line,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.loginPickLanguage.toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.08 * 13,
+                                color: isDark
+                                    ? AppColors.ink3Dark
+                                    : AppColors.ink3,
+                              ),
+                            ),
+                            const SizedBox(height: 11),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [
+                                for (final locale in supportedLocales)
+                                  _LanguageChip(
+                                    label:
+                                        localeNames[locale.languageCode] ??
+                                        locale.languageCode,
+                                    selected:
+                                        ref.watch(localeProvider) == locale,
+                                    isDark: isDark,
+                                    onTap: () => ref
+                                        .read(localeProvider.notifier)
+                                        .change(locale),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const Spacer(flex: 1),
+
+                      // Footer note
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 26),
+                        child: Text(
+                          l10n.loginPrivacyNote,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            height: 1.55,
+                            color: isDark ? AppColors.ink3Dark : AppColors.ink3,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
+}
 
-  void _showLanguageSheet(BuildContext context, WidgetRef ref) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (sheetContext) {
-        final current = ref.read(localeProvider);
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 8),
-              for (final locale in supportedLocales)
-                ListTile(
-                  title: Text(
-                    localeNames[locale.languageCode] ?? locale.languageCode,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  trailing: locale == current
-                      ? const Icon(Icons.check, color: AppColors.primary)
-                      : null,
-                  onTap: () {
-                    ref.read(localeProvider.notifier).change(locale);
-                    Navigator.of(sheetContext).pop();
-                  },
-                ),
-            ],
+class _LanguageChip extends StatelessWidget {
+  const _LanguageChip({
+    required this.label,
+    required this.selected,
+    required this.isDark,
+    required this.onTap,
+  });
+  final String label;
+  final bool selected;
+  final bool isDark;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          color: selected
+              ? (isDark ? AppColors.forestDark : AppColors.forest)
+              : (isDark ? AppColors.surfaceDark : Colors.white),
+          borderRadius: BorderRadius.circular(4),
+          border: selected
+              ? null
+              : Border.all(color: isDark ? AppColors.lineDark : AppColors.line),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+            color: selected
+                ? Colors.white
+                : (isDark ? AppColors.ink2Dark : AppColors.ink2),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
 
 class _FailureNote extends StatelessWidget {
   const _FailureNote({required this.failure});
-
   final AuthFailure failure;
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final message = switch (failure) {
       AuthFailure.cancelled => l10n.authCancelled,
@@ -157,10 +293,10 @@ class _FailureNote extends StatelessWidget {
       AuthFailure.server => l10n.authServerError,
     };
 
-    // Cancelling is not an error — the user chose it — so it is stated
-    // neutrally rather than in alarm colours.
     final isFault = failure != AuthFailure.cancelled;
-    final color = isFault ? AppColors.danger : AppColors.muted;
+    final color = isFault
+        ? (isDark ? AppColors.dangerDark : AppColors.danger)
+        : (isDark ? AppColors.mutedDark : AppColors.muted);
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -177,7 +313,15 @@ class _FailureNote extends StatelessWidget {
             color: color,
           ),
           const SizedBox(width: 12),
-          Expanded(child: Text(message)),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(
+                fontSize: 14,
+                color: isDark ? AppColors.inkDark : AppColors.ink,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -185,10 +329,6 @@ class _FailureNote extends StatelessWidget {
 }
 
 /// Username + password sign-in, shown only when the build opted in.
-///
-/// `Env.allowPasswordLogin` is a `bool.fromEnvironment` constant, so when the
-/// flag is absent the tree shaker removes this widget and everything behind it
-/// from the binary.
 class _DeveloperSignIn extends ConsumerStatefulWidget {
   const _DeveloperSignIn();
 

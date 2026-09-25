@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../data/district_suggestion_repository.dart';
+import '../../../app/theme/app_colors.dart';
 
 class DistrictSuggestionScreen extends ConsumerStatefulWidget {
   const DistrictSuggestionScreen({super.key});
@@ -112,12 +113,12 @@ class _DistrictSuggestionScreenState
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
-                  color: const Color(0xFF2E7D32).withValues(alpha: 0.08),
+                  color: AppColors.forest.withValues(alpha: 0.08),
                   child: Row(
                     children: [
                       const Icon(
                         Icons.psychology,
-                        color: Color(0xFF2E7D32),
+                        color: AppColors.forest,
                         size: 28,
                       ),
                       const SizedBox(width: 12),
@@ -129,7 +130,7 @@ class _DistrictSuggestionScreenState
                               'Grounded Agronomic Intelligence',
                               style: theme.textTheme.titleSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF1B5E20),
+                                color: AppColors.forest,
                               ),
                             ),
                             Text(
@@ -155,7 +156,7 @@ class _DistrictSuggestionScreenState
                       labelText: 'Select District (Gujarat)',
                       prefixIcon: const Icon(
                         Icons.location_city,
-                        color: Color(0xFF2E7D32),
+                        color: AppColors.forest,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -257,14 +258,14 @@ class _DistrictSuggestionScreenState
                                     vertical: 3,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF2E7D32)
+                                    color: AppColors.forest
                                         .withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
                                     '${currentDistrict.season} Season',
                                     style: const TextStyle(
-                                      color: Color(0xFF2E7D32),
+                                      color: AppColors.forest,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 11,
                                     ),
@@ -329,7 +330,7 @@ class _DistrictSuggestionScreenState
                       width: double.infinity,
                       child: FilledButton.icon(
                         style: FilledButton.styleFrom(
-                          backgroundColor: const Color(0xFF2E7D32),
+                          backgroundColor: AppColors.forest,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -382,11 +383,11 @@ class _DistrictSuggestionScreenState
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: const BorderSide(
-                            color: Color(0xFF2E7D32),
+                            color: AppColors.forest,
                             width: 1.5,
                           ),
                         ),
-                        color: const Color(0xFF2E7D32).withValues(alpha: 0.03),
+                        color: AppColors.forest.withValues(alpha: 0.03),
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
@@ -396,7 +397,7 @@ class _DistrictSuggestionScreenState
                                 children: [
                                   const Icon(
                                     Icons.verified,
-                                    color: Color(0xFF2E7D32),
+                                    color: AppColors.forest,
                                     size: 20,
                                   ),
                                   const SizedBox(width: 8),
@@ -405,7 +406,7 @@ class _DistrictSuggestionScreenState
                                     style: theme.textTheme.titleMedium
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          color: const Color(0xFF1B5E20),
+                                          color: AppColors.forest,
                                         ),
                                   ),
                                 ],
