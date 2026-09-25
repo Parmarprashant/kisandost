@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../data/crop_detail_models.dart';
 import '../data/farm_repository.dart';
 import 'zone_inspection_sheet.dart';
+import '../../../app/theme/app_colors.dart';
 
 class CropDetailScreen extends ConsumerStatefulWidget {
   const CropDetailScreen({required this.cropId, super.key});
@@ -31,7 +32,7 @@ class _CropDetailScreenState extends ConsumerState<CropDetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Crop cycle and thermal GDD updated successfully.'),
-            backgroundColor: Color(0xFF2E7D32),
+            backgroundColor: AppColors.forest,
           ),
         );
       }
@@ -160,10 +161,10 @@ class _HeaderCard extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: isDark ? const Color(0xFF1E2A20) : const Color(0xFFE8F5E9),
+      color: isDark ? AppColors.surfaceDark : AppColors.forestTint,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: const Color(0xFF2E7D32).withValues(alpha: 0.3)),
+        side: BorderSide(color: AppColors.forest.withValues(alpha: 0.3)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -176,13 +177,13 @@ class _HeaderCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2E7D32).withValues(alpha: 0.15),
+                    color: AppColors.forest.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(
                     Icons.eco,
                     size: 32,
-                    color: Color(0xFF2E7D32),
+                    color: AppColors.forest,
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -215,7 +216,7 @@ class _HeaderCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: crop.isActive
-                        ? const Color(0xFF2E7D32)
+                        ? AppColors.forest
                         : Colors.grey.shade600,
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -274,7 +275,7 @@ class _HeaderStat extends StatelessWidget {
     return Expanded(
       child: Row(
         children: [
-          Icon(icon, size: 20, color: const Color(0xFF2E7D32)),
+          Icon(icon, size: 20, color: AppColors.forest),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,7 +292,7 @@ class _HeaderStat extends StatelessWidget {
                 value,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: highlight ? const Color(0xFF2E7D32) : null,
+                  color: highlight ? AppColors.forest : null,
                 ),
               ),
             ],
@@ -335,7 +336,7 @@ class _SpatialLineageCard extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.explore_outlined,
-                  color: Color(0xFF2E7D32),
+                  color: AppColors.forest,
                   size: 20,
                 ),
                 const SizedBox(width: 8),
@@ -389,9 +390,9 @@ class _SpatialLineageCard extends StatelessWidget {
                       : 'Multi-Angle Zone Inspection',
                 ),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E7D32)
+                  backgroundColor: AppColors.forest
                       .withValues(alpha: 0.12),
-                  foregroundColor: const Color(0xFF2E7D32),
+                  foregroundColor: AppColors.forest,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -440,16 +441,16 @@ class _LineageRow extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.1),
+              color: AppColors.forest.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: const Color(0xFF2E7D32).withValues(alpha: 0.3),
+                color: AppColors.forest.withValues(alpha: 0.3),
               ),
             ),
             child: Text(
               value,
               style: const TextStyle(
-                color: Color(0xFF2E7D32),
+                color: AppColors.forest,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),
@@ -487,11 +488,11 @@ class _AgriShieldRiskCard extends ConsumerWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: const Color(0xFFE65100).withValues(alpha: 0.3)),
+        side: BorderSide(color: AppColors.terracottaText.withValues(alpha: 0.3)),
       ),
       color: theme.brightness == Brightness.dark
-          ? const Color(0xFF2D2319)
-          : const Color(0xFFFFF8E1),
+          ? AppColors.surfaceDark
+          : AppColors.amberTint,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -501,7 +502,7 @@ class _AgriShieldRiskCard extends ConsumerWidget {
               children: [
                 const Icon(
                   Icons.shield_outlined,
-                  color: Color(0xFFE65100),
+                  color: AppColors.terracottaText,
                   size: 22,
                 ),
                 const SizedBox(width: 8),
@@ -572,7 +573,7 @@ class _AgriShieldRiskCard extends ConsumerWidget {
                       children: [
                         Icon(
                           Icons.check_circle_outline,
-                          color: Color(0xFF2E7D32),
+                          color: AppColors.forest,
                           size: 18,
                         ),
                         SizedBox(width: 6),
@@ -580,7 +581,7 @@ class _AgriShieldRiskCard extends ConsumerWidget {
                           'No critical agronomic threats detected.',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF2E7D32),
+                            color: AppColors.forest,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -610,17 +611,17 @@ class _RiskStatusBadge extends StatelessWidget {
 
     switch (status) {
       case 'NO_CONCERN':
-        bg = const Color(0xFFE8F5E9);
-        fg = const Color(0xFF2E7D32);
+        bg = AppColors.forestTint;
+        fg = AppColors.forest;
         label = 'No Concern';
       case 'POTENTIAL_CONCERN':
       case 'ATTENTION':
-        bg = const Color(0xFFFFF3E0);
-        fg = const Color(0xFFE65100);
+        bg = AppColors.amberTint;
+        fg = AppColors.terracottaText;
         label = 'Attention Required';
       case 'HIGH_RISK':
-        bg = const Color(0xFFFFEBEE);
-        fg = const Color(0xFFC62828);
+        bg = AppColors.dangerTint;
+        fg = AppColors.danger;
         label = 'High Risk';
       default:
         bg = Colors.grey.shade200;
@@ -681,7 +682,7 @@ class _ThreatTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isWarning
-              ? const Color(0xFFE65100).withValues(alpha: 0.4)
+              ? AppColors.terracottaText.withValues(alpha: 0.4)
               : theme.dividerColor.withValues(alpha: 0.4),
         ),
       ),
@@ -694,7 +695,7 @@ class _ThreatTile extends StatelessWidget {
                 isWarning ? Icons.warning_amber_rounded : Icons.info_outline,
                 size: 16,
                 color: isWarning
-                    ? const Color(0xFFE65100)
+                    ? AppColors.terracottaText
                     : Colors.grey.shade600,
               ),
               const SizedBox(width: 6),
@@ -768,7 +769,7 @@ class _CropCycleCard extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.thermostat_outlined,
-                  color: Color(0xFF2E7D32),
+                  color: AppColors.forest,
                   size: 20,
                 ),
                 const SizedBox(width: 8),
@@ -809,7 +810,7 @@ class _CropCycleCard extends StatelessWidget {
                   crop.currentStageId ?? 'Vegetative / Active Growth',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
+                    color: AppColors.forest,
                   ),
                 ),
               ],
@@ -835,7 +836,7 @@ class _CropCycleCard extends StatelessWidget {
                   value: ratio,
                   minHeight: 8,
                   backgroundColor: Colors.grey.shade200,
-                  color: const Color(0xFF2E7D32),
+                  color: AppColors.forest,
                 ),
               ),
               const SizedBox(height: 4),
@@ -897,7 +898,7 @@ class _CropScansCard extends ConsumerWidget {
               children: [
                 const Icon(
                   Icons.camera_alt_outlined,
-                  color: Color(0xFF2E7D32),
+                  color: AppColors.forest,
                   size: 20,
                 ),
                 const SizedBox(width: 8),
@@ -1016,10 +1017,10 @@ class _ScanItemTile extends StatelessWidget {
             width: 54,
             height: 54,
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.1),
+              color: AppColors.forest.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.document_scanner, color: Color(0xFF2E7D32)),
+            child: const Icon(Icons.document_scanner, color: AppColors.forest),
           ),
         const SizedBox(width: 12),
         Expanded(

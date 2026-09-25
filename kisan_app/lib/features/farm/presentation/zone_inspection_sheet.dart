@@ -9,6 +9,7 @@ import '../data/boundary_models.dart';
 import '../data/crop_detail_models.dart';
 import '../data/farm_repository.dart';
 import '../data/zone_scan_models.dart';
+import '../../../app/theme/app_colors.dart';
 
 /// Modal bottom sheet providing multi-photo zone scouting & progressive inspection
 /// using the AgriVision AI diagnostic pipeline.
@@ -288,12 +289,12 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.12),
+              color: AppColors.forest.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
               Icons.camera_alt_outlined,
-              color: Color(0xFF2E7D32),
+              color: AppColors.forest,
               size: 22,
             ),
           ),
@@ -349,7 +350,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                 const Icon(
                   Icons.grid_view_rounded,
                   size: 18,
-                  color: Color(0xFF2E7D32),
+                  color: AppColors.forest,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -393,11 +394,11 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                     return ChoiceChip(
                       label: Text('${z.zoneCode} — ${z.zoneName}'),
                       selected: isSelected,
-                      selectedColor: const Color(0xFF2E7D32)
+                      selectedColor: AppColors.forest
                           .withValues(alpha: 0.2),
                       side: BorderSide(
                         color: isSelected
-                            ? const Color(0xFF2E7D32)
+                            ? AppColors.forest
                             : theme.dividerColor,
                       ),
                       onSelected: _activeSession == null
@@ -440,7 +441,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                   ? 'Step 1 of 4'
                   : 'Step ${_activeSession!.scanCount + 1} of 4',
               style: TextStyle(
-                color: const Color(0xFF2E7D32),
+                color: AppColors.forest,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),
@@ -469,18 +470,18 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                           child: Icon(
                             Icons.check_circle,
                             size: 14,
-                            color: Color(0xFF2E7D32),
+                            color: AppColors.forest,
                           ),
                         ),
                       Text(angle.label),
                     ],
                   ),
                   selected: isSelected,
-                  selectedColor: const Color(0xFF2E7D32)
+                  selectedColor: AppColors.forest
                       .withValues(alpha: 0.18),
                   side: BorderSide(
                     color: isSelected
-                        ? const Color(0xFF2E7D32)
+                        ? AppColors.forest
                         : theme.dividerColor.withValues(alpha: 0.6),
                   ),
                   onSelected: (selected) {
@@ -530,7 +531,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
             icon: const Icon(Icons.camera_alt),
             label: Text('Take ${_selectedAngle.label}'),
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF2E7D32),
+              backgroundColor: AppColors.forest,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -557,10 +558,10 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
   Widget _buildLoadingCard(ThemeData theme) {
     return Card(
       elevation: 0,
-      color: const Color(0xFF2E7D32).withValues(alpha: 0.08),
+      color: AppColors.forest.withValues(alpha: 0.08),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: const Color(0xFF2E7D32).withValues(alpha: 0.2)),
+        side: BorderSide(color: AppColors.forest.withValues(alpha: 0.2)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -571,7 +572,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
               height: 36,
               child: CircularProgressIndicator(
                 strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2E7D32)),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.forest),
               ),
             ),
             const SizedBox(height: 14),
@@ -580,7 +581,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF2E7D32),
+                color: AppColors.forest,
               ),
             ),
             const SizedBox(height: 4),
@@ -626,7 +627,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
     final IconData statusIcon;
 
     if (session.isHealthy) {
-      badgeColor = const Color(0xFF2E7D32);
+      badgeColor = AppColors.forest;
       statusLabel = 'No Concern Detected (Healthy)';
       statusIcon = Icons.check_circle_outline;
     } else if (session.isPotentialConcern) {
@@ -740,7 +741,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
   ) {
     final isConsistent = summary.isConsistent;
     final color = isConsistent
-        ? const Color(0xFF2E7D32)
+        ? AppColors.forest
         : Colors.amber.shade900;
 
     return Container(
@@ -864,7 +865,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                   style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
+                    color: AppColors.forest,
                   ),
                 ),
                 Text(
@@ -925,7 +926,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                 icon: const Icon(Icons.check_circle_outline),
                 label: const Text('Complete & Finalize Zone Inspection'),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E7D32),
+                  backgroundColor: AppColors.forest,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -944,7 +945,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
     ZoneScanCompletionSummary summary,
   ) {
     final isHealthy = summary.isHealthy;
-    final color = isHealthy ? const Color(0xFF2E7D32) : Colors.orange.shade800;
+    final color = isHealthy ? AppColors.forest : Colors.orange.shade800;
 
     return Column(
       children: [
@@ -1008,7 +1009,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
           child: FilledButton(
             onPressed: () => Navigator.of(context).pop(),
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF2E7D32),
+              backgroundColor: AppColors.forest,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),

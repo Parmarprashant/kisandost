@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/crop_encyclopedia_models.dart';
+import '../../../app/theme/app_colors.dart';
 
 class CropEncyclopediaScreen extends ConsumerStatefulWidget {
   const CropEncyclopediaScreen({super.key});
@@ -131,8 +132,8 @@ class _CropEncyclopediaCard extends StatelessWidget {
                     imageUrl: crop.image,
                     fit: BoxFit.cover,
                     errorWidget: (_, _, _) => Container(
-                      color: const Color(0xFF2E7D32).withValues(alpha: 0.1),
-                      child: const Icon(Icons.grass, color: Color(0xFF2E7D32)),
+                      color: AppColors.forest.withValues(alpha: 0.1),
+                      child: const Icon(Icons.grass, color: AppColors.forest),
                     ),
                   ),
                 ),
@@ -261,7 +262,7 @@ class _CropDetailSheet extends StatelessWidget {
                           cropName,
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFF1B5E20),
+                            color: AppColors.forest,
                           ),
                         ),
                         Text(
@@ -293,10 +294,10 @@ class _CropDetailSheet extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2E7D32).withValues(alpha: 0.05),
+                  color: AppColors.forest.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: const Color(0xFF2E7D32).withValues(alpha: 0.2),
+                    color: AppColors.forest.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Column(
@@ -355,7 +356,7 @@ class _CropDetailSheet extends StatelessWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
-                                color: Color(0xFFB71C1C),
+                                color: AppColors.danger,
                               ),
                             ),
                           ),
@@ -387,7 +388,7 @@ class _CropDetailSheet extends StatelessWidget {
                             const Icon(
                               Icons.health_and_safety,
                               size: 14,
-                              color: Color(0xFF2E7D32),
+                              color: AppColors.forest,
                             ),
                             const SizedBox(width: 6),
                             Expanded(
@@ -396,7 +397,7 @@ class _CropDetailSheet extends StatelessWidget {
                                 style: const TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1B5E20),
+                                  color: AppColors.forest,
                                 ),
                               ),
                             ),
@@ -413,7 +414,7 @@ class _CropDetailSheet extends StatelessWidget {
                 width: double.infinity,
                 child: FilledButton.icon(
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF2E7D32),
+                    backgroundColor: AppColors.forest,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

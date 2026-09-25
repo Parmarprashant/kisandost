@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../app/theme/app_colors.dart';
 
 class EServiceItem {
   const EServiceItem({
@@ -8,7 +9,7 @@ class EServiceItem {
     required this.description,
     required this.url,
     required this.badge,
-    this.badgeColor = const Color(0xFF2E7D32),
+    this.badgeColor = AppColors.forest,
   });
 
   final String icon;
@@ -140,10 +141,10 @@ class FarmerResourcesView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color(0xFF2E7D32).withValues(alpha: 0.08),
+            color: AppColors.forest.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.2),
+              color: AppColors.forest.withValues(alpha: 0.2),
             ),
           ),
           child: Row(
@@ -158,7 +159,7 @@ class FarmerResourcesView extends StatelessWidget {
                       'Official Government Portals',
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF1B5E20),
+                        color: AppColors.forest,
                       ),
                     ),
                     Text(
