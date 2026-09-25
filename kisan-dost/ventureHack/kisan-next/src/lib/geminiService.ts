@@ -97,7 +97,14 @@ If the crop is healthy, indicate 'Healthy Plant' for diseaseName.`;
 }
 
 export async function getDistrictSuggestion(district: string, season: string = "Kharif", waterAvailability: string = "Medium", recommendedCrops: string[] = []): Promise<string> {
-  const nvidiaKey = process.env.NVIDIA_API_KEY || "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";
+  // No literal fallback. A key committed here is a key published: this file
+  // is in git, and the previous default was a live credential.
+  const nvidiaKey = process.env.NVIDIA_API_KEY;
+  if (!nvidiaKey) {
+    throw new Error(
+      "NVIDIA_API_KEY is not set. District suggestions need it."
+    );
+  }
 
   const cropsText = recommendedCrops.length > 0 ? recommendedCrops.join(", ") : "traditional crops";
 
