@@ -368,7 +368,7 @@ abstract class L10n {
   /// No description provided for @authTagline.
   ///
   /// In en, this message translates to:
-  /// **'Your farming companion'**
+  /// **'Your field, your rate, your language.'**
   String get authTagline;
 
   /// No description provided for @authWhyGoogle.
@@ -376,6 +376,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'We use your Google account so you never have to remember a password.'**
   String get authWhyGoogle;
+
+  /// No description provided for @loginPickLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick your language now'**
+  String get loginPickLanguage;
+
+  /// No description provided for @loginPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No password, no email. Your account stays signed in.'**
+  String get loginPrivacyNote;
 
   /// No description provided for @chatWidget_callExpert.
   ///

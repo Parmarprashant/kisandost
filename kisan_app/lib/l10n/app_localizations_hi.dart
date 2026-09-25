@@ -157,11 +157,18 @@ class L10nHi extends L10n {
       'यह साइन इन लिंक मेल नहीं खाया। कृपया दोबारा शुरू करें।';
 
   @override
-  String get authTagline => 'आपका खेती साथी';
+  String get authTagline => 'आपका खेत, आपकी दर, आपकी भाषा।';
 
   @override
   String get authWhyGoogle =>
       'हम आपका Google खाता इस्तेमाल करते हैं ताकि पासवर्ड याद रखना न पड़े।';
+
+  @override
+  String get loginPickLanguage => 'अभी अपनी भाषा चुनें';
+
+  @override
+  String get loginPrivacyNote =>
+      'कोई पासवर्ड नहीं, कोई ईमेल नहीं। आपका खाता साइन इन रहता है।';
 
   @override
   String get chatWidget_callExpert => 'विशेषज्ञ को कॉल करें';

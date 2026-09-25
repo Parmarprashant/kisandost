@@ -159,11 +159,18 @@ class L10nEn extends L10n {
       'That sign-in link did not match. Please start again.';
 
   @override
-  String get authTagline => 'Your farming companion';
+  String get authTagline => 'Your field, your rate, your language.';
 
   @override
   String get authWhyGoogle =>
       'We use your Google account so you never have to remember a password.';
+
+  @override
+  String get loginPickLanguage => 'Pick your language now';
+
+  @override
+  String get loginPrivacyNote =>
+      'No password, no email. Your account stays signed in.';
 
   @override
   String get chatWidget_callExpert => 'Call Expert';

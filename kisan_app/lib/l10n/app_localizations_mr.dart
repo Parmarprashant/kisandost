@@ -160,11 +160,18 @@ class L10nMr extends L10n {
       'ही साइन इन लिंक जुळली नाही. कृपया पुन्हा सुरू करा.';
 
   @override
-  String get authTagline => 'तुमचा शेती सोबती';
+  String get authTagline => 'तुमचे शेत, तुमचा भाव, तुमची भाषा.';
 
   @override
   String get authWhyGoogle =>
       'आम्ही तुमचे Google खाते वापरतो जेणेकरून पासवर्ड लक्षात ठेवावा लागणार नाही.';
+
+  @override
+  String get loginPickLanguage => 'आत्ता तुमची भाषा निवडा';
+
+  @override
+  String get loginPrivacyNote =>
+      'पासवर्ड नाही, ईमेल नाही. तुमचे खाते साइन इन राहते.';
 
   @override
   String get chatWidget_callExpert => 'तज्ञांना कॉल करा';

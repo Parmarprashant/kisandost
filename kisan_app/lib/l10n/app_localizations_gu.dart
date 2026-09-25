@@ -159,11 +159,18 @@ class L10nGu extends L10n {
       'આ સાઇન ઇન લિંક મેળ ખાતી નથી. કૃપા કરી ફરી શરૂ કરો.';
 
   @override
-  String get authTagline => 'તમારો ખેતી સાથી';
+  String get authTagline => 'તમારું ખેતર, તમારો ભાવ, તમારી ભાષા.';
 
   @override
   String get authWhyGoogle =>
       'અમે તમારું Google ખાતું વાપરીએ છીએ જેથી પાસવર્ડ યાદ રાખવો ન પડે.';
+
+  @override
+  String get loginPickLanguage => 'અત્યારે તમારી ભાષા પસંદ કરો';
+
+  @override
+  String get loginPrivacyNote =>
+      'કોઈ પાસવર્ડ નહીં, કોઈ ઈમેલ નહીં. તમારું ખાતું સાઇન ઇન રહે છે.';
 
   @override
   String get chatWidget_callExpert => 'નિષ્ણાતને કોલ કરો';
