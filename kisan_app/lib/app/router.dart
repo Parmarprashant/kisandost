@@ -35,6 +35,8 @@ import '../l10n/app_localizations.dart';
 final _tabs = <_TabSpec>[
   _TabSpec('/home', Icons.home_outlined, Icons.home, (l) => l.navigation_home),
   _TabSpec('/farm', Icons.grass_outlined, Icons.grass, (l) => l.navFarm),
+  // The raised one. It sits in the middle because it is the highest-value
+  // action and the easiest reach for a thumb — see [_raisedTab].
   _TabSpec(
     '/diagnose',
     Icons.camera_alt_outlined,
@@ -43,11 +45,20 @@ final _tabs = <_TabSpec>[
   ),
   _TabSpec(
     '/insights',
-    Icons.insights_outlined,
-    Icons.insights,
-    (l) => l.navInsights,
+    Icons.storefront_outlined,
+    Icons.storefront,
+    (l) => l.navMarket,
+  ),
+  _TabSpec(
+    '/community',
+    Icons.people_outline,
+    Icons.people,
+    (l) => l.navCommunity,
   ),
 ];
+
+/// Index into [_tabs] of the destination the phone bar raises above itself.
+const _raisedTab = 2;
 
 /// Screens reached from the drawer rather than the bottom bar.
 ///
@@ -56,7 +67,6 @@ final _tabs = <_TabSpec>[
 /// dashboard and taps Home to get back — which reads as the app throwing
 /// them out.
 const _drawerPaths = {
-  '/community',
   '/weather',
   '/fertilizer',
   '/schemes',
@@ -260,9 +270,6 @@ class _PhoneLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = L10n.of(context);
-    final index = tabIndexFor(location);
-
     return Scaffold(
       body: Column(
         children: [
@@ -270,18 +277,186 @@ class _PhoneLayout extends StatelessWidget {
           Expanded(child: child),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        // A drawer screen lights no tab. NavigationBar has no "none", so the
-        // bar is hidden there rather than lying about where the farmer is.
-        selectedIndex: index ?? 0,
-        onDestinationSelected: (i) => context.go(_tabs[i].path),
-        destinations: [
-          for (final tab in _tabs)
-            NavigationDestination(
-              icon: Icon(tab.icon),
-              selectedIcon: Icon(tab.activeIcon),
-              label: tab.label(l10n),
+      bottomNavigationBar: _KdBottomBar(location: location),
+    );
+  }
+}
+
+/// The phone bar: four flat destinations and one raised in the middle.
+///
+/// Material's [NavigationBar] cannot raise a destination, and its "selected"
+/// state has no way to express *none* — a drawer screen belongs to no tab, and
+/// lighting one anyway tells the farmer they are somewhere they are not. Both
+/// of those are reasons enough to draw the bar here.
+class _KdBottomBar extends StatelessWidget {
+  const _KdBottomBar({required this.location});
+
+  final String location;
+
+  /// The bar proper. The raised button stands [_overhang] above this.
+  static const double _barHeight = 76;
+  static const double _overhang = 24;
+  static const double _fabSize = 60;
+
+  /// The gap left in the row for the raised button to sit in.
+  static const double _wellWidth = 76;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final index = tabIndexFor(location);
+    final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
+
+    // Everything except the raised one, in bar order.
+    final flat = [
+      for (var i = 0; i < _tabs.length; i++)
+        if (i != _raisedTab) i,
+    ];
+    final half = flat.length ~/ 2;
+
+    return SizedBox(
+      height: _barHeight + _overhang + bottomInset,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: _barHeight + bottomInset,
+            child: Container(
+              padding: EdgeInsets.only(bottom: bottomInset),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                border: Border(
+                  top: BorderSide(color: theme.colorScheme.outline),
+                ),
+              ),
+              child: Row(
+                children: [
+                  for (final i in flat.take(half))
+                    Expanded(child: _FlatTab(tab: _tabs[i], selected: index == i)),
+                  const SizedBox(width: _wellWidth),
+                  for (final i in flat.skip(half))
+                    Expanded(child: _FlatTab(tab: _tabs[i], selected: index == i)),
+                ],
+              ),
             ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: _RaisedTab(
+                tab: _tabs[_raisedTab],
+                selected: index == _raisedTab,
+                size: _fabSize,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FlatTab extends StatelessWidget {
+  const _FlatTab({required this.tab, required this.selected});
+
+  final _TabSpec tab;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = L10n.of(context);
+    final color = selected
+        ? theme.colorScheme.primary
+        : theme.colorScheme.onSurfaceVariant;
+
+    return InkWell(
+      onTap: () => context.go(tab.path),
+      child: SizedBox(
+        height: _KdBottomBar._barHeight,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(selected ? tab.activeIcon : tab.icon, size: 24, color: color),
+            const SizedBox(height: 3),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: Text(
+                tab.label(l10n),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: color,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// The scan button. The only lifted surface in the app — it has to be found
+/// without looking, by a thumb, while the other hand holds a leaf.
+class _RaisedTab extends StatelessWidget {
+  const _RaisedTab({
+    required this.tab,
+    required this.selected,
+    required this.size,
+  });
+
+  final _TabSpec tab;
+  final bool selected;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = L10n.of(context);
+
+    return GestureDetector(
+      onTap: () => context.go(tab.path),
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary,
+              shape: BoxShape.circle,
+              // The ring is the page colour, not a shadow: it separates the
+              // button from the bar without putting a smudge on the glass.
+              border: Border.all(
+                color: theme.scaffoldBackgroundColor,
+                width: 4,
+              ),
+            ),
+            child: Icon(
+              selected ? tab.activeIcon : tab.icon,
+              size: 26,
+              color: theme.colorScheme.onPrimary,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            tab.label(l10n),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: theme.colorScheme.primary,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
     );

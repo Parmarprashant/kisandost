@@ -1534,6 +1534,28 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get homeMarkDone => 'Mark as done';
+
+  @override
+  String get homeNothingDue => 'Nothing due today';
+
+  @override
+  String get homeNothingDueBody =>
+      'No spray or dose is scheduled. The next one is still days away.';
+
+  @override
+  String get homeRateToday => 'Today\'s rate';
+
+  @override
+  String get homeSchemesForYou => 'Schemes for you';
+
+  @override
+  String get homeSeeAll => 'See all';
+
+  @override
+  String get homeToday => 'Do this today';
+
+  @override
   String get homeMyCrops => 'My crops';
 
   @override
@@ -1720,6 +1742,9 @@ class L10nEn extends L10n {
   String get myCrop_waterSource => 'Water Source';
 
   @override
+  String get navCommunity => 'Community';
+
+  @override
   String get navDiagnose => 'Diagnose';
 
   @override
@@ -1736,6 +1761,9 @@ class L10nEn extends L10n {
 
   @override
   String get navInsights => 'Insights';
+
+  @override
+  String get navMarket => 'Market';
 
   @override
   String get navMore => 'More';
@@ -3055,6 +3083,9 @@ class L10nEn extends L10n {
 
   @override
   String get weatherSearchHint => 'Village, town or district';
+
+  @override
+  String get weatherWorkOk => 'Good conditions for field work right now.';
 
   @override
   String get weatherSprayWarn => 'Rain expected — do not spray today.';

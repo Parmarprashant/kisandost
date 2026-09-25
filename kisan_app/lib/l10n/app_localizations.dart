@@ -2807,6 +2807,48 @@ abstract class L10n {
   /// **'Namaste, {name}'**
   String homeGreeting(String name);
 
+  /// No description provided for @homeMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as done'**
+  String get homeMarkDone;
+
+  /// No description provided for @homeNothingDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing due today'**
+  String get homeNothingDue;
+
+  /// No description provided for @homeNothingDueBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No spray or dose is scheduled. The next one is still days away.'**
+  String get homeNothingDueBody;
+
+  /// No description provided for @homeRateToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s rate'**
+  String get homeRateToday;
+
+  /// No description provided for @homeSchemesForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Schemes for you'**
+  String get homeSchemesForYou;
+
+  /// No description provided for @homeSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAll;
+
+  /// No description provided for @homeToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Do this today'**
+  String get homeToday;
+
   /// No description provided for @homeMyCrops.
   ///
   /// In en, this message translates to:
@@ -3161,6 +3203,12 @@ abstract class L10n {
   /// **'Water Source'**
   String get myCrop_waterSource;
 
+  /// No description provided for @navCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get navCommunity;
+
   /// No description provided for @navDiagnose.
   ///
   /// In en, this message translates to:
@@ -3196,6 +3244,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Insights'**
   String get navInsights;
+
+  /// No description provided for @navMarket.
+  ///
+  /// In en, this message translates to:
+  /// **'Market'**
+  String get navMarket;
 
   /// No description provided for @navMore.
   ///
@@ -5440,6 +5494,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Village, town or district'**
   String get weatherSearchHint;
+
+  /// No description provided for @weatherWorkOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Good conditions for field work right now.'**
+  String get weatherWorkOk;
 
   /// No description provided for @weatherSprayWarn.
   ///

@@ -125,7 +125,6 @@ void main() {
       const fromDrawer = [
         '/products',
         '/profile',
-        '/community',
         '/weather',
         '/fertilizer',
         '/schemes',
@@ -153,7 +152,20 @@ void main() {
     });
 
     test('a sub-path of a drawer screen still lights nothing', () {
-      expect(tabIndexFor('/community/abc123'), isNull);
+      expect(tabIndexFor('/products/abc123'), isNull);
+    });
+
+    test('community is a bar destination now, not a drawer link', () {
+      // It moved into the bar in the redesign: the feed is what brings a
+      // farmer back on a day when nothing is due on their own field.
+      expect(tabIndexFor('/community'), 4);
+      expect(tabIndexFor('/community/abc123'), 4);
+    });
+
+    test('the raised destination is still an ordinary tab index', () {
+      // The scan button is drawn differently, but it is tab 2 like any
+      // other — nothing about the layout changes which tab is lit.
+      expect(tabIndexFor('/diagnose'), 2);
     });
   });
 

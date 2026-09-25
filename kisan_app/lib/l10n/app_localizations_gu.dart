@@ -1536,6 +1536,28 @@ class L10nGu extends L10n {
   }
 
   @override
+  String get homeMarkDone => 'પૂર્ણ થયું';
+
+  @override
+  String get homeNothingDue => 'આજે કંઈ બાકી નથી';
+
+  @override
+  String get homeNothingDueBody =>
+      'આજે કોઈ છંટકાવ કે માત્રા નક્કી નથી. આગલી હજી થોડા દિવસ દૂર છે.';
+
+  @override
+  String get homeRateToday => 'આજનો ભાવ';
+
+  @override
+  String get homeSchemesForYou => 'તમારા માટે યોજનાઓ';
+
+  @override
+  String get homeSeeAll => 'બધું જુઓ';
+
+  @override
+  String get homeToday => 'આજે આ કરો';
+
+  @override
   String get homeMyCrops => 'મારા પાક';
 
   @override
@@ -1722,6 +1744,9 @@ class L10nGu extends L10n {
   String get myCrop_waterSource => 'પાણીનો સ્ત્રોત';
 
   @override
+  String get navCommunity => 'સમુદાય';
+
+  @override
   String get navDiagnose => 'તપાસ';
 
   @override
@@ -1738,6 +1763,9 @@ class L10nGu extends L10n {
 
   @override
   String get navInsights => 'માહિતી';
+
+  @override
+  String get navMarket => 'બજાર';
 
   @override
   String get navMore => 'વધુ';
@@ -3057,6 +3085,9 @@ class L10nGu extends L10n {
 
   @override
   String get weatherSearchHint => 'ગામ, શહેર કે જિલ્લો';
+
+  @override
+  String get weatherWorkOk => 'અત્યારે ખેતરના કામ માટે હવામાન સારું છે.';
 
   @override
   String get weatherSprayWarn => 'વરસાદની શક્યતા — આજે છંટકાવ ન કરો.';
