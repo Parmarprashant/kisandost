@@ -28,7 +28,8 @@ class _YieldTabState extends ConsumerState<YieldTab> {
 
   bool _running = false;
   String? _error;
-  YieldPrediction? _result;
+  // Mirrors the kept provider, so the answer survives leaving the tab.
+  YieldPrediction? get _result => ref.watch(keptYieldProvider);
 
   @override
   void initState() {
@@ -58,13 +59,13 @@ class _YieldTabState extends ConsumerState<YieldTab> {
       final result = await ref
           .read(predictionRepositoryProvider)
           .predictYield(
-            crop: _crop,
+            crop: yieldCropApiName(_crop),
             areaAcres: double.tryParse(_area.text.trim()) ?? 1,
             ndvi: _ndvi,
             soilMoisture: _soilMoisture,
             rainfall: double.tryParse(_rainfall.text.trim()) ?? defaultRainfall,
           );
-      setState(() => _result = result);
+      ref.read(keptYieldProvider.notifier).set(result);
     } on ApiException catch (error) {
       if (!mounted) return;
       final l10n = L10n.of(context);
@@ -90,7 +91,12 @@ class _YieldTabState extends ConsumerState<YieldTab> {
       children: [
         _CropField(
           value: _crop,
-          onChanged: (v) => setState(() => _crop = v),
+          onChanged: (v) => setState(() {
+            _crop = v;
+            // A result for the previous crop must not sit under a new one.
+            ref.read(keptYieldProvider.notifier).clear();
+            _error = null;
+          }),
           label: l10n.predCrop,
         ),
         const SizedBox(height: 16),
@@ -130,10 +136,28 @@ class _YieldTabState extends ConsumerState<YieldTab> {
         ),
 
         const SizedBox(height: 24),
-        FilledButton(
-          onPressed: _running ? null : _run,
-          child: Text(_running ? l10n.predRunning : l10n.predRun),
-        ),
+
+        // Eight of the twelve crops in the shared picker have no baseline in
+        // this route and come back as a 400. Saying so here beats a round
+        // trip that ends in a generic failure message.
+        if (!yieldSupportsCrop(_crop))
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.secondary.withValues(alpha: 0.12),
+            ),
+            child: Text(
+              l10n.predNoBaseline(_crop),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          )
+        else
+          FilledButton(
+            onPressed: _running ? null : _run,
+            child: Text(_running ? l10n.predRunning : l10n.predRun),
+          ),
 
         if (_error != null) ...[
           const SizedBox(height: 20),

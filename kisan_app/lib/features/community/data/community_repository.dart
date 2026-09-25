@@ -3,16 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
+import '../../../core/offline/write_queue.dart';
 import 'community_models.dart';
 
 final communityRepositoryProvider = Provider<CommunityRepository>(
-  (ref) => CommunityRepository(ref.read(dioProvider)),
+  (ref) =>
+      CommunityRepository(ref.read(dioProvider), ref.read(writeQueueProvider)),
 );
 
 class CommunityRepository {
-  CommunityRepository(this._dio);
+  CommunityRepository(this._dio, this._queue);
 
   final Dio _dio;
+  final WriteQueue _queue;
 
   /// The feed. Readable signed out, which is deliberate — a farmer should be
   /// able to see what others are dealing with before committing to an account.
@@ -72,6 +75,27 @@ class CommunityRepository {
 
   Future<void> toggleSaved(String postId) async {
     await _post('/api/community/posts/$postId/save');
+  }
+
+  /// Posts a reply, or queues it if there is no connection.
+  ///
+  /// Returns true when it went out now, false when it was queued. The screen
+  /// says which, because "sent" and "will send later" are different promises.
+  Future<bool> addCommentOrQueue(String postId, String content) async {
+    final path = '/api/community/posts/$postId/comments';
+    try {
+      await addComment(postId, content);
+      return true;
+    } on ApiException catch (error) {
+      // Only a connection problem is worth queueing. A rejected reply would
+      // be rejected again, and a signed-out user needs to sign in first.
+      if (error.kind == ApiErrorKind.offline ||
+          error.kind == ApiErrorKind.timeout) {
+        await _queue.add(path: path, body: {'content': content});
+        return false;
+      }
+      rethrow;
+    }
   }
 
   Future<void> addComment(String postId, String content) async {
@@ -138,3 +162,14 @@ final postCommentsProvider = FutureProvider.family<List<PostComment>, String>((
 ) {
   return ref.read(communityRepositoryProvider).comments(postId);
 });
+
+final communitySearchProvider = NotifierProvider<CommunitySearch, String>(
+  CommunitySearch.new,
+);
+
+class CommunitySearch extends Notifier<String> {
+  @override
+  String build() => '';
+
+  void update(String query) => state = query;
+}

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../app/shell/app_drawer.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/farm_models.dart';
+import '../../../app/shell/ask_fab.dart';
+import '../../../core/offline/offline_banner.dart';
 import '../data/farm_repository.dart';
 import 'add_crop_sheet.dart';
 import 'field_wizard.dart';
@@ -19,27 +22,44 @@ class FarmScreen extends ConsumerWidget {
     final fields = ref.watch(fieldsProvider);
 
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: Text(l10n.navFarm)),
-      floatingActionButton: fields.hasValue && fields.value!.isNotEmpty
-          ? FloatingActionButton.extended(
-              onPressed: () => FieldWizard.open(context),
-              icon: const Icon(Icons.add),
-              label: Text(l10n.farmAddField),
-            )
-          : null,
+      floatingActionButton: FabColumn(
+        primary: fields.hasValue && fields.value!.isNotEmpty
+            ? FloatingActionButton.extended(
+                heroTag: 'farm-add-field',
+                onPressed: () => FieldWizard.open(context),
+                icon: const Icon(Icons.add),
+                label: Text(l10n.farmAddField),
+              )
+            : null,
+      ),
       body: RefreshIndicator(
         onRefresh: () async => ref.refresh(fieldsProvider.future),
         child: fields.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, _) => _Error(error: error),
-          data: (list) => list.isEmpty
-              ? const _Empty()
-              : ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
-                  itemCount: list.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 16),
-                  itemBuilder: (context, i) => _FieldCard(field: list[i]),
-                ),
+          data: (list) {
+            if (list.isEmpty) return const _Empty();
+
+            // Non-null only when the network failed and this came off disk.
+            // A crop list from last week shown as today's would put someone
+            // at the wrong stage of their own calendar.
+            final cachedAt = ref.watch(fieldsCachedAtProvider);
+
+            return ListView.separated(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
+              itemCount: list.length + (cachedAt == null ? 0 : 1),
+              separatorBuilder: (_, _) => const SizedBox(height: 16),
+              itemBuilder: (context, i) {
+                if (cachedAt != null && i == 0) {
+                  return CachedNotice(savedAt: cachedAt);
+                }
+                final field = list[cachedAt == null ? i : i - 1];
+                return _FieldCard(field: field);
+              },
+            );
+          },
         ),
       ),
     );

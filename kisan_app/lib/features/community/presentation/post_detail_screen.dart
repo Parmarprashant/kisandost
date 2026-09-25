@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/voice/voice_input_button.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/data/auth_controller.dart';
 import '../data/community_models.dart';
@@ -60,9 +61,21 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
 
     setState(() => _sending = true);
     try {
-      await ref.read(communityRepositoryProvider).addComment(_post.id, content);
+      final sentNow = await ref
+          .read(communityRepositoryProvider)
+          .addCommentOrQueue(_post.id, content);
       _reply.clear();
       ref.invalidate(postCommentsProvider(_post.id));
+
+      if (!mounted) return;
+      if (!sentNow) {
+        // "Sent" and "will send when you have signal" are different
+        // promises, and a farmer who is told the wrong one stops trusting
+        // the app the first time a reply never appears.
+        final l10n = L10n.of(context);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(l10n.offlineQueued)));
+      }
     } on ApiException catch (error) {
       if (!mounted) return;
       final l10n = L10n.of(context);
@@ -193,6 +206,10 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: l10n.communityAddComment,
+                          // Replying to a neighbour is the longest free text
+                          // in the app, and the hardest to type in Devanagari
+                          // or Gujarati on a phone.
+                          suffixIcon: VoiceInputButton(controller: _reply),
                         ),
                       ),
                     ),

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home-screen widget.
+
+  Deliberately plain and text-heavy. A farmer glances at this in daylight,
+  often on a cheap screen, so it favours a few large readable lines over
+  anything decorative. Everything on it is a real value pushed from the app;
+  nothing is a placeholder that could be mistaken for data.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="14dp"
+    android:background="@drawable/kisan_widget_background">
+
+    <TextView
+        android:id="@+id/widget_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#4A6B4A"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/widget_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#1B3A1B"
+        android:maxLines="1"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/widget_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#1B3A1B"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="" />
+
+    <!-- What to do today, from the on-device advisory calendar. -->
+    <TextView
+        android:id="@+id/widget_advisory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="#2E5A2E"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="" />
+
+    <!-- Says when these figures were fetched, so a stale widget cannot be
+         mistaken for a live one. -->
+    <TextView
+        android:id="@+id/widget_updated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textSize="10sp"
+        android:textColor="#6B7F6B"
+        android:maxLines="1"
+        android:text="" />
+
+</LinearLayout>

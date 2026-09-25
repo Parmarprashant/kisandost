@@ -30,6 +30,16 @@
   "advisoryNothingDue": "Nothing is due right now. The next step is below.",
   "advisoryNow": "DO THIS NOW",
   "advisoryTitle": "Crop calendar",
+  "aiAsk": "Ask a farming question",
+  "aiBusy": "The assistant is busy. Please try again in a moment.",
+  "aiDisclaimer": "Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.",
+  "aiExample1": "My cotton leaves are turning yellow. What should I do?",
+  "aiExample2": "When should I sow wheat this season?",
+  "aiExample3": "How much urea does one acre of rice need?",
+  "aiIntro": "Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.",
+  "aiSignIn": "Sign in to ask a question.",
+  "aiThinking": "Thinking",
+  "aiTitle": "Ask KisanDost",
   "appError": "Something went wrong.",
   "appLanguage": "Language",
   "appLastUpdated": "Updated {time}",
@@ -49,6 +59,7 @@
   "authProfile": "Profile",
   "authRejected": "Google could not sign you in. Please try again.",
   "authServerError": "We could not sign you in right now.",
+  "authSignIn": "Sign in",
   "authSignOut": "Sign out",
   "authSigningIn": "Signing in",
   "authStateMismatch": "That sign-in link did not match. Please start again.",
@@ -163,12 +174,25 @@
   "communityEmpty": "No posts yet",
   "communityHelpful": "Helpful",
   "communityNoComments": "No replies yet. Be the first.",
+  "communityNoMatch": "No posts match that search",
   "communityPost": "Post",
   "communityPostTitle": "What is the problem?",
+  "communityPosted": "Posted. Other farmers can see it now.",
   "communityPosting": "Posting",
+  "communitySearch": "Search posts, crops or villages",
   "communitySend": "Send",
   "communitySignInNote": "Sign in to reply or mark posts helpful.",
   "communityTitle": "Farmer community",
+  "composeIntro": "Other farmers will see this and can reply. Say it in your own words — tap the microphone if that is easier.",
+  "composeTried": "What have you already tried?",
+  "composeTriedHelp": "Optional, but it saves people suggesting what you have done.",
+  "composeType": "What kind of post",
+  "composeTypeAsk": "Ask farmers",
+  "composeTypeExperience": "My experience",
+  "composeTypeProblem": "Crop problem",
+  "composeTypeSuccess": "Success story",
+  "composeTypeTip": "Prevention tip",
+  "composeVisibleNote": "Your name and district are shown with the post, on the app and on the website.",
   "cropSuggestion_aiAdvisory": "AI Advisory for {district}",
   "@cropSuggestion_aiAdvisory": {
     "placeholders": {
@@ -387,6 +411,8 @@
       }
     }
   },
+  "diagnoseCopyDetails": "Copy details",
+  "diagnoseDetailsCopied": "Copied",
   "diagnoseExpertNote": "Please confirm with an expert before you spray.",
   "diagnoseFarmingSteps": "Farming steps",
   "diagnoseGallery": "Choose from gallery",
@@ -396,6 +422,7 @@
   "diagnoseInfected": "Disease found",
   "diagnoseKeepPhoto": "Your photo is saved. You can try again.",
   "diagnoseMatching": "Finding treatments",
+  "diagnoseModelDetails": "Technical details from the model",
   "diagnoseNoCamera": "Camera is not available on this device.",
   "diagnosePermission": "Allow camera access to check your crop.",
   "diagnoseRetake": "Check another leaf",
@@ -553,6 +580,7 @@
     }
   },
   "homeMyCrops": "My crops",
+  "homeNextUp": "What to do next",
   "mandiArrival": "Market date {date}",
   "@mandiArrival": {
     "placeholders": {
@@ -629,6 +657,9 @@
   "myCrop_waterSource": "Water Source",
   "navDiagnose": "Diagnose",
   "navFarm": "My Farm",
+  "navGroupAdvice": "Advice",
+  "navGroupReference": "Look up",
+  "navGroupTools": "Tools",
   "navInsights": "Insights",
   "navMore": "More",
   "navbar_activeFarmer": "Active Farmer",
@@ -655,6 +686,41 @@
   "navigation_profile": "Profile",
   "navigation_weather": "Weather",
   "navigation_yieldAi": "Yield AI",
+  "offlineBanner": "No internet. Showing what was saved.",
+  "offlineDays": "{count} days ago",
+  "@offlineDays": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineHours": "{count} hours ago",
+  "@offlineHours": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineJustNow": "just now",
+  "offlineMinutes": "{count} minutes ago",
+  "@offlineMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineQueued": "No signal. Your reply is saved and will be sent when you are back online.",
+  "offlineShowingSaved": "Saved {when}. Connect to get the latest.",
+  "@offlineShowingSaved": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "onboardDistrict": "District",
   "onboardFinish": "Continue",
   "onboardMainCrop": "Main crop",
@@ -700,6 +766,14 @@
   "predMarginNote": "This counts only the fertilizer, pesticide and irrigation you entered. Seed, labour, land and transport are not included, so your real profit will be lower.",
   "predNdvi": "Crop greenness (NDVI)",
   "predNdviHelp": "How green and healthy the crop looks from above. Leave as-is if unsure.",
+  "predNoBaseline": "We do not have a yield baseline for {crop} yet. Try the Profit tab, which covers more crops.",
+  "@predNoBaseline": {
+    "placeholders": {
+      "crop": {
+        "type": "String"
+      }
+    }
+  },
   "predPerAcre": "{value} t per acre",
   "@predPerAcre": {
     "placeholders": {
@@ -976,6 +1050,37 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "scanAgain": "Check another",
+  "scanBrand": "Brand",
+  "scanCheck": "Check",
+  "scanChecking": "Checking",
+  "scanCodeLabel": "Code on the pack",
+  "scanCodeWas": "Code read: {code}",
+  "@scanCodeWas": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "scanDose": "Dose per acre",
+  "scanFake": "Do not use",
+  "scanFakeDetail": "This code is flagged as counterfeit in the official registry. Report it to your dealer.",
+  "scanGenuine": "Genuine",
+  "scanGenuineDetail": "This product is in the official registry.",
+  "scanHelp": "Point the camera at the QR code on the pack.",
+  "scanHowToUse": "How to use",
+  "scanLicence": "Licence no.",
+  "scanManual": "Or type the code",
+  "scanManufacturer": "Made by",
+  "scanPremiumNeeded": "Pesticide checking needs a premium membership on your account.",
+  "scanPremiumTitle": "Premium feature",
+  "scanProduct": "Product",
+  "scanSignIn": "Sign in to check a pesticide.",
+  "scanTitle": "Check pesticide",
+  "scanType": "Type",
+  "scanUnknown": "Not in the registry",
+  "scanUnknownDetail": "No record of this code. That does not prove it is fake, but check with your dealer before using it.",
   "schemesAll": "All",
   "schemesBenefits": "What you get",
   "schemesCuratedNote": "A hand-checked list, not a live government feed. Always confirm details on the official site.",
@@ -992,6 +1097,30 @@
   "schemesOpen": "Open official website",
   "schemesSearch": "Search schemes",
   "schemesTitle": "Government schemes",
+  "suggestAddField": "Add your field",
+  "suggestAddFieldWhy": "Everything else — advice, prices, the crop calendar — works from your field.",
+  "suggestAsk": "Ask KisanDost",
+  "suggestAskCrop": "Ask about your {crop}",
+  "@suggestAskCrop": {
+    "placeholders": {
+      "crop": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestAskWhy": "Any question, in your own words. Speak it if that is easier.",
+  "suggestInDays": "In {days} days",
+  "@suggestInDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "voiceListening": "Listening — tap to stop",
+  "voiceSpeak": "Speak your answer",
+  "voiceStart": "Speak instead of typing",
+  "voiceStop": "Stop",
   "weatherFeels": "Feels like {value}°",
   "@weatherFeels": {
     "placeholders": {
@@ -1004,7 +1133,10 @@
   "weatherHeatWarn": "Very hot. Irrigate early morning or evening.",
   "weatherHumidity": "Humidity",
   "weatherLocating": "Finding your location",
+  "weatherLocationBlocked": "Location is blocked for this app. Allow it in your phone's Settings.",
   "weatherLocationDenied": "Location is off. Search for your village instead.",
+  "weatherLocationOff": "Turn on location on your phone, then try again.",
+  "weatherLocationSlow": "Could not find your location. Try again outdoors, or search for your town.",
   "weatherPage_allowLocation": "Allow location access when prompted",
   "weatherPage_cloudCover": "Cloud Cover",
   "weatherPage_detectingLocation": "Detecting your location…",

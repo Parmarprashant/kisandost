@@ -46,6 +46,38 @@ class L10nGu extends L10n {
   String get advisoryTitle => 'પાક કૅલેન્ડર';
 
   @override
+  String get aiAsk => 'ખેતી વિષે સવાલ પૂછો';
+
+  @override
+  String get aiBusy => 'સહાયક વ્યસ્ત છે. કૃપા કરીને ફરી પ્રયાસ કરો.';
+
+  @override
+  String get aiDisclaimer =>
+      'આ સલાહ AI તરફથી છે, તમારા જિલ્લા અને પાક પ્રમાણે. પૈસા ખર્ચતા પહેલાં તમારા ખેતીવાડી અધિકારીને જરૂર પૂછો.';
+
+  @override
+  String get aiExample1 => 'મારા કપાસના પાન પીળા થાય છે. શું કરવું?';
+
+  @override
+  String get aiExample2 => 'આ સીઝનમાં ઘઉં ક્યારે વાવવા?';
+
+  @override
+  String get aiExample3 => 'એક એકર ડાંગરમાં કેટલું યુરિયા જોઈએ?';
+
+  @override
+  String get aiIntro =>
+      'તમારા પાક વિષે તમારા શબ્દોમાં કંઈપણ પૂછો. બોલવું હોય તો માઇક દબાવો.';
+
+  @override
+  String get aiSignIn => 'સવાલ પૂછવા સાઇન ઇન કરો.';
+
+  @override
+  String get aiThinking => 'વિચારીએ છીએ';
+
+  @override
+  String get aiTitle => 'કિસાનદોસ્તને પૂછો';
+
+  @override
   String get appError => 'કંઈક ખોટું થયું.';
 
   @override
@@ -83,6 +115,9 @@ class L10nGu extends L10n {
 
   @override
   String get authServerError => 'અત્યારે સાઇન ઇન થઈ શક્યું નહીં.';
+
+  @override
+  String get authSignIn => 'સાઇન ઇન કરો';
 
   @override
   String get authSignOut => 'સાઇન આઉટ';
@@ -440,13 +475,22 @@ class L10nGu extends L10n {
   String get communityNoComments => 'હજી કોઈ જવાબ નથી. પહેલા તમે લખો.';
 
   @override
+  String get communityNoMatch => 'આ શોધ માટે કોઈ પોસ્ટ નથી';
+
+  @override
   String get communityPost => 'પોસ્ટ કરો';
 
   @override
   String get communityPostTitle => 'સમસ્યા શું છે?';
 
   @override
+  String get communityPosted => 'પોસ્ટ કર્યું. હવે બીજા ખેડૂતો જોઈ શકે છે.';
+
+  @override
   String get communityPosting => 'પોસ્ટ થઈ રહ્યું છે';
+
+  @override
+  String get communitySearch => 'પોસ્ટ, પાક કે ગામ શોધો';
 
   @override
   String get communitySend => 'મોકલો';
@@ -456,6 +500,39 @@ class L10nGu extends L10n {
 
   @override
   String get communityTitle => 'ખેડૂત સમુદાય';
+
+  @override
+  String get composeIntro =>
+      'બીજા ખેડૂતો આ જોઈને જવાબ આપી શકશે. તમારા શબ્દોમાં લખો — બોલવું સરળ હોય તો માઇક દબાવો.';
+
+  @override
+  String get composeTried => 'તમે અત્યાર સુધી શું કર્યું?';
+
+  @override
+  String get composeTriedHelp =>
+      'જરૂરી નથી, પણ આથી લોકો એ જ સલાહ ફરી નહીં આપે જે તમે કરી ચૂક્યા છો.';
+
+  @override
+  String get composeType => 'પોસ્ટ કયા પ્રકારની છે';
+
+  @override
+  String get composeTypeAsk => 'ખેડૂતોને પૂછો';
+
+  @override
+  String get composeTypeExperience => 'મારો અનુભવ';
+
+  @override
+  String get composeTypeProblem => 'પાકની સમસ્યા';
+
+  @override
+  String get composeTypeSuccess => 'સફળતાની વાર્તા';
+
+  @override
+  String get composeTypeTip => 'બચાવની સલાહ';
+
+  @override
+  String get composeVisibleNote =>
+      'તમારું નામ અને જિલ્લો પોસ્ટ સાથે એપ અને વેબસાઇટ બંને પર દેખાશે.';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {
@@ -1113,6 +1190,12 @@ class L10nGu extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'માહિતી કૉપી કરો';
+
+  @override
+  String get diagnoseDetailsCopied => 'કૉપી કર્યું';
+
+  @override
   String get diagnoseExpertNote => 'છંટકાવ પહેલાં નિષ્ણાતની ખાતરી કરો.';
 
   @override
@@ -1139,6 +1222,9 @@ class L10nGu extends L10n {
 
   @override
   String get diagnoseMatching => 'ઉપચાર શોધી રહ્યા છીએ';
+
+  @override
+  String get diagnoseModelDetails => 'મોડલની ટેકનિકલ માહિતી';
 
   @override
   String get diagnoseNoCamera => 'આ ફોનમાં કૅમેરા ઉપલબ્ધ નથી.';
@@ -1453,6 +1539,9 @@ class L10nGu extends L10n {
   String get homeMyCrops => 'મારા પાક';
 
   @override
+  String get homeNextUp => 'હવે શું કરવું';
+
+  @override
   String mandiArrival(String date) {
     return 'બજાર તારીખ $date';
   }
@@ -1639,6 +1728,15 @@ class L10nGu extends L10n {
   String get navFarm => 'મારું ખેતર';
 
   @override
+  String get navGroupAdvice => 'સલાહ';
+
+  @override
+  String get navGroupReference => 'માહિતી';
+
+  @override
+  String get navGroupTools => 'ઉપકરણો';
+
+  @override
   String get navInsights => 'માહિતી';
 
   @override
@@ -1718,6 +1816,36 @@ class L10nGu extends L10n {
 
   @override
   String get navigation_yieldAi => 'ઉપજ AI';
+
+  @override
+  String get offlineBanner => 'ઇન્ટરનેટ નથી. સાચવેલી માહિતી બતાવીએ છીએ.';
+
+  @override
+  String offlineDays(String count) {
+    return '$count દિવસ પહેલાં';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count કલાક પહેલાં';
+  }
+
+  @override
+  String get offlineJustNow => 'હમણાં જ';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count મિનિટ પહેલાં';
+  }
+
+  @override
+  String get offlineQueued =>
+      'સિગ્નલ નથી. તમારો જવાબ સાચવ્યો છે, ઇન્ટરનેટ આવતાં મોકલીશું.';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return '$when સાચવ્યું. નવી માહિતી માટે ઇન્ટરનેટ ચાલુ કરો.';
+  }
 
   @override
   String get onboardDistrict => 'જિલ્લો';
@@ -1801,6 +1929,11 @@ class L10nGu extends L10n {
   @override
   String get predNdviHelp =>
       'ઉપરથી પાક કેટલો લીલો અને તંદુરસ્ત દેખાય છે. ખબર ન હોય તો એમ જ રહેવા દો.';
+
+  @override
+  String predNoBaseline(String crop) {
+    return '$crop માટે હજુ ઉપજનો આધાર નથી. નફો ટેબ અજમાવો, તેમાં વધુ પાક છે.';
+  }
 
   @override
   String predPerAcre(String value) {
@@ -2655,6 +2788,83 @@ class L10nGu extends L10n {
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
 
   @override
+  String get scanAgain => 'બીજું તપાસો';
+
+  @override
+  String get scanBrand => 'બ્રાન્ડ';
+
+  @override
+  String get scanCheck => 'તપાસો';
+
+  @override
+  String get scanChecking => 'તપાસ ચાલુ છે';
+
+  @override
+  String get scanCodeLabel => 'પેક પરનો કોડ';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'વાંચેલો કોડ: $code';
+  }
+
+  @override
+  String get scanDose => 'એકર દીઠ માત્રા';
+
+  @override
+  String get scanFake => 'વાપરશો નહીં';
+
+  @override
+  String get scanFakeDetail =>
+      'આ કોડ સરકારી યાદીમાં નકલી તરીકે નોંધાયેલો છે. દુકાનદારને જણાવો.';
+
+  @override
+  String get scanGenuine => 'અસલ';
+
+  @override
+  String get scanGenuineDetail => 'આ ઉત્પાદન સરકારી યાદીમાં છે.';
+
+  @override
+  String get scanHelp => 'કૅમેરાને પેક પરના QR કોડ પર રાખો.';
+
+  @override
+  String get scanHowToUse => 'કેવી રીતે વાપરવું';
+
+  @override
+  String get scanLicence => 'લાઇસન્સ નં.';
+
+  @override
+  String get scanManual => 'અથવા કોડ લખો';
+
+  @override
+  String get scanManufacturer => 'બનાવનાર';
+
+  @override
+  String get scanPremiumNeeded =>
+      'દવા તપાસવા માટે તમારા ખાતાપર પ્રીમિયમ સભ્યપદ જરૂરી છે.';
+
+  @override
+  String get scanPremiumTitle => 'પ્રીમિયમ સુવિધા';
+
+  @override
+  String get scanProduct => 'ઉત્પાદન';
+
+  @override
+  String get scanSignIn => 'દવા તપાસવા સાઇન ઇન કરો.';
+
+  @override
+  String get scanTitle => 'દવા તપાસો';
+
+  @override
+  String get scanType => 'પ્રકાર';
+
+  @override
+  String get scanUnknown => 'યાદીમાં નથી';
+
+  @override
+  String get scanUnknownDetail =>
+      'આ કોડની કોઈ નોંધ નથી. એનો અર્થ નકલી નથી, પણ વાપરતા પહેલાં દુકાનદારને પૂછો.';
+
+  @override
   String get schemesAll => 'બધી';
 
   @override
@@ -2685,6 +2895,42 @@ class L10nGu extends L10n {
   String get schemesTitle => 'સરકારી યોજનાઓ';
 
   @override
+  String get suggestAddField => 'તમારું ખેતર ઉમેરો';
+
+  @override
+  String get suggestAddFieldWhy =>
+      'બીજું બધું — સલાહ, ભાવ, પાક કૅલેન્ડર — તમારા ખેતર પરથી ચાલે છે.';
+
+  @override
+  String get suggestAsk => 'કિસાનદોસ્તને પૂછો';
+
+  @override
+  String suggestAskCrop(String crop) {
+    return 'તમારા $crop વિષે પૂછો';
+  }
+
+  @override
+  String get suggestAskWhy =>
+      'કોઈપણ સવાલ, તમારા શબ્દોમાં. સરળ હોય તો બોલીને પૂછો.';
+
+  @override
+  String suggestInDays(String days) {
+    return '$days દિવસમાં';
+  }
+
+  @override
+  String get voiceListening => 'સાંભીએ છીએ — બંધ કરવા દબાવો';
+
+  @override
+  String get voiceSpeak => 'બોલીને જણાવો';
+
+  @override
+  String get voiceStart => 'લખવાને બદલે બોલો';
+
+  @override
+  String get voiceStop => 'બંધ કરો';
+
+  @override
   String weatherFeels(String value) {
     return 'અનુભવ $value°';
   }
@@ -2702,7 +2948,18 @@ class L10nGu extends L10n {
   String get weatherLocating => 'તમારું સ્થાન શોધી રહ્યા છીએ';
 
   @override
+  String get weatherLocationBlocked =>
+      'આ એપ માટે લોકેશન બંધ છે. સેટિંગ્સમાં પરવાનગી આપો.';
+
+  @override
   String get weatherLocationDenied => 'સ્થાન બંધ છે. તમારા ગામનું નામ શોધો.';
+
+  @override
+  String get weatherLocationOff => 'ફોનમાં લોકેશન ચાલુ કરીને ફરી પ્રયાસ કરો.';
+
+  @override
+  String get weatherLocationSlow =>
+      'તમારું સ્થાન મળ્યું નહીં. બહાર જઈને ફરી પ્રયાસ કરો કે તમારું શહેર શોધો.';
 
   @override
   String get weatherPage_allowLocation => 'પૂછ્યા પર સ્થળ અનુમતિ આપો';

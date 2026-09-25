@@ -46,6 +46,39 @@ class L10nEn extends L10n {
   String get advisoryTitle => 'Crop calendar';
 
   @override
+  String get aiAsk => 'Ask a farming question';
+
+  @override
+  String get aiBusy => 'The assistant is busy. Please try again in a moment.';
+
+  @override
+  String get aiDisclaimer =>
+      'Advice from an AI, using your district and crops. Check anything important with your local agriculture officer before spending money on it.';
+
+  @override
+  String get aiExample1 =>
+      'My cotton leaves are turning yellow. What should I do?';
+
+  @override
+  String get aiExample2 => 'When should I sow wheat this season?';
+
+  @override
+  String get aiExample3 => 'How much urea does one acre of rice need?';
+
+  @override
+  String get aiIntro =>
+      'Ask anything about your crops, in your own words. Tap the microphone if you would rather speak.';
+
+  @override
+  String get aiSignIn => 'Sign in to ask a question.';
+
+  @override
+  String get aiThinking => 'Thinking';
+
+  @override
+  String get aiTitle => 'Ask KisanDost';
+
+  @override
   String get appError => 'Something went wrong.';
 
   @override
@@ -82,6 +115,9 @@ class L10nEn extends L10n {
 
   @override
   String get authServerError => 'We could not sign you in right now.';
+
+  @override
+  String get authSignIn => 'Sign in';
 
   @override
   String get authSignOut => 'Sign out';
@@ -437,13 +473,22 @@ class L10nEn extends L10n {
   String get communityNoComments => 'No replies yet. Be the first.';
 
   @override
+  String get communityNoMatch => 'No posts match that search';
+
+  @override
   String get communityPost => 'Post';
 
   @override
   String get communityPostTitle => 'What is the problem?';
 
   @override
+  String get communityPosted => 'Posted. Other farmers can see it now.';
+
+  @override
   String get communityPosting => 'Posting';
+
+  @override
+  String get communitySearch => 'Search posts, crops or villages';
 
   @override
   String get communitySend => 'Send';
@@ -453,6 +498,39 @@ class L10nEn extends L10n {
 
   @override
   String get communityTitle => 'Farmer community';
+
+  @override
+  String get composeIntro =>
+      'Other farmers will see this and can reply. Say it in your own words — tap the microphone if that is easier.';
+
+  @override
+  String get composeTried => 'What have you already tried?';
+
+  @override
+  String get composeTriedHelp =>
+      'Optional, but it saves people suggesting what you have done.';
+
+  @override
+  String get composeType => 'What kind of post';
+
+  @override
+  String get composeTypeAsk => 'Ask farmers';
+
+  @override
+  String get composeTypeExperience => 'My experience';
+
+  @override
+  String get composeTypeProblem => 'Crop problem';
+
+  @override
+  String get composeTypeSuccess => 'Success story';
+
+  @override
+  String get composeTypeTip => 'Prevention tip';
+
+  @override
+  String get composeVisibleNote =>
+      'Your name and district are shown with the post, on the app and on the website.';
 
   @override
   String cropSuggestion_aiAdvisory(String district) {
@@ -1105,6 +1183,12 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'Copy details';
+
+  @override
+  String get diagnoseDetailsCopied => 'Copied';
+
+  @override
   String get diagnoseExpertNote =>
       'Please confirm with an expert before you spray.';
 
@@ -1131,6 +1215,9 @@ class L10nEn extends L10n {
 
   @override
   String get diagnoseMatching => 'Finding treatments';
+
+  @override
+  String get diagnoseModelDetails => 'Technical details from the model';
 
   @override
   String get diagnoseNoCamera => 'Camera is not available on this device.';
@@ -1450,6 +1537,9 @@ class L10nEn extends L10n {
   String get homeMyCrops => 'My crops';
 
   @override
+  String get homeNextUp => 'What to do next';
+
+  @override
   String mandiArrival(String date) {
     return 'Market date $date';
   }
@@ -1636,6 +1726,15 @@ class L10nEn extends L10n {
   String get navFarm => 'My Farm';
 
   @override
+  String get navGroupAdvice => 'Advice';
+
+  @override
+  String get navGroupReference => 'Look up';
+
+  @override
+  String get navGroupTools => 'Tools';
+
+  @override
   String get navInsights => 'Insights';
 
   @override
@@ -1714,6 +1813,36 @@ class L10nEn extends L10n {
 
   @override
   String get navigation_yieldAi => 'Yield AI';
+
+  @override
+  String get offlineBanner => 'No internet. Showing what was saved.';
+
+  @override
+  String offlineDays(String count) {
+    return '$count days ago';
+  }
+
+  @override
+  String offlineHours(String count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String get offlineJustNow => 'just now';
+
+  @override
+  String offlineMinutes(String count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String get offlineQueued =>
+      'No signal. Your reply is saved and will be sent when you are back online.';
+
+  @override
+  String offlineShowingSaved(String when) {
+    return 'Saved $when. Connect to get the latest.';
+  }
 
   @override
   String get onboardDistrict => 'District';
@@ -1797,6 +1926,11 @@ class L10nEn extends L10n {
   @override
   String get predNdviHelp =>
       'How green and healthy the crop looks from above. Leave as-is if unsure.';
+
+  @override
+  String predNoBaseline(String crop) {
+    return 'We do not have a yield baseline for $crop yet. Try the Profit tab, which covers more crops.';
+  }
 
   @override
   String predPerAcre(String value) {
@@ -2650,6 +2784,83 @@ class L10nEn extends L10n {
   String get profitPredictor_totalCost => 'Total Cost';
 
   @override
+  String get scanAgain => 'Check another';
+
+  @override
+  String get scanBrand => 'Brand';
+
+  @override
+  String get scanCheck => 'Check';
+
+  @override
+  String get scanChecking => 'Checking';
+
+  @override
+  String get scanCodeLabel => 'Code on the pack';
+
+  @override
+  String scanCodeWas(String code) {
+    return 'Code read: $code';
+  }
+
+  @override
+  String get scanDose => 'Dose per acre';
+
+  @override
+  String get scanFake => 'Do not use';
+
+  @override
+  String get scanFakeDetail =>
+      'This code is flagged as counterfeit in the official registry. Report it to your dealer.';
+
+  @override
+  String get scanGenuine => 'Genuine';
+
+  @override
+  String get scanGenuineDetail => 'This product is in the official registry.';
+
+  @override
+  String get scanHelp => 'Point the camera at the QR code on the pack.';
+
+  @override
+  String get scanHowToUse => 'How to use';
+
+  @override
+  String get scanLicence => 'Licence no.';
+
+  @override
+  String get scanManual => 'Or type the code';
+
+  @override
+  String get scanManufacturer => 'Made by';
+
+  @override
+  String get scanPremiumNeeded =>
+      'Pesticide checking needs a premium membership on your account.';
+
+  @override
+  String get scanPremiumTitle => 'Premium feature';
+
+  @override
+  String get scanProduct => 'Product';
+
+  @override
+  String get scanSignIn => 'Sign in to check a pesticide.';
+
+  @override
+  String get scanTitle => 'Check pesticide';
+
+  @override
+  String get scanType => 'Type';
+
+  @override
+  String get scanUnknown => 'Not in the registry';
+
+  @override
+  String get scanUnknownDetail =>
+      'No record of this code. That does not prove it is fake, but check with your dealer before using it.';
+
+  @override
   String get schemesAll => 'All';
 
   @override
@@ -2680,6 +2891,42 @@ class L10nEn extends L10n {
   String get schemesTitle => 'Government schemes';
 
   @override
+  String get suggestAddField => 'Add your field';
+
+  @override
+  String get suggestAddFieldWhy =>
+      'Everything else — advice, prices, the crop calendar — works from your field.';
+
+  @override
+  String get suggestAsk => 'Ask KisanDost';
+
+  @override
+  String suggestAskCrop(String crop) {
+    return 'Ask about your $crop';
+  }
+
+  @override
+  String get suggestAskWhy =>
+      'Any question, in your own words. Speak it if that is easier.';
+
+  @override
+  String suggestInDays(String days) {
+    return 'In $days days';
+  }
+
+  @override
+  String get voiceListening => 'Listening — tap to stop';
+
+  @override
+  String get voiceSpeak => 'Speak your answer';
+
+  @override
+  String get voiceStart => 'Speak instead of typing';
+
+  @override
+  String get voiceStop => 'Stop';
+
+  @override
   String weatherFeels(String value) {
     return 'Feels like $value°';
   }
@@ -2697,8 +2944,20 @@ class L10nEn extends L10n {
   String get weatherLocating => 'Finding your location';
 
   @override
+  String get weatherLocationBlocked =>
+      'Location is blocked for this app. Allow it in your phone\'s Settings.';
+
+  @override
   String get weatherLocationDenied =>
       'Location is off. Search for your village instead.';
+
+  @override
+  String get weatherLocationOff =>
+      'Turn on location on your phone, then try again.';
+
+  @override
+  String get weatherLocationSlow =>
+      'Could not find your location. Try again outdoors, or search for your town.';
 
   @override
   String get weatherPage_allowLocation => 'Allow location access when prompted';

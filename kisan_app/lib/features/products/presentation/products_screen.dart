@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/voice/voice_search_field.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/product_models.dart';
@@ -23,11 +24,8 @@ class ProductsScreen extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: l10n.productsSearch,
-                prefixIcon: const Icon(Icons.search),
-              ),
+            child: VoiceSearchField(
+              hintText: l10n.productsSearch,
               onChanged: (v) =>
                   ref.read(productSearchProvider.notifier).update(v),
             ),

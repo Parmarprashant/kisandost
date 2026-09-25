@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../core/offline/offline_banner.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/farm_advice.dart';
 import '../data/weather_models.dart';
@@ -26,33 +29,70 @@ class WeatherQuery extends Notifier<String> {
     if (trimmed.isNotEmpty) state = trimmed;
   }
 
-  /// Switches to GPS coordinates. Returns false when permission is refused or
-  /// location is off, so the caller can tell the user to search instead.
-  Future<bool> useCurrentLocation() async {
-    if (!await Geolocator.isLocationServiceEnabled()) return false;
+  /// Switches to GPS coordinates.
+  ///
+  /// Reports what went wrong rather than a bare false: "turn on location",
+  /// "you said no once" and "allow it in Settings" need different actions
+  /// from the farmer, and one message for all three tells them nothing.
+  Future<LocationOutcome> useCurrentLocation() async {
+    try {
+      if (!await Geolocator.isLocationServiceEnabled()) {
+        return LocationOutcome.serviceOff;
+      }
 
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.deniedForever) {
+        return LocationOutcome.blocked;
+      }
+      if (permission == LocationPermission.denied) {
+        return LocationOutcome.denied;
+      }
+
+      // A fix indoors or under cloud can take a very long time, and without
+      // a limit the button spins until the farmer force-closes the app.
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.medium,
+          timeLimit: Duration(seconds: 20),
+        ),
+      );
+
+      // Village-level precision is plenty for weather, and fewer decimals
+      // keeps the cache key stable as the phone's fix drifts by a few metres.
+      state =
+          '${position.latitude.toStringAsFixed(3)},'
+          '${position.longitude.toStringAsFixed(3)}';
+      return LocationOutcome.ok;
+    } on TimeoutException {
+      return LocationOutcome.timedOut;
+    } catch (_) {
+      // A platform exception here must not leave the caller waiting forever.
+      return LocationOutcome.failed;
     }
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      return false;
-    }
-
-    final position = await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.medium,
-      ),
-    );
-
-    // Village-level precision is plenty for weather, and fewer decimals keeps
-    // the cache key stable as the phone's fix drifts by a few metres.
-    state =
-        '${position.latitude.toStringAsFixed(3)},'
-        '${position.longitude.toStringAsFixed(3)}';
-    return true;
   }
+}
+
+/// Why finding the farmer's location did or did not work.
+enum LocationOutcome {
+  ok,
+
+  /// Location is switched off on the phone.
+  serviceOff,
+
+  /// Refused this time; asking again is allowed.
+  denied,
+
+  /// Refused permanently — only Settings can undo it.
+  blocked,
+
+  /// No fix within the time limit. Common indoors.
+  timedOut,
+
+  /// Anything else.
+  failed,
 }
 
 class WeatherScreen extends ConsumerStatefulWidget {
@@ -74,17 +114,24 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
 
   Future<void> _useLocation() async {
     setState(() => _locating = true);
-    final ok = await ref
+    final outcome = await ref
         .read(weatherQueryProvider.notifier)
         .useCurrentLocation();
     if (!mounted) return;
     setState(() => _locating = false);
 
-    if (!ok) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(L10n.of(context).weatherLocationDenied)),
-      );
-    }
+    if (outcome == LocationOutcome.ok) return;
+
+    final l10n = L10n.of(context);
+    final message = switch (outcome) {
+      LocationOutcome.serviceOff => l10n.weatherLocationOff,
+      LocationOutcome.blocked => l10n.weatherLocationBlocked,
+      LocationOutcome.timedOut => l10n.weatherLocationSlow,
+      _ => l10n.weatherLocationDenied,
+    };
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -397,6 +444,28 @@ class _Error extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final api = ApiException.from(error);
+
+    // Standing in a field with no signal, the last forecast we saw is a far
+    // better answer than an error. Shown with its age so nobody mistakes
+    // yesterday's rain for today's.
+    final cached = ref.read(weatherRepositoryProvider).lastKnown(query);
+    if (cached != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CachedNotice(savedAt: cached.savedAt),
+          _Content(weather: cached.value),
+          const SizedBox(height: 16),
+          Center(
+            child: OutlinedButton.icon(
+              onPressed: () => ref.invalidate(weatherProvider(query)),
+              icon: const Icon(Icons.refresh),
+              label: Text(l10n.appRetry),
+            ),
+          ),
+        ],
+      );
+    }
 
     final message = switch (api.kind) {
       ApiErrorKind.offline => l10n.appOffline,
