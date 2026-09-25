@@ -3220,6 +3220,19 @@ class L10nEn extends L10n {
       'Strong wind — spray will drift. Wait for calmer air.';
 
   @override
+  String get weatherFieldImpact => 'What this means for the field';
+
+  @override
+  String get weatherNext7Days => 'Next seven days';
+
+  @override
+  String get weatherSourceNotice =>
+      'Live · WeatherAPI. Open-Meteo is the fallback if it fails.';
+
+  @override
+  String get weatherGpsPoint => 'From your saved GPS point';
+
+  @override
   String get yieldPredictor_areaRequired => 'Valid land area is required';
 
   @override

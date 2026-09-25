@@ -3222,6 +3222,19 @@ class L10nGu extends L10n {
   String get weatherWindWarn => 'તેજ પવન — છંટકાવ ઊડી જશે. પવન શાંત થવા દો.';
 
   @override
+  String get weatherFieldImpact => 'ખેતર માટે આનો શું અર્થ છે';
+
+  @override
+  String get weatherNext7Days => 'આગામી સાત દિવસ';
+
+  @override
+  String get weatherSourceNotice =>
+      'લાઇવ · WeatherAPI. નિષ્ફળ જાય તો Open-Meteo નો ઉપયોગ થશે.';
+
+  @override
+  String get weatherGpsPoint => 'તમારા સાચવેલા GPS સ્થાન પરથી';
+
+  @override
   String get yieldPredictor_areaRequired => 'માન્ય જમીન વિસ્તાર જરૂરી છે';
 
   @override

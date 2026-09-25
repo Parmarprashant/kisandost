@@ -5723,6 +5723,30 @@ abstract class L10n {
   /// **'Strong wind — spray will drift. Wait for calmer air.'**
   String get weatherWindWarn;
 
+  /// No description provided for @weatherFieldImpact.
+  ///
+  /// In en, this message translates to:
+  /// **'What this means for the field'**
+  String get weatherFieldImpact;
+
+  /// No description provided for @weatherNext7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Next seven days'**
+  String get weatherNext7Days;
+
+  /// No description provided for @weatherSourceNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Live · WeatherAPI. Open-Meteo is the fallback if it fails.'**
+  String get weatherSourceNotice;
+
+  /// No description provided for @weatherGpsPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'From your saved GPS point'**
+  String get weatherGpsPoint;
+
   /// No description provided for @yieldPredictor_areaRequired.
   ///
   /// In en, this message translates to:

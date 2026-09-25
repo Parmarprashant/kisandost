@@ -3221,6 +3221,19 @@ class L10nMr extends L10n {
       'जोरदार वारा — फवारणी वाहून जाईल. वारा शांत होऊ द्या.';
 
   @override
+  String get weatherFieldImpact => 'शेतासाठी याचा काय अर्थ आहे';
+
+  @override
+  String get weatherNext7Days => 'पुढील सात दिवस';
+
+  @override
+  String get weatherSourceNotice =>
+      'थेट · WeatherAPI. अयशस्वी झाल्यास Open-Meteo वापरले जाईल.';
+
+  @override
+  String get weatherGpsPoint => 'तुमच्या जतन केलेल्या GPS स्थानावरून';
+
+  @override
   String get yieldPredictor_areaRequired => 'योग्य क्षेत्रफळ आवश्यक आहे';
 
   @override
