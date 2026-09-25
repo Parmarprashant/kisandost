@@ -25,11 +25,26 @@ pnpm-debug.log*
 
 # Environment secrets
 .env
-.env*.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
 !.env.example
+
+# Private developer notes
+DEV2_PRIVATE_HANDOFF.md
+
+# Build & Dist
+dist/
+/dist/
+
+# IDE & Editor files
+.vscode/
+.idea/
+
+# Large datasets and scrapers
+dataSet/
+
+# Uploaded scan test files
+public/uploads/scans/*
+!public/uploads/scans/.gitkeep
 
 # Vercel & Netlify
 .vercel

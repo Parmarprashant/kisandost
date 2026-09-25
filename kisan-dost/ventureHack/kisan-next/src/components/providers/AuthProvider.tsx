@@ -7,6 +7,7 @@ type User = {
   id: string;
   username: string;
   name: string;
+  firstName?: string;
   mobile?: string;
   village?: string;
   district?: string;
@@ -16,6 +17,8 @@ type User = {
 type AuthContextType = {
   user: User | null;
   isLoading: boolean;
+  isLoaded: boolean;
+  isSignedIn: boolean;
   login: (user: User) => void;
   logout: () => Promise<void>;
   checkSession: () => Promise<void>;
@@ -58,8 +61,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/en/auth'); // default to start page or auth page
   };
 
+  const isLoaded = !isLoading;
+  const isSignedIn = !!user;
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, checkSession }}>
+    <AuthContext.Provider
+      value={{ user, isLoading, isLoaded, isSignedIn, login, logout, checkSession }}
+    >
       {children}
     </AuthContext.Provider>
   );

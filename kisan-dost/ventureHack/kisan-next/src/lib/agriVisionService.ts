@@ -60,6 +60,7 @@ export interface AgriVisionDiseaseResult {
   recommendedPesticides: string[];
   recommendedFertilizers: string[];
   requiresExpertVerification: boolean;
+  rawPayload?: AgriVisionRawResponse;
   focusRegion?: {
     isFocused: boolean;
     boxNormalized: [number, number, number, number]; // [ymin, xmin, ymax, xmax]
@@ -373,6 +374,7 @@ export async function analyzeWithAgriVision(file: Blob): Promise<AgriVisionDisea
       recommendedPesticides,
       recommendedFertilizers,
       requiresExpertVerification: raw.requires_expert_verification ?? false,
+      rawPayload: raw,
       focusRegion,
     };
 }

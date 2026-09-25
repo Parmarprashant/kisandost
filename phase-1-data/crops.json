@@ -1,0 +1,1667 @@
+{
+  "priority_crops": [
+    {
+      "crop_name": "Wheat",
+      "local_name": "Gehun",
+      "crop_type": "Cereal",
+      "season": "Rabi",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "pages": [
+            35,
+            36
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "pages": [
+            25,
+            26,
+            27,
+            28
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "pages": [
+            25,
+            26
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "pages": [
+            22,
+            23
+          ],
+          "section": "Crop Improvement - Cereals"
+        }
+      ]
+    },
+    {
+      "crop_name": "Rice",
+      "local_name": "Dhan / Paddy",
+      "crop_type": "Cereal",
+      "season": "Kharif / Rabi / Boro",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "pages": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "pages": [
+            23,
+            24,
+            25
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "pages": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "section": "Crop Improvement - Cereals"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "pages": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "section": "Crop Improvement - Cereals"
+        }
+      ]
+    },
+    {
+      "crop_name": "Cotton",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial / Fibre",
+      "season": "Kharif",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "pages": [
+            50,
+            51,
+            52,
+            53
+          ],
+          "section": "Crop Improvement - Commercial Crops"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "pages": [
+            39,
+            40
+          ],
+          "section": "Crop Improvement - Commercial Crops"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "pages": [
+            40,
+            41,
+            42,
+            43,
+            44
+          ],
+          "section": "Crop Improvement - Commercial Crops"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "pages": [
+            34,
+            35,
+            36
+          ],
+          "section": "Crop Improvement - Commercial Crops"
+        }
+      ]
+    },
+    {
+      "crop_name": "Groundnut",
+      "local_name": "Mungfali",
+      "crop_type": "Oilseed",
+      "season": "Kharif / Rabi-Summer",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "pages": [
+            43,
+            44
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "pages": [
+            33
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "pages": [
+            33
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "pages": [
+            31
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        }
+      ]
+    },
+    {
+      "crop_name": "Soybean",
+      "local_name": "Soya / Soya Chikkudu",
+      "crop_type": "Oilseed",
+      "season": "Kharif",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "pages": [
+            44,
+            45
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "pages": [
+            33,
+            34
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "pages": [
+            33,
+            34
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "pages": [
+            32
+          ],
+          "section": "Crop Improvement - Oilseeds"
+        }
+      ]
+    }
+  ],
+  "additional_crop_candidates": [
+    {
+      "crop_name": "Little millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Maize",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 56,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 26,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 27,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 47,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 23,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 24,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 25,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 26,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 27,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Barley",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Sorghum",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 40,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 46,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 23,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 24,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 28,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Pearl millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 40,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 42,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 47,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Finger millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 29,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Kodo millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 42,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Barnyard millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 42,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 24,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 25,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Indian Mustard",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 42,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 43,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Gobhi sarson",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 43,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Toria",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 43,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Taramira",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 43,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Linseed",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 44,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Safflower",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 44,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Castor",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Sesame",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 46,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Chickpea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 46,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 47,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Pigeon pea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 47,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 48,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Cowpea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 48,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 42,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Rajmash",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 48,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Mungbean",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 49,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Urdbean",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 49,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 50,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Lentil",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 50,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Field pea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 50,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 38,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 34,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Sugarcane",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial/Fibre",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 55,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2022-23",
+          "year": "2022-23",
+          "page": 56,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 40,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 44,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Proso millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Foxtail millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 30,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Brown top millet",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Cereal",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Yellow sarson",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Niger",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 31,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Sunflower",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Oilseed",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 32,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Pigeonpea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Pulse",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Jute",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial/Fibre",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 40,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Mesta",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial/Fibre",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 40,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 37,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Sunnhemp",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial/Fibre",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Forage oats",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2023-24",
+          "year": "2023-24",
+          "page": 41,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Moth bean",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Tobacco",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Commercial/Fibre",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 44,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 45,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 46,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 35,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 36,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Lucerne",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 47,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 48,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Berseem",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2024-25",
+          "year": "2024-25",
+          "page": 48,
+          "section": "Crop Improvement - Variety Release"
+        },
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 39,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    },
+    {
+      "crop_name": "Grass pea",
+      "local_name": "NOT_FOUND_IN_SOURCE",
+      "crop_type": "Forage",
+      "season": "NOT_FOUND_IN_SOURCE",
+      "sources": [
+        {
+          "report": "ICAR Annual Report 2025-26",
+          "year": "2025-26",
+          "page": 33,
+          "section": "Crop Improvement - Variety Release"
+        }
+      ]
+    }
+  ]
+}

@@ -33,6 +33,17 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+# added patterns for dist, IDE config, generic logs
+/dist/
+.vscode/
+.idea/
+Thumbs.db
+DEV2_PRIVATE_HANDOFF.md
+*.log
+
+# Uploaded scan test files
+public/uploads/scans/*
+!public/uploads/scans/.gitkeep
 
 # vercel
 .vercel

@@ -20,7 +20,7 @@ export async function GET() {
       const crops = await Crop.find({ fieldId: { $in: fieldIds } }).sort({ sowingDate: -1 });
 
       const fieldsWithCrops = fields.map((field) => {
-        const fieldObj = field.toObject();
+        const fieldObj = field.toObject() as any;
         fieldObj.crops = crops.filter((c) => c.fieldId.toString() === field._id.toString());
         return fieldObj;
       });

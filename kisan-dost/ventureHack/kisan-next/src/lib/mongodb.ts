@@ -35,7 +35,8 @@ if (!global.mongoose) {
 const cached = global.mongoose;
 
 async function dbConnect() {
-  if (!MONGODB_URI) {
+  const uri = process.env.MONGODB_URI || MONGODB_URI;
+  if (!uri) {
     throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
   }
   if (cached.conn) {
@@ -47,7 +48,7 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
       return mongoose;
     });
   }

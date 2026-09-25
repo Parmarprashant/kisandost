@@ -47,6 +47,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       cultivatedArea,
       cultivatedAreaUnit,
       cultivationMethod,
+      zoneId,
       notes,
     } = body;
 
@@ -74,9 +75,28 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         );
       }
 
+      let validatedZoneId = null;
+      if (zoneId) {
+        const { FarmZone } = await import('@/models/FarmZone');
+        const validZone = await FarmZone.findOne({
+          _id: zoneId,
+          fieldId: field._id,
+          farmerId: userId,
+          active: true,
+        });
+        if (!validZone) {
+          return NextResponse.json(
+            { error: 'Specified zone does not belong to this field or access denied' },
+            { status: 400 }
+          );
+        }
+        validatedZoneId = validZone._id;
+      }
+
       const newCrop = await Crop.create({
         farmerId: userId,
         fieldId: field._id,
+        zoneId: validatedZoneId,
         cropName,
         cropMasterId: cropMasterId || '',
         variety: variety || '',
