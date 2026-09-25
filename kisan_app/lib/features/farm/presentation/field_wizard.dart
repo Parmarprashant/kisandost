@@ -107,9 +107,13 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
         return;
       }
 
+      // Without a limit a fix indoors never arrives and the button spins
+      // until the app is force-closed. A field is entered from a house as
+      // often as from the field itself.
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
+          timeLimit: Duration(seconds: 20),
         ),
       );
       if (!mounted) return;
@@ -117,6 +121,9 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
         _latitude = position.latitude;
         _longitude = position.longitude;
       });
+    } catch (_) {
+      // Coordinates are optional on a field, so a failure here just leaves
+      // them unset rather than blocking the farmer from saving.
     } finally {
       if (mounted) setState(() => _locating = false);
     }

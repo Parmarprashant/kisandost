@@ -2873,7 +2873,18 @@ class L10nGu extends L10n {
   String get weatherLocating => 'તમારું સ્થાન શોધી રહ્યા છીએ';
 
   @override
+  String get weatherLocationBlocked =>
+      'આ એપ માટે લોકેશન બંધ છે. સેટિંગ્સમાં પરવાનગી આપો.';
+
+  @override
   String get weatherLocationDenied => 'સ્થાન બંધ છે. તમારા ગામનું નામ શોધો.';
+
+  @override
+  String get weatherLocationOff => 'ફોનમાં લોકેશન ચાલુ કરીને ફરી પ્રયાસ કરો.';
+
+  @override
+  String get weatherLocationSlow =>
+      'તમારું સ્થાન મળ્યું નહીં. બહાર જઈને ફરી પ્રયાસ કરો કે તમારું શહેર શોધો.';
 
   @override
   String get weatherPage_allowLocation => 'પૂછ્યા પર સ્થળ અનુમતિ આપો';

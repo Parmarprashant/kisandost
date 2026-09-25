@@ -2871,7 +2871,18 @@ class L10nMr extends L10n {
   String get weatherLocating => 'तुमचे स्थान शोधत आहे';
 
   @override
+  String get weatherLocationBlocked =>
+      'या अॅपसाठी लोकेशन बंद आहे. सेटिंग्जमध्ये परवानगी द्या.';
+
+  @override
   String get weatherLocationDenied => 'स्थान बंद आहे. तुमच्या गावाचे नाव शोधा.';
+
+  @override
+  String get weatherLocationOff => 'फोनवर लोकेशन सुरू करून पुन्हा प्रयत्न करा.';
+
+  @override
+  String get weatherLocationSlow =>
+      'तुमचे ठिकाण सापडले नाही. बाहेर जाऊन पुन्हा प्रयत्न करा किंवा शहर शोधा.';
 
   @override
   String get weatherPage_allowLocation =>

@@ -2869,8 +2869,20 @@ class L10nEn extends L10n {
   String get weatherLocating => 'Finding your location';
 
   @override
+  String get weatherLocationBlocked =>
+      'Location is blocked for this app. Allow it in your phone\'s Settings.';
+
+  @override
   String get weatherLocationDenied =>
       'Location is off. Search for your village instead.';
+
+  @override
+  String get weatherLocationOff =>
+      'Turn on location on your phone, then try again.';
+
+  @override
+  String get weatherLocationSlow =>
+      'Could not find your location. Try again outdoors, or search for your town.';
 
   @override
   String get weatherPage_allowLocation => 'Allow location access when prompted';

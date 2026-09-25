@@ -5099,11 +5099,29 @@ abstract class L10n {
   /// **'Finding your location'**
   String get weatherLocating;
 
+  /// No description provided for @weatherLocationBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is blocked for this app. Allow it in your phone\'s Settings.'**
+  String get weatherLocationBlocked;
+
   /// No description provided for @weatherLocationDenied.
   ///
   /// In en, this message translates to:
   /// **'Location is off. Search for your village instead.'**
   String get weatherLocationDenied;
+
+  /// No description provided for @weatherLocationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on location on your phone, then try again.'**
+  String get weatherLocationOff;
+
+  /// No description provided for @weatherLocationSlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not find your location. Try again outdoors, or search for your town.'**
+  String get weatherLocationSlow;
 
   /// No description provided for @weatherPage_allowLocation.
   ///
