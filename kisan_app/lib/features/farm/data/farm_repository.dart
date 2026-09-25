@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
 import '../../../core/offline/offline_store.dart';
+import 'boundary_models.dart';
 import 'crop_detail_models.dart';
 import 'farm_models.dart';
 
@@ -203,6 +204,44 @@ class FarmRepository {
         .toList(growable: false);
   }
 
+  Future<FieldBoundaryInfo> fieldBoundary(String fieldId) async {
+    final json = await _get<Map<String, dynamic>>(
+      '/api/fields/$fieldId/boundary',
+    );
+    return FieldBoundaryInfo.fromJson(json);
+  }
+
+  Future<FieldBoundaryInfo> saveFieldBoundary(
+    String fieldId,
+    Map<String, dynamic> boundary, {
+    bool updateFieldArea = true,
+  }) async {
+    final json = await _send<Map<String, dynamic>>(
+      'POST',
+      '/api/fields/$fieldId/boundary',
+      {'boundary': boundary, 'updateFieldArea': updateFieldArea},
+    );
+    return FieldBoundaryInfo.fromJson(json);
+  }
+
+  Future<List<ZoneItem>> fieldZones(String fieldId) async {
+    final json = await _get<Map<String, dynamic>>('/api/fields/$fieldId/zones');
+    final rawZones = json['zones'];
+    if (rawZones is List) {
+      return rawZones
+          .whereType<Map<String, dynamic>>()
+          .map(ZoneItem.fromJson)
+          .toList(growable: false);
+    }
+    return const [];
+  }
+
+  Future<void> generateFieldZones(String fieldId, {int targetZones = 4}) async {
+    await _send<Map<String, dynamic>>('POST', '/api/fields/$fieldId/zones', {
+      'targetZones': targetZones,
+    });
+  }
+
   Future<T> _get<T>(String path) async {
     try {
       final response = await _dio.get<T>(path);
@@ -332,4 +371,20 @@ final cropScansProvider = FutureProvider.family<List<CropScanItem>, String>((
   cropId,
 ) async {
   return ref.read(farmRepositoryProvider).cropScans(cropId);
+});
+
+/// Field boundary polygon details.
+final fieldBoundaryProvider = FutureProvider.family<FieldBoundaryInfo, String>((
+  ref,
+  fieldId,
+) async {
+  return ref.read(farmRepositoryProvider).fieldBoundary(fieldId);
+});
+
+/// Field monitoring zones.
+final fieldZonesProvider = FutureProvider.family<List<ZoneItem>, String>((
+  ref,
+  fieldId,
+) async {
+  return ref.read(farmRepositoryProvider).fieldZones(fieldId);
 });

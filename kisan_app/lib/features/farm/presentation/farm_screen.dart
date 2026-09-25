@@ -132,6 +132,14 @@ class _FieldCard extends ConsumerWidget {
                   ),
                 ),
                 IconButton(
+                  icon: const Icon(
+                    Icons.polyline_outlined,
+                    color: Color(0xFF2E7D32),
+                  ),
+                  tooltip: 'Field Geo-Boundary & Zones',
+                  onPressed: () => context.push('/fields/${field.id}/boundary'),
+                ),
+                IconButton(
                   icon: const Icon(Icons.delete_outline),
                   tooltip: l10n.farmDelete,
                   onPressed: () => _confirmDelete(context, ref),

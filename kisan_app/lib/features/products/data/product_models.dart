@@ -1,13 +1,7 @@
 /// The agri-input catalogue.
 ///
-/// Ported from the web app's `data/products.ts` into a bundled JSON asset, by
-/// decision: the web `/products` page reads that static file while
-/// `/marketplace` reads the `AgriProduct` collection, and the two disagree. A
-/// real API is coming later, so this is read through [ProductRepository] and
-/// swapping the source will not touch a single screen.
-///
-/// Bundling also means the catalogue works with no signal, which matters for
-/// someone standing in a shop.
+/// Ported from the web app's `data/products.ts` into a bundled JSON asset,
+/// while supporting live enrichment from `/api/marketplace/:productId`.
 library;
 
 class Product {
@@ -21,6 +15,9 @@ class Product {
     required this.usage,
     required this.imageUrl,
     this.tag,
+    this.brand,
+    this.stock,
+    this.category,
   });
 
   final String id;
@@ -42,6 +39,15 @@ class Product {
   /// "Plant Growth Regulator", "Insecticide", and so on.
   final String? tag;
 
+  /// Manufacturer or chemical distributor brand (e.g. "Bayer", "Syngenta", "UPL").
+  final String? brand;
+
+  /// Available units in inventory.
+  final int? stock;
+
+  /// 'pesticide', 'fertilizer', 'biostimulant', etc.
+  final String? category;
+
   bool get hasUsage => usage.isNotEmpty;
 
   bool matches(String query) {
@@ -51,33 +57,59 @@ class Product {
     return name.toLowerCase().contains(q) ||
         description.toLowerCase().contains(q) ||
         (tag?.toLowerCase().contains(q) ?? false) ||
+        (brand?.toLowerCase().contains(q) ?? false) ||
         usage.keys.any((crop) => crop.toLowerCase().contains(q));
   }
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    final id = json['id']?.toString() ?? json['productId']?.toString() ?? '';
+    final name =
+        json['name'] as String? ?? json['productName'] as String? ?? '';
+    final price = json['price'] is num ? json['price'] as num : 0;
+    final description = json['description'] as String? ?? '';
+    final longDescription = json['longDescription'] as String? ?? description;
+
+    final rawFeatures = json['features'];
+    final features = rawFeatures is List
+        ? rawFeatures
+              .whereType<String>()
+              .where((s) => s.trim().isNotEmpty)
+              .toList(growable: false)
+        : const <String>[];
+
     final usage = json['usage'];
+    final Map<String, String> parsedUsage;
+    if (usage is Map) {
+      parsedUsage = {
+        for (final entry in usage.entries)
+          if (entry.key is String && entry.value is String)
+            entry.key as String: entry.value as String,
+      };
+    } else if (usage is String && usage.trim().isNotEmpty) {
+      parsedUsage = {'General Application': usage.trim()};
+    } else {
+      parsedUsage = const {};
+    }
+
+    final imageUrl = json['imageUrl'] as String? ?? '';
+    final tag = _nonEmpty(json['tag'] ?? json['category']);
+    final brand = _nonEmpty(json['brand']);
+    final stock = json['stock'] is num ? (json['stock'] as num).toInt() : null;
+    final category = _nonEmpty(json['category']);
 
     return Product(
-      id: json['id']?.toString() ?? '',
-      name: json['name'] as String? ?? '',
-      price: json['price'] is num ? json['price'] as num : 0,
-      description: json['description'] as String? ?? '',
-      longDescription: json['longDescription'] as String? ?? '',
-      features: json['features'] is List
-          ? (json['features'] as List)
-                .whereType<String>()
-                .where((s) => s.trim().isNotEmpty)
-                .toList(growable: false)
-          : const [],
-      usage: usage is Map
-          ? {
-              for (final entry in usage.entries)
-                if (entry.key is String && entry.value is String)
-                  entry.key as String: entry.value as String,
-            }
-          : const {},
-      imageUrl: json['imageUrl'] as String? ?? '',
-      tag: _nonEmpty(json['tag']),
+      id: id,
+      name: name,
+      price: price,
+      description: description,
+      longDescription: longDescription,
+      features: features,
+      usage: parsedUsage,
+      imageUrl: imageUrl,
+      tag: tag,
+      brand: brand,
+      stock: stock,
+      category: category,
     );
   }
 }

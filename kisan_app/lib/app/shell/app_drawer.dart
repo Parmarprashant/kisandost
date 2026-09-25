@@ -55,6 +55,11 @@ final drawerGroups = <DrawerGroup>[
       (l) => l.fertTitle,
     ),
     DrawerDestination(Icons.qr_code_scanner, '/scan', (l) => l.scanTitle),
+    DrawerDestination(
+      Icons.psychology_outlined,
+      '/crop-suggestion',
+      (l) => 'District AI Advisor',
+    ),
   ]),
   DrawerGroup((l) => l.navGroupReference, [
     DrawerDestination(
@@ -66,6 +71,11 @@ final drawerGroups = <DrawerGroup>[
       Icons.shopping_bag_outlined,
       '/products',
       (l) => l.productsTitle,
+    ),
+    DrawerDestination(
+      Icons.menu_book_outlined,
+      '/crops-guide',
+      (l) => 'Crop Reference Guide',
     ),
   ]),
 ];
@@ -113,6 +123,12 @@ class AppDrawer extends ConsumerWidget {
 
       const Divider(height: 24, indent: 20, endIndent: 20),
 
+      _Tile(
+        icon: Icons.workspace_premium_outlined,
+        label: 'KisanDost Premium',
+        selected: location == '/pricing',
+        onTap: () => go('/pricing'),
+      ),
       _Tile(
         icon: Icons.language,
         label: l10n.appLanguage,
