@@ -1252,6 +1252,39 @@ class L10nEn extends L10n {
   String get diagnoseWhatToDo => 'What to do now';
 
   @override
+  String get diagnoseSprayThis => 'Spray this';
+
+  @override
+  String get diagnoseCulturalPractices => 'And do this, no cost';
+
+  @override
+  String get diagnoseWhereToGet => 'Where to get it';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'Check the packet is genuine before you pay';
+
+  @override
+  String get diagnoseAskCommunity => 'Ask the community';
+
+  @override
+  String get diagnoseModelConfidence => 'Model confidence';
+
+  @override
+  String get diagnoseFromModel => 'From the model';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'Good light. Keep the phone about 15 cm away.';
+
+  @override
+  String get diagnoseShadowTip => 'Avoid your own shadow on the leaf.';
+
+  @override
+  String get diagnoseFootnote =>
+      'This is one photo of one leaf, read by a model. If the field looks worse than the leaf, trust the field and ask an officer.';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override

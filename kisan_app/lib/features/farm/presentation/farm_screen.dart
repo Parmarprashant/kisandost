@@ -456,11 +456,7 @@ class _FarmHeader extends StatelessWidget {
 }
 
 class _HeaderButton extends StatelessWidget {
-  const _HeaderButton({
-    required this.icon,
-    required this.onTap,
-    this.tooltip,
-  });
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
 
   final IconData icon;
   final VoidCallback onTap;

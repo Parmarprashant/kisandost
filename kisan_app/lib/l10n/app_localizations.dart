@@ -2285,6 +2285,66 @@ abstract class L10n {
   /// **'What to do now'**
   String get diagnoseWhatToDo;
 
+  /// No description provided for @diagnoseSprayThis.
+  ///
+  /// In en, this message translates to:
+  /// **'Spray this'**
+  String get diagnoseSprayThis;
+
+  /// No description provided for @diagnoseCulturalPractices.
+  ///
+  /// In en, this message translates to:
+  /// **'And do this, no cost'**
+  String get diagnoseCulturalPractices;
+
+  /// No description provided for @diagnoseWhereToGet.
+  ///
+  /// In en, this message translates to:
+  /// **'Where to get it'**
+  String get diagnoseWhereToGet;
+
+  /// No description provided for @diagnoseCheckGenuine.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the packet is genuine before you pay'**
+  String get diagnoseCheckGenuine;
+
+  /// No description provided for @diagnoseAskCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the community'**
+  String get diagnoseAskCommunity;
+
+  /// No description provided for @diagnoseModelConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Model confidence'**
+  String get diagnoseModelConfidence;
+
+  /// No description provided for @diagnoseFromModel.
+  ///
+  /// In en, this message translates to:
+  /// **'From the model'**
+  String get diagnoseFromModel;
+
+  /// No description provided for @diagnoseGoodLightTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Good light. Keep the phone about 15 cm away.'**
+  String get diagnoseGoodLightTip;
+
+  /// No description provided for @diagnoseShadowTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid your own shadow on the leaf.'**
+  String get diagnoseShadowTip;
+
+  /// No description provided for @diagnoseFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'This is one photo of one leaf, read by a model. If the field looks worse than the leaf, trust the field and ask an officer.'**
+  String get diagnoseFootnote;
+
   /// No description provided for @diseasesPage_bestSeason.
   ///
   /// In en, this message translates to:

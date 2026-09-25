@@ -88,7 +88,10 @@ class SectionHeader extends StatelessWidget {
               // A 44dp strip around the words, so the tap target clears the
               // minimum even though the text itself is 13sp.
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 4,
+                ),
                 child: Text(
                   actionLabel!,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -117,11 +120,8 @@ class ProvenanceChip extends StatelessWidget {
   /// A chip that is always shown, including for a live source. Use on the
   /// screen that is *about* the figure, where naming the mandi or the API is
   /// itself the information.
-  const ProvenanceChip.always(
-    this.provenance, {
-    super.key,
-    required this.label,
-  }) : _force = true;
+  const ProvenanceChip.always(this.provenance, {super.key, required this.label})
+    : _force = true;
 
   final Provenance provenance;
   final String label;

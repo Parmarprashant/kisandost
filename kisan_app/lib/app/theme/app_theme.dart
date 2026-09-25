@@ -232,7 +232,9 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(radiusSheet)),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(radiusSheet),
+          ),
         ),
       ),
 
@@ -262,11 +264,7 @@ class AppTheme {
         ),
       ),
 
-      dividerTheme: DividerThemeData(
-        color: hairline,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: hairline, thickness: 1, space: 1),
 
       listTileTheme: ListTileThemeData(
         titleTextStyle: text.bodyLarge?.copyWith(fontWeight: FontWeight.w600),

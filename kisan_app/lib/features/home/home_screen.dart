@@ -131,9 +131,7 @@ class _Header extends ConsumerWidget {
     final crops = ref.watch(activeCropsProvider);
     final fields = ref.watch(fieldsProvider).value ?? const <Field>[];
 
-    final place = crops.isNotEmpty
-        ? crops.first.field.location.label
-        : null;
+    final place = crops.isNotEmpty ? crops.first.field.location.label : null;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,11 +230,7 @@ class _Header extends ConsumerWidget {
 }
 
 class _SquareButton extends StatelessWidget {
-  const _SquareButton({
-    required this.icon,
-    required this.onTap,
-    this.tooltip,
-  });
+  const _SquareButton({required this.icon, required this.onTap, this.tooltip});
 
   final IconData icon;
   final VoidCallback onTap;
@@ -543,7 +537,10 @@ class _TodayCard extends ConsumerWidget {
                 children: [
                   Text(l10n.suggestAddField, style: theme.textTheme.titleSmall),
                   const SizedBox(height: 3),
-                  Text(l10n.suggestAddFieldWhy, style: theme.textTheme.bodySmall),
+                  Text(
+                    l10n.suggestAddFieldWhy,
+                    style: theme.textTheme.bodySmall,
+                  ),
                 ],
               ),
             ),
@@ -568,10 +565,7 @@ class _TodayCard extends ConsumerWidget {
         padding: const EdgeInsets.all(18),
         child: Row(
           children: [
-            Icon(
-              Icons.check_circle_outline,
-              color: theme.colorScheme.primary,
-            ),
+            Icon(Icons.check_circle_outline, color: theme.colorScheme.primary),
             const SizedBox(width: 14),
             Expanded(
               child: Column(
@@ -824,10 +818,7 @@ class _RateStrip extends ConsumerWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   const SizedBox(height: 1),
-                  Figure(
-                    value: '₹${value.pricePerQuintal.round()}',
-                    size: 27,
-                  ),
+                  Figure(value: '₹${value.pricePerQuintal.round()}', size: 27),
                   const SizedBox(height: 7),
                   _PriceChip(value.confidence, source: value.source),
                 ],

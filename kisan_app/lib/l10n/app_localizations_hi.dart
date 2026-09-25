@@ -1259,6 +1259,39 @@ class L10nHi extends L10n {
   String get diagnoseWhatToDo => 'अभी क्या करें';
 
   @override
+  String get diagnoseSprayThis => 'यह छिड़काव करें';
+
+  @override
+  String get diagnoseCulturalPractices => 'और यह बिना खर्च के करें';
+
+  @override
+  String get diagnoseWhereToGet => 'कहाँ से प्राप्त करें';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'खरीदने से पहले पैकेट की प्रामाणिकता जांचें';
+
+  @override
+  String get diagnoseAskCommunity => 'समुदाय से पूछें';
+
+  @override
+  String get diagnoseModelConfidence => 'मॉडल विश्वसनीयता';
+
+  @override
+  String get diagnoseFromModel => 'मॉडल द्वारा विश्लेषित';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'अच्छी रोशनी रखें। फोन को लगभग 15 सेमी दूर रखें।';
+
+  @override
+  String get diagnoseShadowTip => 'पत्ती पर अपनी छाया न पड़ने दें।';
+
+  @override
+  String get diagnoseFootnote =>
+      'यह एक पत्ती का मॉडल द्वारा किया गया विश्लेषण है। यदि खेत की स्थिति पत्ती से बदतर लगे, तो कृषि अधिकारी से संपर्क करें।';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override

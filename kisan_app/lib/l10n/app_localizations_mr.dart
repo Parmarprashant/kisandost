@@ -1254,6 +1254,39 @@ class L10nMr extends L10n {
   String get diagnoseWhatToDo => 'आता काय करावे';
 
   @override
+  String get diagnoseSprayThis => 'हे फवारा';
+
+  @override
+  String get diagnoseCulturalPractices => 'आणि हे विनामूल्य करा';
+
+  @override
+  String get diagnoseWhereToGet => 'कुठून मिळवायचे';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'खरेदी करण्यापूर्वी पाकीट अस्सल असल्याची खात्री करा';
+
+  @override
+  String get diagnoseAskCommunity => 'समुदायाला विचारा';
+
+  @override
+  String get diagnoseModelConfidence => 'मॉडेल विश्वासार्हता';
+
+  @override
+  String get diagnoseFromModel => 'मॉडेलकडून प्राप्त';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'चांगला प्रकाश ठेवा. फोन सुमारे 15 सेमी अंतरावर धरा.';
+
+  @override
+  String get diagnoseShadowTip => 'पानावर स्वतःची सावली पडू देऊ नका.';
+
+  @override
+  String get diagnoseFootnote =>
+      'हे मॉडेलद्वारे वाचलेले एका पानाचे छायाचित्र आहे. शेतातील स्थिती जास्त गंभीर असल्यास कृषी अधिकाऱ्यांचा सल्ला घ्या.';
+
+  @override
   String get diseasesPage_bestSeason => 'सर्वोत्तम हंगाम: खरीप (पावसाळा)';
 
   @override

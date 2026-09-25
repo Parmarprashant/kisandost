@@ -138,13 +138,9 @@ extension ProvenanceStyle on Provenance {
   bool get needsChip => this != Provenance.live;
 
   Color background(bool isDark) => switch (this) {
-    Provenance.live => isDark
-        ? AppColors.forestTintDark
-        : AppColors.forestTint,
-    Provenance.indicative ||
-    Provenance.estimated => isDark
-        ? AppColors.amberTintDark
-        : AppColors.amberTint,
+    Provenance.live => isDark ? AppColors.forestTintDark : AppColors.forestTint,
+    Provenance.indicative || Provenance.estimated =>
+      isDark ? AppColors.amberTintDark : AppColors.amberTint,
     Provenance.entered => isDark ? AppColors.sunkDark : AppColors.sunk,
     Provenance.onDevice => isDark ? AppColors.skyTintDark : AppColors.skyTint,
   };
@@ -152,21 +148,15 @@ extension ProvenanceStyle on Provenance {
   Color foreground(bool isDark) => switch (this) {
     Provenance.live => isDark ? AppColors.forestDark : AppColors.forest,
     Provenance.indicative ||
-    Provenance.estimated => isDark
-        ? AppColors.amberDark
-        : AppColors.amberText,
+    Provenance.estimated => isDark ? AppColors.amberDark : AppColors.amberText,
     Provenance.entered => isDark ? AppColors.ink2Dark : AppColors.ink2,
     Provenance.onDevice => isDark ? AppColors.skyDark : AppColors.sky,
   };
 
   Color outline(bool isDark) => switch (this) {
-    Provenance.live => isDark
-        ? AppColors.forestLineDark
-        : AppColors.forestLine,
-    Provenance.indicative ||
-    Provenance.estimated => isDark
-        ? AppColors.amberLineDark
-        : AppColors.amberLine,
+    Provenance.live => isDark ? AppColors.forestLineDark : AppColors.forestLine,
+    Provenance.indicative || Provenance.estimated =>
+      isDark ? AppColors.amberLineDark : AppColors.amberLine,
     Provenance.entered => isDark ? AppColors.lineDark : AppColors.line,
     Provenance.onDevice => isDark ? AppColors.skyLineDark : AppColors.skyLine,
   };
@@ -187,17 +177,13 @@ extension SeverityColors on Severity {
   Color background(bool isDark) => switch (this) {
     Severity.low => isDark ? AppColors.forestTintDark : AppColors.forestTint,
     Severity.moderate => isDark ? AppColors.amberTintDark : AppColors.amberTint,
-    Severity.severe => isDark
-        ? AppColors.dangerTintDark
-        : AppColors.dangerTint,
+    Severity.severe => isDark ? AppColors.dangerTintDark : AppColors.dangerTint,
   };
 
   Color outline(bool isDark) => switch (this) {
     Severity.low => isDark ? AppColors.forestLineDark : AppColors.forestLine,
     Severity.moderate => isDark ? AppColors.amberLineDark : AppColors.amberLine,
-    Severity.severe => isDark
-        ? AppColors.dangerLineDark
-        : AppColors.dangerLine,
+    Severity.severe => isDark ? AppColors.dangerLineDark : AppColors.dangerLine,
   };
 
   IconData get icon => switch (this) {

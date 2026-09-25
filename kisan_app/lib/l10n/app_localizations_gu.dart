@@ -1257,6 +1257,39 @@ class L10nGu extends L10n {
   String get diagnoseWhatToDo => 'હવે શું કરવું';
 
   @override
+  String get diagnoseSprayThis => 'આ છંટકાવ કરો';
+
+  @override
+  String get diagnoseCulturalPractices => 'અને આ વિના ખર્ચે કરો';
+
+  @override
+  String get diagnoseWhereToGet => 'ક્યાંથી મેળવવું';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'ખરીદતા પહેલા પેકેટ અસલી છે કે નહીં તે ચકાસો';
+
+  @override
+  String get diagnoseAskCommunity => 'સમુદાયને પૂછો';
+
+  @override
+  String get diagnoseModelConfidence => 'મોડલ વિશ્વસનીયતા';
+
+  @override
+  String get diagnoseFromModel => 'મોડલ દ્વારા વિશ્લેષિત';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'સારો પ્રકાશ રાખો. ફોનને આશરે 15 સેમી દૂર રાખો.';
+
+  @override
+  String get diagnoseShadowTip => 'પાંદડા પર તમારો પડછાયો ન આવવા દો.';
+
+  @override
+  String get diagnoseFootnote =>
+      'આ એક પાંદડાનું મોડલ દ્વારા થયેલું વિશ્લેષણ છે. જો ખેતરની સ્થિતિ વધુ ગંભીર જણાય, તો કૃષિ અધિકારીનો સંપર્ક કરો.';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override

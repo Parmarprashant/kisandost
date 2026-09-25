@@ -335,10 +335,14 @@ class _KdBottomBar extends StatelessWidget {
               child: Row(
                 children: [
                   for (final i in flat.take(half))
-                    Expanded(child: _FlatTab(tab: _tabs[i], selected: index == i)),
+                    Expanded(
+                      child: _FlatTab(tab: _tabs[i], selected: index == i),
+                    ),
                   const SizedBox(width: _wellWidth),
                   for (final i in flat.skip(half))
-                    Expanded(child: _FlatTab(tab: _tabs[i], selected: index == i)),
+                    Expanded(
+                      child: _FlatTab(tab: _tabs[i], selected: index == i),
+                    ),
                 ],
               ),
             ),
