@@ -24,9 +24,10 @@ export async function GET(
     }
 
     const scans = await CropDiseaseScan.find({
-      cropCycleId: id,
+      cropCycleId: { $in: [id, crop._id] },
       farmerId: userId,
     })
+      .select('-rawResponsePayload')
       .sort({ capturedAt: -1, createdAt: -1 })
       .populate('zoneId', 'zoneCode zoneName')
       .lean();

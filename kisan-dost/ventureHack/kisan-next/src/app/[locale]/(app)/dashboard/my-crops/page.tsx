@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import {
+  localizeCropName,
+  localizeGrowthStage,
+  localizeProgressionMode,
+  localizeStatus,
+  localizeThreatName,
+  localizeUnits,
+  localizeScoutingAngle,
+} from "@/lib/i18n/agriculturalData";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,7 +98,8 @@ interface FieldItem {
 }
 
 export default function MyCropsPage() {
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("MyCrops");
+  const locale = useLocale();
   const { weatherData } = useWeather() || {};
 
   const [loading, setLoading] = useState(true);
@@ -351,7 +361,11 @@ export default function MyCropsPage() {
         throw new Error(data.error || "Failed to analyze zone image");
       }
 
-      setZoneScanSession(data);
+      setZoneScanSession({
+        ...data,
+        scanCount: data.scanCount || 1,
+        scans: data.currentScan ? [data.currentScan] : [],
+      });
       toast.success(data.message);
     } catch (err: any) {
       console.error(err);
@@ -385,10 +399,26 @@ export default function MyCropsPage() {
         throw new Error(data.error || "Failed to process supplementary image");
       }
 
-      setZoneScanSession(data);
-      toast.success(data.message);
+      const updatedCount = data.scanCount ?? ((zoneScanSession?.scanCount || 1) + 1);
+
+      setZoneScanSession((prev: any) => {
+        const existingScans = prev?.scans || (prev?.currentScan ? [prev.currentScan] : []);
+        const newScans = data.currentScan ? [...existingScans, data.currentScan] : existingScans;
+        return {
+          ...prev,
+          ...data,
+          scanCount: updatedCount,
+          scans: newScans,
+        };
+      });
+
+      // Automatically advance to the next recommended angle
+      if (updatedCount === 2) setSupplementaryAngle("canopy");
+      else if (updatedCount === 3) setSupplementaryAngle("stem");
+
+      toast.success(data.message || `View ${updatedCount} uploaded and analyzed.`);
     } catch (err: any) {
-      console.error(err);
+      console.warn("Upload view notice:", err);
       toast.error(err.message || "Failed to upload supplementary image");
     } finally {
       setUploadingSupplementary(false);
@@ -417,15 +447,16 @@ export default function MyCropsPage() {
 
       setZoneScanSession((prev: any) => ({
         ...prev,
-        status: data.summary.status,
-        result: data.summary.result,
-        completedAt: data.summary.completedAt,
-        evidenceSummary: data.summary.evidenceSummary,
-        scans: data.summary.scans,
+        status: data.summary?.status || "COMPLETED",
+        result: data.summary?.result,
+        completedAt: data.summary?.completedAt,
+        evidenceSummary: data.summary?.evidenceSummary,
+        scans: data.summary?.scans || prev?.scans,
+        scanCount: data.summary?.scanCount ?? prev?.scanCount,
       }));
-      toast.success(data.message);
+      toast.success(data.message || "Zone scan completed successfully.");
     } catch (err: any) {
-      console.error(err);
+      console.warn("Complete session notice:", err);
       toast.error(err.message || "Failed to complete zone session");
     } finally {
       setCompletingSession(false);
@@ -453,14 +484,14 @@ export default function MyCropsPage() {
           <div className="flex items-center gap-2 mb-1">
             <Badge variant="outline" className="bg-emerald-50 text-emerald-800 border-emerald-300 text-xs">
               <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-              AgriShield 360° Spatial Foundation
+              {t("badge")}
             </Badge>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight text-foreground">
-            My Crop & Farm Monitoring
+            {t("title")}
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Manage your agricultural fields, define precision farm boundaries, and divide plots into spatial monitoring zones.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -469,7 +500,7 @@ export default function MyCropsPage() {
           className="bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
         >
           <Plus className="w-4 h-4 mr-1.5" />
-          {showNewFieldForm ? "Cancel" : "Add New Field"}
+          {showNewFieldForm ? t("cancel") : t("addNewField")}
         </Button>
       </div>
 
@@ -479,20 +510,20 @@ export default function MyCropsPage() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Tractor className="w-5 h-5 text-emerald-600" />
-              Register New Farm Field
+              {t("registerNewField")}
             </CardTitle>
             <CardDescription>
-              Create a farm plot record. You can subsequently draw its exact polygon boundary on the map.
+              {t("registerNewFieldDesc")}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleCreateField} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="fieldName">Field / Plot Name *</Label>
+                  <Label htmlFor="fieldName">{t("fieldNameLabel")}</Label>
                   <Input
                     id="fieldName"
-                    placeholder="e.g. North Acre / Home Farm"
+                    placeholder={t("fieldNamePlaceholder")}
                     value={newFieldName}
                     onChange={(e) => setNewFieldName(e.target.value)}
                     required
@@ -500,7 +531,7 @@ export default function MyCropsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="fieldArea">Estimated Area *</Label>
+                  <Label htmlFor="fieldArea">{t("estimatedAreaLabel")}</Label>
                   <div className="flex gap-2">
                     <Input
                       id="fieldArea"
@@ -518,17 +549,17 @@ export default function MyCropsPage() {
                       onChange={(e) => setNewFieldUnit(e.target.value as "Acre" | "Hectare")}
                       className="w-1/3 text-xs rounded-md border border-input bg-background px-2"
                     >
-                      <option value="Acre">Acres</option>
-                      <option value="Hectare">Hectares</option>
+                      <option value="Acre">{t("acres")}</option>
+                      <option value="Hectare">{t("hectares")}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="fieldVillage">Village / Taluka</Label>
+                  <Label htmlFor="fieldVillage">{t("villageLabel")}</Label>
                   <Input
                     id="fieldVillage"
-                    placeholder="e.g. Gandhinagar"
+                    placeholder={t("villagePlaceholder")}
                     value={newFieldVillage}
                     onChange={(e) => setNewFieldVillage(e.target.value)}
                   />
@@ -541,7 +572,7 @@ export default function MyCropsPage() {
                   variant="ghost"
                   onClick={() => setShowNewFieldForm(false)}
                 >
-                  Cancel
+                  {t("cancel")}
                 </Button>
                 <Button
                   type="submit"
@@ -553,7 +584,7 @@ export default function MyCropsPage() {
                   ) : (
                     <Plus className="w-4 h-4 mr-1.5" />
                   )}
-                  Save Field
+                  {t("saveField")}
                 </Button>
               </div>
             </form>
@@ -565,7 +596,7 @@ export default function MyCropsPage() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20">
           <Loader2 className="w-10 h-10 animate-spin text-emerald-600 mb-3" />
-          <p className="text-sm text-muted-foreground">Loading your farm fields and spatial boundaries...</p>
+          <p className="text-sm text-muted-foreground">{t("loadingFields")}</p>
         </div>
       ) : fields.length === 0 ? (
         /* Empty State */
@@ -573,16 +604,16 @@ export default function MyCropsPage() {
           <div className="p-4 rounded-full bg-emerald-50 text-emerald-600 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
             <Tractor className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-bold mb-2">No Farm Fields Registered Yet</h3>
+          <h3 className="text-xl font-bold mb-2">{t("noFieldsTitle")}</h3>
           <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
-            Register your first agricultural field to unlock GPS-accurate farm boundaries, monitoring zones, and crop disease mapping.
+            {t("noFieldsDesc")}
           </p>
           <Button
             onClick={() => setShowNewFieldForm(true)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             <Plus className="w-4 h-4 mr-1.5" />
-            Add Your First Field
+            {t("addFirstField")}
           </Button>
         </Card>
       ) : (
@@ -591,7 +622,7 @@ export default function MyCropsPage() {
           {/* Field Selection Sidebar */}
           <div className="lg:col-span-1 space-y-3">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Your Registered Fields ({fields.length})
+              {t("yourRegisteredFields")} ({fields.length})
             </h3>
             <div className="space-y-2">
               {fields.map((f) => {
@@ -613,7 +644,7 @@ export default function MyCropsPage() {
                         {f.name}
                       </p>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span>{f.area} {f.areaUnit}</span>
+                        <span>{f.area} {localizeUnits(f.areaUnit, locale)}</span>
                         {f.location?.village && (
                           <>
                             <span>•</span>
@@ -624,11 +655,11 @@ export default function MyCropsPage() {
                       <div className="pt-1 flex items-center gap-1.5">
                         {hasBoundary ? (
                           <Badge variant="outline" className="text-[10px] bg-emerald-100/50 text-emerald-700 border-emerald-300 py-0">
-                            <CheckCircle2 className="w-2.5 h-2.5 mr-0.5" /> Boundary Ready
+                            <CheckCircle2 className="w-2.5 h-2.5 mr-0.5" /> {t("boundaryReady")}
                           </Badge>
                         ) : (
                           <Badge variant="outline" className="text-[10px] text-amber-600 border-amber-300 py-0">
-                            <AlertCircle className="w-2.5 h-2.5 mr-0.5" /> No Boundary
+                            <AlertCircle className="w-2.5 h-2.5 mr-0.5" /> {t("noBoundary")}
                           </Badge>
                         )}
                       </div>
@@ -655,9 +686,9 @@ export default function MyCropsPage() {
                       <MapPin className="w-3.5 h-3.5" />
                       {[selectedField.location?.village, selectedField.location?.district, selectedField.location?.state]
                         .filter(Boolean)
-                        .join(", ") || "Location not specified"}
+                        .join(", ") || t("locationNotSpecified")}
                       {" • "}
-                      Registered Area: {selectedField.area} {selectedField.areaUnit}
+                      {t("registeredArea")}: {selectedField.area} {localizeUnits(selectedField.areaUnit, locale)}
                     </p>
                   </div>
 
@@ -672,7 +703,7 @@ export default function MyCropsPage() {
                       }`}
                     >
                       <Compass className="w-3.5 h-3.5" />
-                      Boundary & Zones
+                      {t("tabBoundary")}
                     </button>
                     <button
                       onClick={() => setActiveTab("crops")}
@@ -683,7 +714,7 @@ export default function MyCropsPage() {
                       }`}
                     >
                       <Sprout className="w-3.5 h-3.5" />
-                      Planted Crops ({selectedField.crops?.length || 0})
+                      {t("tabCrops")} ({selectedField.crops?.length || 0})
                     </button>
                     <button
                       onClick={() => setActiveTab("scouting")}
@@ -694,7 +725,7 @@ export default function MyCropsPage() {
                       }`}
                     >
                       <Camera className="w-3.5 h-3.5" />
-                      Zone Scouting
+                      {t("tabScouting")}
                     </button>
                   </div>
                 </div>
@@ -732,10 +763,10 @@ export default function MyCropsPage() {
                       <div>
                         <CardTitle className="text-lg flex items-center gap-2">
                           <Sprout className="w-5 h-5 text-emerald-600" />
-                          Active Crops on {selectedField.name}
+                          {t("activeCropsOn")} {selectedField.name}
                         </CardTitle>
                         <CardDescription>
-                          Crops planted on this field will link directly to spatial monitoring zones for localized health evaluation.
+                          {t("activeCropsDesc")}
                         </CardDescription>
                       </div>
                       <Button
@@ -747,14 +778,14 @@ export default function MyCropsPage() {
                         }}
                       >
                         <Plus className="w-4 h-4 mr-1.5" />
-                        Add Crop
+                        {t("addCrop")}
                       </Button>
                     </CardHeader>
                     <CardContent>
                       {(!selectedField.crops || selectedField.crops.length === 0) ? (
                         <div className="text-center py-8 space-y-3">
                           <p className="text-sm text-muted-foreground">
-                            No active crops are registered on this field yet.
+                            {t("noCropsOnField")}
                           </p>
                           <Button
                             size="sm"
@@ -765,7 +796,7 @@ export default function MyCropsPage() {
                             }}
                           >
                             <Plus className="w-4 h-4 mr-1" />
-                            Add Crop to this Field
+                            {t("addCropToThisField")}
                           </Button>
                         </div>
                       ) : (
@@ -788,7 +819,7 @@ export default function MyCropsPage() {
                               : null;
                             const assignedZoneText = matchedZone
                               ? `${matchedZone.zoneCode} (${matchedZone.zoneName})`
-                              : "Zone not assigned";
+                              : t("zoneNotAssigned");
 
                             const locParts = [
                               selectedField.location?.village,
@@ -796,7 +827,7 @@ export default function MyCropsPage() {
                               selectedField.location?.state,
                             ].filter(Boolean);
                             const locationSummary =
-                              locParts.length > 0 ? locParts.join(", ") : "Location unavailable";
+                              locParts.length > 0 ? locParts.join(", ") : t("locationUnavailable");
 
                             return (
                               <div
@@ -807,12 +838,12 @@ export default function MyCropsPage() {
                                   <div className="space-y-1">
                                     <div className="flex items-center gap-2">
                                       <p className="font-semibold text-base text-foreground">
-                                        {c.cropName}
+                                        {localizeCropName(c.cropName, locale)}
                                       </p>
                                       {mode === "DYNAMIC_GDD" && (
                                         <Badge className="bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] flex items-center gap-1">
                                           <Thermometer className="w-3 h-3" />
-                                          Thermal Time (GDD)
+                                          {localizeProgressionMode("DYNAMIC_GDD", locale)}
                                         </Badge>
                                       )}
                                       {mode === "HYBRID_DAS" && (
@@ -821,7 +852,7 @@ export default function MyCropsPage() {
                                           className="text-amber-700 border-amber-400 bg-amber-50 text-[11px] flex items-center gap-1"
                                         >
                                           <Activity className="w-3 h-3" />
-                                          Hybrid (DAS + Target GDD)
+                                          {localizeProgressionMode("HYBRID_DAS", locale)}
                                         </Badge>
                                       )}
                                       {mode === "DAS_ONLY" && (
@@ -829,26 +860,26 @@ export default function MyCropsPage() {
                                           variant="secondary"
                                           className="text-muted-foreground text-[11px]"
                                         >
-                                          DAS Tracking
+                                          {localizeProgressionMode("DAS_ONLY", locale)}
                                         </Badge>
                                       )}
                                     </div>
                                     <p className="text-xs text-muted-foreground">
-                                      Variety: <span className="font-medium text-foreground">{c.variety || "Unspecified"}</span>
+                                      {t("variety")}: <span className="font-medium text-foreground">{c.variety || t("unspecified")}</span>
                                     </p>
                                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground pt-1">
                                       <span>
-                                        Field: <strong className="text-foreground">{selectedField.name}</strong>
+                                        {t("field")}: <strong className="text-foreground">{selectedField.name}</strong>
                                       </span>
                                       <span>•</span>
                                       <span className="flex items-center gap-1">
                                         <MapPin className="w-3 h-3 text-muted-foreground" />
-                                        Location: <span className="text-foreground">{locationSummary}</span>
+                                        {t("location")}: <span className="text-foreground">{locationSummary}</span>
                                       </span>
                                       <span>•</span>
                                       <span className="flex items-center gap-1">
                                         <Compass className="w-3 h-3 text-muted-foreground" />
-                                        Monitoring Zone:{" "}
+                                        {t("monitoringZone")}:{" "}
                                         <Badge
                                           variant={matchedZone ? "outline" : "secondary"}
                                           className={`text-[10px] py-0 px-1.5 ${
@@ -865,7 +896,7 @@ export default function MyCropsPage() {
 
                                   <div className="flex items-center gap-2">
                                     <Badge variant="outline" className="text-xs">
-                                      {c.cultivatedArea} {selectedField.areaUnit}
+                                      {c.cultivatedArea} {localizeUnits(selectedField.areaUnit, locale)}
                                     </Badge>
                                     <Badge
                                       variant={
@@ -873,7 +904,7 @@ export default function MyCropsPage() {
                                       }
                                       className="text-xs"
                                     >
-                                      {c.status}
+                                      {localizeStatus(c.status, locale)}
                                     </Badge>
                                   </div>
                                 </div>
@@ -882,36 +913,36 @@ export default function MyCropsPage() {
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-muted/30 p-2.5 rounded-md border text-xs">
                                   <div>
                                     <span className="text-muted-foreground block text-[11px]">
-                                      Elapsed DAS:
+                                      {t("elapsedDas")}:
                                     </span>
                                     <span className="font-semibold text-foreground">
-                                      {calculatedDas} Days
+                                      {calculatedDas} {t("days")}
                                     </span>
                                   </div>
 
                                   <div>
                                     <span className="text-muted-foreground block text-[11px]">
-                                      Growth Stage:
+                                      {t("growthStage")}:
                                     </span>
                                     <span className="font-semibold text-emerald-700 dark:text-emerald-400 truncate block">
-                                      {c.currentStageId || "Initial Growth"}
+                                      {localizeGrowthStage(c.currentStageId || t("initialGrowth"), locale)}
                                     </span>
                                   </div>
 
                                   <div>
                                     <span className="text-muted-foreground block text-[11px]">
-                                      Accumulated GDD:
+                                      {t("accumulatedGdd")}:
                                     </span>
                                     <span className="font-medium text-foreground">
                                       {c.cumulativeGdd !== undefined && c.cumulativeGdd !== null
                                         ? `${c.cumulativeGdd} °C day`
-                                        : "— (Awaiting Obs)"}
+                                        : t("awaitingObs")}
                                     </span>
                                   </div>
 
                                   <div>
                                     <span className="text-muted-foreground block text-[11px]">
-                                      Est. Harvest:
+                                      {t("estHarvest")}:
                                     </span>
                                     <span className="font-medium text-foreground">
                                       {c.expectedHarvestDate
@@ -925,9 +956,9 @@ export default function MyCropsPage() {
                                 <div className="flex items-center justify-between pt-1">
                                   <span className="text-[11px] text-muted-foreground">
                                     {c.gddParameterSetId ? (
-                                      <span>Parameter Set: {c.gddParameterSetId}</span>
+                                      <span>{t("paramSet")}: {c.gddParameterSetId}</span>
                                     ) : (
-                                      <span>Physiological DAS baseline tracking</span>
+                                      <span>{t("physiologicalDas")}</span>
                                     )}
                                   </span>
 
@@ -939,7 +970,7 @@ export default function MyCropsPage() {
                                         className="h-7 text-xs border-blue-300 text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
                                       >
                                         <Eye className="w-3 h-3 mr-1.5 text-blue-600" />
-                                        View Crop
+                                        {t("viewCrop")}
                                       </Button>
                                     </Link>
 
@@ -955,7 +986,7 @@ export default function MyCropsPage() {
                                       ) : (
                                         <ShieldCheck className="w-3 h-3 mr-1.5 text-amber-600" />
                                       )}
-                                      {evaluatingRiskCropId === c._id ? "Evaluating Risk..." : "AgriShield Risk"}
+                                      {evaluatingRiskCropId === c._id ? t("evaluatingRisk") : t("agriShieldRisk")}
                                     </Button>
 
                                     <Button
@@ -970,7 +1001,7 @@ export default function MyCropsPage() {
                                           isUpdating ? "animate-spin" : ""
                                         }`}
                                       />
-                                      {isUpdating ? "Evaluating..." : "Update Progression"}
+                                      {isUpdating ? t("evaluating") : t("updateProgression")}
                                     </Button>
                                   </div>
                                 </div>
@@ -981,7 +1012,7 @@ export default function MyCropsPage() {
                                     <div className="flex items-center justify-between">
                                       <div className="flex items-center gap-1.5 font-medium">
                                         <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
-                                        <span>AgriShield 360° Risk Assessment:</span>
+                                        <span>{t("riskAssessment")}:</span>
                                       </div>
                                       <Badge
                                         variant="outline"
@@ -995,22 +1026,22 @@ export default function MyCropsPage() {
                                             : "border-slate-300 bg-slate-50 text-slate-700"
                                         }`}
                                       >
-                                        {cropRisks[c._id].overallStatus.replace("_", " ")}
+                                        {localizeStatus(cropRisks[c._id].overallStatus, locale)}
                                       </Badge>
                                     </div>
 
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[11px] text-muted-foreground border-t pt-1.5">
-                                      <div>Stage: {cropRisks[c._id].evidenceCompleteness?.cropStageAvailable ? "✓ Grounded" : "✗ Missing"}</div>
-                                      <div>Weather: {cropRisks[c._id].evidenceCompleteness?.weatherAvailable ? `✓ ${cropRisks[c._id].evidenceCompleteness.weatherCoveragePercent}%` : "✗ Missing"}</div>
-                                      <div>Scout Scans: {cropRisks[c._id].evidenceCompleteness?.imageScanAvailable ? "✓ Recorded" : "— None Yet"}</div>
-                                      <div>Cultivar: {cropRisks[c._id].evidenceCompleteness?.varietyDataAvailable ? "✓ ICAR Verified" : "— Standard"}</div>
+                                      <div>{t("stage")}: {cropRisks[c._id].evidenceCompleteness?.cropStageAvailable ? t("grounded") : t("missing")}</div>
+                                      <div>{t("weather")}: {cropRisks[c._id].evidenceCompleteness?.weatherAvailable ? `✓ ${cropRisks[c._id].evidenceCompleteness.weatherCoveragePercent}%` : t("missing")}</div>
+                                      <div>{t("scoutScans")}: {cropRisks[c._id].evidenceCompleteness?.imageScanAvailable ? t("recorded") : t("noneYet")}</div>
+                                      <div>{t("cultivar")}: {cropRisks[c._id].evidenceCompleteness?.varietyDataAvailable ? t("icarVerified") : t("standard")}</div>
                                     </div>
 
                                     {cropRisks[c._id].evaluatedThreats && cropRisks[c._id].evaluatedThreats.length > 0 && (
                                       <div className="space-y-1 pt-1">
                                         {cropRisks[c._id].evaluatedThreats.slice(0, 3).map((threat: any) => (
                                           <div key={threat.ruleId} className="flex items-start gap-1.5 text-[11px]">
-                                            <span className="font-medium text-foreground shrink-0">{threat.threatName}:</span>
+                                            <span className="font-medium text-foreground shrink-0">{localizeThreatName(threat.threatName, locale)}:</span>
                                             <span className="text-muted-foreground">{threat.explanation}</span>
                                           </div>
                                         ))}
@@ -1234,29 +1265,84 @@ export default function MyCropsPage() {
                                           <p className="text-xs text-amber-800 dark:text-amber-300">
                                             Initial Finding:{" "}
                                             <span className="font-semibold underline">
-                                              {zoneScanSession.latestDiagnosis?.name || "Suspicious anomaly"}
+                                              {zoneScanSession.currentScan?.diseaseName ||
+                                                zoneScanSession.evidenceSummary?.repeatedDiagnosis ||
+                                                zoneScanSession.evidenceSummary?.diagnoses?.[0] ||
+                                                zoneScanSession.latestDiagnosis?.name ||
+                                                "Suspicious anomaly"}
                                             </span>
+                                            {zoneScanSession.currentScan?.confidence != null && (
+                                              <span className="ml-1 text-[11px] opacity-80">
+                                                ({typeof zoneScanSession.currentScan.confidence === "number" &&
+                                                zoneScanSession.currentScan.confidence <= 1
+                                                  ? (zoneScanSession.currentScan.confidence * 100).toFixed(0)
+                                                  : Number(zoneScanSession.currentScan.confidence).toFixed(0)}
+                                                % confidence)
+                                              </span>
+                                            )}
                                           </p>
                                         </div>
                                       </div>
 
                                       {/* View Angle Recommendation Checklist */}
-                                      <div className="bg-white/80 dark:bg-background/80 p-3 rounded-lg border border-amber-200 text-xs space-y-2">
-                                        <p className="font-semibold text-foreground">
-                                          Recommended supplementary views for Zone {activeZone.zoneCode}:
-                                        </p>
-                                        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-muted-foreground text-[11px]">
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 2:</strong> Close-up of leaf/lesion
+                                      <div className="bg-white/90 dark:bg-background/90 p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/50 text-xs space-y-2">
+                                        <div className="flex items-center justify-between">
+                                          <p className="font-semibold text-foreground">
+                                            Recommended supplementary views for Zone {activeZone.zoneCode}:
+                                          </p>
+                                          <Badge
+                                            variant="outline"
+                                            className="text-[11px] font-mono border-amber-300 text-amber-800 dark:text-amber-300"
+                                          >
+                                            {zoneScanSession.scanCount || 1} / 4 Views Captured
+                                          </Badge>
+                                        </div>
+                                        <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 text-[11px]">
+                                          <li className="flex items-center gap-1.5 p-2 rounded bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            <span>View 1: Screening</span>
                                           </li>
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 3:</strong> Wider canopy view
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 2
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 2 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 2: Close-up</span>
                                           </li>
-                                          <li className="flex items-center gap-1.5 p-2 rounded bg-muted/40">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                            <strong>View 4:</strong> Stem / adjacent plant
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 3
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 3 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 3: Canopy</span>
+                                          </li>
+                                          <li
+                                            className={`flex items-center gap-1.5 p-2 rounded border ${
+                                              (zoneScanSession.scanCount || 1) >= 4
+                                                ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-300 font-medium"
+                                                : "bg-muted/40 border-transparent text-muted-foreground"
+                                            }`}
+                                          >
+                                            {(zoneScanSession.scanCount || 1) >= 4 ? (
+                                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                            ) : (
+                                              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                                            )}
+                                            <span>View 4: Stem/Side</span>
                                           </li>
                                         </ul>
                                       </div>
@@ -1277,38 +1363,48 @@ export default function MyCropsPage() {
                                           </select>
                                         </div>
 
-                                        <label className="cursor-pointer">
-                                          <input
-                                            type="file"
-                                            accept="image/jpeg,image/png,image/webp"
-                                            className="hidden"
-                                            disabled={uploadingSupplementary}
-                                            onChange={(e) => {
-                                              const file = e.target.files?.[0];
-                                              if (file) handleSupplementaryScan(file);
-                                            }}
-                                          />
-                                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium shadow-xs">
-                                            {uploadingSupplementary ? (
-                                              <>
-                                                <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" />
-                                                Uploading View...
-                                              </>
-                                            ) : (
-                                              <>
-                                                <UploadCloud className="w-3.5 h-3.5 mr-1" />
-                                                Upload View ({zoneScanSession.totalImages || 1}/4)
-                                              </>
-                                            )}
-                                          </div>
-                                        </label>
+                                        {(zoneScanSession.scanCount || 1) < 4 ? (
+                                          <label className="cursor-pointer">
+                                            <input
+                                              type="file"
+                                              accept="image/jpeg,image/png,image/webp"
+                                              className="hidden"
+                                              disabled={uploadingSupplementary}
+                                              onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (file) handleSupplementaryScan(file);
+                                              }}
+                                            />
+                                            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium shadow-xs transition-colors">
+                                              {uploadingSupplementary ? (
+                                                <>
+                                                  <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" />
+                                                  Uploading View {(zoneScanSession.scanCount || 1) + 1}...
+                                                </>
+                                              ) : (
+                                                <>
+                                                  <UploadCloud className="w-3.5 h-3.5 mr-1" />
+                                                  Upload View {(zoneScanSession.scanCount || 1) + 1} of 4
+                                                </>
+                                              )}
+                                            </div>
+                                          </label>
+                                        ) : (
+                                          <Badge
+                                            variant="outline"
+                                            className="px-3 py-1.5 text-xs bg-emerald-100/60 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border-emerald-300 font-medium"
+                                          >
+                                            <CheckCircle2 className="w-3.5 h-3.5 mr-1 inline text-emerald-600" />
+                                            All 4 views captured
+                                          </Badge>
+                                        )}
 
                                         <Button
-                                          variant="outline"
+                                          variant="default"
                                           size="sm"
                                           disabled={completingSession}
                                           onClick={handleCompleteSession}
-                                          className="text-xs border-amber-300 text-amber-800 hover:bg-amber-100"
+                                          className="text-xs bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs"
                                         >
                                           {completingSession ? (
                                             <>
@@ -1348,18 +1444,131 @@ export default function MyCropsPage() {
                                     </Badge>
                                   </div>
 
-                                  <div className="bg-background p-3 rounded-lg border text-xs space-y-1.5">
-                                    <p className="font-medium">
+                                  <div className="bg-background p-3.5 rounded-lg border text-xs space-y-2.5">
+                                    <p className="font-medium text-sm text-foreground">
                                       {zoneScanSession.result === "NO_CONCERN_DETECTED"
                                         ? "No concerning signs detected in this scan."
                                         : zoneScanSession.status === "INCONCLUSIVE"
                                         ? "Diagnosis inconclusive / conflicting evidence across angles. Physical field inspection advised."
                                         : `Potential concern detected in Zone ${activeZone?.zoneCode || ""}.`}
                                     </p>
+
+                                    {/* Safely Render Diagnostic Evidence Consensus */}
                                     {zoneScanSession.evidenceSummary && (
-                                      <p className="text-muted-foreground text-[11px]">
-                                        Evidence: {zoneScanSession.evidenceSummary}
-                                      </p>
+                                      <div className="pt-2 border-t border-border/60 space-y-2">
+                                        <div className="flex items-center justify-between">
+                                          <span className="font-semibold text-foreground text-[11px]">
+                                            Diagnostic Consensus:
+                                          </span>
+                                          <Badge
+                                            variant={
+                                              typeof zoneScanSession.evidenceSummary === "object" &&
+                                              zoneScanSession.evidenceSummary.isConsistent
+                                                ? "default"
+                                                : "secondary"
+                                            }
+                                            className="text-[10px]"
+                                          >
+                                            {typeof zoneScanSession.evidenceSummary === "object" &&
+                                            zoneScanSession.evidenceSummary.isConsistent
+                                              ? "Consistent Across Angles"
+                                              : "Varied / Inconclusive"}
+                                          </Badge>
+                                        </div>
+
+                                        {typeof zoneScanSession.evidenceSummary === "string" ? (
+                                          <p className="text-muted-foreground text-[11px]">
+                                            Evidence: {zoneScanSession.evidenceSummary}
+                                          </p>
+                                        ) : (
+                                          <>
+                                            {zoneScanSession.evidenceSummary.repeatedDiagnosis && (
+                                              <p className="text-foreground text-[11px]">
+                                                <span className="text-muted-foreground">Consensus Threat:</span>{" "}
+                                                <strong className="text-amber-800 dark:text-amber-300 font-semibold">
+                                                  {zoneScanSession.evidenceSummary.repeatedDiagnosis}
+                                                </strong>
+                                              </p>
+                                            )}
+
+                                            {Array.isArray(zoneScanSession.evidenceSummary.diagnoses) &&
+                                              zoneScanSession.evidenceSummary.diagnoses.length > 0 && (
+                                                <div className="space-y-1">
+                                                  <span className="text-muted-foreground text-[11px]">
+                                                    Detected conditions per angle:
+                                                  </span>
+                                                  <div className="flex flex-wrap gap-1.5">
+                                                    {zoneScanSession.evidenceSummary.diagnoses.map(
+                                                      (diag: string, idx: number) => {
+                                                        const conf =
+                                                          zoneScanSession.evidenceSummary?.confidences?.[idx];
+                                                        const confStr =
+                                                          conf != null
+                                                            ? ` (${
+                                                                typeof conf === "number" && conf <= 1
+                                                                  ? (conf * 100).toFixed(0)
+                                                                  : Number(conf).toFixed(0)
+                                                              }% confidence)`
+                                                            : "";
+                                                        return (
+                                                          <span
+                                                            key={idx}
+                                                            className="inline-flex items-center px-2 py-0.5 rounded text-[11px] bg-muted text-foreground border border-border"
+                                                          >
+                                                            Angle {idx + 1}: {diag}
+                                                            {confStr}
+                                                          </span>
+                                                        );
+                                                      }
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+
+                                            {zoneScanSession.evidenceSummary.requiresExpertVerification && (
+                                              <p className="text-amber-700 dark:text-amber-400 text-[11px] font-medium flex items-center gap-1 pt-1">
+                                                <AlertTriangle className="w-3.5 h-3.5 inline shrink-0" />
+                                                Agronomist or expert field verification recommended.
+                                              </p>
+                                            )}
+                                          </>
+                                        )}
+                                      </div>
+                                    )}
+
+                                    {/* Gallery of captured scans if available */}
+                                    {Array.isArray(zoneScanSession.scans) && zoneScanSession.scans.length > 0 && (
+                                      <div className="pt-2 border-t border-border/60 space-y-1.5">
+                                        <p className="text-[11px] font-semibold text-foreground">
+                                          Evidence Image Angles ({zoneScanSession.scans.length}):
+                                        </p>
+                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                          {zoneScanSession.scans.map((s: any, idx: number) => (
+                                            <div
+                                              key={s.scanId || idx}
+                                              className="rounded-lg border bg-background overflow-hidden text-[10px]"
+                                            >
+                                              {s.imageUrl && (
+                                                <img
+                                                  src={s.imageUrl}
+                                                  alt={`View ${idx + 1}`}
+                                                  className="w-full h-18 object-cover"
+                                                />
+                                              )}
+                                              <div className="p-1.5 space-y-0.5">
+                                                <p className="font-semibold truncate capitalize">
+                                                  {s.viewAngle ? s.viewAngle.replace("_", " ") : `View ${idx + 1}`}
+                                                </p>
+                                                {s.diseaseName && (
+                                                  <p className="text-muted-foreground truncate" title={s.diseaseName}>
+                                                    {s.diseaseName}
+                                                  </p>
+                                                )}
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
                                     )}
                                   </div>
 
@@ -1414,13 +1623,13 @@ export default function MyCropsPage() {
                 </Button>
               </div>
               <CardDescription>
-                Register a crop planted on this field ({selectedField.area} {selectedField.areaUnit}) to track phenology, thermal time (GDD), and spatial zone health.
+                {t("modalDesc")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleAddCropToField} className="space-y-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="cropTypeSelect">Crop Name / Type *</Label>
+                  <Label htmlFor="cropTypeSelect">{t("cropType")}</Label>
                   <select
                     id="cropTypeSelect"
                     value={newCropType}
@@ -1428,28 +1637,28 @@ export default function MyCropsPage() {
                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
                     required
                   >
-                    <option value="Cotton">Cotton (કપાસ)</option>
-                    <option value="Wheat">Wheat (ઘઉં)</option>
-                    <option value="Rice">Rice / Paddy (ડાંગર)</option>
-                    <option value="Groundnut">Groundnut (મગફળી)</option>
-                    <option value="Maize">Maize / Corn (મકાઈ)</option>
-                    <option value="Soybean">Soybean (સોયાબીન)</option>
-                    <option value="Tomato">Tomato (ટામેટા)</option>
-                    <option value="Potato">Potato (બટાકા)</option>
-                    <option value="Onion">Onion (ડુંગળી)</option>
-                    <option value="Sugarcane">Sugarcane (શેરડી)</option>
-                    <option value="Chickpea">Chickpea / Chana (ચણા)</option>
-                    <option value="Mustard">Mustard (રાયડા)</option>
-                    <option value="Other">Other / Custom Crop</option>
+                    <option value="Cotton">{localizeCropName("Cotton", locale)}</option>
+                    <option value="Wheat">{localizeCropName("Wheat", locale)}</option>
+                    <option value="Rice">{localizeCropName("Rice", locale)}</option>
+                    <option value="Groundnut">{localizeCropName("Groundnut", locale)}</option>
+                    <option value="Maize">{localizeCropName("Maize", locale)}</option>
+                    <option value="Soybean">{localizeCropName("Soybean", locale)}</option>
+                    <option value="Tomato">{localizeCropName("Tomato", locale)}</option>
+                    <option value="Potato">{localizeCropName("Potato", locale)}</option>
+                    <option value="Onion">{localizeCropName("Onion", locale)}</option>
+                    <option value="Sugarcane">{localizeCropName("Sugarcane", locale)}</option>
+                    <option value="Chickpea">{localizeCropName("Chickpea", locale)}</option>
+                    <option value="Mustard">{localizeCropName("Mustard", locale)}</option>
+                    <option value="Other">{t("other")}</option>
                   </select>
                 </div>
 
                 {newCropType === "Other" && (
                   <div className="space-y-1.5">
-                    <Label htmlFor="customCrop">Enter Crop Name *</Label>
+                    <Label htmlFor="customCrop">{t("cropType")}</Label>
                     <Input
                       id="customCrop"
-                      placeholder="e.g. Cumin, Fennel, Garlic"
+                      placeholder={t("customCropPlaceholder")}
                       value={customCropName}
                       onChange={(e) => setCustomCropName(e.target.value)}
                       required
@@ -1459,17 +1668,17 @@ export default function MyCropsPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <Label htmlFor="cropVariety">Cultivar / Variety</Label>
+                    <Label htmlFor="cropVariety">{t("variety")}</Label>
                     <Input
                       id="cropVariety"
-                      placeholder="e.g. BT Cotton, HD-2967"
+                      placeholder={t("varietyPlaceholder")}
                       value={newCropVariety}
                       onChange={(e) => setNewCropVariety(e.target.value)}
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="sowingDate">Plantation / Sowing Date *</Label>
+                    <Label htmlFor="sowingDate">{t("sowingDateLabel")}</Label>
                     <Input
                       id="sowingDate"
                       type="date"
@@ -1483,7 +1692,7 @@ export default function MyCropsPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <Label htmlFor="cropArea">Cultivated Area ({selectedField.areaUnit}) *</Label>
+                    <Label htmlFor="cropArea">{t("cultivatedAreaLabel")} ({localizeUnits(selectedField.areaUnit, locale)}) *</Label>
                     <Input
                       id="cropArea"
                       type="number"
@@ -1497,14 +1706,14 @@ export default function MyCropsPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="zoneAssign">Assign Monitoring Zone (Optional)</Label>
+                    <Label htmlFor="zoneAssign">{t("assignZoneLabel")}</Label>
                     <select
                       id="zoneAssign"
                       value={newCropZoneId}
                       onChange={(e) => setNewCropZoneId(e.target.value)}
                       className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                     >
-                      <option value="">No Specific Zone (Whole Field)</option>
+                      <option value="">{t("wholeField")}</option>
                       {fieldZones.map((z) => (
                         <option key={z._id} value={z._id}>
                           {z.zoneCode}: {z.zoneName}
@@ -1515,7 +1724,7 @@ export default function MyCropsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="cropPhone">Farmer Phone (For SMS Advisory Alerts)</Label>
+                  <Label htmlFor="cropPhone">{t("phoneLabel")}</Label>
                   <Input
                     id="cropPhone"
                     type="tel"
@@ -1523,9 +1732,6 @@ export default function MyCropsPage() {
                     value={newCropPhone}
                     onChange={(e) => setNewCropPhone(e.target.value)}
                   />
-                  <p className="text-xs text-muted-foreground">
-                    Optional: Daily pesticide, fertilizer, and weather schedules will be sent to this number.
-                  </p>
                 </div>
 
                 <div className="flex justify-end gap-2 pt-3 border-t">
@@ -1534,7 +1740,7 @@ export default function MyCropsPage() {
                     variant="ghost"
                     onClick={() => setShowAddCropModal(false)}
                   >
-                    Cancel
+                    {t("cancel")}
                   </Button>
                   <Button
                     type="submit"
@@ -1544,12 +1750,12 @@ export default function MyCropsPage() {
                     {addingCrop ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
-                        Planting Crop...
+                        {t("evaluating")}
                       </>
                     ) : (
                       <>
                         <Sprout className="w-4 h-4 mr-1.5" />
-                        Plant Crop on Field
+                        {t("registerCrop")}
                       </>
                     )}
                   </Button>

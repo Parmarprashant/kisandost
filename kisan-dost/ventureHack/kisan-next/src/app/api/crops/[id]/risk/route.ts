@@ -36,7 +36,7 @@ export async function GET(
     return NextResponse.json(summary);
   } catch (err: any) {
     const message = err?.message || 'Failed to evaluate crop risk';
-    console.error(`[GET /api/crops/${params?.id}/risk] Error:`, message);
+    console.error(`[GET /api/crops/[id]/risk] Error:`, message);
 
     if (message.includes('not found') || message.includes('access denied')) {
       return NextResponse.json({ error: message }, { status: 403 });
