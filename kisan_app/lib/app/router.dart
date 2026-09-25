@@ -14,9 +14,15 @@ import '../features/auth/presentation/profile_screen.dart';
 import '../features/community/presentation/community_screen.dart';
 import '../features/diagnosis/presentation/diagnose_screen.dart';
 import '../features/fertilizer/presentation/fertilizer_screen.dart';
+import '../features/farm/presentation/crop_detail_screen.dart';
+import '../features/farm/presentation/crop_encyclopedia_screen.dart';
+import '../features/farm/presentation/district_suggestion_screen.dart';
 import '../features/farm/presentation/farm_screen.dart';
+import '../features/farm/presentation/field_boundary_editor_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/membership/presentation/pricing_screen.dart';
 import '../features/predictions/presentation/insights_screen.dart';
+import '../features/products/presentation/product_detail_screen.dart';
 import '../features/products/presentation/products_screen.dart';
 import '../features/schemes/presentation/schemes_screen.dart';
 import '../features/weather/presentation/weather_screen.dart';
@@ -59,6 +65,11 @@ const _drawerPaths = {
   '/advisory',
   '/ask',
   '/scan',
+  '/crops',
+  '/pricing',
+  '/crop-suggestion',
+  '/crops-guide',
+  '/fields',
 };
 
 /// Which bottom-bar tab should be lit for [location], or null when none
@@ -169,6 +180,32 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
           GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),
           GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
+          GoRoute(
+            path: '/crops/:id',
+            builder: (_, state) =>
+                CropDetailScreen(cropId: state.pathParameters['id'] ?? ''),
+          ),
+          GoRoute(path: '/pricing', builder: (_, _) => const PricingScreen()),
+          GoRoute(
+            path: '/products/:id',
+            builder: (_, state) => ProductDetailScreen(
+              productId: state.pathParameters['id'] ?? '',
+            ),
+          ),
+          GoRoute(
+            path: '/crop-suggestion',
+            builder: (_, _) => const DistrictSuggestionScreen(),
+          ),
+          GoRoute(
+            path: '/crops-guide',
+            builder: (_, _) => const CropEncyclopediaScreen(),
+          ),
+          GoRoute(
+            path: '/fields/:id/boundary',
+            builder: (_, state) => FieldBoundaryEditorScreen(
+              fieldId: state.pathParameters['id'] ?? '',
+            ),
+          ),
         ],
       ),
     ],

@@ -1,15 +1,13 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/network/dio_client.dart';
 import 'product_models.dart';
 
 /// Where the catalogue comes from.
-///
-/// Deliberately an interface with one implementation: an API is coming later,
-/// and when it does only the provider binding below changes. No screen, model
-/// or widget touches the source directly.
 abstract interface class ProductRepository {
   Future<List<Product>> all();
   Future<Product?> byId(String id);
@@ -48,14 +46,49 @@ class StaticProductRepository implements ProductRepository {
   }
 }
 
-/// Swap this binding for an `ApiProductRepository` when the endpoint exists.
-final productRepositoryProvider = Provider<ProductRepository>(
-  (ref) => StaticProductRepository(),
-);
+/// Fetches live product details from `/api/marketplace/:productId` with
+/// seamless fallback to local bundled assets.
+class HybridProductRepository implements ProductRepository {
+  HybridProductRepository(this._dio, this._fallback);
+
+  final Dio _dio;
+  final StaticProductRepository _fallback;
+
+  @override
+  Future<List<Product>> all() => _fallback.all();
+
+  @override
+  Future<Product?> byId(String id) async {
+    try {
+      final res = await _dio.get<Map<String, dynamic>>('/api/marketplace/$id');
+      final data = res.data;
+      if (data != null && data['error'] == null) {
+        return Product.fromJson(data);
+      }
+    } catch (_) {
+      // Offline, not found, or network error — fall back to static product
+    }
+    return _fallback.byId(id);
+  }
+}
+
+final productRepositoryProvider = Provider<ProductRepository>((ref) {
+  return HybridProductRepository(
+    ref.watch(dioProvider),
+    StaticProductRepository(),
+  );
+});
 
 final productsProvider = FutureProvider<List<Product>>(
   (ref) => ref.read(productRepositoryProvider).all(),
 );
+
+final singleProductProvider = FutureProvider.family<Product?, String>((
+  ref,
+  id,
+) {
+  return ref.read(productRepositoryProvider).byId(id);
+});
 
 final productSearchProvider = NotifierProvider<ProductSearch, String>(
   ProductSearch.new,
