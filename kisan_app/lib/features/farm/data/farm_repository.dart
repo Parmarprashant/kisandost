@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
 import '../../../core/offline/offline_store.dart';
+import 'crop_detail_models.dart';
 import 'farm_models.dart';
 
 final farmRepositoryProvider = Provider<FarmRepository>(
@@ -167,6 +168,41 @@ class FarmRepository {
     await _send<dynamic>('DELETE', '/api/crops/$id', null);
   }
 
+  Future<CropDetail> cropDetail(String cropId) async {
+    final json = await _get<Map<String, dynamic>>('/api/crops/$cropId');
+    return CropDetail.fromJson(json);
+  }
+
+  Future<CropRiskSummary> cropRisk(String cropId) async {
+    final json = await _get<Map<String, dynamic>>('/api/crops/$cropId/risk');
+    return CropRiskSummary.fromJson(json);
+  }
+
+  Future<CropCycleState> cropCycle(String cropId) async {
+    final json = await _get<Map<String, dynamic>>('/api/crops/$cropId/cycle');
+    return CropCycleState.fromJson(json);
+  }
+
+  Future<CropCycleState> updateCropCycle(String cropId) async {
+    final json = await _send<Map<String, dynamic>>(
+      'POST',
+      '/api/crops/$cropId/cycle/update',
+      <String, dynamic>{},
+    );
+    final cycleJson = json['cycle'] is Map<String, dynamic>
+        ? json['cycle'] as Map<String, dynamic>
+        : json;
+    return CropCycleState.fromJson(cycleJson);
+  }
+
+  Future<List<CropScanItem>> cropScans(String cropId) async {
+    final response = await _get<List<dynamic>>('/api/crops/$cropId/scans');
+    return response
+        .whereType<Map<String, dynamic>>()
+        .map(CropScanItem.fromJson)
+        .toList(growable: false);
+  }
+
   Future<T> _get<T>(String path) async {
     try {
       final response = await _dio.get<T>(path);
@@ -264,4 +300,36 @@ final activeCropsProvider = Provider<List<({Field field, Crop crop})>>((ref) {
       for (final crop in field.crops)
         if (crop.isActive) (field: field, crop: crop),
   ];
+});
+
+/// Detailed information for a single crop by its ID.
+final cropDetailProvider = FutureProvider.family<CropDetail, String>((
+  ref,
+  cropId,
+) async {
+  return ref.read(farmRepositoryProvider).cropDetail(cropId);
+});
+
+/// AgriShield 360° risk evaluation for a crop.
+final cropRiskProvider = FutureProvider.family<CropRiskSummary, String>((
+  ref,
+  cropId,
+) async {
+  return ref.read(farmRepositoryProvider).cropRisk(cropId);
+});
+
+/// Cycle telemetry and thermal progression state for a crop.
+final cropCycleProvider = FutureProvider.family<CropCycleState, String>((
+  ref,
+  cropId,
+) async {
+  return ref.read(farmRepositoryProvider).cropCycle(cropId);
+});
+
+/// Historical disease scans specifically attached to a crop.
+final cropScansProvider = FutureProvider.family<List<CropScanItem>, String>((
+  ref,
+  cropId,
+) async {
+  return ref.read(farmRepositoryProvider).cropScans(cropId);
 });

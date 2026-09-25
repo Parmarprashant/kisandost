@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../app/shell/app_drawer.dart';
@@ -212,47 +213,59 @@ class _CropRow extends StatelessWidget {
         .format(crop.sowingDate);
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
-        children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primaryContainer,
-            ),
-            child: const Icon(Icons.eco, color: AppColors.primary),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  crop.variety == null
-                      ? crop.cropName
-                      : '${crop.cropName} · ${crop.variety}',
-                  style: text.bodyLarge,
+      padding: const EdgeInsets.only(bottom: 8),
+      child: InkWell(
+        onTap: () => context.push('/crops/${crop.id}'),
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryContainer,
                 ),
-                Text('$sown · ${crop.areaLabel}', style: text.bodySmall),
-              ],
-            ),
+                child: const Icon(Icons.eco, color: AppColors.primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      crop.variety == null
+                          ? crop.cropName
+                          : '${crop.cropName} · ${crop.variety}',
+                      style: text.bodyLarge,
+                    ),
+                    Text('$sown · ${crop.areaLabel}', style: text.bodySmall),
+                  ],
+                ),
+              ),
+              // Days after sowing is what the advisory engine keys off, and the
+              // number a farmer actually thinks in.
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(999),
+                  color: AppColors.primaryContainer,
+                ),
+                child: Text(
+                  l10n.farmDayCount('${crop.daysAfterSowing}'),
+                  style: text.labelMedium?.copyWith(color: AppColors.primary),
+                ),
+              ),
+              const SizedBox(width: 6),
+              const Icon(Icons.chevron_right, size: 20, color: Colors.grey),
+            ],
           ),
-          // Days after sowing is what the advisory engine keys off, and the
-          // number a farmer actually thinks in.
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(999),
-              color: AppColors.primaryContainer,
-            ),
-            child: Text(
-              l10n.farmDayCount('${crop.daysAfterSowing}'),
-              style: text.labelMedium?.copyWith(color: AppColors.primary),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

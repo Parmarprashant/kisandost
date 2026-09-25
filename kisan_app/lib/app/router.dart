@@ -14,6 +14,7 @@ import '../features/auth/presentation/profile_screen.dart';
 import '../features/community/presentation/community_screen.dart';
 import '../features/diagnosis/presentation/diagnose_screen.dart';
 import '../features/fertilizer/presentation/fertilizer_screen.dart';
+import '../features/farm/presentation/crop_detail_screen.dart';
 import '../features/farm/presentation/farm_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/predictions/presentation/insights_screen.dart';
@@ -59,6 +60,7 @@ const _drawerPaths = {
   '/advisory',
   '/ask',
   '/scan',
+  '/crops',
 };
 
 /// Which bottom-bar tab should be lit for [location], or null when none
@@ -169,6 +171,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/schemes', builder: (_, _) => const SchemesScreen()),
           GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),
           GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen()),
+          GoRoute(
+            path: '/crops/:id',
+            builder: (_, state) =>
+                CropDetailScreen(cropId: state.pathParameters['id'] ?? ''),
+          ),
         ],
       ),
     ],
