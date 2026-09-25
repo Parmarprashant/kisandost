@@ -239,11 +239,35 @@ abstract class L10n {
   /// **'Thinking'**
   String get aiThinking;
 
+  /// No description provided for @aiSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Knows your fields, crop stage, and today\'s weather'**
+  String get aiSubtitle;
+
   /// No description provided for @aiTitle.
   ///
   /// In en, this message translates to:
   /// **'Ask KisanDost'**
   String get aiTitle;
+
+  /// No description provided for @aiTypeOrHoldMic.
+  ///
+  /// In en, this message translates to:
+  /// **'Type, or hold the mic'**
+  String get aiTypeOrHoldMic;
+
+  /// No description provided for @aiScanLeaf.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a leaf'**
+  String get aiScanLeaf;
+
+  /// No description provided for @aiUreaDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Urea dose'**
+  String get aiUreaDose;
 
   /// No description provided for @appError.
   ///

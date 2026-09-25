@@ -92,7 +92,19 @@ class L10nGu extends L10n {
   String get aiThinking => 'વિચારીએ છીએ';
 
   @override
+  String get aiSubtitle => 'તમારા ખેતર, પાકની અવસ્થા અને આજના હવામાનને સમજે છે';
+
+  @override
   String get aiTitle => 'કિસાનદોસ્તને પૂછો';
+
+  @override
+  String get aiTypeOrHoldMic => 'ટાઇપ કરો અથવા માઇક દબાવીને બોલો';
+
+  @override
+  String get aiScanLeaf => 'પાંદડું સ્કેન કરો';
+
+  @override
+  String get aiUreaDose => 'યૂરિયા ડોઝ';
 
   @override
   String get appError => 'કંઈક ખોટું થયું.';

@@ -90,7 +90,19 @@ class L10nHi extends L10n {
   String get aiThinking => 'सोच रहे हैं';
 
   @override
+  String get aiSubtitle => 'आपके खेत, फसल की अवस्था और आज का मौसम समझता है';
+
+  @override
   String get aiTitle => 'किसानदोस्त से पूछें';
+
+  @override
+  String get aiTypeOrHoldMic => 'टाइप करें, या माइक दबाकर बोलें';
+
+  @override
+  String get aiScanLeaf => 'पत्ती स्कैन करें';
+
+  @override
+  String get aiUreaDose => 'यूरिया की खुराक';
 
   @override
   String get appError => 'कुछ गड़बड़ हो गई।';

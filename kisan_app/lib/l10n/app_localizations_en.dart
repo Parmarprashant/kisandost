@@ -92,7 +92,20 @@ class L10nEn extends L10n {
   String get aiThinking => 'Thinking';
 
   @override
+  String get aiSubtitle =>
+      'Knows your fields, crop stage, and today\'s weather';
+
+  @override
   String get aiTitle => 'Ask KisanDost';
+
+  @override
+  String get aiTypeOrHoldMic => 'Type, or hold the mic';
+
+  @override
+  String get aiScanLeaf => 'Scan a leaf';
+
+  @override
+  String get aiUreaDose => 'Urea dose';
 
   @override
   String get appError => 'Something went wrong.';

@@ -92,7 +92,19 @@ class L10nMr extends L10n {
   String get aiThinking => 'विचार करत आहे';
 
   @override
+  String get aiSubtitle => 'तुमची शेती, पिकाची अवस्था आणि आजचे हवामान समजते';
+
+  @override
   String get aiTitle => 'किसानदोस्तला विचारा';
+
+  @override
+  String get aiTypeOrHoldMic => 'टाइप करा किंवा माइक दाबून बोला';
+
+  @override
+  String get aiScanLeaf => 'पान स्कॅन करा';
+
+  @override
+  String get aiUreaDose => 'युरिया डोस';
 
   @override
   String get appError => 'काहीतरी चूक झाली.';
