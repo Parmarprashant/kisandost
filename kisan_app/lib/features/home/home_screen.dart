@@ -338,7 +338,13 @@ class _CropChip extends StatelessWidget {
     final text = Theme.of(context).textTheme;
 
     return InkWell(
-      onTap: () => context.go('/farm'),
+      onTap: () {
+        if (entry.crop.id.isNotEmpty) {
+          context.push('/crops/${entry.crop.id}');
+        } else {
+          context.go('/farm');
+        }
+      },
       borderRadius: BorderRadius.circular(16),
       child: Container(
         width: 160,

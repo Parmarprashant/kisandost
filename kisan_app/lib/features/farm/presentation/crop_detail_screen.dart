@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/crop_detail_models.dart';
 import '../data/farm_repository.dart';
+import 'zone_inspection_sheet.dart';
 
 class CropDetailScreen extends ConsumerStatefulWidget {
   const CropDetailScreen({required this.cropId, super.key});
@@ -371,6 +372,32 @@ class _SpatialLineageCard extends StatelessWidget {
               label: 'Monitoring Zone',
               value: zone != null ? zone.displayName : 'Not assigned',
               badge: zone != null,
+            ),
+            const SizedBox(height: 14),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.tonalIcon(
+                onPressed: () => ZoneInspectionSheet.show(
+                  context,
+                  crop: crop,
+                  initialZone: zone,
+                ),
+                icon: const Icon(Icons.camera_alt_outlined, size: 18),
+                label: Text(
+                  zone != null
+                      ? 'Inspect Zone (${zone.zoneCode})'
+                      : 'Multi-Angle Zone Inspection',
+                ),
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFF2E7D32)
+                      .withValues(alpha: 0.12),
+                  foregroundColor: const Color(0xFF2E7D32),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

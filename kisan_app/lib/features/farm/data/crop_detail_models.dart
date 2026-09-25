@@ -62,6 +62,12 @@ class CropDetail {
     final rawZone = json['zoneId'];
     if (rawZone is Map<String, dynamic>) {
       parsedZone = FarmZoneSummary.fromJson(rawZone);
+    } else if (rawZone is String && rawZone.isNotEmpty) {
+      parsedZone = FarmZoneSummary(
+        id: rawZone,
+        zoneCode: 'Zone',
+        zoneName: rawZone,
+      );
     }
 
     final sowingParsed =
