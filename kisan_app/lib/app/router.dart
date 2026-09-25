@@ -44,6 +44,40 @@ final _tabs = <_TabSpec>[
   _TabSpec('/more', Icons.apps_outlined, Icons.apps, (l) => l.navMore),
 ];
 
+/// Screens reached from the More tab rather than from the bar itself.
+///
+/// Without this every one of them falls through to index 0 and lights up
+/// Home, so a farmer on the products list is told they are on the dashboard
+/// and taps Home to get back — which is the bug it looks like.
+const _moreOwnedPaths = {
+  '/community',
+  '/weather',
+  '/fertilizer',
+  '/schemes',
+  '/products',
+  '/profile',
+  '/advisory',
+  '/ask',
+  '/scan',
+};
+
+/// Which bottom-bar tab should be lit for [location].
+///
+/// Exposed for testing: the mapping is easy to break by adding a route and
+/// forgetting this set.
+int tabIndexFor(String location) {
+  final direct = _tabs.indexWhere((t) => location == t.path);
+  if (direct >= 0) return direct;
+
+  if (_moreOwnedPaths.any((p) => location.startsWith(p))) {
+    final more = _tabs.indexWhere((t) => t.path == '/more');
+    if (more >= 0) return more;
+  }
+
+  final prefixed = _tabs.indexWhere((t) => location.startsWith(t.path));
+  return prefixed < 0 ? 0 : prefixed;
+}
+
 class _TabSpec {
   const _TabSpec(this.path, this.icon, this.activeIcon, this.label);
 
@@ -157,7 +191,7 @@ class _AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final index = _tabs.indexWhere((t) => location.startsWith(t.path));
+    final index = tabIndexFor(location);
 
     return Scaffold(
       body: Column(
@@ -167,7 +201,7 @@ class _AppShell extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: index < 0 ? 0 : index,
+        selectedIndex: index,
         onDestinationSelected: (i) => context.go(_tabs[i].path),
         destinations: [
           for (final tab in _tabs)

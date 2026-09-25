@@ -18,7 +18,15 @@ class Diagnosis {
     required this.fertilizers,
     required this.requiresExpertVerification,
     this.focusRegion,
+    this.diagnostics,
   });
+
+  /// What the model itself reported, when the route passes it through.
+  ///
+  /// Null on an older backend. Never shown to a farmer as-is — it is English
+  /// and technical — but it is what makes "why was my photo rejected"
+  /// answerable instead of a guess.
+  final ModelDiagnostics? diagnostics;
 
   final String cropName;
   final String diseaseName;
@@ -86,6 +94,11 @@ class Diagnosis {
           json['requiresExpertVerification'] as bool? ?? false,
       focusRegion: json['focusRegion'] is Map<String, dynamic>
           ? FocusRegion.fromJson(json['focusRegion'] as Map<String, dynamic>)
+          : null,
+      diagnostics: json['diagnostics'] is Map<String, dynamic>
+          ? ModelDiagnostics.fromJson(
+              json['diagnostics'] as Map<String, dynamic>,
+            )
           : null,
     );
   }
@@ -187,3 +200,95 @@ int _toInt(Object? value) => switch (value) {
   final String s => int.tryParse(s) ?? num.tryParse(s)?.toInt() ?? 0,
   _ => 0,
 };
+
+/// The model's own verdict, passed through untouched by the route.
+///
+/// Exists because the farmer-facing copy is generated from templates: when a
+/// photo was rejected the app used to say it was "wide-angle or distant" no
+/// matter what actually went wrong, which sent people back to photograph the
+/// same leaf the same wrong way.
+class ModelDiagnostics {
+  const ModelDiagnostics({
+    this.gateStatus,
+    this.cropStatus,
+    this.rejectionReason,
+    this.rejectionReasons = const [],
+    this.rawTopPrediction,
+    this.rawConfidence,
+    this.accepted,
+    this.endpoint,
+  });
+
+  /// "REJECTED" when the quality gate refused the image.
+  final String? gateStatus;
+
+  /// e.g. "IMAGE_QUALITY_FAILURE", "OK".
+  final String? cropStatus;
+
+  /// Why, in the model's words.
+  final String? rejectionReason;
+  final List<String> rejectionReasons;
+
+  /// What the classifier would have said before the gate overruled it.
+  final String? rawTopPrediction;
+  final double? rawConfidence;
+
+  final bool? accepted;
+
+  /// Which service answered — the hosted model or a local one. Worth knowing
+  /// when a result looks wrong.
+  final String? endpoint;
+
+  bool get wasRejected =>
+      accepted == false || (gateStatus ?? '').toUpperCase() == 'REJECTED';
+
+  /// Every distinct reason, with the boilerplate prefix stripped.
+  List<String> get reasons {
+    final all = <String>[...rejectionReasons, ?rejectionReason];
+
+    final cleaned = all
+        .map(
+          (r) => r
+              .replaceFirst(
+                RegExp(r'^Image quality gate failed:\s*', caseSensitive: false),
+                '',
+              )
+              .trim(),
+        )
+        .where((r) => r.isNotEmpty);
+
+    return {...cleaned}.toList(growable: false);
+  }
+
+  /// Flattened for the technical details panel, in a stable order.
+  Map<String, String> get asLines => {
+    'gate': ?gateStatus,
+    'crop': ?cropStatus,
+    if (accepted != null) 'accepted': '$accepted',
+    'top prediction': ?rawTopPrediction,
+    'raw confidence': ?rawConfidence?.toStringAsFixed(3),
+    for (final (i, reason) in reasons.indexed) 'reason ${i + 1}': reason,
+    'endpoint': ?endpoint,
+  };
+
+  factory ModelDiagnostics.fromJson(Map<String, dynamic> json) {
+    return ModelDiagnostics(
+      gateStatus: _nonEmptyString(json['gateStatus']),
+      cropStatus: _nonEmptyString(json['cropStatus']),
+      rejectionReason: _nonEmptyString(json['rejectionReason']),
+      rejectionReasons: _toStringList(json['rejectionReasons']),
+      rawTopPrediction: _nonEmptyString(json['rawTopPrediction']),
+      rawConfidence: json['rawConfidence'] is num
+          ? (json['rawConfidence'] as num).toDouble()
+          : null,
+      accepted: json['accepted'] is bool ? json['accepted'] as bool : null,
+      endpoint: _nonEmptyString(json['endpoint']),
+    );
+  }
+}
+
+String? _nonEmptyString(Object? value) {
+  if (value is! String) return null;
+  final trimmed = value.trim();
+  return trimmed.isEmpty ? null : trimmed;
+}

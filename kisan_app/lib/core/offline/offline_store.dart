@@ -111,5 +111,6 @@ class OfflineKeys {
   static String weather(String query) => 'weather:$query';
   static const mandi = 'mandi';
   static const fields = 'fields';
+  static String cropsOf(String fieldId) => 'fields:$fieldId:crops';
   static const schemes = 'schemes';
 }

@@ -45,6 +45,23 @@ class FarmerPost {
   final String? cropStage;
   final String? state;
   final String? district;
+
+  /// Whether this post matches a search box.
+  ///
+  /// Crop is included deliberately: a farmer searches for "cotton", not for
+  /// the wording someone else used in their title.
+  bool matches(String query) {
+    final q = query.trim().toLowerCase();
+    if (q.isEmpty) return true;
+
+    return title.toLowerCase().contains(q) ||
+        problem.toLowerCase().contains(q) ||
+        crop.toLowerCase().contains(q) ||
+        authorName.toLowerCase().contains(q) ||
+        postType.toLowerCase().contains(q) ||
+        (district?.toLowerCase().contains(q) ?? false);
+  }
+
   final List<String> symptoms;
   final String? whatIDid;
   final String? result;

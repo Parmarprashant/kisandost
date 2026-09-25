@@ -3,19 +3,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
+import '../../../core/offline/offline_store.dart';
 import 'farm_models.dart';
 
 final farmRepositoryProvider = Provider<FarmRepository>(
-  (ref) => FarmRepository(ref.read(dioProvider)),
+  (ref) =>
+      FarmRepository(ref.read(dioProvider), ref.read(offlineStoreProvider)),
 );
 
 class FarmRepository {
-  FarmRepository(this._dio);
+  FarmRepository(this._dio, this._offline);
 
   final Dio _dio;
+  final OfflineStore _offline;
+
+  /// When the fields currently in hand were saved, if they came from the
+  /// cache rather than the network. Null when they are live.
+  ///
+  /// Held here because the provider returns a plain list and the screen still
+  /// needs to know whether to say how old it is.
+  DateTime? servedFromCacheAt;
 
   Future<List<Field>> fields() async {
     final response = await _get<List<dynamic>>('/api/fields');
+
+    // The raw payload is cached rather than the parsed object: it round-trips
+    // exactly what the server sent, with no second serialiser to drift.
+    await _offline.save(OfflineKeys.fields, response);
+
     return response
         .whereType<Map<String, dynamic>>()
         .map(Field.fromJson)
@@ -24,10 +39,47 @@ class FarmRepository {
 
   Future<List<Crop>> cropsOf(String fieldId) async {
     final response = await _get<List<dynamic>>('/api/fields/$fieldId/crops');
+    await _offline.save(OfflineKeys.cropsOf(fieldId), response);
+
     return response
         .whereType<Map<String, dynamic>>()
         .map(Crop.fromJson)
         .toList(growable: false);
+  }
+
+  /// The farmer's fields and crops as they were last seen, or null if they
+  /// have never loaded on this device.
+  ///
+  /// A farmer standing in their own field with no signal should still be able
+  /// to see what is planted in it. This is the difference between an app that
+  /// works outdoors and one that only works on wifi.
+  CachedPayload<List<Field>>? lastKnownFields() {
+    final cached = _offline.readList(OfflineKeys.fields);
+    if (cached == null) return null;
+
+    try {
+      final fields = cached.value
+          .whereType<Map<String, dynamic>>()
+          .map(Field.fromJson)
+          .map((field) {
+            final crops = _offline.readList(OfflineKeys.cropsOf(field.id));
+            if (crops == null) return field;
+            return field.copyWith(
+              crops: crops.value
+                  .whereType<Map<String, dynamic>>()
+                  .map(Crop.fromJson)
+                  .toList(growable: false),
+            );
+          })
+          .toList(growable: false);
+
+      if (fields.isEmpty) return null;
+      return CachedPayload(value: fields, savedAt: cached.savedAt);
+    } catch (_) {
+      // Written by an older version, or corrupt. Better to fall through to
+      // the real error than to show half a farm.
+      return null;
+    }
   }
 
   /// Fields with their crops attached.
@@ -172,8 +224,36 @@ class FarmRepository {
 /// Not cached with `cacheFor`: this is data the user edits, and a stale list
 /// after adding a field reads as the app having lost their work. It is
 /// invalidated explicitly after every mutation instead.
-final fieldsProvider = FutureProvider<List<Field>>((ref) {
-  return ref.read(farmRepositoryProvider).fieldsWithCrops();
+final fieldsProvider = FutureProvider<List<Field>>((ref) async {
+  final repository = ref.read(farmRepositoryProvider);
+  try {
+    final fields = await repository.fieldsWithCrops();
+    repository.servedFromCacheAt = null;
+    return fields;
+  } on ApiException catch (error) {
+    // Only a connection problem falls back. A 401 means the session is gone
+    // and showing someone else's cached farm would be worse than an error.
+    if (error.kind != ApiErrorKind.offline &&
+        error.kind != ApiErrorKind.timeout) {
+      rethrow;
+    }
+
+    final cached = repository.lastKnownFields();
+    if (cached == null) rethrow;
+
+    repository.servedFromCacheAt = cached.savedAt;
+    return cached.value;
+  }
+});
+
+/// When the fields on screen were saved, if they came from the cache.
+///
+/// Null when they are live. The screen uses it to say how old they are rather
+/// than presenting a week-old crop list as today's.
+final fieldsCachedAtProvider = Provider<DateTime?>((ref) {
+  final async = ref.watch(fieldsProvider);
+  if (!async.hasValue) return null;
+  return ref.read(farmRepositoryProvider).servedFromCacheAt;
 });
 
 /// Every active crop across every field, for the home screen.

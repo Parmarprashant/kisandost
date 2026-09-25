@@ -5,6 +5,15 @@
          system speech recogniser unless it declares it here, and without it
          SpeechToText.initialize() just returns false and the microphone never
          appears — with no error a farmer could act on. -->
+    <!-- Location. geolocator_android deliberately declares no permissions of
+         its own, so without these Android refuses the request without ever
+         showing a prompt: checkPermission returns denied, requestPermission
+         returns denied immediately, and "use my location" fails silently.
+         Coarse is enough for weather, but fine is declared so a farmer who
+         grants precise location gets a better fix for their field. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <queries>
         <intent>

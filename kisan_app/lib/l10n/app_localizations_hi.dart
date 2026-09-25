@@ -470,6 +470,9 @@ class L10nHi extends L10n {
   String get communityNoComments => 'अभी कोई जवाब नहीं। पहले आप लिखें।';
 
   @override
+  String get communityNoMatch => 'इस खोज से कोई पोस्ट नहीं मिली';
+
+  @override
   String get communityPost => 'पोस्ट करें';
 
   @override
@@ -477,6 +480,9 @@ class L10nHi extends L10n {
 
   @override
   String get communityPosting => 'पोस्ट हो रहा है';
+
+  @override
+  String get communitySearch => 'पोस्ट, फ़सल या गाँव खोजें';
 
   @override
   String get communitySend => 'भेजें';
@@ -1145,6 +1151,12 @@ class L10nHi extends L10n {
   }
 
   @override
+  String get diagnoseCopyDetails => 'जानकारी कॉपी करें';
+
+  @override
+  String get diagnoseDetailsCopied => 'कॉपी हो गया';
+
+  @override
   String get diagnoseExpertNote =>
       'छिड़काव से पहले कृपया विशेषज्ञ से पुष्टि करें।';
 
@@ -1172,6 +1184,9 @@ class L10nHi extends L10n {
 
   @override
   String get diagnoseMatching => 'इलाज खोजा जा रहा है';
+
+  @override
+  String get diagnoseModelDetails => 'मॉडल की तकनीकी जानकारी';
 
   @override
   String get diagnoseNoCamera => 'इस फ़ोन में कैमरा उपलब्ध नहीं है।';
@@ -2864,7 +2879,18 @@ class L10nHi extends L10n {
   String get weatherLocating => 'आपका स्थान खोजा जा रहा है';
 
   @override
+  String get weatherLocationBlocked =>
+      'इस ऐप के लिए लोकेशन बंद है। सेटिंग्स में जाकर अनुमति दें।';
+
+  @override
   String get weatherLocationDenied => 'स्थान बंद है। अपने गाँव का नाम खोजें।';
+
+  @override
+  String get weatherLocationOff => 'फ़ोन में लोकेशन चालू करके फिर कोशिश करें।';
+
+  @override
+  String get weatherLocationSlow =>
+      'आपकी जगह नहीं मिली। बाहर जाकर फिर कोशिश करें या अपना शहर खोजें।';
 
   @override
   String get weatherPage_allowLocation => 'लोकेशन अनुमति दें जब पूछा जाए';
