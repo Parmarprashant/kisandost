@@ -5321,6 +5321,42 @@ abstract class L10n {
   /// **'Government schemes'**
   String get schemesTitle;
 
+  /// No description provided for @schemesYouQualify.
+  ///
+  /// In en, this message translates to:
+  /// **'You qualify'**
+  String get schemesYouQualify;
+
+  /// No description provided for @schemesNeedDoc.
+  ///
+  /// In en, this message translates to:
+  /// **'Need a document'**
+  String get schemesNeedDoc;
+
+  /// No description provided for @schemesAllCount.
+  ///
+  /// In en, this message translates to:
+  /// **'All schemes'**
+  String get schemesAllCount;
+
+  /// No description provided for @schemesMatchedFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Matched to your farm'**
+  String get schemesMatchedFarm;
+
+  /// No description provided for @schemesHowToApply.
+  ///
+  /// In en, this message translates to:
+  /// **'How to apply'**
+  String get schemesHowToApply;
+
+  /// No description provided for @schemesSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get schemesSave;
+
   /// No description provided for @suggestAddField.
   ///
   /// In en, this message translates to:

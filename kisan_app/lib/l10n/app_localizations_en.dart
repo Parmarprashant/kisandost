@@ -2990,6 +2990,24 @@ class L10nEn extends L10n {
   String get schemesTitle => 'Government schemes';
 
   @override
+  String get schemesYouQualify => 'You qualify';
+
+  @override
+  String get schemesNeedDoc => 'Need a document';
+
+  @override
+  String get schemesAllCount => 'All schemes';
+
+  @override
+  String get schemesMatchedFarm => 'Matched to your farm';
+
+  @override
+  String get schemesHowToApply => 'How to apply';
+
+  @override
+  String get schemesSave => 'Save';
+
+  @override
   String get suggestAddField => 'Add your field';
 
   @override

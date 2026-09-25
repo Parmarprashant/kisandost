@@ -2995,6 +2995,24 @@ class L10nGu extends L10n {
   String get schemesTitle => 'સરકારી યોજનાઓ';
 
   @override
+  String get schemesYouQualify => 'તમે પાત્ર છો';
+
+  @override
+  String get schemesNeedDoc => 'દસ્તાવેજ જરૂરી છે';
+
+  @override
+  String get schemesAllCount => 'બધી યોજનાઓ';
+
+  @override
+  String get schemesMatchedFarm => 'તમારા ખેતર સાથે મેળ ખાતી';
+
+  @override
+  String get schemesHowToApply => 'અરજી કેવી રીતે કરવી';
+
+  @override
+  String get schemesSave => 'સાચવો';
+
+  @override
   String get suggestAddField => 'તમારું ખેતર ઉમેરો';
 
   @override

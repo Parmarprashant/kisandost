@@ -2993,6 +2993,24 @@ class L10nMr extends L10n {
   String get schemesTitle => 'शासकीय योजना';
 
   @override
+  String get schemesYouQualify => 'तुम्ही पात्र आहात';
+
+  @override
+  String get schemesNeedDoc => 'कागदपत्र आवश्यक आहे';
+
+  @override
+  String get schemesAllCount => 'सर्व योजना';
+
+  @override
+  String get schemesMatchedFarm => 'तुमच्या शेतानुसार जुळलेल्या';
+
+  @override
+  String get schemesHowToApply => 'अर्ज कसा करावा';
+
+  @override
+  String get schemesSave => 'जतन करा';
+
+  @override
   String get suggestAddField => 'तुमचे शेत जोडा';
 
   @override

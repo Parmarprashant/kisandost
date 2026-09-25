@@ -3001,6 +3001,24 @@ class L10nHi extends L10n {
   String get schemesTitle => 'सरकारी योजनाएँ';
 
   @override
+  String get schemesYouQualify => 'आप पात्र हैं';
+
+  @override
+  String get schemesNeedDoc => 'दस्तावेज़ चाहिए';
+
+  @override
+  String get schemesAllCount => 'सभी योजनाएं';
+
+  @override
+  String get schemesMatchedFarm => 'आपके खेत के अनुसार';
+
+  @override
+  String get schemesHowToApply => 'आवेदन कैसे करें';
+
+  @override
+  String get schemesSave => 'सहेजें';
+
+  @override
   String get suggestAddField => 'अपना खेत जोड़ें';
 
   @override
