@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/kit.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../farm/data/farm_repository.dart';
@@ -141,20 +142,31 @@ class _YieldTabState extends ConsumerState<YieldTab> {
         // this route and come back as a 400. Saying so here beats a round
         // trip that ends in a generic failure message.
         if (!yieldSupportsCrop(_crop))
-          Container(
-            width: double.infinity,
+          KdCard(
+            background:
+                Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.amberDark.withAlpha(30)
+                    : AppColors.amberTint,
+            outline:
+                Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.amberDark.withAlpha(70)
+                    : AppColors.amberLine,
             padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: AppColors.secondary.withValues(alpha: 0.12),
-            ),
             child: Text(
               l10n.predNoBaseline(_crop),
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color:
+                    Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.amberDark
+                        : AppColors.amberText,
+              ),
             ),
           )
         else
           FilledButton(
+            style: FilledButton.styleFrom(
+              minimumSize: const Size(double.infinity, 48),
+            ),
             onPressed: _running ? null : _run,
             child: Text(_running ? l10n.predRunning : l10n.predRun),
           ),
@@ -163,8 +175,9 @@ class _YieldTabState extends ConsumerState<YieldTab> {
           const SizedBox(height: 20),
           Text(
             _error!,
-            style: Theme.of(context).textTheme.bodyLarge
-                ?.copyWith(color: AppColors.danger),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: AppColors.danger,
+            ),
           ),
         ],
 
@@ -185,37 +198,43 @@ class _YieldResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final text = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final text = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     final numbers = NumberFormat.decimalPattern(
       Localizations.localeOf(context).toString(),
     );
 
     final better = result.isAboveAverage;
-    final accent = better ? AppColors.success : AppColors.warning;
+    final accent =
+        better
+            ? (isDark ? AppColors.forestDark : AppColors.forest)
+            : (isDark ? AppColors.terracottaDark : AppColors.terracotta);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.predYieldResult, style: text.titleMedium),
-        const SizedBox(height: 12),
-
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: AppColors.primaryContainer,
-          ),
+        SectionHeader(l10n.predYieldResult),
+        KdCard(
+          background:
+              isDark ? AppColors.forestDark.withAlpha(35) : AppColors.forestTint,
+          outline:
+              isDark ? AppColors.forestDark.withAlpha(80) : AppColors.forestLine,
+          padding: const EdgeInsets.all(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                l10n.predTonnes(numbers.format(result.totalYield)),
-                style: text.displaySmall?.copyWith(color: AppColors.primary),
+              Figure(
+                value: numbers.format(result.totalYield),
+                unit: l10n.predTonnes(''),
+                caption: l10n.predYieldResult,
               ),
+              const SizedBox(height: 4),
               Text(
                 l10n.predPerAcre(result.yieldPerAcre.toStringAsFixed(2)),
-                style: text.bodyLarge,
+                style: text.bodyMedium?.copyWith(
+                  color: isDark ? AppColors.ink2Dark : AppColors.ink2,
+                ),
               ),
             ],
           ),
@@ -224,45 +243,62 @@ class _YieldResult extends StatelessWidget {
         // The comparison is the point: a number on its own tells a farmer
         // nothing, but "12% below what your district manages" is actionable.
         if (result.hasBaseline) ...[
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              Icon(
-                better ? Icons.trending_up : Icons.trending_down,
-                color: accent,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  better
-                      ? l10n.predAbove(
-                          result.percentDifference.abs().toStringAsFixed(1),
-                        )
-                      : l10n.predBelow(
-                          result.percentDifference.abs().toStringAsFixed(1),
-                        ),
-                  style: text.bodyLarge?.copyWith(color: accent),
+          const SizedBox(height: 12),
+          KdCard(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              children: [
+                Icon(
+                  better ? Icons.trending_up : Icons.trending_down,
+                  color: accent,
+                  size: 22,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            l10n.predVsRegion(result.regionalPerAcre.toStringAsFixed(2)),
-            style: text.bodySmall,
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        better
+                            ? l10n.predAbove(
+                              result.percentDifference.abs().toStringAsFixed(1),
+                            )
+                            : l10n.predBelow(
+                              result.percentDifference.abs().toStringAsFixed(1),
+                            ),
+                        style: text.titleSmall?.copyWith(color: accent),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        l10n.predVsRegion(
+                          result.regionalPerAcre.toStringAsFixed(2),
+                        ),
+                        style: text.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
 
         if (result.insights.isNotEmpty) ...[
-          const SizedBox(height: 18),
-          Container(
+          const SizedBox(height: 12),
+          KdCard(
+            background:
+                isDark ? AppColors.skyDark.withAlpha(35) : AppColors.skyTint,
+            outline:
+                isDark ? AppColors.skyDark.withAlpha(80) : AppColors.skyLine,
             padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: AppColors.sky.withValues(alpha: 0.10),
-              border: Border.all(color: AppColors.sky.withValues(alpha: 0.35)),
+            child: Text(
+              result.insights,
+              style: text.bodyMedium?.copyWith(
+                color: isDark ? AppColors.skyDark : AppColors.sky,
+              ),
             ),
-            child: Text(result.insights, style: text.bodyLarge),
           ),
         ],
       ],

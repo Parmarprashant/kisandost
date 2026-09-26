@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/kit.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../mandi/data/mandi_models.dart';
@@ -201,74 +203,125 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.farmAddField),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4),
-          child: LinearProgressIndicator(value: (_step + 1) / _totalSteps),
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                Text(
-                  l10n.farmStep('${_step + 1}', '$_totalSteps'),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 16),
-                switch (_step) {
-                  0 => _stepField(l10n),
-                  1 => _stepSoil(l10n),
-                  2 => _stepCrop(l10n),
-                  _ => _stepReview(l10n),
-                },
-                if (_error != null) ...[
-                  const SizedBox(height: 20),
-                  Text(
-                    _error!,
-                    style: Theme.of(context).textTheme.bodyLarge
-                        ?.copyWith(color: AppColors.danger),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (_step > 0)
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: _saving
-                            ? null
-                            : () => setState(() => _step--),
-                        child: Text(l10n.farmBack),
+                  Row(
+                    children: [
+                      _HeaderButton(
+                        icon: Icons.arrow_back,
+                        tooltip:
+                            MaterialLocalizations.of(context).backButtonTooltip,
+                        onTap: () {
+                          if (_step > 0) {
+                            setState(() => _step--);
+                          } else {
+                            Navigator.of(context).pop();
+                          }
+                        },
                       ),
-                    ),
-                  if (_step > 0) const SizedBox(width: 12),
-                  Expanded(
-                    flex: 2,
-                    child: FilledButton(
-                      onPressed: _nextAction(),
-                      child: Text(
-                        _step == _totalSteps - 1
-                            ? (_saving ? l10n.farmSaving : l10n.farmSave)
-                            : l10n.farmNext,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          l10n.farmStep('${_step + 1}', '$_totalSteps'),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      for (int i = 0; i < _totalSteps; i++) ...[
+                        Expanded(
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color:
+                                  i <= _step
+                                      ? theme.colorScheme.primary
+                                      : theme.colorScheme.outline,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        ),
+                        if (i != _totalSteps - 1) const SizedBox(width: 6),
+                      ],
+                    ],
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+                children: [
+                  switch (_step) {
+                    0 => _stepField(l10n),
+                    1 => _stepSoil(l10n),
+                    2 => _stepCrop(l10n),
+                    _ => _stepReview(l10n),
+                  },
+                  if (_error != null) ...[
+                    const SizedBox(height: 20),
+                    Text(
+                      _error!,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: AppColors.danger,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child: Row(
+                  children: [
+                    if (_step > 0)
+                      Expanded(
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: const Size(0, 48),
+                          ),
+                          onPressed:
+                              _saving ? null : () => setState(() => _step--),
+                          child: Text(l10n.farmBack),
+                        ),
+                      ),
+                    if (_step > 0) const SizedBox(width: 12),
+                    Expanded(
+                      flex: 2,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size(0, 48),
+                        ),
+                        onPressed: _nextAction(),
+                        child: Text(
+                          _step == _totalSteps - 1
+                              ? (_saving ? l10n.farmSaving : l10n.farmSave)
+                              : l10n.farmNext,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -474,31 +527,37 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.farmReview, style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 16),
-        for (final (label, value) in rows)
-          if (value != null && value.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 130,
-                    child: Text(
-                      label,
-                      style: Theme.of(context).textTheme.bodySmall,
+        SectionHeader(l10n.farmReview),
+        KdCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              for (final (label, value) in rows)
+                if (value != null && value.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 130,
+                          child: Text(
+                            label,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Text(
-                      value,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -570,6 +629,36 @@ class _DateField extends StatelessWidget {
         child: Text(
           MaterialLocalizations.of(context).formatMediumDate(value),
           style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ),
+    );
+  }
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Tooltip(
+      message: tooltip ?? '',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Icon(icon, size: 22, color: theme.colorScheme.onSurface),
         ),
       ),
     );

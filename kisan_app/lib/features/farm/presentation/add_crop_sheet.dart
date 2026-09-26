@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/farm_models.dart';
@@ -20,6 +21,11 @@ class AddCropSheet extends ConsumerStatefulWidget {
     return showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppTheme.radiusSheet),
+        ),
+      ),
       builder: (_) => AddCropSheet(field: field),
     );
   }
@@ -98,6 +104,7 @@ class _AddCropSheetState extends ConsumerState<AddCropSheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final theme = Theme.of(context);
 
     return Padding(
       // Lifts the sheet above the keyboard so the save button stays reachable.
@@ -106,114 +113,137 @@ class _AddCropSheetState extends ConsumerState<AddCropSheet> {
       ),
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.outline,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               Text(
                 l10n.farmAddCrop,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: theme.textTheme.headlineSmall,
               ),
+              const SizedBox(height: 2),
               Text(
                 widget.field.name,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 20),
 
-              TextField(
-                controller: _cropName,
-                autofocus: true,
-                decoration: InputDecoration(labelText: l10n.farmCropName),
-                onChanged: (_) => setState(() {}),
+              _Labelled(
+                label: l10n.farmCropName,
+                child: TextField(
+                  controller: _cropName,
+                  autofocus: true,
+                  textCapitalization: TextCapitalization.sentences,
+                  onChanged: (_) => setState(() {}),
+                ),
               ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _variety,
-                decoration: InputDecoration(labelText: l10n.farmVariety),
+              _Labelled(
+                label: l10n.farmVariety,
+                child: TextField(
+                  controller: _variety,
+                  textCapitalization: TextCapitalization.sentences,
+                ),
               ),
-              const SizedBox(height: 16),
 
-              InkWell(
-                onTap: () async {
-                  final now = DateTime.now();
-                  final picked = await showDatePicker(
-                    context: context,
-                    initialDate: _sowingDate,
-                    firstDate: DateTime(now.year - 2),
-                    lastDate: now,
-                  );
-                  if (picked != null) setState(() => _sowingDate = picked);
-                },
-                child: InputDecorator(
-                  decoration: InputDecoration(
-                    labelText: l10n.farmSowingDate,
-                    suffixIcon: const Icon(Icons.calendar_today, size: 20),
-                  ),
-                  child: Text(
-                    MaterialLocalizations.of(context)
-                        .formatMediumDate(_sowingDate),
-                    style: Theme.of(context).textTheme.bodyLarge,
+              _Labelled(
+                label: l10n.farmSowingDate,
+                child: InkWell(
+                  onTap: () async {
+                    final now = DateTime.now();
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: _sowingDate,
+                      firstDate: DateTime(now.year - 2),
+                      lastDate: now,
+                    );
+                    if (picked != null) setState(() => _sowingDate = picked);
+                  },
+                  child: InputDecorator(
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.calendar_today, size: 20),
+                    ),
+                    child: Text(
+                      MaterialLocalizations.of(context)
+                          .formatMediumDate(_sowingDate),
+                      style: theme.textTheme.bodyLarge,
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
 
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: TextField(
-                      controller: _area,
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
+              _Labelled(
+                label: l10n.farmArea,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: TextField(
+                        controller: _area,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
+                        onChanged: (_) => setState(() {}),
                       ),
-                      decoration: InputDecoration(labelText: l10n.farmArea),
-                      onChanged: (_) => setState(() {}),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      initialValue: _areaUnit,
-                      isExpanded: true,
-                      items: [
-                        for (final unit in areaUnits)
-                          DropdownMenuItem(value: unit, child: Text(unit)),
-                      ],
-                      onChanged: (v) {
-                        if (v != null) setState(() => _areaUnit = v);
-                      },
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        initialValue: _areaUnit,
+                        isExpanded: true,
+                        items: [
+                          for (final unit in areaUnits)
+                            DropdownMenuItem(value: unit, child: Text(unit)),
+                        ],
+                        onChanged: (v) {
+                          if (v != null) setState(() => _areaUnit = v);
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              DropdownButtonFormField<String>(
-                initialValue: _method,
-                isExpanded: true,
-                decoration: InputDecoration(
-                  labelText: l10n.farmCultivationMethod,
+                  ],
                 ),
-                items: [
-                  for (final method in cultivationMethods)
-                    DropdownMenuItem(value: method, child: Text(method)),
-                ],
-                onChanged: (v) => setState(() => _method = v),
+              ),
+
+              _Labelled(
+                label: l10n.farmCultivationMethod,
+                child: DropdownButtonFormField<String>(
+                  initialValue: _method,
+                  isExpanded: true,
+                  items: [
+                    for (final method in cultivationMethods)
+                      DropdownMenuItem(value: method, child: Text(method)),
+                  ],
+                  onChanged: (v) => setState(() => _method = v),
+                ),
               ),
 
               if (_error != null) ...[
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 Text(
                   _error!,
-                  style: Theme.of(context).textTheme.bodyLarge
+                  style: theme.textTheme.bodyLarge
                       ?.copyWith(color: AppColors.danger),
                 ),
               ],
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               FilledButton(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 48),
+                ),
                 onPressed: _valid && !_saving ? _save : null,
                 child: Text(_saving ? l10n.farmSaving : l10n.farmSave),
               ),
@@ -224,3 +254,26 @@ class _AddCropSheetState extends ConsumerState<AddCropSheet> {
     );
   }
 }
+
+class _Labelled extends StatelessWidget {
+  const _Labelled({required this.label, required this.child});
+
+  final String label;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 7),
+          child,
+        ],
+      ),
+    );
+  }
+}
+

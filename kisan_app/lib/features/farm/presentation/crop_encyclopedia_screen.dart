@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../data/crop_encyclopedia_models.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/kit.dart';
 
 class CropEncyclopediaScreen extends ConsumerStatefulWidget {
   const CropEncyclopediaScreen({super.key});
@@ -25,74 +27,107 @@ class _CropEncyclopediaScreenState
     final cropsAsync = ref.watch(cropEncyclopediaProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Crop Reference Guide'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/farm');
-            }
-          },
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search crops (Wheat, Rice, Cotton, etc.)...',
-                prefixIcon: const Icon(Icons.search),
-                isDense: true,
-                filled: true,
-                fillColor: theme.cardColor,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+              child: Row(
+                children: [
+                  _HeaderButton(
+                    icon: Icons.arrow_back,
+                    tooltip:
+                        MaterialLocalizations.of(context).backButtonTooltip,
+                    onTap: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/farm');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Crop Reference Guide',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Agronomic Baseline & Disease Catalog',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              onChanged: (val) =>
-                  setState(() => _search = val.trim().toLowerCase()),
             ),
-          ),
-          Expanded(
-            child: cropsAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, _) =>
-                  Center(child: Text('Error loading guide: $err')),
-              data: (crops) {
-                final filtered = crops.where((c) {
-                  if (_search.isEmpty) return true;
-                  final nameEn = c.name.en.toLowerCase();
-                  final nameHi = c.name.hi.toLowerCase();
-                  final nameGu = c.name.gu.toLowerCase();
-                  return nameEn.contains(_search) ||
-                      nameHi.contains(_search) ||
-                      nameGu.contains(_search);
-                }).toList();
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search crops (Wheat, Rice, Cotton, etc.)...',
+                  prefixIcon: const Icon(Icons.search),
+                  isDense: true,
+                  filled: true,
+                  fillColor: theme.colorScheme.surfaceContainerHighest,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                    borderSide: BorderSide(color: theme.colorScheme.outline),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                    borderSide: BorderSide(color: theme.colorScheme.outline),
+                  ),
+                ),
+                onChanged: (val) =>
+                    setState(() => _search = val.trim().toLowerCase()),
+              ),
+            ),
+            Expanded(
+              child: cropsAsync.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) =>
+                    Center(child: Text('Error loading guide: $err')),
+                data: (crops) {
+                  final filtered = crops.where((c) {
+                    if (_search.isEmpty) return true;
+                    final nameEn = c.name.en.toLowerCase();
+                    final nameHi = c.name.hi.toLowerCase();
+                    final nameGu = c.name.gu.toLowerCase();
+                    return nameEn.contains(_search) ||
+                        nameHi.contains(_search) ||
+                        nameGu.contains(_search);
+                  }).toList();
 
-                if (filtered.isEmpty) {
-                  return const Center(
-                    child: Text('No crops matching your search'),
+                  if (filtered.isEmpty) {
+                    return const Center(
+                      child: Text('No crops matching your search'),
+                    );
+                  }
+
+                  return ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+                    itemCount: filtered.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 12),
+                    itemBuilder: (ctx, i) {
+                      final crop = filtered[i];
+                      return _CropEncyclopediaCard(crop: crop, locale: locale);
+                    },
                   );
-                }
-
-                return ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-                  itemCount: filtered.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 12),
-                  itemBuilder: (ctx, i) {
-                    final crop = filtered[i];
-                    return _CropEncyclopediaCard(crop: crop, locale: locale);
-                  },
-                );
-              },
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -110,91 +145,79 @@ class _CropEncyclopediaCard extends StatelessWidget {
     final cropName = crop.name.localized(locale);
     final englishName = crop.name.en;
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.dividerColor.withValues(alpha: 0.4)),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () => _showCropDetailModal(context, crop, locale),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox(
-                  width: 76,
-                  height: 76,
-                  child: CachedNetworkImage(
-                    imageUrl: crop.image,
-                    fit: BoxFit.cover,
-                    errorWidget: (_, _, _) => Container(
-                      color: AppColors.forest.withValues(alpha: 0.1),
-                      child: const Icon(Icons.grass, color: AppColors.forest),
-                    ),
-                  ),
+    return KdCard(
+      onTap: () => _showCropDetailModal(context, crop, locale),
+      padding: const EdgeInsets.all(12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            child: SizedBox(
+              width: 76,
+              height: 76,
+              child: CachedNetworkImage(
+                imageUrl: crop.image,
+                fit: BoxFit.cover,
+                errorWidget: (_, _, _) => Container(
+                  color: AppColors.forestTint,
+                  child: const Icon(Icons.grass, color: AppColors.forest),
                 ),
               ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          cropName,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        if (cropName != englishName) ...[
-                          const SizedBox(width: 6),
-                          Text(
-                            '($englishName)',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 4,
-                      children: [
-                        _Badge(
-                          text: crop.season.localized(locale),
-                          color: Colors.amber.shade800,
-                          bg: Colors.amber.shade50,
-                        ),
-                        _Badge(
-                          text: 'Water: ${crop.waterNeed.localized(locale)}',
-                          color: Colors.blue.shade800,
-                          bg: Colors.blue.shade50,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
                     Text(
-                      'Soil: ${crop.soilType.localized(locale)} · ${crop.diseases.length} known diseases',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.grey.shade600,
+                      cropName,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    if (cropName != englishName) ...[
+                      const SizedBox(width: 6),
+                      Text(
+                        '($englishName)',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: [
+                    _Badge(
+                      text: crop.season.localized(locale),
+                      color: AppColors.soil,
+                      bg: AppColors.amberTint,
+                    ),
+                    _Badge(
+                      text: 'Water: ${crop.waterNeed.localized(locale)}',
+                      color: AppColors.sky,
+                      bg: AppColors.skyTint,
                     ),
                   ],
                 ),
-              ),
-              const Icon(Icons.chevron_right, color: Colors.grey),
-            ],
+                const SizedBox(height: 6),
+                Text(
+                  'Soil: ${crop.soilType.localized(locale)} · ${crop.diseases.length} known diseases',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          Icon(Icons.chevron_right, color: theme.colorScheme.outline),
+        ],
       ),
     );
   }
@@ -232,7 +255,9 @@ class _CropDetailSheet extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: theme.scaffoldBackgroundColor,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppTheme.radiusSheet),
+            ),
           ),
           child: ListView(
             controller: scrollController,
@@ -243,7 +268,7 @@ class _CropDetailSheet extends StatelessWidget {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: theme.colorScheme.outlineVariant,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -267,16 +292,15 @@ class _CropDetailSheet extends StatelessWidget {
                         ),
                         Text(
                           'Scientific Reference & Agronomic Care',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey.shade600,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
                     ),
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppTheme.radiusButton),
                     child: SizedBox(
                       width: 60,
                       height: 60,
@@ -291,29 +315,23 @@ class _CropDetailSheet extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Agronomic Grid
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.forest.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: AppColors.forest.withValues(alpha: 0.2),
-                  ),
-                ),
+              KdCard(
+                background: AppColors.forestTint,
+                outline: AppColors.forestLine,
                 child: Column(
                   children: [
                     _InfoRow('Growing Season', crop.season.localized(locale)),
-                    const Divider(height: 12),
+                    const Divider(height: 16),
                     _InfoRow(
                       'Optimal Soil Type',
                       crop.soilType.localized(locale),
                     ),
-                    const Divider(height: 12),
+                    const Divider(height: 16),
                     _InfoRow(
                       'Water Requirement',
                       crop.waterNeed.localized(locale),
                     ),
-                    const Divider(height: 12),
+                    const Divider(height: 16),
                     _InfoRow(
                       'General Precautions',
                       crop.precautions.localized(locale),
@@ -324,87 +342,75 @@ class _CropDetailSheet extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Disease Profiles
-              Text(
-                'Common Diseases & Management',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const SectionHeader('Common Diseases & Management'),
               const SizedBox(height: 10),
               for (final disease in crop.diseases)
-                Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: theme.cardColor,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Colors.grey.shade200),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            disease.icon,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              disease.name.localized(locale),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: AppColors.danger,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Symptoms: ${disease.symptoms.localized(locale)}',
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Favorable Weather: ${disease.favorableConditions.localized(locale)}',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey.shade700,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade50,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: KdCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            const Icon(
-                              Icons.health_and_safety,
-                              size: 14,
-                              color: AppColors.forest,
+                            Text(
+                              disease.icon,
+                              style: const TextStyle(fontSize: 20),
                             ),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                'Recommended Action: ${disease.management.localized(locale)}',
+                                disease.name.localized(locale),
                                 style: const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.forest,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: AppColors.danger,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 8),
+                        Text(
+                          'Symptoms: ${disease.symptoms.localized(locale)}',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Favorable Weather: ${disease.favorableConditions.localized(locale)}',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        KdCard(
+                          background: AppColors.forestTint,
+                          outline: AppColors.forestLine,
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.health_and_safety,
+                                size: 16,
+                                color: AppColors.forest,
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  'Recommended Action: ${disease.management.localized(locale)}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.forest,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               const SizedBox(height: 16),
@@ -415,8 +421,11 @@ class _CropDetailSheet extends StatelessWidget {
                 child: FilledButton.icon(
                   style: FilledButton.styleFrom(
                     backgroundColor: AppColors.forest,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size.fromHeight(48),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius:
+                          BorderRadius.circular(AppTheme.radiusButton),
                     ),
                   ),
                   onPressed: () {
@@ -424,7 +433,10 @@ class _CropDetailSheet extends StatelessWidget {
                     context.push('/fertilizer');
                   },
                   icon: const Icon(Icons.science_outlined),
-                  label: const Text('Calculate Fertilizer Dosage for Crop'),
+                  label: const Text(
+                    'Calculate Fertilizer Dosage for Crop',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],
@@ -443,6 +455,7 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -450,9 +463,8 @@ class _InfoRow extends StatelessWidget {
           width: 130,
           child: Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -460,7 +472,9 @@ class _InfoRow extends StatelessWidget {
         Expanded(
           child: Text(
             value,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -481,7 +495,7 @@ class _Badge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(AppTheme.radiusChip),
         border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
@@ -490,6 +504,36 @@ class _Badge extends StatelessWidget {
           fontSize: 11,
           fontWeight: FontWeight.bold,
           color: color,
+        ),
+      ),
+    );
+  }
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Tooltip(
+      message: tooltip ?? '',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Icon(icon, size: 22, color: theme.colorScheme.onSurface),
         ),
       ),
     );

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/kit.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/data/auth_controller.dart';
@@ -197,7 +199,9 @@ class _ProfitResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final text = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final text = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     final numbers = NumberFormat.decimalPattern(
       Localizations.localeOf(context).toString(),
     );
@@ -205,107 +209,210 @@ class _ProfitResult extends StatelessWidget {
     String rupees(double value) => '₹${numbers.format(value.round())}';
 
     final positive = result.isProfitable;
-    final accent = positive ? AppColors.success : AppColors.danger;
+    final accent =
+        positive
+            ? (isDark ? AppColors.forestDark : AppColors.forest)
+            : (isDark ? AppColors.dangerDark : AppColors.danger);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: accent.withValues(alpha: 0.10),
-            border: Border.all(color: accent.withValues(alpha: 0.30)),
-          ),
+        SectionHeader(l10n.predMargin),
+        KdCard(
+          background:
+              positive
+                  ? (isDark
+                      ? AppColors.forestDark.withAlpha(35)
+                      : AppColors.forestTint)
+                  : (isDark
+                      ? AppColors.dangerDark.withAlpha(35)
+                      : AppColors.dangerTint),
+          outline:
+              positive
+                  ? (isDark
+                      ? AppColors.forestDark.withAlpha(80)
+                      : AppColors.forestLine)
+                  : (isDark
+                      ? AppColors.dangerDark.withAlpha(80)
+                      : AppColors.dangerLine),
+          padding: const EdgeInsets.all(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.predMargin, style: text.bodyLarge),
-              const SizedBox(height: 4),
               Text(
-                rupees(result.margin),
-                style: text.displaySmall?.copyWith(color: accent),
+                l10n.predMargin.toUpperCase(),
+                style: AppTheme.eyebrow(context),
               ),
+              const SizedBox(height: 6),
+              Figure(value: rupees(result.margin), color: accent),
               if (!positive) ...[
                 const SizedBox(height: 4),
-                Text(l10n.predLoss, style: text.bodyLarge),
+                Text(
+                  l10n.predLoss,
+                  style: text.bodyLarge?.copyWith(color: AppColors.danger),
+                ),
               ],
             ],
           ),
         ),
 
         const SizedBox(height: 12),
-        // The API calls this "profit", but it subtracts only the three input
-        // costs the farmer typed. Seed, labour, land rent and transport are
-        // missing, and those are most of what a smallholder actually spends.
-        // Presenting it as profit would overstate take-home badly enough to
-        // change a planting decision.
-        Text(l10n.predMarginNote, style: text.bodySmall),
-
-        const SizedBox(height: 20),
-        _Row(
-          label: l10n.predQuintals(result.predictedYield.toStringAsFixed(1)),
-          icon: Icons.grass_outlined,
-        ),
-        _Row(
-          label: l10n.predPrice(numbers.format(result.pricePerQuintal.round())),
-          icon: Icons.sell_outlined,
-        ),
-        _Row(
-          label: '${l10n.predRevenue}: ${rupees(result.expectedRevenue)}',
-          icon: Icons.trending_up,
-        ),
-        _Row(
-          label: '${l10n.predCosts}: ${rupees(result.totalCost)}',
-          icon: Icons.receipt_long_outlined,
-        ),
-        if (result.usedModel)
-          _Row(
-            label: l10n.predConfidence('${result.confidencePercent}'),
-            icon: Icons.insights,
+        // Costs breakdown card
+        KdCard(
+          clip: true,
+          padding: EdgeInsets.zero,
+          child: Column(
+            children: [
+              _CostRow(
+                label: l10n.predQuintals(
+                  result.predictedYield.toStringAsFixed(1),
+                ),
+                icon: Icons.grass_outlined,
+              ),
+              Divider(height: 1, color: theme.colorScheme.outline),
+              _CostRow(
+                label: l10n.predPrice(
+                  numbers.format(result.pricePerQuintal.round()),
+                ),
+                icon: Icons.sell_outlined,
+              ),
+              Divider(height: 1, color: theme.colorScheme.outline),
+              _CostRow(
+                label: '${l10n.predRevenue}: ${rupees(result.expectedRevenue)}',
+                icon: Icons.trending_up,
+              ),
+              Divider(height: 1, color: theme.colorScheme.outline),
+              _CostRow(
+                label: '${l10n.predCosts}: ${rupees(result.totalCost)}',
+                icon: Icons.receipt_long_outlined,
+              ),
+              if (result.usedModel) ...[
+                Divider(height: 1, color: theme.colorScheme.outline),
+                _CostRow(
+                  label: l10n.predConfidence('${result.confidencePercent}'),
+                  icon: Icons.insights,
+                ),
+              ],
+            ],
           ),
+        ),
+
+        const SizedBox(height: 12),
+        // Land rent note
+        KdCard(
+          background:
+              isDark
+                  ? AppColors.amberDark.withAlpha(30)
+                  : AppColors.amberTint,
+          outline:
+              isDark
+                  ? AppColors.amberDark.withAlpha(70)
+                  : AppColors.amberLine,
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.info_outline,
+                size: 20,
+                color: isDark ? AppColors.amberDark : AppColors.amberText,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Land rent is not in this',
+                      style: text.titleSmall?.copyWith(
+                        color:
+                            isDark
+                                ? AppColors.amberDark
+                                : AppColors.amberText,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'If you lease this field, subtract the rent yourself. Everything else you spend is above.',
+                      style: text.bodySmall?.copyWith(
+                        color:
+                            isDark
+                                ? AppColors.amberDark
+                                : AppColors.amberText,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
 
         // A confidence score belongs to the model. When the route answered
         // from its fallback table there is no model behind the number, so the
         // score is withheld and the estimate is labelled instead.
         if (!result.usedModel) ...[
-          const SizedBox(height: 4),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: AppColors.secondary.withValues(alpha: 0.12),
-            ),
-            child: Text(l10n.predFallbackNote, style: text.bodyLarge),
-          ),
           const SizedBox(height: 12),
+          KdCard(
+            background:
+                isDark
+                    ? AppColors.amberDark.withAlpha(25)
+                    : AppColors.amberTint,
+            outline:
+                isDark
+                    ? AppColors.amberDark.withAlpha(60)
+                    : AppColors.amberLine,
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              l10n.predFallbackNote,
+              style: text.bodyMedium?.copyWith(
+                color:
+                    isDark ? AppColors.amberDark : AppColors.amberText,
+              ),
+            ),
+          ),
         ],
 
         if (result.mandi != null) ...[
           const SizedBox(height: 12),
-          Text(result.mandi!.location, style: text.bodySmall),
-          // Same honesty rule as the mandi screen: a margin built on an
-          // invented baseline price is a guess, and must say so.
-          if (!result.mandi!.isLive) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.secondary.withValues(alpha: 0.12),
-              ),
-              child: Text(l10n.predEstimatedPrice, style: text.bodyLarge),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    result.mandi!.location,
+                    style: text.bodySmall,
+                  ),
+                ),
+                ProvenanceChip(
+                  result.mandi!.isLive
+                      ? Provenance.live
+                      : Provenance.estimated,
+                  label:
+                      result.mandi!.isLive
+                          ? 'Live'
+                          : l10n.predEstimatedPrice,
+                ),
+              ],
             ),
-          ],
+          ),
         ],
+
+        const SizedBox(height: 14),
+        Text(
+          l10n.predMarginNote,
+          style: text.bodySmall?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
       ],
     );
   }
 }
 
-class _Row extends StatelessWidget {
-  const _Row({required this.label, required this.icon});
+class _CostRow extends StatelessWidget {
+  const _CostRow({required this.label, required this.icon});
 
   final String label;
   final IconData icon;
@@ -313,11 +420,15 @@ class _Row extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.muted),
-          const SizedBox(width: 10),
+          Icon(
+            icon,
+            size: 20,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
           ),
@@ -326,3 +437,4 @@ class _Row extends StatelessWidget {
     );
   }
 }
+

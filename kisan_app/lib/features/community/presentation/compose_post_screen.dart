@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/voice/voice_input_button.dart';
 import '../../../l10n/app_localizations.dart';
@@ -125,108 +126,254 @@ class _ComposePostScreenState extends ConsumerState<ComposePostScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final theme = Theme.of(context);
     final crops = cropFormulas.keys.toList();
     final cropOptions = crops.contains(_crop) ? crops : [_crop, ...crops];
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.communityAsk)),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-        children: [
-          Text(l10n.composeIntro, style: Theme.of(context).textTheme.bodyLarge),
-          const SizedBox(height: 20),
-
-          DropdownButtonFormField<String>(
-            initialValue: _postType,
-            isExpanded: true,
-            decoration: InputDecoration(labelText: l10n.composeType),
-            items: [
-              for (final value in postTypeValues)
-                DropdownMenuItem(
-                  value: value,
-                  child: Text(postTypeLabel(l10n, value)),
-                ),
-            ],
-            onChanged: (v) => setState(() => _postType = v ?? _postType),
-          ),
-          const SizedBox(height: 16),
-
-          DropdownButtonFormField<String>(
-            initialValue: _crop,
-            isExpanded: true,
-            decoration: InputDecoration(labelText: l10n.communityCrop),
-            items: [
-              for (final crop in cropOptions)
-                DropdownMenuItem(value: crop, child: Text(crop)),
-            ],
-            onChanged: (v) => setState(() => _crop = v ?? _crop),
-          ),
-          const SizedBox(height: 16),
-
-          TextField(
-            controller: _title,
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration(
-              labelText: l10n.communityPostTitle,
-              suffixIcon: VoiceInputButton(
-                controller: _title,
-                // Rebuild so the Post button enables as words arrive.
-                onChanged: (_) => setState(() {}),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+              child: Row(
+                children: [
+                  _HeaderButton(
+                    icon: Icons.arrow_back,
+                    tooltip:
+                        MaterialLocalizations.of(context).backButtonTooltip,
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.communityAsk,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        Text(
+                          l10n.composeIntro,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            onChanged: (_) => setState(() {}),
-          ),
-          const SizedBox(height: 16),
-
-          TextField(
-            controller: _problem,
-            minLines: 4,
-            maxLines: 8,
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration(
-              labelText: l10n.communityDetails,
-              alignLabelWithHint: true,
-            ),
-            onChanged: (_) => setState(() {}),
-          ),
-          // A tall box needs a labelled button, not a small icon lost in the
-          // corner — this is the field a farmer has the most to say in.
-          VoiceInputBar(controller: _problem),
-
-          const SizedBox(height: 8),
-          TextField(
-            controller: _whatIDid,
-            minLines: 2,
-            maxLines: 5,
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration(
-              labelText: l10n.composeTried,
-              helperText: l10n.composeTriedHelp,
-              alignLabelWithHint: true,
-            ),
-          ),
-          VoiceInputBar(controller: _whatIDid),
-
-          if (_error != null) ...[
-            const SizedBox(height: 16),
-            Text(
-              _error!,
-              style: Theme.of(context).textTheme.bodyLarge
-                  ?.copyWith(color: AppColors.danger),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
+                children: [
+                  _Labelled(
+                    label: l10n.composeType,
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final value in postTypeValues)
+                          _SelectableChip(
+                            label: postTypeLabel(l10n, value),
+                            selected: _postType == value,
+                            onTap: () => setState(() => _postType = value),
+                          ),
+                      ],
+                    ),
+                  ),
+                  _Labelled(
+                    label: l10n.communityCrop,
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final crop in cropOptions)
+                          _SelectableChip(
+                            label: crop,
+                            selected: _crop == crop,
+                            onTap: () => setState(() => _crop = crop),
+                          ),
+                      ],
+                    ),
+                  ),
+                  _Labelled(
+                    label: l10n.communityPostTitle,
+                    child: TextField(
+                      controller: _title,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: InputDecoration(
+                        suffixIcon: VoiceInputButton(
+                          controller: _title,
+                          onChanged: (_) => setState(() {}),
+                        ),
+                      ),
+                      onChanged: (_) => setState(() {}),
+                    ),
+                  ),
+                  _Labelled(
+                    label: l10n.communityDetails,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                          controller: _problem,
+                          minLines: 4,
+                          maxLines: 8,
+                          textCapitalization: TextCapitalization.sentences,
+                          onChanged: (_) => setState(() {}),
+                        ),
+                        const SizedBox(height: 6),
+                        VoiceInputBar(controller: _problem),
+                      ],
+                    ),
+                  ),
+                  _Labelled(
+                    label: l10n.composeTried,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                          controller: _whatIDid,
+                          minLines: 2,
+                          maxLines: 5,
+                          textCapitalization: TextCapitalization.sentences,
+                        ),
+                        const SizedBox(height: 6),
+                        VoiceInputBar(controller: _whatIDid),
+                      ],
+                    ),
+                  ),
+                  if (_error != null) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      _error!,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: AppColors.danger,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 48),
+                    ),
+                    onPressed: _canPost && !_sending ? _submit : null,
+                    child: Text(
+                      _sending ? l10n.communityPosting : l10n.communityPost,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.composeVisibleNote,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
 
-          const SizedBox(height: 24),
-          FilledButton(
-            onPressed: _canPost && !_sending ? _submit : null,
-            child: Text(_sending ? l10n.communityPosting : l10n.communityPost),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            l10n.composeVisibleNote,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+class _Labelled extends StatelessWidget {
+  const _Labelled({required this.label, required this.child});
+
+  final String label;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 7),
+          child,
         ],
+      ),
+    );
+  }
+}
+
+class _SelectableChip extends StatelessWidget {
+  const _SelectableChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+        decoration: BoxDecoration(
+          color:
+              selected ? theme.colorScheme.primary : theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+          border: Border.all(
+            color:
+                selected ? theme.colorScheme.primary : theme.colorScheme.outline,
+          ),
+        ),
+        child: Text(
+          label,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color:
+                selected
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.onSurface,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Tooltip(
+      message: tooltip ?? '',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Icon(icon, size: 22, color: theme.colorScheme.onSurface),
+        ),
       ),
     );
   }
