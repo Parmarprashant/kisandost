@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/network/api_exception.dart';
+import '../../../app/theme/kit.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/mandi_models.dart';
 import '../data/mandi_repository.dart';
@@ -108,7 +109,8 @@ class _PriceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final text = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final text = theme.textTheme;
     final rupees = NumberFormat.decimalPattern(
       Localizations.localeOf(context).toString(),
     );
@@ -116,34 +118,39 @@ class _PriceCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: AppColors.primaryContainer,
-          ),
+        KdCard(
+          padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(price.crop, style: text.titleMedium),
-              const SizedBox(height: 8),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    '₹${rupees.format(price.pricePerQuintal)}',
-                    style: text.displaySmall?.copyWith(
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(l10n.mandiPerQuintal, style: text.bodySmall),
-                ],
+              // The API can answer with a mandi in a different district from
+              // the one requested, so the returned location is shown here
+              // rather than the query the farmer typed.
+              Text(
+                '${price.crop} · ${price.location}',
+                maxLines: 2,
+                style: text.bodySmall,
+              ),
+              const SizedBox(height: 2),
+              Figure(
+                value: '₹${rupees.format(price.pricePerQuintal)}',
+                unit: l10n.mandiPerQuintal,
+                size: 40,
               ),
               if (price.hasRange) ...[
-                const SizedBox(height: 6),
+                const SizedBox(height: 16),
+                // The day's spread, drawn. A farmer deciding whether to load
+                // the trolley cares about the bottom of the range, which a
+                // single headline figure hides.
+                MiniBars(
+                  values: [
+                    price.minPrice.toDouble(),
+                    price.pricePerQuintal.toDouble(),
+                    price.maxPrice.toDouble(),
+                  ],
+                  height: 44,
+                ),
+                const SizedBox(height: 8),
                 Text(
                   // gen_l10n orders placeholder parameters ALPHABETICALLY,
                   // not in the order they appear in the string. For
@@ -157,37 +164,45 @@ class _PriceCard extends StatelessWidget {
                   style: text.bodySmall,
                 ),
               ],
+              const SizedBox(height: 14),
+              Divider(height: 1, color: theme.colorScheme.outline),
+              const SizedBox(height: 14),
+
+              // Where the number came from. The route reports five different
+              // sources and substitutes a calculated baseline when the feed
+              // has nothing, so saying which kind this is matters more than
+              // the number itself.
+              _SourceBadge(confidence: price.confidence),
+
+              if (price.confidence != PriceConfidence.live) ...[
+                const SizedBox(height: 10),
+                Text(
+                  price.confidence == PriceConfidence.indicative
+                      ? l10n.mandiIndicativeNote
+                      : l10n.mandiEstimateNote,
+                  style: text.bodySmall,
+                ),
+              ],
             ],
           ),
         ),
-        const SizedBox(height: 16),
 
-        // Where the number came from. The route reports five different
-        // sources and substitutes a calculated baseline when the feed has
-        // nothing, so saying which kind this is matters more than the number.
-        _SourceBadge(confidence: price.confidence),
-
-        if (price.confidence != PriceConfidence.live) ...[
-          const SizedBox(height: 10),
-          Text(
-            price.confidence == PriceConfidence.indicative
-                ? l10n.mandiIndicativeNote
-                : l10n.mandiEstimateNote,
-            style: text.bodySmall,
+        const SizedBox(height: 12),
+        KdCard(
+          clip: true,
+          child: Column(
+            children: [
+              _Row(icon: Icons.storefront_outlined, label: price.location),
+              if (price.arrivalDate.isNotEmpty)
+                _Row(
+                  icon: Icons.event_outlined,
+                  label: l10n.mandiArrival(price.arrivalDate),
+                ),
+              if (price.variety.isNotEmpty)
+                _Row(icon: Icons.grass_outlined, label: price.variety),
+            ],
           ),
-        ],
-
-        const SizedBox(height: 16),
-        // The API can answer with a mandi in a different district from the one
-        // requested, so the returned location is shown rather than the query.
-        _Row(icon: Icons.storefront_outlined, label: price.location),
-        if (price.arrivalDate.isNotEmpty)
-          _Row(
-            icon: Icons.event_outlined,
-            label: l10n.mandiArrival(price.arrivalDate),
-          ),
-        if (price.variety.isNotEmpty)
-          _Row(icon: Icons.grass_outlined, label: price.variety),
+        ),
       ],
     );
   }
@@ -202,43 +217,20 @@ class _SourceBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
 
-    final (label, icon, color) = switch (confidence) {
-      PriceConfidence.live => (
-        l10n.mandiLive,
-        Icons.verified_outlined,
-        AppColors.success,
+    return switch (confidence) {
+      PriceConfidence.live => ProvenanceChip.always(
+        Provenance.live,
+        label: l10n.mandiLive,
       ),
-      PriceConfidence.indicative => (
-        l10n.mandiIndicative,
-        Icons.history,
-        AppColors.sky,
+      PriceConfidence.indicative => ProvenanceChip(
+        Provenance.indicative,
+        label: l10n.mandiIndicative,
       ),
-      PriceConfidence.estimated => (
-        l10n.mandiEstimate,
-        Icons.info_outline,
-        AppColors.secondary,
+      PriceConfidence.estimated => ProvenanceChip(
+        Provenance.estimated,
+        label: l10n.mandiEstimate,
       ),
     };
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(999),
-        color: color.withValues(alpha: 0.12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 18, color: color),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelMedium
-                ?.copyWith(color: color),
-          ),
-        ],
-      ),
-    );
   }
 }
 
@@ -250,8 +242,13 @@ class _Row extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Theme.of(context).colorScheme.outline),
+        ),
+      ),
       child: Row(
         children: [
           Icon(icon, size: 20, color: AppColors.muted),

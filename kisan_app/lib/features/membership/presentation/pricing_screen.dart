@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/data/auth_controller.dart';
 import '../data/membership_repository.dart';
+import '../../../app/theme/app_colors.dart';
 
 class PricingPlan {
   const PricingPlan({
@@ -63,7 +64,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          icon: const Icon(Icons.verified, color: Color(0xFF2E7D32), size: 40),
+          icon: const Icon(Icons.verified, color: AppColors.forest, size: 40),
           title: const Text('KisanDost Premium Demo'),
           content: Text(
             'Plan "${_selectedPlan.label}" selected for ₹${_selectedPlan.totalPrice}.\n\n'
@@ -76,9 +77,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
               child: const Text('OK'),
             ),
             FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF2E7D32),
-              ),
+              style: FilledButton.styleFrom(backgroundColor: AppColors.forest),
               onPressed: () {
                 Navigator.of(ctx).pop();
                 context.go('/farm');
@@ -155,7 +154,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                   'Grow Smarter',
                   style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w900,
-                    color: const Color(0xFF1B5E20),
+                    color: AppColors.forest,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -198,13 +197,12 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                             ),
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? const Color(0xFF2E7D32)
-                                        .withValues(alpha: 0.08)
+                                  ? AppColors.forest.withValues(alpha: 0.08)
                                   : theme.cardColor,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: isSelected
-                                    ? const Color(0xFF2E7D32)
+                                    ? AppColors.forest
                                     : Colors.grey.shade300,
                                 width: isSelected ? 2 : 1,
                               ),
@@ -214,7 +212,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: isSelected
-                                    ? const Color(0xFF2E7D32)
+                                    ? AppColors.forest
                                     : theme.textTheme.bodyMedium?.color,
                               ),
                             ),
@@ -231,7 +229,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                                     vertical: 2,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF2E7D32),
+                                    color: AppColors.forest,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
@@ -257,7 +255,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: const BorderSide(color: Color(0xFF2E7D32), width: 2),
+                    side: const BorderSide(color: AppColors.forest, width: 2),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20),
@@ -271,7 +269,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                               'Premium Plan',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF2E7D32),
+                                color: AppColors.forest,
                               ),
                             ),
                             Container(
@@ -280,7 +278,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF2E7D32),
+                                color: AppColors.forest,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: const Text(
@@ -304,7 +302,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                               style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.w900,
-                                color: Color(0xFF2E7D32),
+                                color: AppColors.forest,
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -343,7 +341,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
 
                         _FeatureRow(
                           icon: Icons.shield_outlined,
-                          iconColor: const Color(0xFF2E7D32),
+                          iconColor: AppColors.forest,
                           title: 'AgriShield 360° Risk Engine',
                           subtitle: '26 zero-hallucination agronomic rules & thermal stress alerts',
                         ),
@@ -378,7 +376,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                           height: 52,
                           child: FilledButton.icon(
                             style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFF2E7D32),
+                              backgroundColor: AppColors.forest,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),
                               ),

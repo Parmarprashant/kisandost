@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../core/network/api_exception.dart';
 import '../../../core/network/dio_client.dart';
@@ -7,6 +11,7 @@ import '../../../core/offline/offline_store.dart';
 import 'boundary_models.dart';
 import 'crop_detail_models.dart';
 import 'farm_models.dart';
+import 'zone_scan_models.dart';
 
 final farmRepositoryProvider = Provider<FarmRepository>(
   (ref) =>
@@ -240,6 +245,90 @@ class FarmRepository {
     await _send<Map<String, dynamic>>('POST', '/api/fields/$fieldId/zones', {
       'targetZones': targetZones,
     });
+  }
+
+  // ---------------------------------------------------- Multi-Photo Zone Scan
+
+  Future<ZoneScanResult> startZoneScan(
+    String cropId,
+    String zoneId,
+    File imageFile, {
+    String viewAngle = 'screening',
+  }) async {
+    final bytes = await imageFile.readAsBytes();
+    final filename = p.basename(imageFile.path);
+    final form = FormData.fromMap({
+      'file': MultipartFile.fromBytes(
+        bytes,
+        filename: filename.isEmpty ? 'scan.jpg' : filename,
+        contentType: MediaType('image', 'jpeg'),
+      ),
+      'viewAngle': viewAngle,
+    });
+
+    final data = await _send<Map<String, dynamic>>(
+      'POST',
+      '/api/crops/$cropId/zones/$zoneId/scan',
+      form,
+    );
+    return ZoneScanResult.fromJson(data);
+  }
+
+  Future<ZoneScanResult> uploadSupplementaryScan(
+    String cropId,
+    String zoneId,
+    String sessionId,
+    File imageFile, {
+    String viewAngle = 'canopy',
+  }) async {
+    final bytes = await imageFile.readAsBytes();
+    final filename = p.basename(imageFile.path);
+    final form = FormData.fromMap({
+      'file': MultipartFile.fromBytes(
+        bytes,
+        filename: filename.isEmpty ? 'scan.jpg' : filename,
+        contentType: MediaType('image', 'jpeg'),
+      ),
+      'viewAngle': viewAngle,
+    });
+
+    final data = await _send<Map<String, dynamic>>(
+      'POST',
+      '/api/crops/$cropId/zones/$zoneId/scan/$sessionId/images',
+      form,
+    );
+    return ZoneScanResult.fromJson(data);
+  }
+
+  Future<ZoneScanCompletionSummary> completeZoneScan(
+    String cropId,
+    String zoneId,
+    String sessionId, {
+    String? notes,
+  }) async {
+    final body = notes != null && notes.trim().isNotEmpty
+        ? {'notes': notes.trim()}
+        : <String, dynamic>{};
+
+    final data = await _send<Map<String, dynamic>>(
+      'POST',
+      '/api/crops/$cropId/zones/$zoneId/scan/$sessionId/complete',
+      body,
+    );
+    return ZoneScanCompletionSummary.fromJson(data);
+  }
+
+  Future<ZoneScanResult> getZoneScanSession(
+    String cropId,
+    String zoneId,
+    String sessionId,
+  ) async {
+    final data = await _get<Map<String, dynamic>>(
+      '/api/crops/$cropId/zones/$zoneId/scan/$sessionId',
+    );
+    return ZoneScanResult.fromJson(
+      data['session'] as Map<String, dynamic>? ?? data,
+    );
   }
 
   Future<T> _get<T>(String path) async {

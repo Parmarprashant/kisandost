@@ -46,6 +46,23 @@ class L10nGu extends L10n {
   String get advisoryTitle => 'પાક કૅલેન્ડર';
 
   @override
+  String get advisorySubtitle => 'શું અને ક્યારે કરવું';
+
+  @override
+  String get advisorySmsNoticeTitle =>
+      'આ તમને સવારે 6 વાગ્યે SMS દ્વારા મળે છે';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'તમારી ભાષામાં, એપ બંધ હોય અને ઇન્ટરનેટ વિના પણ';
+
+  @override
+  String get advisoryComingUp => 'આગામી કાર્યો';
+
+  @override
+  String get advisoryToday => 'આજે';
+
+  @override
   String get aiAsk => 'ખેતી વિષે સવાલ પૂછો';
 
   @override
@@ -75,7 +92,19 @@ class L10nGu extends L10n {
   String get aiThinking => 'વિચારીએ છીએ';
 
   @override
+  String get aiSubtitle => 'તમારા ખેતર, પાકની અવસ્થા અને આજના હવામાનને સમજે છે';
+
+  @override
   String get aiTitle => 'કિસાનદોસ્તને પૂછો';
+
+  @override
+  String get aiTypeOrHoldMic => 'ટાઇપ કરો અથવા માઇક દબાવીને બોલો';
+
+  @override
+  String get aiScanLeaf => 'પાંદડું સ્કેન કરો';
+
+  @override
+  String get aiUreaDose => 'યૂરિયા ડોઝ';
 
   @override
   String get appError => 'કંઈક ખોટું થયું.';
@@ -130,11 +159,18 @@ class L10nGu extends L10n {
       'આ સાઇન ઇન લિંક મેળ ખાતી નથી. કૃપા કરી ફરી શરૂ કરો.';
 
   @override
-  String get authTagline => 'તમારો ખેતી સાથી';
+  String get authTagline => 'તમારું ખેતર, તમારો ભાવ, તમારી ભાષા.';
 
   @override
   String get authWhyGoogle =>
       'અમે તમારું Google ખાતું વાપરીએ છીએ જેથી પાસવર્ડ યાદ રાખવો ન પડે.';
+
+  @override
+  String get loginPickLanguage => 'અત્યારે તમારી ભાષા પસંદ કરો';
+
+  @override
+  String get loginPrivacyNote =>
+      'કોઈ પાસવર્ડ નહીં, કોઈ ઈમેલ નહીં. તમારું ખાતું સાઇન ઇન રહે છે.';
 
   @override
   String get chatWidget_callExpert => 'નિષ્ણાતને કોલ કરો';
@@ -1257,6 +1293,39 @@ class L10nGu extends L10n {
   String get diagnoseWhatToDo => 'હવે શું કરવું';
 
   @override
+  String get diagnoseSprayThis => 'આ છંટકાવ કરો';
+
+  @override
+  String get diagnoseCulturalPractices => 'અને આ વિના ખર્ચે કરો';
+
+  @override
+  String get diagnoseWhereToGet => 'ક્યાંથી મેળવવું';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'ખરીદતા પહેલા પેકેટ અસલી છે કે નહીં તે ચકાસો';
+
+  @override
+  String get diagnoseAskCommunity => 'સમુદાયને પૂછો';
+
+  @override
+  String get diagnoseModelConfidence => 'મોડલ વિશ્વસનીયતા';
+
+  @override
+  String get diagnoseFromModel => 'મોડલ દ્વારા વિશ્લેષિત';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'સારો પ્રકાશ રાખો. ફોનને આશરે 15 સેમી દૂર રાખો.';
+
+  @override
+  String get diagnoseShadowTip => 'પાંદડા પર તમારો પડછાયો ન આવવા દો.';
+
+  @override
+  String get diagnoseFootnote =>
+      'આ એક પાંદડાનું મોડલ દ્વારા થયેલું વિશ્લેષણ છે. જો ખેતરની સ્થિતિ વધુ ગંભીર જણાય, તો કૃષિ અધિકારીનો સંપર્ક કરો.';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override
@@ -1373,6 +1442,28 @@ class L10nGu extends L10n {
 
   @override
   String get farmNext => 'આગળ';
+
+  @override
+  String get farmBoundary => 'ખેતરની સીમા અને વિસ્તાર';
+
+  @override
+  String get farmNextUp => 'હવે પછી કરવા જેવું';
+
+  @override
+  String get farmNothingNext =>
+      'કંઈ બાકી નથી. દરેક ખેતરની માટી, પાણી અને પાક નોંધાયેલા છે.';
+
+  @override
+  String get farmSoilMissingWhy =>
+      'તે ભરો અને ખાતરની માત્રા અટકળ કરવાનું બંધ કરશે.';
+
+  @override
+  String get farmSoilUnknown => 'માટી નોંધી નથી';
+
+  @override
+  String farmSummary(String fields, String crops) {
+    return '$fields ખેતર · $crops પાક ઊભા';
+  }
 
   @override
   String get farmNoCrops => 'આ ખેતરમાં હજી કોઈ પાક નથી';
@@ -1495,6 +1586,22 @@ class L10nGu extends L10n {
   String get fertTitle => 'ખાતર કૅલ્ક્યુલેટર';
 
   @override
+  String get fertilizerWorksOffline => 'ઇન્ટરનેટ વિના પણ કામ કરે છે';
+
+  @override
+  String get fertilizerOnDevice => 'ડિવાઇસ પર';
+
+  @override
+  String get fertilizerTotalBuy => 'કુલ આટલું ખરીદો';
+
+  @override
+  String get fertilizerWhenToApply => 'ક્યારે નાખવું';
+
+  @override
+  String get fertilizerFootnote =>
+      'ICAR ના ભલામણ કરેલ દરો પર આધારિત. તમારા પોતાના ખેતરનું સોઇલ હેલ્થ કાર્ડ પરીક્ષણ આના કરતાં વધુ સારું રહેશે — તે મફત છે, અને યોજનાઓની સૂચિમાં છે.';
+
+  @override
   String get fertUrea => 'યુરિયા';
 
   @override
@@ -1534,6 +1641,28 @@ class L10nGu extends L10n {
   String homeGreeting(String name) {
     return 'નમસ્તે, $name';
   }
+
+  @override
+  String get homeMarkDone => 'પૂર્ણ થયું';
+
+  @override
+  String get homeNothingDue => 'આજે કંઈ બાકી નથી';
+
+  @override
+  String get homeNothingDueBody =>
+      'આજે કોઈ છંટકાવ કે માત્રા નક્કી નથી. આગલી હજી થોડા દિવસ દૂર છે.';
+
+  @override
+  String get homeRateToday => 'આજનો ભાવ';
+
+  @override
+  String get homeSchemesForYou => 'તમારા માટે યોજનાઓ';
+
+  @override
+  String get homeSeeAll => 'બધું જુઓ';
+
+  @override
+  String get homeToday => 'આજે આ કરો';
 
   @override
   String get homeMyCrops => 'મારા પાક';
@@ -1722,6 +1851,9 @@ class L10nGu extends L10n {
   String get myCrop_waterSource => 'પાણીનો સ્ત્રોત';
 
   @override
+  String get navCommunity => 'સમુદાય';
+
+  @override
   String get navDiagnose => 'તપાસ';
 
   @override
@@ -1738,6 +1870,9 @@ class L10nGu extends L10n {
 
   @override
   String get navInsights => 'માહિતી';
+
+  @override
+  String get navMarket => 'બજાર';
 
   @override
   String get navMore => 'વધુ';
@@ -2064,11 +2199,39 @@ class L10nGu extends L10n {
   String get productsSearch => 'ઉત્પાદન શોધો';
 
   @override
+  String get productsSubtitle => 'દુકાનથી શું માંગવું અને કેટલું';
+
+  @override
+  String get productsSearchHint => 'ઉત્પાદન અથવા રોગ શોધો';
+
+  @override
+  String get productsFilterMyCrops => 'મારા પાક માટે';
+
+  @override
+  String get productsFilterPesticide => 'જંતુનાશક';
+
+  @override
+  String get productsFilterFertilizer => 'ખાતર';
+
+  @override
+  String get productsFilterSeed => 'બિયારણ';
+
+  @override
+  String get productsScanBeforePay => 'દુકાને, પૈસા ચૂકવતા પહેલાં સ્કેન કરો';
+
+  @override
+  String get productsScanBeforePaySub => 'અહીં નકલી જંતુનાશકો ખૂબ સામાન્ય છે';
+
+  @override
+  String get productsReferenceNote =>
+      'સંદર્ભ સૂચિ અને અંદાજિત દરો, કોઈ દુકાન નથી. એપ્લિકેશનમાં કંઈ ખરીદાતું નથી. સોદાબાજી કરતી વખતે આને માર્ગદર્શિકા તરીકે ગણો.';
+
+  @override
   String get productsStaticNote =>
       'સામાન્ય ખેતી સામગ્રીની સંદર્ભ યાદી. ભાવ અંદાજિત છે — તમારા ડીલર પાસે ચકાસો.';
 
   @override
-  String get productsTitle => 'ઉત્પાદનો';
+  String get productsTitle => 'ખેતી સામગ્રી';
 
   @override
   String get productsUsage => 'કેવી રીતે વાપરવું';
@@ -2682,6 +2845,43 @@ class L10nGu extends L10n {
   String get profileSaved => 'સાચવ્યું';
 
   @override
+  String get profileHowWeReachYou => 'અમે તમારા સુધી કેવી રીતે પહોંચીએ છીએ';
+
+  @override
+  String get profileDailySms => 'સવારે 6 વાગ્યે દૈનિક SMS';
+
+  @override
+  String get profileDailySmsSub => 'ડેટા વિના, તમારી ભાષામાં કામ કરે છે';
+
+  @override
+  String get profilePushNotifs => 'પુશ સૂચનાઓ';
+
+  @override
+  String get profilePushNotifsSub => 'હવામાનની ચેતવણી અને ભાવ ચેતવણીઓ';
+
+  @override
+  String get profileCommunityReplies => 'સમુદાય જવાબો';
+
+  @override
+  String get profileCommunityRepliesSub => 'જ્યારે કોઈ તમારી પોસ્ટનો જવાબ આપે';
+
+  @override
+  String get profileTheApp => 'એપ્લિકેશન';
+
+  @override
+  String get profileSavedOffline => 'ઑફલાઇન માટે સાચવ્યું';
+
+  @override
+  String get profileSavedOfflineSub => 'ભાવ, સલાહ અને ખેતર · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'હોમ સ્ક્રીન વિજેટ ઉમેરો';
+
+  @override
+  String get profilePrivacyNote =>
+      'તમારા ખેતર, સ્કેન અને અંદાજો તમારા ખાતા પર સુરક્ષિત રહે છે. કંઈ વેચાતું નથી અને તમે પોસ્ટ ન કરો ત્યાં સુધી કંઈ પોસ્ટ થતું નથી.';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'હવામાન અને પર્યાવરણીય માહિતી પ્રાપ્ત થાય છે';
 
@@ -2788,6 +2988,12 @@ class L10nGu extends L10n {
   String get profitPredictor_totalCost => 'કુલ ખર્ચ';
 
   @override
+  String get provenanceEntered => 'તમે ભર્યું છે';
+
+  @override
+  String get provenanceEstimate => 'અંદાજ, મોડેલનું પરિણામ નથી';
+
+  @override
   String get scanAgain => 'બીજું તપાસો';
 
   @override
@@ -2855,6 +3061,22 @@ class L10nGu extends L10n {
   String get scanTitle => 'દવા તપાસો';
 
   @override
+  String get scanSubtitle => 'દુકાનદારને ચૂકવણી કરતા પહેલા QR સ્કેન કરો';
+
+  @override
+  String get scanPacketReal => 'શું આ પેકેટ અસલી છે?';
+
+  @override
+  String get scanWhatOthersLookLike => 'અન્ય પરિણામો કેવા દેખાય છે';
+
+  @override
+  String get scanNotOnList => 'અમારી યાદીમાં નથી';
+
+  @override
+  String get scanFootnote =>
+      'અમારા પોતાના બેચ ડેટાબેઝ સાથે ચકાસાયેલ, સત્તાવાર સરકારી રજિસ્ટ્રી ફીડથી નહીં — જે હજુ જાહેરમાં ઉપલબ્ધ નથી. \'અસલી\' પરિણામ સારો પુરાવો છે, ગેરંટી નથી.';
+
+  @override
   String get scanType => 'પ્રકાર';
 
   @override
@@ -2893,6 +3115,24 @@ class L10nGu extends L10n {
 
   @override
   String get schemesTitle => 'સરકારી યોજનાઓ';
+
+  @override
+  String get schemesYouQualify => 'તમે પાત્ર છો';
+
+  @override
+  String get schemesNeedDoc => 'દસ્તાવેજ જરૂરી છે';
+
+  @override
+  String get schemesAllCount => 'બધી યોજનાઓ';
+
+  @override
+  String get schemesMatchedFarm => 'તમારા ખેતર સાથે મેળ ખાતી';
+
+  @override
+  String get schemesHowToApply => 'અરજી કેવી રીતે કરવી';
+
+  @override
+  String get schemesSave => 'સાચવો';
 
   @override
   String get suggestAddField => 'તમારું ખેતર ઉમેરો';
@@ -3059,6 +3299,9 @@ class L10nGu extends L10n {
   String get weatherSearchHint => 'ગામ, શહેર કે જિલ્લો';
 
   @override
+  String get weatherWorkOk => 'અત્યારે ખેતરના કામ માટે હવામાન સારું છે.';
+
+  @override
   String get weatherSprayWarn => 'વરસાદની શક્યતા — આજે છંટકાવ ન કરો.';
 
   @override
@@ -3117,6 +3360,19 @@ class L10nGu extends L10n {
 
   @override
   String get weatherWindWarn => 'તેજ પવન — છંટકાવ ઊડી જશે. પવન શાંત થવા દો.';
+
+  @override
+  String get weatherFieldImpact => 'ખેતર માટે આનો શું અર્થ છે';
+
+  @override
+  String get weatherNext7Days => 'આગામી સાત દિવસ';
+
+  @override
+  String get weatherSourceNotice =>
+      'લાઇવ · WeatherAPI. નિષ્ફળ જાય તો Open-Meteo નો ઉપયોગ થશે.';
+
+  @override
+  String get weatherGpsPoint => 'તમારા સાચવેલા GPS સ્થાન પરથી';
 
   @override
   String get yieldPredictor_areaRequired => 'માન્ય જમીન વિસ્તાર જરૂરી છે';

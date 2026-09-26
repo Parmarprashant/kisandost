@@ -155,6 +155,36 @@ abstract class L10n {
   /// **'Crop calendar'**
   String get advisoryTitle;
 
+  /// No description provided for @advisorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do, when'**
+  String get advisorySubtitle;
+
+  /// No description provided for @advisorySmsNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You get this as an SMS at 6 AM'**
+  String get advisorySmsNoticeTitle;
+
+  /// No description provided for @advisorySmsNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'In your language, even with the app closed and no data'**
+  String get advisorySmsNoticeBody;
+
+  /// No description provided for @advisoryComingUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming up'**
+  String get advisoryComingUp;
+
+  /// No description provided for @advisoryToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get advisoryToday;
+
   /// No description provided for @aiAsk.
   ///
   /// In en, this message translates to:
@@ -209,11 +239,35 @@ abstract class L10n {
   /// **'Thinking'**
   String get aiThinking;
 
+  /// No description provided for @aiSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Knows your fields, crop stage, and today\'s weather'**
+  String get aiSubtitle;
+
   /// No description provided for @aiTitle.
   ///
   /// In en, this message translates to:
   /// **'Ask KisanDost'**
   String get aiTitle;
+
+  /// No description provided for @aiTypeOrHoldMic.
+  ///
+  /// In en, this message translates to:
+  /// **'Type, or hold the mic'**
+  String get aiTypeOrHoldMic;
+
+  /// No description provided for @aiScanLeaf.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a leaf'**
+  String get aiScanLeaf;
+
+  /// No description provided for @aiUreaDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Urea dose'**
+  String get aiUreaDose;
 
   /// No description provided for @appError.
   ///
@@ -314,7 +368,7 @@ abstract class L10n {
   /// No description provided for @authTagline.
   ///
   /// In en, this message translates to:
-  /// **'Your farming companion'**
+  /// **'Your field, your rate, your language.'**
   String get authTagline;
 
   /// No description provided for @authWhyGoogle.
@@ -322,6 +376,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'We use your Google account so you never have to remember a password.'**
   String get authWhyGoogle;
+
+  /// No description provided for @loginPickLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick your language now'**
+  String get loginPickLanguage;
+
+  /// No description provided for @loginPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No password, no email. Your account stays signed in.'**
+  String get loginPrivacyNote;
 
   /// No description provided for @chatWidget_callExpert.
   ///
@@ -2285,6 +2351,66 @@ abstract class L10n {
   /// **'What to do now'**
   String get diagnoseWhatToDo;
 
+  /// No description provided for @diagnoseSprayThis.
+  ///
+  /// In en, this message translates to:
+  /// **'Spray this'**
+  String get diagnoseSprayThis;
+
+  /// No description provided for @diagnoseCulturalPractices.
+  ///
+  /// In en, this message translates to:
+  /// **'And do this, no cost'**
+  String get diagnoseCulturalPractices;
+
+  /// No description provided for @diagnoseWhereToGet.
+  ///
+  /// In en, this message translates to:
+  /// **'Where to get it'**
+  String get diagnoseWhereToGet;
+
+  /// No description provided for @diagnoseCheckGenuine.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the packet is genuine before you pay'**
+  String get diagnoseCheckGenuine;
+
+  /// No description provided for @diagnoseAskCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the community'**
+  String get diagnoseAskCommunity;
+
+  /// No description provided for @diagnoseModelConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Model confidence'**
+  String get diagnoseModelConfidence;
+
+  /// No description provided for @diagnoseFromModel.
+  ///
+  /// In en, this message translates to:
+  /// **'From the model'**
+  String get diagnoseFromModel;
+
+  /// No description provided for @diagnoseGoodLightTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Good light. Keep the phone about 15 cm away.'**
+  String get diagnoseGoodLightTip;
+
+  /// No description provided for @diagnoseShadowTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid your own shadow on the leaf.'**
+  String get diagnoseShadowTip;
+
+  /// No description provided for @diagnoseFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'This is one photo of one leaf, read by a model. If the field looks worse than the leaf, trust the field and ask an officer.'**
+  String get diagnoseFootnote;
+
   /// No description provided for @diseasesPage_bestSeason.
   ///
   /// In en, this message translates to:
@@ -2506,6 +2632,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Next'**
   String get farmNext;
+
+  /// No description provided for @farmBoundary.
+  ///
+  /// In en, this message translates to:
+  /// **'Field boundary and zones'**
+  String get farmBoundary;
+
+  /// No description provided for @farmNextUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Worth doing next'**
+  String get farmNextUp;
+
+  /// No description provided for @farmNothingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing waiting. Every field has its soil, water and crop on record.'**
+  String get farmNothingNext;
+
+  /// No description provided for @farmSoilMissingWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Set it and the fertiliser dose stops guessing.'**
+  String get farmSoilMissingWhy;
+
+  /// No description provided for @farmSoilUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil not set'**
+  String get farmSoilUnknown;
+
+  /// No description provided for @farmSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{fields} fields · {crops} crops standing'**
+  String farmSummary(String fields, String crops);
 
   /// No description provided for @farmNoCrops.
   ///
@@ -2729,6 +2891,36 @@ abstract class L10n {
   /// **'Fertilizer calculator'**
   String get fertTitle;
 
+  /// No description provided for @fertilizerWorksOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Works with no signal'**
+  String get fertilizerWorksOffline;
+
+  /// No description provided for @fertilizerOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'On device'**
+  String get fertilizerOnDevice;
+
+  /// No description provided for @fertilizerTotalBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy this much, in total'**
+  String get fertilizerTotalBuy;
+
+  /// No description provided for @fertilizerWhenToApply.
+  ///
+  /// In en, this message translates to:
+  /// **'When to put it on'**
+  String get fertilizerWhenToApply;
+
+  /// No description provided for @fertilizerFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on ICAR\'s recommended rates. A Soil Health Card test for your own field would beat this — it is free, and it is on the schemes list.'**
+  String get fertilizerFootnote;
+
   /// No description provided for @fertUrea.
   ///
   /// In en, this message translates to:
@@ -2806,6 +2998,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Namaste, {name}'**
   String homeGreeting(String name);
+
+  /// No description provided for @homeMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as done'**
+  String get homeMarkDone;
+
+  /// No description provided for @homeNothingDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing due today'**
+  String get homeNothingDue;
+
+  /// No description provided for @homeNothingDueBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No spray or dose is scheduled. The next one is still days away.'**
+  String get homeNothingDueBody;
+
+  /// No description provided for @homeRateToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s rate'**
+  String get homeRateToday;
+
+  /// No description provided for @homeSchemesForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Schemes for you'**
+  String get homeSchemesForYou;
+
+  /// No description provided for @homeSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAll;
+
+  /// No description provided for @homeToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Do this today'**
+  String get homeToday;
 
   /// No description provided for @homeMyCrops.
   ///
@@ -3161,6 +3395,12 @@ abstract class L10n {
   /// **'Water Source'**
   String get myCrop_waterSource;
 
+  /// No description provided for @navCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get navCommunity;
+
   /// No description provided for @navDiagnose.
   ///
   /// In en, this message translates to:
@@ -3196,6 +3436,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Insights'**
   String get navInsights;
+
+  /// No description provided for @navMarket.
+  ///
+  /// In en, this message translates to:
+  /// **'Market'**
+  String get navMarket;
 
   /// No description provided for @navMore.
   ///
@@ -3761,6 +4007,60 @@ abstract class L10n {
   /// **'Search products'**
   String get productsSearch;
 
+  /// No description provided for @productsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What to ask the shop for, and how much'**
+  String get productsSubtitle;
+
+  /// No description provided for @productsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a product or a disease'**
+  String get productsSearchHint;
+
+  /// No description provided for @productsFilterMyCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'For my crops'**
+  String get productsFilterMyCrops;
+
+  /// No description provided for @productsFilterPesticide.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide'**
+  String get productsFilterPesticide;
+
+  /// No description provided for @productsFilterFertilizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertiliser'**
+  String get productsFilterFertilizer;
+
+  /// No description provided for @productsFilterSeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Seed'**
+  String get productsFilterSeed;
+
+  /// No description provided for @productsScanBeforePay.
+  ///
+  /// In en, this message translates to:
+  /// **'At the shop, scan before you pay'**
+  String get productsScanBeforePay;
+
+  /// No description provided for @productsScanBeforePaySub.
+  ///
+  /// In en, this message translates to:
+  /// **'Counterfeit pesticide is common here'**
+  String get productsScanBeforePaySub;
+
+  /// No description provided for @productsReferenceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A reference list with typical rates, not a shop. Nothing is bought in the app and no seller is quoted. Prices move — treat these as a guide when you bargain.'**
+  String get productsReferenceNote;
+
   /// No description provided for @productsStaticNote.
   ///
   /// In en, this message translates to:
@@ -3770,7 +4070,7 @@ abstract class L10n {
   /// No description provided for @productsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Products'**
+  /// **'Inputs'**
   String get productsTitle;
 
   /// No description provided for @productsUsage.
@@ -4745,6 +5045,78 @@ abstract class L10n {
   /// **'Saved'**
   String get profileSaved;
 
+  /// No description provided for @profileHowWeReachYou.
+  ///
+  /// In en, this message translates to:
+  /// **'How we reach you'**
+  String get profileHowWeReachYou;
+
+  /// No description provided for @profileDailySms.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily SMS at 6 AM'**
+  String get profileDailySms;
+
+  /// No description provided for @profileDailySmsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Works with no data, in your language'**
+  String get profileDailySmsSub;
+
+  /// No description provided for @profilePushNotifs.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get profilePushNotifs;
+
+  /// No description provided for @profilePushNotifsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather warnings and price alerts'**
+  String get profilePushNotifsSub;
+
+  /// No description provided for @profileCommunityReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Community replies'**
+  String get profileCommunityReplies;
+
+  /// No description provided for @profileCommunityRepliesSub.
+  ///
+  /// In en, this message translates to:
+  /// **'When someone answers your post'**
+  String get profileCommunityRepliesSub;
+
+  /// No description provided for @profileTheApp.
+  ///
+  /// In en, this message translates to:
+  /// **'The app'**
+  String get profileTheApp;
+
+  /// No description provided for @profileSavedOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved for offline'**
+  String get profileSavedOffline;
+
+  /// No description provided for @profileSavedOfflineSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Rates, advisory and fields · 2.4 MB'**
+  String get profileSavedOfflineSub;
+
+  /// No description provided for @profileAddWidget.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the home screen widget'**
+  String get profileAddWidget;
+
+  /// No description provided for @profilePrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your fields, scans and estimates stay on your account. Nothing is sold, and nothing is posted to the community unless you post it.'**
+  String get profilePrivacyNote;
+
   /// No description provided for @profitPredictor_autoFetchDesc.
   ///
   /// In en, this message translates to:
@@ -4943,6 +5315,18 @@ abstract class L10n {
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
 
+  /// No description provided for @provenanceEntered.
+  ///
+  /// In en, this message translates to:
+  /// **'You entered this'**
+  String get provenanceEntered;
+
+  /// No description provided for @provenanceEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate, not a model result'**
+  String get provenanceEstimate;
+
   /// No description provided for @scanAgain.
   ///
   /// In en, this message translates to:
@@ -5069,6 +5453,36 @@ abstract class L10n {
   /// **'Check pesticide'**
   String get scanTitle;
 
+  /// No description provided for @scanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR before you pay the shop'**
+  String get scanSubtitle;
+
+  /// No description provided for @scanPacketReal.
+  ///
+  /// In en, this message translates to:
+  /// **'Is this packet real?'**
+  String get scanPacketReal;
+
+  /// No description provided for @scanWhatOthersLookLike.
+  ///
+  /// In en, this message translates to:
+  /// **'What the other answers look like'**
+  String get scanWhatOthersLookLike;
+
+  /// No description provided for @scanNotOnList.
+  ///
+  /// In en, this message translates to:
+  /// **'Not on our list'**
+  String get scanNotOnList;
+
+  /// No description provided for @scanFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked against our own database of batches, not an official government registry feed — that does not exist publicly yet. A \'genuine\' result is good evidence, not a guarantee.'**
+  String get scanFootnote;
+
   /// No description provided for @scanType.
   ///
   /// In en, this message translates to:
@@ -5140,6 +5554,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Government schemes'**
   String get schemesTitle;
+
+  /// No description provided for @schemesYouQualify.
+  ///
+  /// In en, this message translates to:
+  /// **'You qualify'**
+  String get schemesYouQualify;
+
+  /// No description provided for @schemesNeedDoc.
+  ///
+  /// In en, this message translates to:
+  /// **'Need a document'**
+  String get schemesNeedDoc;
+
+  /// No description provided for @schemesAllCount.
+  ///
+  /// In en, this message translates to:
+  /// **'All schemes'**
+  String get schemesAllCount;
+
+  /// No description provided for @schemesMatchedFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Matched to your farm'**
+  String get schemesMatchedFarm;
+
+  /// No description provided for @schemesHowToApply.
+  ///
+  /// In en, this message translates to:
+  /// **'How to apply'**
+  String get schemesHowToApply;
+
+  /// No description provided for @schemesSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get schemesSave;
 
   /// No description provided for @suggestAddField.
   ///
@@ -5441,6 +5891,12 @@ abstract class L10n {
   /// **'Village, town or district'**
   String get weatherSearchHint;
 
+  /// No description provided for @weatherWorkOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Good conditions for field work right now.'**
+  String get weatherWorkOk;
+
   /// No description provided for @weatherSprayWarn.
   ///
   /// In en, this message translates to:
@@ -5536,6 +5992,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Strong wind — spray will drift. Wait for calmer air.'**
   String get weatherWindWarn;
+
+  /// No description provided for @weatherFieldImpact.
+  ///
+  /// In en, this message translates to:
+  /// **'What this means for the field'**
+  String get weatherFieldImpact;
+
+  /// No description provided for @weatherNext7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Next seven days'**
+  String get weatherNext7Days;
+
+  /// No description provided for @weatherSourceNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Live · WeatherAPI. Open-Meteo is the fallback if it fails.'**
+  String get weatherSourceNotice;
+
+  /// No description provided for @weatherGpsPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'From your saved GPS point'**
+  String get weatherGpsPoint;
 
   /// No description provided for @yieldPredictor_areaRequired.
   ///

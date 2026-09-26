@@ -46,6 +46,22 @@ class L10nEn extends L10n {
   String get advisoryTitle => 'Crop calendar';
 
   @override
+  String get advisorySubtitle => 'What to do, when';
+
+  @override
+  String get advisorySmsNoticeTitle => 'You get this as an SMS at 6 AM';
+
+  @override
+  String get advisorySmsNoticeBody =>
+      'In your language, even with the app closed and no data';
+
+  @override
+  String get advisoryComingUp => 'Coming up';
+
+  @override
+  String get advisoryToday => 'Today';
+
+  @override
   String get aiAsk => 'Ask a farming question';
 
   @override
@@ -76,7 +92,20 @@ class L10nEn extends L10n {
   String get aiThinking => 'Thinking';
 
   @override
+  String get aiSubtitle =>
+      'Knows your fields, crop stage, and today\'s weather';
+
+  @override
   String get aiTitle => 'Ask KisanDost';
+
+  @override
+  String get aiTypeOrHoldMic => 'Type, or hold the mic';
+
+  @override
+  String get aiScanLeaf => 'Scan a leaf';
+
+  @override
+  String get aiUreaDose => 'Urea dose';
 
   @override
   String get appError => 'Something went wrong.';
@@ -130,11 +159,18 @@ class L10nEn extends L10n {
       'That sign-in link did not match. Please start again.';
 
   @override
-  String get authTagline => 'Your farming companion';
+  String get authTagline => 'Your field, your rate, your language.';
 
   @override
   String get authWhyGoogle =>
       'We use your Google account so you never have to remember a password.';
+
+  @override
+  String get loginPickLanguage => 'Pick your language now';
+
+  @override
+  String get loginPrivacyNote =>
+      'No password, no email. Your account stays signed in.';
 
   @override
   String get chatWidget_callExpert => 'Call Expert';
@@ -1252,6 +1288,39 @@ class L10nEn extends L10n {
   String get diagnoseWhatToDo => 'What to do now';
 
   @override
+  String get diagnoseSprayThis => 'Spray this';
+
+  @override
+  String get diagnoseCulturalPractices => 'And do this, no cost';
+
+  @override
+  String get diagnoseWhereToGet => 'Where to get it';
+
+  @override
+  String get diagnoseCheckGenuine =>
+      'Check the packet is genuine before you pay';
+
+  @override
+  String get diagnoseAskCommunity => 'Ask the community';
+
+  @override
+  String get diagnoseModelConfidence => 'Model confidence';
+
+  @override
+  String get diagnoseFromModel => 'From the model';
+
+  @override
+  String get diagnoseGoodLightTip =>
+      'Good light. Keep the phone about 15 cm away.';
+
+  @override
+  String get diagnoseShadowTip => 'Avoid your own shadow on the leaf.';
+
+  @override
+  String get diagnoseFootnote =>
+      'This is one photo of one leaf, read by a model. If the field looks worse than the leaf, trust the field and ask an officer.';
+
+  @override
   String get diseasesPage_bestSeason => 'Best Season: Kharif (Monsoon)';
 
   @override
@@ -1368,6 +1437,28 @@ class L10nEn extends L10n {
 
   @override
   String get farmNext => 'Next';
+
+  @override
+  String get farmBoundary => 'Field boundary and zones';
+
+  @override
+  String get farmNextUp => 'Worth doing next';
+
+  @override
+  String get farmNothingNext =>
+      'Nothing waiting. Every field has its soil, water and crop on record.';
+
+  @override
+  String get farmSoilMissingWhy =>
+      'Set it and the fertiliser dose stops guessing.';
+
+  @override
+  String get farmSoilUnknown => 'Soil not set';
+
+  @override
+  String farmSummary(String fields, String crops) {
+    return '$fields fields · $crops crops standing';
+  }
 
   @override
   String get farmNoCrops => 'No crops in this field yet';
@@ -1493,6 +1584,22 @@ class L10nEn extends L10n {
   String get fertTitle => 'Fertilizer calculator';
 
   @override
+  String get fertilizerWorksOffline => 'Works with no signal';
+
+  @override
+  String get fertilizerOnDevice => 'On device';
+
+  @override
+  String get fertilizerTotalBuy => 'Buy this much, in total';
+
+  @override
+  String get fertilizerWhenToApply => 'When to put it on';
+
+  @override
+  String get fertilizerFootnote =>
+      'Based on ICAR\'s recommended rates. A Soil Health Card test for your own field would beat this — it is free, and it is on the schemes list.';
+
+  @override
   String get fertUrea => 'Urea';
 
   @override
@@ -1532,6 +1639,28 @@ class L10nEn extends L10n {
   String homeGreeting(String name) {
     return 'Namaste, $name';
   }
+
+  @override
+  String get homeMarkDone => 'Mark as done';
+
+  @override
+  String get homeNothingDue => 'Nothing due today';
+
+  @override
+  String get homeNothingDueBody =>
+      'No spray or dose is scheduled. The next one is still days away.';
+
+  @override
+  String get homeRateToday => 'Today\'s rate';
+
+  @override
+  String get homeSchemesForYou => 'Schemes for you';
+
+  @override
+  String get homeSeeAll => 'See all';
+
+  @override
+  String get homeToday => 'Do this today';
 
   @override
   String get homeMyCrops => 'My crops';
@@ -1720,6 +1849,9 @@ class L10nEn extends L10n {
   String get myCrop_waterSource => 'Water Source';
 
   @override
+  String get navCommunity => 'Community';
+
+  @override
   String get navDiagnose => 'Diagnose';
 
   @override
@@ -1736,6 +1868,9 @@ class L10nEn extends L10n {
 
   @override
   String get navInsights => 'Insights';
+
+  @override
+  String get navMarket => 'Market';
 
   @override
   String get navMore => 'More';
@@ -2060,11 +2195,39 @@ class L10nEn extends L10n {
   String get productsSearch => 'Search products';
 
   @override
+  String get productsSubtitle => 'What to ask the shop for, and how much';
+
+  @override
+  String get productsSearchHint => 'Search a product or a disease';
+
+  @override
+  String get productsFilterMyCrops => 'For my crops';
+
+  @override
+  String get productsFilterPesticide => 'Pesticide';
+
+  @override
+  String get productsFilterFertilizer => 'Fertiliser';
+
+  @override
+  String get productsFilterSeed => 'Seed';
+
+  @override
+  String get productsScanBeforePay => 'At the shop, scan before you pay';
+
+  @override
+  String get productsScanBeforePaySub => 'Counterfeit pesticide is common here';
+
+  @override
+  String get productsReferenceNote =>
+      'A reference list with typical rates, not a shop. Nothing is bought in the app and no seller is quoted. Prices move — treat these as a guide when you bargain.';
+
+  @override
   String get productsStaticNote =>
       'A reference list of common agri-inputs. Prices are indicative — check with your dealer.';
 
   @override
-  String get productsTitle => 'Products';
+  String get productsTitle => 'Inputs';
 
   @override
   String get productsUsage => 'How to use';
@@ -2678,6 +2841,43 @@ class L10nEn extends L10n {
   String get profileSaved => 'Saved';
 
   @override
+  String get profileHowWeReachYou => 'How we reach you';
+
+  @override
+  String get profileDailySms => 'Daily SMS at 6 AM';
+
+  @override
+  String get profileDailySmsSub => 'Works with no data, in your language';
+
+  @override
+  String get profilePushNotifs => 'Push notifications';
+
+  @override
+  String get profilePushNotifsSub => 'Weather warnings and price alerts';
+
+  @override
+  String get profileCommunityReplies => 'Community replies';
+
+  @override
+  String get profileCommunityRepliesSub => 'When someone answers your post';
+
+  @override
+  String get profileTheApp => 'The app';
+
+  @override
+  String get profileSavedOffline => 'Saved for offline';
+
+  @override
+  String get profileSavedOfflineSub => 'Rates, advisory and fields · 2.4 MB';
+
+  @override
+  String get profileAddWidget => 'Add the home screen widget';
+
+  @override
+  String get profilePrivacyNote =>
+      'Your fields, scans and estimates stay on your account. Nothing is sold, and nothing is posted to the community unless you post it.';
+
+  @override
   String get profitPredictor_autoFetchDesc =>
       'Retrieving weather and environmental data';
 
@@ -2784,6 +2984,12 @@ class L10nEn extends L10n {
   String get profitPredictor_totalCost => 'Total Cost';
 
   @override
+  String get provenanceEntered => 'You entered this';
+
+  @override
+  String get provenanceEstimate => 'Estimate, not a model result';
+
+  @override
   String get scanAgain => 'Check another';
 
   @override
@@ -2851,6 +3057,22 @@ class L10nEn extends L10n {
   String get scanTitle => 'Check pesticide';
 
   @override
+  String get scanSubtitle => 'Scan the QR before you pay the shop';
+
+  @override
+  String get scanPacketReal => 'Is this packet real?';
+
+  @override
+  String get scanWhatOthersLookLike => 'What the other answers look like';
+
+  @override
+  String get scanNotOnList => 'Not on our list';
+
+  @override
+  String get scanFootnote =>
+      'Checked against our own database of batches, not an official government registry feed — that does not exist publicly yet. A \'genuine\' result is good evidence, not a guarantee.';
+
+  @override
   String get scanType => 'Type';
 
   @override
@@ -2889,6 +3111,24 @@ class L10nEn extends L10n {
 
   @override
   String get schemesTitle => 'Government schemes';
+
+  @override
+  String get schemesYouQualify => 'You qualify';
+
+  @override
+  String get schemesNeedDoc => 'Need a document';
+
+  @override
+  String get schemesAllCount => 'All schemes';
+
+  @override
+  String get schemesMatchedFarm => 'Matched to your farm';
+
+  @override
+  String get schemesHowToApply => 'How to apply';
+
+  @override
+  String get schemesSave => 'Save';
 
   @override
   String get suggestAddField => 'Add your field';
@@ -3057,6 +3297,9 @@ class L10nEn extends L10n {
   String get weatherSearchHint => 'Village, town or district';
 
   @override
+  String get weatherWorkOk => 'Good conditions for field work right now.';
+
+  @override
   String get weatherSprayWarn => 'Rain expected — do not spray today.';
 
   @override
@@ -3116,6 +3359,19 @@ class L10nEn extends L10n {
   @override
   String get weatherWindWarn =>
       'Strong wind — spray will drift. Wait for calmer air.';
+
+  @override
+  String get weatherFieldImpact => 'What this means for the field';
+
+  @override
+  String get weatherNext7Days => 'Next seven days';
+
+  @override
+  String get weatherSourceNotice =>
+      'Live · WeatherAPI. Open-Meteo is the fallback if it fails.';
+
+  @override
+  String get weatherGpsPoint => 'From your saved GPS point';
 
   @override
   String get yieldPredictor_areaRequired => 'Valid land area is required';

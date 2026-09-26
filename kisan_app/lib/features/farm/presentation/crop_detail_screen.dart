@@ -5,6 +5,10 @@ import 'package:go_router/go_router.dart';
 
 import '../data/crop_detail_models.dart';
 import '../data/farm_repository.dart';
+import 'zone_inspection_sheet.dart';
+import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/kit.dart';
 
 class CropDetailScreen extends ConsumerStatefulWidget {
   const CropDetailScreen({required this.cropId, super.key});
@@ -30,7 +34,7 @@ class _CropDetailScreenState extends ConsumerState<CropDetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Crop cycle and thermal GDD updated successfully.'),
-            backgroundColor: Color(0xFF2E7D32),
+            backgroundColor: AppColors.forest,
           ),
         );
       }
@@ -54,96 +58,155 @@ class _CropDetailScreenState extends ConsumerState<CropDetailScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: cropAsync.maybeWhen(
-          data: (crop) => Text(crop.cropName),
-          orElse: () => const Text('Crop Profile'),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            tooltip: 'Refresh Telemetry',
-            onPressed: () {
-              ref.invalidate(cropDetailProvider(widget.cropId));
-              ref.invalidate(cropRiskProvider(widget.cropId));
-              ref.invalidate(cropScansProvider(widget.cropId));
-            },
-          ),
-        ],
-      ),
-      body: cropAsync.when(
-        loading: () => const Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Loading crop telemetry & AgriShield...'),
-            ],
-          ),
-        ),
-        error: (error, _) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 48,
-                  color: theme.colorScheme.error,
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'Failed to load crop details',
-                  style: theme.textTheme.titleMedium,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '$error',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall,
-                ),
-                const SizedBox(height: 16),
-                FilledButton.tonal(
-                  onPressed: () =>
-                      ref.invalidate(cropDetailProvider(widget.cropId)),
-                  child: const Text('Retry'),
-                ),
-              ],
-            ),
-          ),
-        ),
-        data: (crop) => RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(cropDetailProvider(widget.cropId));
-            ref.invalidate(cropRiskProvider(widget.cropId));
-            ref.invalidate(cropScansProvider(widget.cropId));
-          },
-          child: ListView(
-            padding: const EdgeInsets.all(16.0),
-            children: [
-              _HeaderCard(crop: crop),
-              const SizedBox(height: 16),
-              _SpatialLineageCard(crop: crop),
-              const SizedBox(height: 16),
-              _AgriShieldRiskCard(cropId: widget.cropId),
-              const SizedBox(height: 16),
-              _CropCycleCard(
-                crop: crop,
-                isUpdating: _isUpdatingCycle,
-                onUpdate: _handleUpdateCycle,
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+              child: Row(
+                children: [
+                  _HeaderButton(
+                    icon: Icons.arrow_back,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
+                    onTap: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/farm');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        cropAsync.maybeWhen(
+                          data: (crop) => Text(
+                            crop.cropName,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          orElse: () => Text(
+                            'Crop Profile',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        cropAsync.maybeWhen(
+                          data: (crop) => Text(
+                            crop.field?.name ?? 'Assigned Field',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          orElse: () => Text(
+                            'Field Telemetry',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _HeaderButton(
+                    icon: Icons.refresh,
+                    tooltip: 'Refresh Telemetry',
+                    onTap: () {
+                      ref.invalidate(cropDetailProvider(widget.cropId));
+                      ref.invalidate(cropRiskProvider(widget.cropId));
+                      ref.invalidate(cropScansProvider(widget.cropId));
+                      ref.invalidate(cropCycleProvider(widget.cropId));
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              _CropScansCard(cropId: widget.cropId),
-              const SizedBox(height: 24),
-            ],
-          ),
+            ),
+            Expanded(
+              child: cropAsync.when(
+                loading: () => const Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 16),
+                      Text('Loading crop telemetry & AgriShield...'),
+                    ],
+                  ),
+                ),
+                error: (error, _) => Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.error_outline,
+                          size: 48,
+                          color: theme.colorScheme.error,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Failed to load crop details',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '$error',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        const SizedBox(height: 16),
+                        FilledButton.tonal(
+                          onPressed: () =>
+                              ref.invalidate(cropDetailProvider(widget.cropId)),
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                data: (crop) => RefreshIndicator(
+                  onRefresh: () async {
+                    ref.invalidate(cropDetailProvider(widget.cropId));
+                    ref.invalidate(cropRiskProvider(widget.cropId));
+                    ref.invalidate(cropScansProvider(widget.cropId));
+                  },
+                  child: ListView(
+                    padding: const EdgeInsets.all(16.0),
+                    children: [
+                      _HeaderCard(crop: crop),
+                      const SizedBox(height: 16),
+                      _SpatialLineageCard(crop: crop),
+                      const SizedBox(height: 16),
+                      _AgriShieldRiskCard(cropId: widget.cropId),
+                      const SizedBox(height: 16),
+                      _CropCycleCard(
+                        crop: crop,
+                        isUpdating: _isUpdatingCycle,
+                        onUpdate: _handleUpdateCycle,
+                      ),
+                      const SizedBox(height: 16),
+                      _CropScansCard(cropId: widget.cropId),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+// ----------------------------------------------------------------- Header Card
 
 // ----------------------------------------------------------------- Header Card
 
@@ -157,98 +220,91 @@ class _HeaderCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Card(
-      elevation: 0,
-      color: isDark ? const Color(0xFF1E2A20) : const Color(0xFFE8F5E9),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: const Color(0xFF2E7D32).withValues(alpha: 0.3)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF2E7D32).withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Icon(
-                    Icons.eco,
-                    size: 32,
-                    color: Color(0xFF2E7D32),
-                  ),
+    return KdCard(
+      background: isDark ? AppColors.surfaceDark : AppColors.forestTint,
+      outline: isDark ? AppColors.forestDark : AppColors.forestLine,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? AppColors.forest.withValues(alpha: 0.25)
+                      : AppColors.forestTint,
+                  borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                  border: Border.all(color: AppColors.forestLine),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        crop.cropName,
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                child: const Icon(Icons.eco, size: 26, color: AppColors.forest),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      crop.cropName,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Variety: ${crop.variety ?? "Standard"} • ${crop.areaLabel}',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.textTheme.bodyMedium?.color?.withValues(
-                            alpha: 0.8,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: crop.isActive
-                        ? const Color(0xFF2E7D32)
-                        : Colors.grey.shade600,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    crop.status,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
                     ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Variety: ${crop.variety ?? "Standard"} · ${crop.areaLabel}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: crop.isActive
+                      ? AppColors.forest
+                      : theme.colorScheme.outline,
+                  borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+                ),
+                child: Text(
+                  crop.status,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
-            ),
-            const Divider(height: 28),
-            Row(
-              children: [
-                _HeaderStat(
+              ),
+            ],
+          ),
+          const Divider(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: _HeaderStat(
                   label: 'Sowing Date',
                   value:
                       '${crop.sowingDate.day}/${crop.sowingDate.month}/${crop.sowingDate.year}',
                   icon: Icons.calendar_today_outlined,
                 ),
-                const SizedBox(width: 16),
-                _HeaderStat(
-                  label: 'Elapsed DAS',
-                  value: '${crop.currentDas} Days',
-                  icon: Icons.timelapse_outlined,
-                  highlight: true,
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              const SizedBox(width: 16),
+              Figure(
+                value: '${crop.currentDas}',
+                unit: 'days',
+                caption: 'Elapsed DAS',
+                color: AppColors.forest,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -259,44 +315,37 @@ class _HeaderStat extends StatelessWidget {
     required this.label,
     required this.value,
     required this.icon,
-    this.highlight = false,
   });
 
   final String label;
   final String value;
   final IconData icon;
-  final bool highlight;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Expanded(
-      child: Row(
-        children: [
-          Icon(icon, size: 20, color: const Color(0xFF2E7D32)),
-          const SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.textTheme.bodySmall?.color?.withValues(
-                    alpha: 0.7,
-                  ),
-                ),
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: AppColors.forest),
+        const SizedBox(width: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
-              Text(
-                value,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: highlight ? const Color(0xFF2E7D32) : null,
-                ),
+            ),
+            Text(
+              value,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -319,61 +368,78 @@ class _SpatialLineageCard extends StatelessWidget {
         ? '${field.location.latitude!.toStringAsFixed(4)}°N, ${field.location.longitude!.toStringAsFixed(4)}°E'
         : 'GPS not recorded';
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.dividerColor.withValues(alpha: 0.4)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.explore_outlined,
-                  color: Color(0xFF2E7D32),
-                  size: 20,
+    return KdCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.explore_outlined,
+                color: AppColors.forest,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Spatial & Location Hierarchy',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  'Spatial & Location Hierarchy',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _LineageRow(
+            icon: Icons.terrain_outlined,
+            label: 'Field Name',
+            value: field?.name ?? 'Assigned Field',
+          ),
+          const Divider(height: 16),
+          _LineageRow(
+            icon: Icons.place_outlined,
+            label: 'Location',
+            value: locationStr,
+          ),
+          const Divider(height: 16),
+          _LineageRow(
+            icon: Icons.gps_fixed,
+            label: 'Coordinates',
+            value: coordsStr,
+            monospace: true,
+          ),
+          const Divider(height: 16),
+          _LineageRow(
+            icon: Icons.crop_square_outlined,
+            label: 'Monitoring Zone',
+            value: zone != null ? zone.displayName : 'Not assigned',
+            badge: zone != null,
+          ),
+          const SizedBox(height: 14),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.tonalIcon(
+              onPressed: () => ZoneInspectionSheet.show(
+                context,
+                crop: crop,
+                initialZone: zone,
+              ),
+              icon: const Icon(Icons.camera_alt_outlined, size: 18),
+              label: Text(
+                zone != null
+                    ? 'Inspect Zone (${zone.zoneCode})'
+                    : 'Multi-Angle Zone Inspection',
+              ),
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.forestTint,
+                foregroundColor: AppColors.forest,
+                minimumSize: const Size.fromHeight(48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusButton),
                 ),
-              ],
+              ),
             ),
-            const SizedBox(height: 12),
-            _LineageRow(
-              icon: Icons.terrain_outlined,
-              label: 'Field Name',
-              value: field?.name ?? 'Assigned Field',
-            ),
-            const Divider(height: 16),
-            _LineageRow(
-              icon: Icons.place_outlined,
-              label: 'Location',
-              value: locationStr,
-            ),
-            const Divider(height: 16),
-            _LineageRow(
-              icon: Icons.gps_fixed,
-              label: 'Coordinates',
-              value: coordsStr,
-              monospace: true,
-            ),
-            const Divider(height: 16),
-            _LineageRow(
-              icon: Icons.crop_square_outlined,
-              label: 'Monitoring Zone',
-              value: zone != null ? zone.displayName : 'Not assigned',
-              badge: zone != null,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -400,12 +466,12 @@ class _LineageRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 16, color: Colors.grey.shade600),
+        Icon(icon, size: 16, color: theme.colorScheme.onSurfaceVariant),
         const SizedBox(width: 8),
         Text(
           '$label:',
           style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.7),
+            color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
         const Spacer(),
@@ -413,16 +479,14 @@ class _LineageRow extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: const Color(0xFF2E7D32).withValues(alpha: 0.3),
-              ),
+              color: AppColors.forestTint,
+              borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+              border: Border.all(color: AppColors.forestLine),
             ),
             child: Text(
               value,
               style: const TextStyle(
-                color: Color(0xFF2E7D32),
+                color: AppColors.forest,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),
@@ -455,116 +519,108 @@ class _AgriShieldRiskCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final riskAsync = ref.watch(cropRiskProvider(cropId));
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: const Color(0xFFE65100).withValues(alpha: 0.3)),
-      ),
-      color: theme.brightness == Brightness.dark
-          ? const Color(0xFF2D2319)
-          : const Color(0xFFFFF8E1),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.shield_outlined,
-                  color: Color(0xFFE65100),
-                  size: 22,
+    return KdCard(
+      background: isDark ? AppColors.surfaceDark : AppColors.amberTint,
+      outline: AppColors.amberLine,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.shield_outlined,
+                color: AppColors.terracottaText,
+                size: 22,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'AgriShield 360° Risk Evaluation',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'AgriShield 360° Risk Evaluation',
-                    style: theme.textTheme.titleMedium?.copyWith(
+              ),
+              IconButton(
+                icon: const Icon(Icons.refresh, size: 18),
+                tooltip: 'Re-evaluate Risk',
+                onPressed: () => ref.refresh(cropRiskProvider(cropId)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          riskAsync.when(
+            loading: () => const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    CircularProgressIndicator(strokeWidth: 2),
+                    SizedBox(height: 8),
+                    Text(
+                      'Evaluating 26 agronomic rules...',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            error: (err, _) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Risk evaluation currently unavailable: $err',
+                style: const TextStyle(fontSize: 12, color: AppColors.danger),
+              ),
+            ),
+            data: (risk) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _RiskStatusBadge(status: risk.overallStatus),
+                    const SizedBox(width: 8),
+                    _RiskLevelPill(level: risk.overallLevel),
+                  ],
+                ),
+                if (risk.evaluatedThreats.isNotEmpty) ...[
+                  const SizedBox(height: 14),
+                  Text(
+                    'Evaluated Threat Windows:',
+                    style: theme.textTheme.labelMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.refresh, size: 18),
-                  tooltip: 'Re-evaluate Risk',
-                  onPressed: () => ref.refresh(cropRiskProvider(cropId)),
-                ),
+                  const SizedBox(height: 8),
+                  ...risk.evaluatedThreats.map(
+                    (threat) => _ThreatTile(threat: threat),
+                  ),
+                ] else ...[
+                  const SizedBox(height: 12),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: AppColors.forest,
+                        size: 18,
+                      ),
+                      SizedBox(width: 6),
+                      Text(
+                        'No critical agronomic threats detected.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: AppColors.forest,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
-            const SizedBox(height: 12),
-            riskAsync.when(
-              loading: () => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Center(
-                  child: Column(
-                    children: [
-                      CircularProgressIndicator(strokeWidth: 2),
-                      SizedBox(height: 8),
-                      Text(
-                        'Evaluating 26 agronomic rules...',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              error: (err, _) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Risk evaluation currently unavailable: $err',
-                  style: const TextStyle(fontSize: 12, color: Colors.orange),
-                ),
-              ),
-              data: (risk) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      _RiskStatusBadge(status: risk.overallStatus),
-                      const SizedBox(width: 8),
-                      _RiskLevelPill(level: risk.overallLevel),
-                    ],
-                  ),
-                  if (risk.evaluatedThreats.isNotEmpty) ...[
-                    const SizedBox(height: 14),
-                    Text(
-                      'Evaluated Threat Windows:',
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    ...risk.evaluatedThreats.map(
-                      (threat) => _ThreatTile(threat: threat),
-                    ),
-                  ] else ...[
-                    const SizedBox(height: 12),
-                    const Row(
-                      children: [
-                        Icon(
-                          Icons.check_circle_outline,
-                          color: Color(0xFF2E7D32),
-                          size: 18,
-                        ),
-                        SizedBox(width: 6),
-                        Text(
-                          'No critical agronomic threats detected.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF2E7D32),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -583,17 +639,17 @@ class _RiskStatusBadge extends StatelessWidget {
 
     switch (status) {
       case 'NO_CONCERN':
-        bg = const Color(0xFFE8F5E9);
-        fg = const Color(0xFF2E7D32);
+        bg = AppColors.forestTint;
+        fg = AppColors.forest;
         label = 'No Concern';
       case 'POTENTIAL_CONCERN':
       case 'ATTENTION':
-        bg = const Color(0xFFFFF3E0);
-        fg = const Color(0xFFE65100);
+        bg = AppColors.amberTint;
+        fg = AppColors.terracottaText;
         label = 'Attention Required';
       case 'HIGH_RISK':
-        bg = const Color(0xFFFFEBEE);
-        fg = const Color(0xFFC62828);
+        bg = AppColors.dangerTint;
+        fg = AppColors.danger;
         label = 'High Risk';
       default:
         bg = Colors.grey.shade200;
@@ -605,7 +661,7 @@ class _RiskStatusBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppTheme.radiusChip),
       ),
       child: Text(
         label,
@@ -625,8 +681,8 @@ class _RiskLevelPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade400),
-        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        borderRadius: BorderRadius.circular(AppTheme.radiusChip),
       ),
       child: Text(
         'Level: $level',
@@ -646,59 +702,56 @@ class _ThreatTile extends StatelessWidget {
     final theme = Theme.of(context);
     final isWarning = threat.isElevated;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isWarning
-              ? const Color(0xFFE65100).withValues(alpha: 0.4)
-              : theme.dividerColor.withValues(alpha: 0.4),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                isWarning ? Icons.warning_amber_rounded : Icons.info_outline,
-                size: 16,
-                color: isWarning
-                    ? const Color(0xFFE65100)
-                    : Colors.grey.shade600,
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Text(
-                  threat.threatName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: KdCard(
+        outline: isWarning ? AppColors.terracotta : theme.colorScheme.outline,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  isWarning ? Icons.warning_amber_rounded : Icons.info_outline,
+                  size: 16,
+                  color: isWarning
+                      ? AppColors.terracottaText
+                      : theme.colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    threat.threatName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(4),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+                  ),
+                  child: Text(
+                    threat.threatCategory,
+                    style: theme.textTheme.labelSmall?.copyWith(fontSize: 10),
+                  ),
                 ),
-                child: Text(
-                  threat.threatCategory,
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            threat.explanation,
-            style: theme.textTheme.bodySmall?.copyWith(fontSize: 12),
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              threat.explanation,
+              style: theme.textTheme.bodySmall?.copyWith(fontSize: 12),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -726,118 +779,136 @@ class _CropCycleCard extends StatelessWidget {
         ? (gdd / maturity).clamp(0.0, 1.0)
         : null;
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.dividerColor.withValues(alpha: 0.4)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.thermostat_outlined,
-                  color: Color(0xFF2E7D32),
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Crop Lifecycle & Thermal Progress',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    crop.progressionMode,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Current Stage:', style: theme.textTheme.bodySmall),
-                Text(
-                  crop.currentStageId ?? 'Vegetative / Active Growth',
-                  style: const TextStyle(
+    const stageCount = 5;
+    final currentStageIdx = ratio != null
+        ? ((ratio * stageCount).floor()).clamp(0, stageCount - 1)
+        : 1;
+
+    return KdCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.thermostat_outlined,
+                color: AppColors.forest,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Crop Lifecycle & Thermal Progress',
+                  style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Accumulated GDD:', style: theme.textTheme.bodySmall),
-                Text(
-                  gdd != null
-                      ? '${gdd.toStringAsFixed(1)} °C-days'
-                      : '— (Pending weather backfill)',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            if (ratio != null) ...[
-              const SizedBox(height: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: LinearProgressIndicator(
-                  value: ratio,
-                  minHeight: 8,
-                  backgroundColor: Colors.grey.shade200,
-                  color: const Color(0xFF2E7D32),
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                'Thermal Maturity: ${(ratio * 100).toStringAsFixed(0)}% of target ${maturity!.toStringAsFixed(0)} °C-days',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+                ),
+                child: Text(
+                  crop.progressionMode,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ),
             ],
-            const SizedBox(height: 14),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: isUpdating ? null : onUpdate,
-                icon: isUpdating
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.sync, size: 16),
-                label: Text(
-                  isUpdating
-                      ? 'Updating thermal cycle...'
-                      : 'Update Stage Progression',
+          ),
+          const SizedBox(height: 12),
+          StageBar(stageCount: stageCount, currentStage: currentStageIdx),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Current Stage:', style: theme.textTheme.bodySmall),
+              Text(
+                crop.currentStageId ?? 'Vegetative / Active Growth',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.forest,
                 ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Accumulated GDD:', style: theme.textTheme.bodySmall),
+                  const SizedBox(height: 2),
+                  if (gdd != null)
+                    Figure(
+                      value: gdd.toStringAsFixed(1),
+                      unit: '°C-days',
+                      size: 22,
+                    )
+                  else
+                    const Text(
+                      '— (Pending weather backfill)',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                ],
+              ),
+              if (maturity != null)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('Target GDD:', style: theme.textTheme.bodySmall),
+                    const SizedBox(height: 2),
+                    Figure(
+                      value: maturity.toStringAsFixed(0),
+                      unit: '°C-days',
+                      size: 22,
+                    ),
+                  ],
+                ),
+            ],
+          ),
+          if (ratio != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              'Thermal Maturity: ${(ratio * 100).toStringAsFixed(0)}% of target ${maturity!.toStringAsFixed(0)} °C-days',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
-        ),
+          const SizedBox(height: 14),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size.fromHeight(48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                ),
+              ),
+              onPressed: isUpdating ? null : onUpdate,
+              icon: isUpdating
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.sync, size: 16),
+              label: Text(
+                isUpdating
+                    ? 'Updating thermal cycle...'
+                    : 'Update Stage Progression',
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -855,95 +926,88 @@ class _CropScansCard extends ConsumerWidget {
     final scansAsync = ref.watch(cropScansProvider(cropId));
     final theme = Theme.of(context);
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.dividerColor.withValues(alpha: 0.4)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.camera_alt_outlined,
-                  color: Color(0xFF2E7D32),
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Crop Disease Scans',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+    return KdCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.camera_alt_outlined,
+                color: AppColors.forest,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Crop Disease Scans',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                TextButton.icon(
-                  onPressed: () => context.push('/diagnose'),
-                  icon: const Icon(Icons.add_a_photo, size: 16),
-                  label: const Text('Scan Now'),
-                ),
-              ],
+              ),
+              TextButton.icon(
+                onPressed: () => context.push('/diagnose'),
+                icon: const Icon(Icons.add_a_photo, size: 16),
+                label: const Text('Scan Now'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          scansAsync.when(
+            loading: () => const Center(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
             ),
-            const SizedBox(height: 8),
-            scansAsync.when(
-              loading: () => const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
+            error: (err, _) => Text(
+              'Could not load scans: $err',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
-              error: (err, _) => Text(
-                'Could not load scans: $err',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              data: (scans) {
-                if (scans.isEmpty) {
-                  return Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.photo_library_outlined,
-                          size: 36,
-                          color: Colors.grey.shade400,
+            ),
+            data: (scans) {
+              if (scans.isEmpty) {
+                return Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                  ),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.photo_library_outlined,
+                        size: 36,
+                        color: theme.colorScheme.outline,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'No disease scans recorded for this crop yet.',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'No disease scans recorded for this crop yet.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: scans.length,
-                  separatorBuilder: (_, _) => const Divider(height: 16),
-                  itemBuilder: (context, index) {
-                    final scan = scans[index];
-                    return _ScanItemTile(scan: scan);
-                  },
+                      ),
+                    ],
+                  ),
                 );
-              },
-            ),
-          ],
-        ),
+              }
+
+              return ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: scans.length,
+                separatorBuilder: (_, _) => const Divider(height: 16),
+                itemBuilder: (context, index) {
+                  final scan = scans[index];
+                  return _ScanItemTile(scan: scan);
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -966,7 +1030,7 @@ class _ScanItemTile extends StatelessWidget {
       children: [
         if (scan.imageUrl != null && scan.imageUrl!.isNotEmpty)
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppTheme.radiusChip),
             child: CachedNetworkImage(
               imageUrl: scan.imageUrl!,
               width: 54,
@@ -975,11 +1039,11 @@ class _ScanItemTile extends StatelessWidget {
               errorWidget: (_, _, _) => Container(
                 width: 54,
                 height: 54,
-                color: Colors.grey.shade200,
-                child: const Icon(
+                color: theme.colorScheme.surfaceContainerHighest,
+                child: Icon(
                   Icons.broken_image,
                   size: 20,
-                  color: Colors.grey,
+                  color: theme.colorScheme.outline,
                 ),
               ),
             ),
@@ -989,10 +1053,11 @@ class _ScanItemTile extends StatelessWidget {
             width: 54,
             height: 54,
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
+              color: AppColors.forestTint,
+              borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+              border: Border.all(color: AppColors.forestLine),
             ),
-            child: const Icon(Icons.document_scanner, color: Color(0xFF2E7D32)),
+            child: const Icon(Icons.document_scanner, color: AppColors.forest),
           ),
         const SizedBox(width: 12),
         Expanded(
@@ -1031,7 +1096,10 @@ class _ScanItemTile extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     'Confidence: ${(scan.confidence * 100).toStringAsFixed(0)}%',
-                    style: TextStyle(fontSize: 11, color: Colors.grey.shade700),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
@@ -1039,7 +1107,10 @@ class _ScanItemTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   'Zone: ${scan.zoneLabel}',
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ],
@@ -1049,7 +1120,7 @@ class _ScanItemTile extends StatelessWidget {
           dateStr,
           style: theme.textTheme.bodySmall?.copyWith(
             fontSize: 11,
-            color: Colors.grey,
+            color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
       ],
@@ -1060,14 +1131,44 @@ class _ScanItemTile extends StatelessWidget {
     switch (severity.toUpperCase()) {
       case 'SEVERE':
       case 'HIGH':
-        return Colors.red.shade700;
+        return AppColors.danger;
       case 'MODERATE':
-        return Colors.orange.shade800;
+        return AppColors.terracottaText;
       case 'MILD':
       case 'LOW':
-        return Colors.green.shade700;
+        return AppColors.forest;
       default:
-        return Colors.blueGrey;
+        return AppColors.muted;
     }
+  }
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Tooltip(
+      message: tooltip ?? '',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Icon(icon, size: 22, color: theme.colorScheme.onSurface),
+        ),
+      ),
+    );
   }
 }

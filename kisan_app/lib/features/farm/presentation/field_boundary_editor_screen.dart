@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../data/boundary_models.dart';
 import '../data/farm_repository.dart';
+import '../../../app/theme/app_colors.dart';
 
 class FieldBoundaryEditorScreen extends ConsumerStatefulWidget {
   const FieldBoundaryEditorScreen({required this.fieldId, super.key});
@@ -92,7 +93,7 @@ class _FieldBoundaryEditorScreenState
           // Telemetry and instructions strip
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: const Color(0xFF1B5E20),
+            color: AppColors.forest,
             child: Row(
               children: [
                 const Icon(Icons.touch_app, color: Colors.white, size: 20),
@@ -176,9 +177,8 @@ class _FieldBoundaryEditorScreenState
                         polygons: [
                           Polygon(
                             points: _points,
-                            color: const Color(0xFF2E7D32)
-                                .withValues(alpha: 0.25),
-                            borderColor: const Color(0xFF2E7D32),
+                            color: AppColors.forest.withValues(alpha: 0.25),
+                            borderColor: AppColors.forest,
                             borderStrokeWidth: 3.0,
                           ),
                         ],
@@ -193,7 +193,7 @@ class _FieldBoundaryEditorScreenState
                             height: 28,
                             child: Container(
                               decoration: BoxDecoration(
-                                color: const Color(0xFF2E7D32),
+                                color: AppColors.forest,
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Colors.white,
@@ -245,7 +245,7 @@ class _FieldBoundaryEditorScreenState
                             children: [
                               Checkbox(
                                 value: _updateFieldArea,
-                                activeColor: const Color(0xFF2E7D32),
+                                activeColor: AppColors.forest,
                                 onChanged: (val) => setState(
                                   () => _updateFieldArea = val ?? true,
                                 ),
@@ -293,7 +293,7 @@ class _FieldBoundaryEditorScreenState
                               Expanded(
                                 child: FilledButton.icon(
                                   style: FilledButton.styleFrom(
-                                    backgroundColor: const Color(0xFF2E7D32),
+                                    backgroundColor: AppColors.forest,
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 12,
                                     ),
@@ -393,7 +393,7 @@ class _FieldBoundaryEditorScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Field boundary saved successfully!'),
-          backgroundColor: Color(0xFF2E7D32),
+          backgroundColor: AppColors.forest,
         ),
       );
     } catch (e) {
@@ -420,7 +420,7 @@ class _FieldBoundaryEditorScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Monitoring zones successfully partitioned!'),
-          backgroundColor: Color(0xFF2E7D32),
+          backgroundColor: AppColors.forest,
         ),
       );
     } catch (e) {
