@@ -143,7 +143,14 @@ def main():
 
     if args.gen:
         print("running flutter gen-l10n")
-        subprocess.call(["flutter", "gen-l10n"])
+        # shell=True on Windows: `flutter` there is flutter.bat, which
+        # CreateProcess will not resolve from a bare name.
+        code = subprocess.call(
+            "flutter gen-l10n",
+            shell=(os.name == "nt"),
+        ) if os.name == "nt" else subprocess.call(["flutter", "gen-l10n"])
+        if code != 0:
+            sys.exit("gen-l10n failed — the keys are written, rerun it yourself")
     else:
         print("\nnow run: flutter gen-l10n")
 

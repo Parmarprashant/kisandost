@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../app/shell/app_drawer.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/kit.dart';
 import '../../../core/network/api_exception.dart';
 import '../../../core/voice/voice_search_field.dart';
 import '../../../app/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../auth/data/auth_controller.dart';
 import '../data/community_models.dart';
 import '../data/community_repository.dart';
 import 'compose_post_screen.dart';
@@ -27,103 +30,164 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    final theme = Theme.of(context);
     final feed = ref.watch(communityFeedProvider);
     final query = ref.watch(communitySearchProvider);
+    final authState = ref.watch(authControllerProvider);
+    final user = authState is SignedIn ? authState.user : null;
+
+    final locationText = [
+      user?.village,
+      user?.district,
+    ].where((s) => s != null && s.isNotEmpty).join(' · ');
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.communityTitle)),
-      floatingActionButton: _selectedTab == 0
-          ? FloatingActionButton.extended(
-              onPressed: () async {
-                final posted = await Navigator.of(context).push<bool>(
-                  MaterialPageRoute(builder: (_) => const ComposePostScreen()),
-                );
-                if (posted != true || !context.mounted) return;
-
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(l10n.communityPosted)));
-              },
-              icon: const Icon(Icons.edit_outlined),
-              label: Text(l10n.communityAsk),
-            )
-          : null,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ChoiceChip(
-                    label: const Center(child: Text('🌾 Farmer Network')),
-                    selected: _selectedTab == 0,
-                    onSelected: (val) {
-                      if (val) setState(() => _selectedTab = 0);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: ChoiceChip(
-                    label: const Center(child: Text('🏛️ E-Services & Guides')),
-                    selected: _selectedTab == 1,
-                    onSelected: (val) {
-                      if (val) setState(() => _selectedTab = 1);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (_selectedTab == 1)
-            const Expanded(child: FarmerResourcesView())
-          else ...[
+      drawer: const AppDrawer(),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-              child: VoiceSearchField(
-                hintText: l10n.communitySearch,
-                onChanged: (v) =>
-                    ref.read(communitySearchProvider.notifier).update(v),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _HeaderButton(
+                    icon: Icons.menu,
+                    tooltip: MaterialLocalizations.of(context)
+                        .openAppDrawerTooltip,
+                    onTap: () => Scaffold.of(context).openDrawer(),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.communityTitle,
+                            style: theme.textTheme.headlineSmall,
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            locationText.isNotEmpty
+                                ? locationText
+                                : l10n.communitySearch,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (_selectedTab == 0) ...[
+                    const SizedBox(width: 10),
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        final posted = await Navigator.of(context).push<bool>(
+                          MaterialPageRoute(
+                            builder: (_) => const ComposePostScreen(),
+                          ),
+                        );
+                        if (posted != true || !context.mounted) return;
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(l10n.communityPosted)),
+                        );
+                      },
+                      icon: const Icon(Icons.edit_outlined, size: 18),
+                      label: Text(l10n.communityAsk),
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(0, 44),
+                        padding: const EdgeInsets.symmetric(horizontal: 13),
+                        textStyle: theme.textTheme.labelMedium,
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async =>
-                    ref.refresh(communityFeedProvider.future),
-                child: feed.when(
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  error: (error, _) => _Error(error: error),
-                  data: (page) {
-                    // Filtered in the app rather than on the server: the feed
-                    // is one page of posts that is already in hand, and a
-                    // round trip per keystroke would cost a farmer data for
-                    // work the phone can do instantly.
-                    final posts = page.posts
-                        .where((p) => p.matches(query))
-                        .toList(growable: false);
-
-                    if (posts.isEmpty) {
-                      return _Empty(
-                        message: query.trim().isEmpty
-                            ? l10n.communityEmpty
-                            : l10n.communityNoMatch,
-                      );
-                    }
-
-                    return ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-                      itemCount: posts.length,
-                      separatorBuilder: (_, _) => const SizedBox(height: 14),
-                      itemBuilder: (context, i) => _PostCard(post: posts[i]),
-                    );
-                  },
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                  border: Border.all(color: theme.colorScheme.outline),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _TabSegment(
+                        label: '🌾 Farmer Network',
+                        selected: _selectedTab == 0,
+                        onTap: () => setState(() => _selectedTab = 0),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: _TabSegment(
+                        label: '🏛️ E-Services & Guides',
+                        selected: _selectedTab == 1,
+                        onTap: () => setState(() => _selectedTab = 1),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+            if (_selectedTab == 1)
+              const Expanded(child: FarmerResourcesView())
+            else ...[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                child: VoiceSearchField(
+                  hintText: l10n.communitySearch,
+                  onChanged: (v) =>
+                      ref.read(communitySearchProvider.notifier).update(v),
+                ),
+              ),
+              Expanded(
+                child: RefreshIndicator(
+                  onRefresh: () async =>
+                      ref.refresh(communityFeedProvider.future),
+                  child: feed.when(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (error, _) => _Error(error: error),
+                    data: (page) {
+                      // Filtered in the app rather than on the server: the feed
+                      // is one page of posts that is already in hand, and a
+                      // round trip per keystroke would cost a farmer data for
+                      // work the phone can do instantly.
+                      final posts = page.posts
+                          .where((p) => p.matches(query))
+                          .toList(growable: false);
+
+                      if (posts.isEmpty) {
+                        return _Empty(
+                          message: query.trim().isEmpty
+                              ? l10n.communityEmpty
+                              : l10n.communityNoMatch,
+                        );
+                      }
+
+                      return ListView.separated(
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+                        itemCount: posts.length,
+                        separatorBuilder: (_, _) => const SizedBox(height: 14),
+                        itemBuilder: (context, i) => _PostCard(post: posts[i]),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -139,152 +203,144 @@ class _PostCard extends StatelessWidget {
     final l10n = L10n.of(context);
     final text = Theme.of(context).textTheme;
 
-    return Card(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-        onTap: () => PostDetailScreen.open(context, post),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: AppColors.primaryContainer,
-                    child: Text(
-                      post.authorName.isEmpty
-                          ? '?'
-                          : post.authorName.trim()[0].toUpperCase(),
-                      style: text.labelMedium?.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(post.authorName, style: text.titleSmall),
-                        Text(
-                          [
-                            post.location,
-                            _relative(context, post.createdAt),
-                          ].where((s) => s.isNotEmpty).join(' · '),
-                          style: text.labelSmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                  _TypeChip(type: post.postType),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(post.title, style: text.titleMedium),
-              const SizedBox(height: 5),
-              Text(
-                post.problem,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: text.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-
-              if (post.hasImages) ...[
-                const SizedBox(height: 12),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: CachedNetworkImage(
-                      imageUrl: post.images.first,
-                      fit: BoxFit.cover,
-                      errorWidget: (_, _, _) => Container(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                      ),
-                    ),
+    return KdCard(
+      clip: true,
+      onTap: () => PostDetailScreen.open(context, post),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.primaryContainer,
+                  child: Text(
+                    post.authorName.isEmpty
+                        ? '?'
+                        : post.authorName.trim()[0].toUpperCase(),
+                    style: text.labelMedium?.copyWith(color: AppColors.primary),
                   ),
                 ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(post.authorName, style: text.titleSmall),
+                      Text(
+                        [
+                          post.location,
+                          _relative(context, post.createdAt),
+                        ].where((s) => s.isNotEmpty).join(' · '),
+                        style: text.labelSmall,
+                      ),
+                    ],
+                  ),
+                ),
+                _TypeChip(type: post.postType),
               ],
+            ),
+            const SizedBox(height: 12),
+            Text(post.title, style: text.titleMedium),
+            const SizedBox(height: 5),
+            Text(
+              post.problem,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: text.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
 
-              // The counts sit below a rule rather than floating under the
-              // body: they belong to the post, not to the sentence above
-              // them, and a farmer scanning the feed reads them as a block.
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Divider(
-                  height: 1,
-                  color: Theme.of(context).colorScheme.outline,
+            if (post.hasImages) ...[
+              const SizedBox(height: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: CachedNetworkImage(
+                    imageUrl: post.images.first,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, _, _) => Container(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest,
+                    ),
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  Icon(
-                    post.isHelpfulByMe
-                        ? Icons.thumb_up
-                        : Icons.thumb_up_outlined,
-                    size: 17,
-                    // Marked in brand green once this farmer has voted, so
-                    // "I already answered this" is legible at a glance in a
-                    // feed they scroll every morning.
+            ],
+
+            // The counts sit below a rule rather than floating under the
+            // body: they belong to the post, not to the sentence above
+            // them, and a farmer scanning the feed reads them as a block.
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Divider(
+                height: 1,
+                color: Theme.of(context).colorScheme.outline,
+              ),
+            ),
+            Row(
+              children: [
+                Icon(
+                  post.isHelpfulByMe ? Icons.thumb_up : Icons.thumb_up_outlined,
+                  size: 17,
+                  // Marked in brand green once this farmer has voted, so
+                  // "I already answered this" is legible at a glance in a
+                  // feed they scroll every morning.
+                  color: post.isHelpfulByMe
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  '${post.helpfulCount}',
+                  style: text.labelMedium?.copyWith(
                     color: post.isHelpfulByMe
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
-                  const SizedBox(width: 6),
-                  Text(
-                    '${post.helpfulCount}',
-                    style: text.labelMedium?.copyWith(
-                      color: post.isHelpfulByMe
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 18),
+                Icon(
+                  Icons.chat_bubble_outline,
+                  size: 17,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  l10n.communityComments('${post.commentCount}'),
+                  style: text.labelSmall,
+                ),
+                const Spacer(),
+                if (post.crop.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
                     ),
-                  ),
-                  const SizedBox(width: 18),
-                  Icon(
-                    Icons.chat_bubble_outline,
-                    size: 17,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    l10n.communityComments('${post.commentCount}'),
-                    style: text.labelSmall,
-                  ),
-                  const Spacer(),
-                  if (post.crop.isNotEmpty)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(
-                          AppTheme.radiusChip,
-                        ),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
-                      ),
-                      child: Text(
-                        post.crop,
-                        style: text.labelSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
-                ],
-              ),
-            ],
-          ),
+                    child: Text(
+                      post.crop,
+                      style: text.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -385,4 +441,72 @@ String _relative(BuildContext context, DateTime when) {
   if (difference.inHours >= 1) return '${difference.inHours}h';
   if (difference.inMinutes >= 1) return '${difference.inMinutes}m';
   return '';
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.onTap, this.tooltip});
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Tooltip(
+      message: tooltip ?? '',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Icon(icon, size: 22, color: theme.colorScheme.onSurface),
+        ),
+      ),
+    );
+  }
+}
+
+class _TabSegment extends StatelessWidget {
+  const _TabSegment({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(7),
+      child: Container(
+        height: 36,
+        decoration: BoxDecoration(
+          color: selected ? theme.colorScheme.primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: selected
+                ? theme.colorScheme.onPrimary
+                : theme.colorScheme.onSurfaceVariant,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
 }

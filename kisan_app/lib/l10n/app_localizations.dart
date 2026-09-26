@@ -5315,6 +5315,18 @@ abstract class L10n {
   /// **'Total Cost'**
   String get profitPredictor_totalCost;
 
+  /// No description provided for @provenanceEntered.
+  ///
+  /// In en, this message translates to:
+  /// **'You entered this'**
+  String get provenanceEntered;
+
+  /// No description provided for @provenanceEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate, not a model result'**
+  String get provenanceEstimate;
+
   /// No description provided for @scanAgain.
   ///
   /// In en, this message translates to:

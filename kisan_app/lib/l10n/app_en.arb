@@ -1113,6 +1113,8 @@
   "profitPredictor_soilPotassium": "Soil Potassium",
   "profitPredictor_title": "Profit Predictor",
   "profitPredictor_totalCost": "Total Cost",
+  "provenanceEntered": "You entered this",
+  "provenanceEstimate": "Estimate, not a model result",
   "scanAgain": "Check another",
   "scanBrand": "Brand",
   "scanCheck": "Check",

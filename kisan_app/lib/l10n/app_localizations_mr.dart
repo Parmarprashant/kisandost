@@ -2988,6 +2988,12 @@ class L10nMr extends L10n {
   String get profitPredictor_totalCost => 'एकूण खर्च';
 
   @override
+  String get provenanceEntered => 'तुम्ही भरले आहे';
+
+  @override
+  String get provenanceEstimate => 'अंदाज, मॉडेलचा निकाल नाही';
+
+  @override
   String get scanAgain => 'पुन्हा तपासा';
 
   @override

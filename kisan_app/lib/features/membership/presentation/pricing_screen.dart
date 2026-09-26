@@ -77,9 +77,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
               child: const Text('OK'),
             ),
             FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.forest,
-              ),
+              style: FilledButton.styleFrom(backgroundColor: AppColors.forest),
               onPressed: () {
                 Navigator.of(ctx).pop();
                 context.go('/farm');
@@ -199,8 +197,7 @@ class _PricingScreenState extends ConsumerState<PricingScreen> {
                             ),
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? AppColors.forest
-                                        .withValues(alpha: 0.08)
+                                  ? AppColors.forest.withValues(alpha: 0.08)
                                   : theme.cardColor,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(

@@ -285,8 +285,9 @@ class _Header extends StatelessWidget {
                         Text(
                           place,
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onPrimary
-                                .withValues(alpha: 0.78),
+                            color: theme.colorScheme.onPrimary.withValues(
+                              alpha: 0.78,
+                            ),
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -383,10 +384,7 @@ class _Tile extends StatelessWidget {
                   ),
                 ),
               ),
-              if (trailing != null) ...[
-                const SizedBox(width: 8),
-                trailing!,
-              ],
+              if (trailing != null) ...[const SizedBox(width: 8), trailing!],
             ],
           ),
         ),

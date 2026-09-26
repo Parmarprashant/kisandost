@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../app/theme/app_colors.dart';
 
 class EServiceItem {
@@ -143,9 +144,7 @@ class FarmerResourcesView extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.forest.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColors.forest.withValues(alpha: 0.2),
-            ),
+            border: Border.all(color: AppColors.forest.withValues(alpha: 0.2)),
           ),
           child: Row(
             children: [
