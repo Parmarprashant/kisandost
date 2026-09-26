@@ -209,32 +209,29 @@ class _ProfitResult extends StatelessWidget {
     String rupees(double value) => '₹${numbers.format(value.round())}';
 
     final positive = result.isProfitable;
-    final accent =
-        positive
-            ? (isDark ? AppColors.forestDark : AppColors.forest)
-            : (isDark ? AppColors.dangerDark : AppColors.danger);
+    final accent = positive
+        ? (isDark ? AppColors.forestDark : AppColors.forest)
+        : (isDark ? AppColors.dangerDark : AppColors.danger);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(l10n.predMargin),
         KdCard(
-          background:
-              positive
-                  ? (isDark
-                      ? AppColors.forestDark.withAlpha(35)
-                      : AppColors.forestTint)
-                  : (isDark
-                      ? AppColors.dangerDark.withAlpha(35)
-                      : AppColors.dangerTint),
-          outline:
-              positive
-                  ? (isDark
-                      ? AppColors.forestDark.withAlpha(80)
-                      : AppColors.forestLine)
-                  : (isDark
-                      ? AppColors.dangerDark.withAlpha(80)
-                      : AppColors.dangerLine),
+          background: positive
+              ? (isDark
+                    ? AppColors.forestDark.withAlpha(35)
+                    : AppColors.forestTint)
+              : (isDark
+                    ? AppColors.dangerDark.withAlpha(35)
+                    : AppColors.dangerTint),
+          outline: positive
+              ? (isDark
+                    ? AppColors.forestDark.withAlpha(80)
+                    : AppColors.forestLine)
+              : (isDark
+                    ? AppColors.dangerDark.withAlpha(80)
+                    : AppColors.dangerLine),
           padding: const EdgeInsets.all(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,14 +297,12 @@ class _ProfitResult extends StatelessWidget {
         const SizedBox(height: 12),
         // Land rent note
         KdCard(
-          background:
-              isDark
-                  ? AppColors.amberDark.withAlpha(30)
-                  : AppColors.amberTint,
-          outline:
-              isDark
-                  ? AppColors.amberDark.withAlpha(70)
-                  : AppColors.amberLine,
+          background: isDark
+              ? AppColors.amberDark.withAlpha(30)
+              : AppColors.amberTint,
+          outline: isDark
+              ? AppColors.amberDark.withAlpha(70)
+              : AppColors.amberLine,
           padding: const EdgeInsets.all(14),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,20 +320,18 @@ class _ProfitResult extends StatelessWidget {
                     Text(
                       'Land rent is not in this',
                       style: text.titleSmall?.copyWith(
-                        color:
-                            isDark
-                                ? AppColors.amberDark
-                                : AppColors.amberText,
+                        color: isDark
+                            ? AppColors.amberDark
+                            : AppColors.amberText,
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       'If you lease this field, subtract the rent yourself. Everything else you spend is above.',
                       style: text.bodySmall?.copyWith(
-                        color:
-                            isDark
-                                ? AppColors.amberDark
-                                : AppColors.amberText,
+                        color: isDark
+                            ? AppColors.amberDark
+                            : AppColors.amberText,
                       ),
                     ),
                   ],
@@ -354,20 +347,17 @@ class _ProfitResult extends StatelessWidget {
         if (!result.usedModel) ...[
           const SizedBox(height: 12),
           KdCard(
-            background:
-                isDark
-                    ? AppColors.amberDark.withAlpha(25)
-                    : AppColors.amberTint,
-            outline:
-                isDark
-                    ? AppColors.amberDark.withAlpha(60)
-                    : AppColors.amberLine,
+            background: isDark
+                ? AppColors.amberDark.withAlpha(25)
+                : AppColors.amberTint,
+            outline: isDark
+                ? AppColors.amberDark.withAlpha(60)
+                : AppColors.amberLine,
             padding: const EdgeInsets.all(12),
             child: Text(
               l10n.predFallbackNote,
               style: text.bodyMedium?.copyWith(
-                color:
-                    isDark ? AppColors.amberDark : AppColors.amberText,
+                color: isDark ? AppColors.amberDark : AppColors.amberText,
               ),
             ),
           ),
@@ -380,19 +370,13 @@ class _ProfitResult extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    result.mandi!.location,
-                    style: text.bodySmall,
-                  ),
+                  child: Text(result.mandi!.location, style: text.bodySmall),
                 ),
                 ProvenanceChip(
-                  result.mandi!.isLive
-                      ? Provenance.live
-                      : Provenance.estimated,
-                  label:
-                      result.mandi!.isLive
-                          ? 'Live'
-                          : l10n.predEstimatedPrice,
+                  result.mandi!.isLive ? Provenance.live : Provenance.estimated,
+                  label: result.mandi!.isLive
+                      ? 'Live'
+                      : l10n.predEstimatedPrice,
                 ),
               ],
             ),
@@ -437,4 +421,3 @@ class _CostRow extends StatelessWidget {
     );
   }
 }
-

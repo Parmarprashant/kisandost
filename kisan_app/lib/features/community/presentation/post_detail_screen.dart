@@ -115,8 +115,8 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                 children: [
                   _HeaderButton(
                     icon: Icons.arrow_back,
-                    tooltip:
-                        MaterialLocalizations.of(context).backButtonTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
                     onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(width: 12),
@@ -195,9 +195,7 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                                 ),
                                 decoration: BoxDecoration(
                                   color:
-                                      theme
-                                          .colorScheme
-                                          .surfaceContainerHighest,
+                                      theme.colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(
                                     AppTheme.radiusChip,
                                   ),
@@ -274,16 +272,15 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                           ),
                           style: OutlinedButton.styleFrom(
                             minimumSize: const Size(0, 46),
-                            backgroundColor:
-                                _post.isHelpfulByMe
-                                    ? theme.colorScheme.primaryContainer
-                                        .withAlpha(80)
-                                    : null,
+                            backgroundColor: _post.isHelpfulByMe
+                                ? theme.colorScheme.primaryContainer.withAlpha(
+                                    80,
+                                  )
+                                : null,
                             side: BorderSide(
-                              color:
-                                  _post.isHelpfulByMe
-                                      ? theme.colorScheme.primary
-                                      : theme.colorScheme.outline,
+                              color: _post.isHelpfulByMe
+                                  ? theme.colorScheme.primary
+                                  : theme.colorScheme.outline,
                             ),
                           ),
                         ),
@@ -303,40 +300,34 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                     l10n.communityComments('${_post.commentCount}'),
                   ),
                   comments.when(
-                    loading:
-                        () => const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: CircularProgressIndicator(),
+                    loading: () => const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    error: (_, _) => Text(
+                      l10n.appError,
+                      style: text.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    data: (list) => list.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Text(
+                              l10n.communityNoComments,
+                              style: text.bodySmall?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              for (final comment in list)
+                                _CommentRow(comment: comment),
+                            ],
                           ),
-                        ),
-                    error:
-                        (_, _) => Text(
-                          l10n.appError,
-                          style: text.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                    data:
-                        (list) =>
-                            list.isEmpty
-                                ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
-                                  child: Text(
-                                    l10n.communityNoComments,
-                                    style: text.bodySmall?.copyWith(
-                                      color: theme.colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
-                                )
-                                : Column(
-                                  children: [
-                                    for (final comment in list)
-                                      _CommentRow(comment: comment),
-                                  ],
-                                ),
                   ),
                 ],
               ),
@@ -368,16 +359,15 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                       const SizedBox(width: 8),
                       IconButton.filled(
                         onPressed: _sending ? null : _sendReply,
-                        icon:
-                            _sending
-                                ? const SizedBox(
-                                  width: 18,
-                                  height: 18,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                                : const Icon(Icons.send),
+                        icon: _sending
+                            ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(Icons.send),
                         tooltip: l10n.communitySend,
                       ),
                     ],
@@ -556,4 +546,3 @@ String _relative(BuildContext context, DateTime when) {
   if (difference.inMinutes >= 1) return '${difference.inMinutes}m';
   return '';
 }
-

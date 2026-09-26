@@ -119,7 +119,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(22, 20, 22, 8),
                 children: [
-                  Text(l10n.onboardTitle, style: theme.textTheme.headlineMedium),
+                  Text(
+                    l10n.onboardTitle,
+                    style: theme.textTheme.headlineMedium,
+                  ),
                   const SizedBox(height: 22),
 
                   _Labelled(
@@ -157,10 +160,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   // option behind a tap and reads as a form; the crops are
                   // few enough to show, and picking one is the answer most
                   // farmers give fastest.
-                  Text(
-                    l10n.onboardMainCrop,
-                    style: theme.textTheme.titleSmall,
-                  ),
+                  Text(l10n.onboardMainCrop, style: theme.textTheme.titleSmall),
                   const SizedBox(height: 10),
                   Wrap(
                     spacing: 8,
@@ -301,7 +301,9 @@ class _CropChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: selected ? theme.colorScheme.primary : theme.colorScheme.surface,
+          color: selected
+              ? theme.colorScheme.primary
+              : theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppTheme.radiusChip),
           border: Border.all(
             color: selected

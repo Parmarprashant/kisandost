@@ -394,8 +394,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                     return ChoiceChip(
                       label: Text('${z.zoneCode} — ${z.zoneName}'),
                       selected: isSelected,
-                      selectedColor: AppColors.forest
-                          .withValues(alpha: 0.2),
+                      selectedColor: AppColors.forest.withValues(alpha: 0.2),
                       side: BorderSide(
                         color: isSelected
                             ? AppColors.forest
@@ -477,8 +476,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
                     ],
                   ),
                   selected: isSelected,
-                  selectedColor: AppColors.forest
-                      .withValues(alpha: 0.18),
+                  selectedColor: AppColors.forest.withValues(alpha: 0.18),
                   side: BorderSide(
                     color: isSelected
                         ? AppColors.forest
@@ -740,9 +738,7 @@ class _ZoneInspectionSheetState extends ConsumerState<ZoneInspectionSheet> {
     ZoneEvidenceSummary summary,
   ) {
     final isConsistent = summary.isConsistent;
-    final color = isConsistent
-        ? AppColors.forest
-        : Colors.amber.shade900;
+    final color = isConsistent ? AppColors.forest : Colors.amber.shade900;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),

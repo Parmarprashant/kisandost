@@ -219,8 +219,8 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
                     children: [
                       _HeaderButton(
                         icon: Icons.arrow_back,
-                        tooltip:
-                            MaterialLocalizations.of(context).backButtonTooltip,
+                        tooltip: MaterialLocalizations.of(context)
+                            .backButtonTooltip,
                         onTap: () {
                           if (_step > 0) {
                             setState(() => _step--);
@@ -248,10 +248,9 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
                           child: Container(
                             height: 4,
                             decoration: BoxDecoration(
-                              color:
-                                  i <= _step
-                                      ? theme.colorScheme.primary
-                                      : theme.colorScheme.outline,
+                              color: i <= _step
+                                  ? theme.colorScheme.primary
+                                  : theme.colorScheme.outline,
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -296,8 +295,9 @@ class _FieldWizardState extends ConsumerState<FieldWizard> {
                           style: OutlinedButton.styleFrom(
                             minimumSize: const Size(0, 48),
                           ),
-                          onPressed:
-                              _saving ? null : () => setState(() => _step--),
+                          onPressed: _saving
+                              ? null
+                              : () => setState(() => _step--),
                           child: Text(l10n.farmBack),
                         ),
                       ),

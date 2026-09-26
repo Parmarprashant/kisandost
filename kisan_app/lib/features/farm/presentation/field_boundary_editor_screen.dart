@@ -177,8 +177,7 @@ class _FieldBoundaryEditorScreenState
                         polygons: [
                           Polygon(
                             points: _points,
-                            color: AppColors.forest
-                                .withValues(alpha: 0.25),
+                            color: AppColors.forest.withValues(alpha: 0.25),
                             borderColor: AppColors.forest,
                             borderStrokeWidth: 3.0,
                           ),

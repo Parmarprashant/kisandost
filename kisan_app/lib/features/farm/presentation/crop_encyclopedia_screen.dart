@@ -37,8 +37,8 @@ class _CropEncyclopediaScreenState
                 children: [
                   _HeaderButton(
                     icon: Icons.arrow_back,
-                    tooltip:
-                        MaterialLocalizations.of(context).backButtonTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
                     onTap: () {
                       if (context.canPop()) {
                         context.pop();
@@ -424,8 +424,9 @@ class _CropDetailSheet extends StatelessWidget {
                     foregroundColor: Colors.white,
                     minimumSize: const Size.fromHeight(48),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(AppTheme.radiusButton),
+                      borderRadius: BorderRadius.circular(
+                        AppTheme.radiusButton,
+                      ),
                     ),
                   ),
                   onPressed: () {

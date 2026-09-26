@@ -143,22 +143,19 @@ class _YieldTabState extends ConsumerState<YieldTab> {
         // trip that ends in a generic failure message.
         if (!yieldSupportsCrop(_crop))
           KdCard(
-            background:
-                Theme.of(context).brightness == Brightness.dark
-                    ? AppColors.amberDark.withAlpha(30)
-                    : AppColors.amberTint,
-            outline:
-                Theme.of(context).brightness == Brightness.dark
-                    ? AppColors.amberDark.withAlpha(70)
-                    : AppColors.amberLine,
+            background: Theme.of(context).brightness == Brightness.dark
+                ? AppColors.amberDark.withAlpha(30)
+                : AppColors.amberTint,
+            outline: Theme.of(context).brightness == Brightness.dark
+                ? AppColors.amberDark.withAlpha(70)
+                : AppColors.amberLine,
             padding: const EdgeInsets.all(14),
             child: Text(
               l10n.predNoBaseline(_crop),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color:
-                    Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.amberDark
-                        : AppColors.amberText,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.amberDark
+                    : AppColors.amberText,
               ),
             ),
           )
@@ -175,9 +172,8 @@ class _YieldTabState extends ConsumerState<YieldTab> {
           const SizedBox(height: 20),
           Text(
             _error!,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppColors.danger,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge
+                ?.copyWith(color: AppColors.danger),
           ),
         ],
 
@@ -206,20 +202,21 @@ class _YieldResult extends StatelessWidget {
     );
 
     final better = result.isAboveAverage;
-    final accent =
-        better
-            ? (isDark ? AppColors.forestDark : AppColors.forest)
-            : (isDark ? AppColors.terracottaDark : AppColors.terracotta);
+    final accent = better
+        ? (isDark ? AppColors.forestDark : AppColors.forest)
+        : (isDark ? AppColors.terracottaDark : AppColors.terracotta);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(l10n.predYieldResult),
         KdCard(
-          background:
-              isDark ? AppColors.forestDark.withAlpha(35) : AppColors.forestTint,
-          outline:
-              isDark ? AppColors.forestDark.withAlpha(80) : AppColors.forestLine,
+          background: isDark
+              ? AppColors.forestDark.withAlpha(35)
+              : AppColors.forestTint,
+          outline: isDark
+              ? AppColors.forestDark.withAlpha(80)
+              : AppColors.forestLine,
           padding: const EdgeInsets.all(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,11 +258,15 @@ class _YieldResult extends StatelessWidget {
                       Text(
                         better
                             ? l10n.predAbove(
-                              result.percentDifference.abs().toStringAsFixed(1),
-                            )
+                                result.percentDifference.abs().toStringAsFixed(
+                                  1,
+                                ),
+                              )
                             : l10n.predBelow(
-                              result.percentDifference.abs().toStringAsFixed(1),
-                            ),
+                                result.percentDifference.abs().toStringAsFixed(
+                                  1,
+                                ),
+                              ),
                         style: text.titleSmall?.copyWith(color: accent),
                       ),
                       const SizedBox(height: 2),
@@ -288,10 +289,12 @@ class _YieldResult extends StatelessWidget {
         if (result.insights.isNotEmpty) ...[
           const SizedBox(height: 12),
           KdCard(
-            background:
-                isDark ? AppColors.skyDark.withAlpha(35) : AppColors.skyTint,
-            outline:
-                isDark ? AppColors.skyDark.withAlpha(80) : AppColors.skyLine,
+            background: isDark
+                ? AppColors.skyDark.withAlpha(35)
+                : AppColors.skyTint,
+            outline: isDark
+                ? AppColors.skyDark.withAlpha(80)
+                : AppColors.skyLine,
             padding: const EdgeInsets.all(14),
             child: Text(
               result.insights,

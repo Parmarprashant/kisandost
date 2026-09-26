@@ -95,8 +95,8 @@ class _DistrictSuggestionScreenState
                 children: [
                   _HeaderButton(
                     icon: Icons.arrow_back,
-                    tooltip:
-                        MaterialLocalizations.of(context).backButtonTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
                     onTap: () {
                       if (context.canPop()) {
                         context.pop();
@@ -159,21 +159,26 @@ class _DistrictSuggestionScreenState
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Grounded Agronomic Intelligence',
-                                        style: theme.textTheme.titleSmall?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.forest,
-                                        ),
+                                        style: theme.textTheme.titleSmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.forest,
+                                            ),
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
                                         'Tap the map or pick your district to evaluate water availability and AI crop viability.',
-                                        style: theme.textTheme.bodySmall?.copyWith(
-                                          color: theme.colorScheme.onSurfaceVariant,
-                                        ),
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(
+                                              color: theme
+                                                  .colorScheme
+                                                  .onSurfaceVariant,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -195,7 +200,9 @@ class _DistrictSuggestionScreenState
                                 color: AppColors.forest,
                               ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(AppTheme.radiusButton),
+                                borderRadius: BorderRadius.circular(
+                                  AppTheme.radiusButton,
+                                ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -218,12 +225,18 @@ class _DistrictSuggestionScreenState
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(AppTheme.radiusCard),
+                            borderRadius: BorderRadius.circular(
+                              AppTheme.radiusCard,
+                            ),
                             child: Container(
                               height: 240,
                               decoration: BoxDecoration(
-                                border: Border.all(color: theme.colorScheme.outline),
-                                borderRadius: BorderRadius.circular(AppTheme.radiusCard),
+                                border: Border.all(
+                                  color: theme.colorScheme.outline,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  AppTheme.radiusCard,
+                                ),
                               ),
                               child: FlutterMap(
                                 mapController: _mapController,
@@ -232,15 +245,15 @@ class _DistrictSuggestionScreenState
                                   initialZoom: 7.0,
                                   onTap: (tapPos, point) {
                                     setState(() => _selectedPoint = point);
-                                    if (currentDistrict != null && _advisory == null) {
+                                    if (currentDistrict != null &&
+                                        _advisory == null) {
                                       _fetchAdvisory(currentDistrict);
                                     }
                                   },
                                 ),
                                 children: [
                                   TileLayer(
-                                    urlTemplate:
-                                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                                     userAgentPackageName: 'com.kisandost.app',
                                   ),
                                   MarkerLayer(
@@ -291,9 +304,11 @@ class _DistrictSuggestionScreenState
                                         decoration: BoxDecoration(
                                           color: AppColors.forestTint,
                                           borderRadius: BorderRadius.circular(
-                                              AppTheme.radiusChip),
+                                            AppTheme.radiusChip,
+                                          ),
                                           border: Border.all(
-                                              color: AppColors.forestLine),
+                                            color: AppColors.forestLine,
+                                          ),
                                         ),
                                         child: Text(
                                           '${currentDistrict.season} Season',
@@ -335,12 +350,15 @@ class _DistrictSuggestionScreenState
                                           vertical: 4,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: theme.colorScheme
+                                          color: theme
+                                              .colorScheme
                                               .surfaceContainerHighest,
                                           borderRadius: BorderRadius.circular(
-                                              AppTheme.radiusChip),
+                                            AppTheme.radiusChip,
+                                          ),
                                           border: Border.all(
-                                              color: theme.colorScheme.outline),
+                                            color: theme.colorScheme.outline,
+                                          ),
                                         ),
                                         child: Text(
                                           c,
@@ -376,7 +394,8 @@ class _DistrictSuggestionScreenState
                                 minimumSize: const Size.fromHeight(48),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      AppTheme.radiusButton),
+                                    AppTheme.radiusButton,
+                                  ),
                                 ),
                               ),
                               onPressed: _isLoadingAdvisory
@@ -396,7 +415,9 @@ class _DistrictSuggestionScreenState
                                 _isLoadingAdvisory
                                     ? 'Analyzing Agro-Climatic Data...'
                                     : 'Ask Gemini Agronomic Advisor',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -419,14 +440,12 @@ class _DistrictSuggestionScreenState
                             ),
                           ] else if (_advisory != null) ...[
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                               child: KdCard(
                                 background: AppColors.forestTint,
                                 outline: AppColors.forestLine,
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       children: [
@@ -450,9 +469,7 @@ class _DistrictSuggestionScreenState
                                     Text(
                                       _advisory!,
                                       style: theme.textTheme.bodyMedium
-                                          ?.copyWith(
-                                            height: 1.55,
-                                          ),
+                                          ?.copyWith(height: 1.55),
                                     ),
                                   ],
                                 ),
@@ -460,8 +477,7 @@ class _DistrictSuggestionScreenState
                             ),
                           ] else if (_error != null) ...[
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                               child: KdCard(
                                 outline: AppColors.danger,
                                 child: Text(
@@ -475,7 +491,6 @@ class _DistrictSuggestionScreenState
                             ),
                           ],
                         ],
-
                       ],
                     ),
                   );

@@ -68,8 +68,8 @@ class _CropDetailScreenState extends ConsumerState<CropDetailScreen> {
                 children: [
                   _HeaderButton(
                     icon: Icons.arrow_back,
-                    tooltip:
-                        MaterialLocalizations.of(context).backButtonTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
                     onTap: () {
                       if (context.canPop()) {
                         context.pop();
@@ -239,11 +239,7 @@ class _HeaderCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppTheme.radiusButton),
                   border: Border.all(color: AppColors.forestLine),
                 ),
-                child: const Icon(
-                  Icons.eco,
-                  size: 26,
-                  color: AppColors.forest,
-                ),
+                child: const Icon(Icons.eco, size: 26, color: AppColors.forest),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -709,9 +705,7 @@ class _ThreatTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: KdCard(
-        outline: isWarning
-            ? AppColors.terracotta
-            : theme.colorScheme.outline,
+        outline: isWarning ? AppColors.terracotta : theme.colorScheme.outline,
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -736,7 +730,10 @@ class _ThreatTile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(AppTheme.radiusChip),
@@ -808,10 +805,7 @@ class _CropCycleCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 2,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(AppTheme.radiusChip),
@@ -828,10 +822,7 @@ class _CropCycleCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          StageBar(
-            stageCount: stageCount,
-            currentStage: currentStageIdx,
-          ),
+          StageBar(stageCount: stageCount, currentStage: currentStageIdx),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

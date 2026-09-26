@@ -54,8 +54,8 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                 children: [
                   _HeaderButton(
                     icon: Icons.menu,
-                    tooltip:
-                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .openAppDrawerTooltip,
                     onTap: () => Scaffold.of(context).openDrawer(),
                   ),
                   const SizedBox(width: 10),
@@ -208,148 +208,142 @@ class _PostCard extends StatelessWidget {
       onTap: () => PostDetailScreen.open(context, post),
       child: Padding(
         padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: AppColors.primaryContainer,
-                    child: Text(
-                      post.authorName.isEmpty
-                          ? '?'
-                          : post.authorName.trim()[0].toUpperCase(),
-                      style: text.labelMedium?.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(post.authorName, style: text.titleSmall),
-                        Text(
-                          [
-                            post.location,
-                            _relative(context, post.createdAt),
-                          ].where((s) => s.isNotEmpty).join(' · '),
-                          style: text.labelSmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                  _TypeChip(type: post.postType),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(post.title, style: text.titleMedium),
-              const SizedBox(height: 5),
-              Text(
-                post.problem,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: text.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-
-              if (post.hasImages) ...[
-                const SizedBox(height: 12),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: CachedNetworkImage(
-                      imageUrl: post.images.first,
-                      fit: BoxFit.cover,
-                      errorWidget: (_, _, _) => Container(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                      ),
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.primaryContainer,
+                  child: Text(
+                    post.authorName.isEmpty
+                        ? '?'
+                        : post.authorName.trim()[0].toUpperCase(),
+                    style: text.labelMedium?.copyWith(color: AppColors.primary),
                   ),
                 ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(post.authorName, style: text.titleSmall),
+                      Text(
+                        [
+                          post.location,
+                          _relative(context, post.createdAt),
+                        ].where((s) => s.isNotEmpty).join(' · '),
+                        style: text.labelSmall,
+                      ),
+                    ],
+                  ),
+                ),
+                _TypeChip(type: post.postType),
               ],
+            ),
+            const SizedBox(height: 12),
+            Text(post.title, style: text.titleMedium),
+            const SizedBox(height: 5),
+            Text(
+              post.problem,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: text.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
 
-              // The counts sit below a rule rather than floating under the
-              // body: they belong to the post, not to the sentence above
-              // them, and a farmer scanning the feed reads them as a block.
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Divider(
-                  height: 1,
-                  color: Theme.of(context).colorScheme.outline,
+            if (post.hasImages) ...[
+              const SizedBox(height: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: CachedNetworkImage(
+                    imageUrl: post.images.first,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, _, _) => Container(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest,
+                    ),
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  Icon(
-                    post.isHelpfulByMe
-                        ? Icons.thumb_up
-                        : Icons.thumb_up_outlined,
-                    size: 17,
-                    // Marked in brand green once this farmer has voted, so
-                    // "I already answered this" is legible at a glance in a
-                    // feed they scroll every morning.
+            ],
+
+            // The counts sit below a rule rather than floating under the
+            // body: they belong to the post, not to the sentence above
+            // them, and a farmer scanning the feed reads them as a block.
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Divider(
+                height: 1,
+                color: Theme.of(context).colorScheme.outline,
+              ),
+            ),
+            Row(
+              children: [
+                Icon(
+                  post.isHelpfulByMe ? Icons.thumb_up : Icons.thumb_up_outlined,
+                  size: 17,
+                  // Marked in brand green once this farmer has voted, so
+                  // "I already answered this" is legible at a glance in a
+                  // feed they scroll every morning.
+                  color: post.isHelpfulByMe
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  '${post.helpfulCount}',
+                  style: text.labelMedium?.copyWith(
                     color: post.isHelpfulByMe
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
-                  const SizedBox(width: 6),
-                  Text(
-                    '${post.helpfulCount}',
-                    style: text.labelMedium?.copyWith(
-                      color: post.isHelpfulByMe
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 18),
+                Icon(
+                  Icons.chat_bubble_outline,
+                  size: 17,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  l10n.communityComments('${post.commentCount}'),
+                  style: text.labelSmall,
+                ),
+                const Spacer(),
+                if (post.crop.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
                     ),
-                  ),
-                  const SizedBox(width: 18),
-                  Icon(
-                    Icons.chat_bubble_outline,
-                    size: 17,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    l10n.communityComments('${post.commentCount}'),
-                    style: text.labelSmall,
-                  ),
-                  const Spacer(),
-                  if (post.crop.isNotEmpty)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(
-                          AppTheme.radiusChip,
-                        ),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
-                      ),
-                      child: Text(
-                        post.crop,
-                        style: text.labelSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(AppTheme.radiusChip),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
-                ],
-              ),
-            ],
-          ),
+                    child: Text(
+                      post.crop,
+                      style: text.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -516,4 +510,3 @@ class _TabSegment extends StatelessWidget {
     );
   }
 }
-

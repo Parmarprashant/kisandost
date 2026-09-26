@@ -140,8 +140,8 @@ class _ComposePostScreenState extends ConsumerState<ComposePostScreen> {
                 children: [
                   _HeaderButton(
                     icon: Icons.arrow_back,
-                    tooltip:
-                        MaterialLocalizations.of(context).backButtonTooltip,
+                    tooltip: MaterialLocalizations.of(context)
+                        .backButtonTooltip,
                     onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(width: 12),
@@ -326,21 +326,22 @@ class _SelectableChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
         decoration: BoxDecoration(
-          color:
-              selected ? theme.colorScheme.primary : theme.colorScheme.surface,
+          color: selected
+              ? theme.colorScheme.primary
+              : theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppTheme.radiusChip),
           border: Border.all(
-            color:
-                selected ? theme.colorScheme.primary : theme.colorScheme.outline,
+            color: selected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.outline,
           ),
         ),
         child: Text(
           label,
           style: theme.textTheme.labelMedium?.copyWith(
-            color:
-                selected
-                    ? theme.colorScheme.onPrimary
-                    : theme.colorScheme.onSurface,
+            color: selected
+                ? theme.colorScheme.onPrimary
+                : theme.colorScheme.onSurface,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
           ),
         ),

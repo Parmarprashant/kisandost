@@ -129,10 +129,7 @@ class _AddCropSheetState extends ConsumerState<AddCropSheet> {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
-                l10n.farmAddCrop,
-                style: theme.textTheme.headlineSmall,
-              ),
+              Text(l10n.farmAddCrop, style: theme.textTheme.headlineSmall),
               const SizedBox(height: 2),
               Text(
                 widget.field.name,
@@ -234,8 +231,9 @@ class _AddCropSheetState extends ConsumerState<AddCropSheet> {
                 const SizedBox(height: 8),
                 Text(
                   _error!,
-                  style: theme.textTheme.bodyLarge
-                      ?.copyWith(color: AppColors.danger),
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: AppColors.danger,
+                  ),
                 ),
               ],
 
@@ -276,4 +274,3 @@ class _Labelled extends StatelessWidget {
     );
   }
 }
-
