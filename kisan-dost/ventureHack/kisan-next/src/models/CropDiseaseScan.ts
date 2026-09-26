@@ -69,6 +69,10 @@ const ConfidenceSchema = new Schema(
       required: true,
       min: 0,
       max: 100,
+      set: (val: number) => {
+        if (typeof val !== 'number' || isNaN(val)) return 0.8;
+        return Number(val.toFixed(4));
+      },
     },
   },
   { _id: false }

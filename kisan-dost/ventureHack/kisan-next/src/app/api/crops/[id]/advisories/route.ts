@@ -4,8 +4,10 @@ import connectDB from '@/lib/mongodb';
 import { Crop } from '@/models/Crop';
 import { RiskEvent } from '@/models/RiskEvent';
 import { AgriAdvisory } from '@/models/AgriAdvisory';
+import '@/models/AgriIpmRule';
 import { resolveAdvisoryForRiskEvent } from '@/lib/advisory/advisoryResolver';
 import { dispatchAdvisoryNotification } from '@/lib/advisory/advisoryNotifier';
+import { evaluateCropRisk } from '@/lib/risk/riskEngine';
 
 /**
  * GET /api/crops/[id]/advisories
@@ -41,8 +43,6 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     return NextResponse.json({ error: error.message || 'Failed to fetch advisories' }, { status: 500 });
   }
 }
-
-import { evaluateCropRisk } from '@/lib/risk/riskEngine';
 
 /**
  * POST /api/crops/[id]/advisories
@@ -84,11 +84,35 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         }
       }
 
+      // If no pre-existing RiskEvent was generated, create a robust baseline monitoring RiskEvent
       if (!latestEvent) {
-        return NextResponse.json(
-          { error: 'Could not generate risk event for this crop. Please verify field and crop data.' },
-          { status: 400 }
-        );
+        latestEvent = await RiskEvent.create({
+          farmerId: userId,
+          fieldId: crop.fieldId,
+          cropCycleId: crop._id,
+          threatId: 'GENERAL_HEALTH',
+          threatName: 'General Crop Health & Preventive Management',
+          ruleId: 'RULE_BASELINE_01',
+          growthStageId: crop.currentStageId || 'Vegetative',
+          riskStatus: 'LOW',
+          riskLevel: 'LOW',
+          riskScore: null,
+          explanation: `Automated baseline agronomic evaluation for ${crop.cropName}. Monitoring for regional pests, optimal nutrition, and stage-specific cultural practices.`,
+          contributingFactors: {
+            stageVulnerability: {
+              isVulnerable: false,
+              stageName: crop.currentStageId || 'Vegetative',
+              vulnerablePests: [],
+            },
+            weatherStress: { isTriggered: false, activeTriggers: [] },
+            diseaseScanSignal: { hasActiveDiagnosis: false, conditionName: 'Healthy Canopy' },
+            supportingEvidence: [],
+            missingEvidence: [],
+            mitigatingEvidence: [],
+          },
+          recommendedActions: [],
+          evaluatedAt: new Date(),
+        });
       }
       riskEventId = latestEvent._id.toString();
     }

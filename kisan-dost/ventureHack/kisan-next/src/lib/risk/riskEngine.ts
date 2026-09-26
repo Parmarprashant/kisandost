@@ -359,9 +359,11 @@ export async function evaluateCropRisk(params: {
       };
     });
 
-    RiskEvent.bulkWrite(bulkOps, { ordered: false }).catch((err) => {
-      console.warn('[evaluateCropRisk] Background RiskEvent persistence notice:', err?.message);
-    });
+    try {
+      await RiskEvent.bulkWrite(bulkOps, { ordered: false });
+    } catch (err: any) {
+      console.warn('[evaluateCropRisk] RiskEvent persistence notice:', err?.message);
+    }
   }
 
   // 12. Zone-by-Zone Breakdown (if evaluating at field/crop level)
